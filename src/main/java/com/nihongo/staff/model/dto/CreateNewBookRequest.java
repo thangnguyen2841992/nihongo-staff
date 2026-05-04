@@ -1,5 +1,7 @@
 package com.nihongo.staff.model.dto;
 
+import com.nihongo.staff.model.Levels;
+import com.nihongo.staff.model.Types;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +14,9 @@ import java.util.List;
 @Getter
 @Setter
 public class CreateNewBookRequest {
-    private Long typeId;
+    private Types types;
 
-    private Long levelId;
+    private Levels levels;
 
     private String bookName;
 
