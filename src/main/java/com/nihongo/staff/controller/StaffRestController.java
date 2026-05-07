@@ -1,5 +1,6 @@
 package com.nihongo.staff.controller;
 
+import com.nihongo.staff.model.Books;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.service.IStaffService;
@@ -24,12 +25,18 @@ public class StaffRestController {
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/types")
     public ResponseEntity<List<Types>> getAllTypes() {
-        return ResponseEntity.ok(staffService.getTypes());
+        return ResponseEntity.ok(this.staffService.getTypes());
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/levels")
     public ResponseEntity<List<Levels>> getAllLevels() {
-        return ResponseEntity.ok(staffService.getLevels());
+        return ResponseEntity.ok(this.staffService.getLevels());
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/books")
+    public ResponseEntity<List<Books>> getAllBooks() {
+        return ResponseEntity.ok(this.staffService.getBooks());
     }
 }

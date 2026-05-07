@@ -48,4 +48,9 @@ public class StaffServiceImpl implements IStaffService {
     public List<Levels> getLevels() {
         return this.levelsRepository.findAll();
     }
+
+    @Override
+    public List<Books> getBooks() {
+        return this.bookRepository.findAll();
+    }
 }

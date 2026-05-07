@@ -11,4 +11,5 @@ public interface IStaffService {
     Books createNewBook(CreateNewBookRequest newBookRequest);
     List<Types> getTypes();
     List<Levels> getLevels();
+    List<Books> getBooks();
 }
