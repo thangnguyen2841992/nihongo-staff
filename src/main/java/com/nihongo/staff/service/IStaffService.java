@@ -3,13 +3,15 @@ package com.nihongo.staff.service;
 import com.nihongo.staff.model.Books;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
+import com.nihongo.staff.model.dto.BookResponse;
 import com.nihongo.staff.model.dto.CreateNewBookRequest;
 
 import java.util.List;
 
 public interface IStaffService {
-    Books createNewBook(CreateNewBookRequest newBookRequest);
+    BookResponse createNewBook(CreateNewBookRequest newBookRequest);
     List<Types> getTypes();
     List<Levels> getLevels();
-    List<Books> getBooks();
+    List<BookResponse> getBooks();
+    BookResponse mappingBookToBookResponse(Books book);
 }

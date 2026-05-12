@@ -3,13 +3,13 @@ package com.nihongo.staff.controller;
 import com.nihongo.staff.model.Books;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
+import com.nihongo.staff.model.dto.BookResponse;
+import com.nihongo.staff.model.dto.CreateNewBookRequest;
 import com.nihongo.staff.service.IStaffService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,7 +36,15 @@ public class StaffRestController {
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/books")
-    public ResponseEntity<List<Books>> getAllBooks() {
+    public ResponseEntity<List<BookResponse>> getAllBooks() {
         return ResponseEntity.ok(this.staffService.getBooks());
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PostMapping("/books")
+    public ResponseEntity<BookResponse> createNewBook(@RequestBody CreateNewBookRequest bookRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.createNewBook(bookRequest));
     }
 }
