@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IImageRepository extends JpaRepository<Images, Integer> {
+public interface IImageRepository extends JpaRepository<Images, Long> {
     List<Images> findByBooks_BookId(Long bookId);
+
 }

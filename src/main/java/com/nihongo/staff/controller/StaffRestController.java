@@ -5,6 +5,8 @@ import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.BookResponse;
 import com.nihongo.staff.model.dto.CreateNewBookRequest;
+import com.nihongo.staff.model.dto.ImageDTO;
+import com.nihongo.staff.model.dto.UpdateImageOfBookRequest;
 import com.nihongo.staff.service.IStaffService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +48,13 @@ public class StaffRestController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.staffService.createNewBook(bookRequest));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PostMapping("/images")
+    public ResponseEntity<List<ImageDTO>> updateImagesOfBook(@RequestBody UpdateImageOfBookRequest imageOfBookRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.updateImagesOfBooks(imageOfBookRequest));
     }
 }
