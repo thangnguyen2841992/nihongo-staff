@@ -1,12 +1,8 @@
 package com.nihongo.staff.controller;
 
-import com.nihongo.staff.model.Books;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
-import com.nihongo.staff.model.dto.BookResponse;
-import com.nihongo.staff.model.dto.CreateNewBookRequest;
-import com.nihongo.staff.model.dto.ImageDTO;
-import com.nihongo.staff.model.dto.UpdateImageOfBookRequest;
+import com.nihongo.staff.model.dto.*;
 import com.nihongo.staff.service.IStaffService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,11 +39,25 @@ public class StaffRestController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/getBooksByLevelAndType")
+    public ResponseEntity<List<BookResponse>> getBooksByLevelAndType(@RequestParam Long levelId, @RequestParam Long typeId) {
+        return ResponseEntity.ok(this.staffService.getBooksByLevelAndType(levelId, typeId));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PostMapping("/books")
     public ResponseEntity<BookResponse> createNewBook(@RequestBody CreateNewBookRequest bookRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.staffService.createNewBook(bookRequest));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PutMapping("/books")
+    public ResponseEntity<BookResponse> updateBook(@RequestBody UpdateBookRequest bookRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.updateBook(bookRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")

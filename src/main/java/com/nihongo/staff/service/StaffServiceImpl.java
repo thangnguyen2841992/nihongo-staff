@@ -4,10 +4,7 @@ import com.nihongo.staff.model.Books;
 import com.nihongo.staff.model.Images;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
-import com.nihongo.staff.model.dto.BookResponse;
-import com.nihongo.staff.model.dto.CreateNewBookRequest;
-import com.nihongo.staff.model.dto.ImageDTO;
-import com.nihongo.staff.model.dto.UpdateImageOfBookRequest;
+import com.nihongo.staff.model.dto.*;
 import com.nihongo.staff.repository.IBookRepository;
 import com.nihongo.staff.repository.IImageRepository;
 import com.nihongo.staff.repository.ILessonsRepository;
@@ -83,6 +80,17 @@ public class StaffServiceImpl implements IStaffService {
     }
 
     @Override
+    public BookResponse updateBook(UpdateBookRequest bookRequest) {
+        Books books = this.bookRepository.findById(bookRequest.getBookId()).orElseThrow(() -> new RuntimeException("Book not found"));
+        Levels level = this.levelsRepository.findById(bookRequest.getLevelId()).orElseThrow(() -> new RuntimeException("Level not found"));
+        Types type = this.typeRepository.findById(bookRequest.getTypeId()).orElseThrow(() -> new RuntimeException("Type not found"));
+        books.setBookName(bookRequest.getBookName());
+        books.setLevel(level);
+        books.setTypes(type);
+        return mappingBookToBookResponse(this.bookRepository.save(books));
+    }
+
+    @Override
     public List<Types> getTypes() {
 
         return this.typeRepository.findAll();
@@ -97,6 +105,12 @@ public class StaffServiceImpl implements IStaffService {
     @Override
     public List<BookResponse> getBooks() {
         return this.bookRepository.findAll().stream().map(this::mappingBookToBookResponse).toList();
+    }
+
+    @Override
+    public List<BookResponse> getBooksByLevelAndType(Long levelId, Long typeId) {
+        return this.bookRepository.findByLevel_LevelIdAndTypes_TypeId(levelId, typeId).stream().map(this::mappingBookToBookResponse).toList();
+
     }
 
 
