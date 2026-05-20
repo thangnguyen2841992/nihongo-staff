@@ -14,6 +14,11 @@ public interface IStaffService {
     List<Levels> getLevels();
     List<BookResponse> getBooks();
     List<BookResponse> getBooksByLevelAndType(Long levelId, Long typeId);
+    List<LessonResponse> getAllLessonByBook(Long bookId);
+    LessonResponse createNewLesson(CreateNewLessonRequest request);
     BookResponse mappingBookToBookResponse(Books book);
     List<ImageDTO> updateImagesOfBooks(UpdateImageOfBookRequest newBookRequest);
+    GrammarResponse createNewGrammar(GrammarRequest request);
+    GrammarResponse updateGrammar(GrammarRequest request);
+    List<GrammarResponse> getAllGrammarByLesson(Long lessonId);
 }

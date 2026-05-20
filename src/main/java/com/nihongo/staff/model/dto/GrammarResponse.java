@@ -9,14 +9,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UpdateBookRequest {
-    private  Long bookId;
+public class GrammarResponse {
+    private Long grammarId;
 
-    private String bookName;
+    private String title;
+
+    private String structure;
+
+    private Long lessonId;
 
     private String description;
-
-    private Long levelId;
-
-    private Long typeId;
 }

@@ -21,6 +21,8 @@ public class CreateNewBookRequest {
 
     private String bookName;
 
+    private String description;
+
     private List<String> urls;
 
 }

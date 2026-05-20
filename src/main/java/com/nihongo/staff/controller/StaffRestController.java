@@ -67,4 +67,41 @@ public class StaffRestController {
                 .status(HttpStatus.CREATED)
                 .body(this.staffService.updateImagesOfBooks(imageOfBookRequest));
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PostMapping("/lessons")
+    public ResponseEntity<LessonResponse> createNewLesson(@RequestBody CreateNewLessonRequest lessonRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.createNewLesson(lessonRequest));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/getLessonsByBook")
+    public ResponseEntity<List<LessonResponse>> getLessonsByBook(@RequestParam Long bookId) {
+        return ResponseEntity.ok(this.staffService.getAllLessonByBook(bookId));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PostMapping("/grammars")
+    public ResponseEntity<GrammarResponse> createNewGrammar(@RequestBody GrammarRequest grammarRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.createNewGrammar(grammarRequest));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/getAllGrammarByLesson")
+    public ResponseEntity<List<GrammarResponse>> getAllGrammarByLesson(@RequestParam Long lessonId) {
+        return ResponseEntity.ok(this.staffService.getAllGrammarByLesson(lessonId));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PutMapping("/grammars")
+    public ResponseEntity<GrammarResponse> updateGrammar(@RequestBody GrammarRequest grammarRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.updateGrammar(grammarRequest));
+    }
+
 }

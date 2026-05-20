@@ -19,6 +19,8 @@ public class Lessons {
 
     private String name;
 
+    private String description;
+
     @CreationTimestamp
     private LocalDateTime dateCreated;
 

@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface IImageRepository extends JpaRepository<Images, Long> {
     List<Images> findByBooks_BookId(Long bookId);
-
+    List<Images> findByBooks_BookIdIn(List<Long> bookIds);
 }
