@@ -22,8 +22,12 @@ public class Grammar {
 
     private String title;
 
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String description;
 
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String structure;
 
     @ManyToOne(fetch = FetchType.LAZY)
