@@ -64,6 +64,13 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    public BookResponse getBookDetail(Long bookId) {
+        Books book = getBookById(bookId);
+        return mappingBookToBookResponse(book);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<Types> getTypes() {
         return typeRepository.findAll();
     }

@@ -39,6 +39,12 @@ public class StaffRestController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/books/{bookId}")
+    public ResponseEntity<BookResponse> getBookDetail(@PathVariable Long bookId) {
+        return ResponseEntity.ok(this.staffService.getBookDetail(bookId));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/getBooksByLevelAndType")
     public ResponseEntity<List<BookResponse>> getBooksByLevelAndType(@RequestParam Long levelId, @RequestParam Long typeId) {
         return ResponseEntity.ok(this.staffService.getBooksByLevelAndType(levelId, typeId));

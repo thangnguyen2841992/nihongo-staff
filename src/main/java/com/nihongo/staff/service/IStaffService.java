@@ -10,6 +10,7 @@ import java.util.List;
 public interface IStaffService {
     BookResponse createNewBook(CreateNewBookRequest newBookRequest);
     BookResponse updateBook(UpdateBookRequest bookRequest);
+    BookResponse   getBookDetail(Long bookId);
     List<Types> getTypes();
     List<Levels> getLevels();
     List<BookResponse> getBooks();
