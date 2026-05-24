@@ -44,6 +44,7 @@ public class StaffRestController {
         return ResponseEntity.ok(this.staffService.getBookDetail(bookId));
     }
 
+
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/getBooksByLevelAndType")
     public ResponseEntity<List<BookResponse>> getBooksByLevelAndType(@RequestParam Long levelId, @RequestParam Long typeId) {
