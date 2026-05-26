@@ -5,6 +5,7 @@ import com.nihongo.staff.model.*;
 import com.nihongo.staff.model.dto.*;
 import com.nihongo.staff.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,12 +78,14 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable("types")
     public List<Levels> getLevels() {
         return levelsRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable("levels")
     public List<BookResponse> getBooks() {
 
         List<Books> books = bookRepository.findAllWithRelations();
@@ -169,6 +172,18 @@ public class StaffServiceImpl implements IStaffService {
     }
 
     @Override
+    @Transactional
+    public void deleteGrammar(Long grammarId) {
+        Grammar grammar = this.grammarRepository.findById(grammarId).orElseThrow(() ->
+                new ResourceNotFoundException(
+                        "Grammar not found with id: "
+                                + grammarId
+                )
+        );
+        this.grammarRepository.delete(grammar);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<GrammarResponse> getAllGrammarByLesson(Long lessonId) {
         List<Grammar> grammars = this.grammarRepository.findByLessons_LessonId(lessonId);
@@ -178,6 +193,15 @@ public class StaffServiceImpl implements IStaffService {
             grammarResponses.add(grammarResponse);
         }
         return grammarResponses;
+    }
+
+    @Override
+    public ExampleResponse createNewExample(ExampleRequest request) {
+        Example example = new Example();
+        example.setNihongo(request.getNihongo());
+        example.setVietnamese(request.getVietnamese());
+        example.setGrammar(this.grammarRepository.findById(request.getGrammarId()).orElseThrow(() -> new ResourceNotFoundException("Grammar not found")));
+        return null;
     }
 
 

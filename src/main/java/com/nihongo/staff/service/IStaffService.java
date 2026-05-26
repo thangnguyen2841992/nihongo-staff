@@ -21,5 +21,7 @@ public interface IStaffService {
     List<ImageDTO> updateImagesOfBooks(UpdateImageOfBookRequest newBookRequest);
     GrammarResponse createNewGrammar(GrammarRequest request);
     GrammarResponse updateGrammar(GrammarRequest request);
+    void deleteGrammar(Long grammarId);
     List<GrammarResponse> getAllGrammarByLesson(Long lessonId);
+    ExampleResponse createNewExample(ExampleRequest request);
 }

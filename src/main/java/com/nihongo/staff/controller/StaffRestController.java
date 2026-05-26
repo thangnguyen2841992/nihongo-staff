@@ -111,4 +111,13 @@ public class StaffRestController {
                 .body(this.staffService.updateGrammar(grammarRequest));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @DeleteMapping("/grammars")
+    public ResponseEntity<?> deleteGrammar(@RequestBody GrammarRequest grammarRequest) {
+        this.staffService.deleteGrammar(grammarRequest.getGrammarId());
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Delete successfully");
+    }
+
 }
