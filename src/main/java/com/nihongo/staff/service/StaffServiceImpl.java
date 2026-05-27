@@ -9,39 +9,33 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class StaffServiceImpl implements IStaffService {
 
     private final IBookRepository bookRepository;
-
     private final ILessonsRepository lessonsRepository;
-
     private final ITypeRepository typeRepository;
-
     private final ILevelsRepository levelsRepository;
-
     private final IImageRepository imageRepository;
     private final IGrammarRepository grammarRepository;
+    private final IExampleRepository exampleRepository;
+
+    /* =========================================================
+                            BOOK
+       ========================================================= */
 
     @Override
-    @Transactional
     public BookResponse createNewBook(CreateNewBookRequest request) {
 
-        Levels level = getLevelById(request.getLevelId());
-
-        Types type = getTypeById(request.getTypeId());
-
         Books book = new Books();
-        book.setBookName(request.getBookName());
-        book.setLevel(level);
-        book.setTypes(type);
+        book.setBookName(request.getBookName().trim());
+        book.setLevel(getLevelById(request.getLevelId()));
+        book.setTypes(getTypeById(request.getTypeId()));
 
         Books savedBook = bookRepository.save(book);
 
@@ -50,13 +44,12 @@ public class StaffServiceImpl implements IStaffService {
         return mappingBookToBookResponse(savedBook);
     }
 
-    @Transactional
     @Override
     public BookResponse updateBook(UpdateBookRequest request) {
 
         Books book = getBookById(request.getBookId());
 
-        book.setBookName(request.getBookName());
+        book.setBookName(request.getBookName().trim());
         book.setLevel(getLevelById(request.getLevelId()));
         book.setTypes(getTypeById(request.getTypeId()));
 
@@ -66,103 +59,97 @@ public class StaffServiceImpl implements IStaffService {
     @Override
     @Transactional(readOnly = true)
     public BookResponse getBookDetail(Long bookId) {
-        Books book = getBookById(bookId);
-        return mappingBookToBookResponse(book);
+        return mappingBookToBookResponse(getBookById(bookId));
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Types> getTypes() {
-        return typeRepository.findAll();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    @Cacheable("types")
-    public List<Levels> getLevels() {
-        return levelsRepository.findAll();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    @Cacheable("levels")
+    @Cacheable("books")
     public List<BookResponse> getBooks() {
 
         List<Books> books = bookRepository.findAllWithRelations();
 
-        Map<Long, List<ImageDTO>> imageMap = getImageMap(books);
-
-        return books.stream().map(book -> mapBook(book, imageMap.get(book.getBookId()))).toList();
+        return mapBooks(books);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<BookResponse> getBooksByLevelAndType(Long levelId, Long typeId) {
 
-        List<Books> books = bookRepository.findByLevel_LevelIdAndTypes_TypeId(levelId, typeId);
+        List<Books> books =
+                bookRepository.findByLevel_LevelIdAndTypes_TypeId(levelId, typeId);
 
-        Map<Long, List<ImageDTO>> imageMap = getImageMap(books);
-
-        return books.stream().map(book -> mapBook(book, imageMap.get(book.getBookId()))).toList();
+        return mapBooks(books);
     }
+
+    @Override
+    public List<ImageDTO> updateImagesOfBooks(UpdateImageOfBookRequest request) {
+
+        Books book = getBookById(request.getBookId());
+
+        Optional.ofNullable(request.getListDeleteImg())
+                .filter(list -> !list.isEmpty())
+                .ifPresent(imageRepository::deleteAllById);
+
+        saveImages(book, request.getListAddImg());
+
+        return imageRepository.findByBooks_BookId(book.getBookId())
+                .stream()
+                .map(this::mapImageToDTO)
+                .toList();
+    }
+
+    /* =========================================================
+                            LESSON
+       ========================================================= */
 
     @Override
     @Transactional(readOnly = true)
     public List<LessonResponse> getAllLessonByBook(Long bookId) {
 
-        return lessonsRepository.findByBook_BookId(bookId).stream().map(this::mapLessonToResponse).toList();
+        return lessonsRepository.findByBook_BookId(bookId)
+                .stream()
+                .map(this::mapLessonToResponse)
+                .toList();
     }
 
     @Override
-    @Transactional
     public LessonResponse createNewLesson(CreateNewLessonRequest request) {
-        Lessons newLessons = new Lessons();
-        newLessons.setName(request.getName());
-        newLessons.setDescription(request.getDescription());
-        newLessons.setBook(this.bookRepository.findById(request.getBookId()).orElseThrow(() -> new RuntimeException("Book not found")));
-        return mapLessonToResponse(this.lessonsRepository.save(newLessons));
+
+        Lessons lesson = new Lessons();
+
+        lesson.setName(request.getName().trim());
+        lesson.setDescription(request.getDescription());
+        lesson.setBook(getBookById(request.getBookId()));
+
+        return mapLessonToResponse(
+                lessonsRepository.save(lesson)
+        );
     }
 
-    @Override
-    @Transactional
-    public List<ImageDTO> updateImagesOfBooks(UpdateImageOfBookRequest request) {
-
-        Books book = getBookById(request.getBookId());
-
-        if (request.getListDeleteImg() != null && !request.getListDeleteImg().isEmpty()) {
-
-            imageRepository.deleteAllById(request.getListDeleteImg());
-        }
-
-        saveImages(book, request.getListAddImg());
-
-        return imageRepository.findByBooks_BookId(book.getBookId()).stream().map(this::mapImageToDTO).toList();
-    }
+    /* =========================================================
+                            GRAMMAR
+       ========================================================= */
 
     @Override
-    @Transactional
     public GrammarResponse createNewGrammar(GrammarRequest request) {
+
         Grammar grammar = new Grammar();
-        grammar.setTitle(request.getTitle());
+
+        grammar.setTitle(request.getTitle().trim());
         grammar.setDescription(request.getDescription());
-        grammar.setStructure(request.getStructure());
-        Lessons lessons = this.lessonsRepository.findById(request.getLessonId()).orElseThrow(() -> new RuntimeException("Lesson not found"));
-        grammar.setLessons(lessons);
-        return (mapGrammarToResponse(this.grammarRepository.save(grammar)));
+        grammar.setStructure(request.getStructure().trim());
+        grammar.setLessons(getLessonById(request.getLessonId()));
+
+        return mapGrammarToResponse(
+                grammarRepository.save(grammar)
+        );
     }
 
     @Override
-    @Transactional
     public GrammarResponse updateGrammar(GrammarRequest request) {
 
-        Grammar grammar = grammarRepository
-                .findById(request.getGrammarId())
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Grammar not found with id: "
-                                        + request.getGrammarId()
-                        )
-                );
+        Grammar grammar = getGrammarById(request.getGrammarId());
 
         grammar.setTitle(request.getTitle().trim());
         grammar.setDescription(request.getDescription());
@@ -172,80 +159,99 @@ public class StaffServiceImpl implements IStaffService {
     }
 
     @Override
-    @Transactional
     public void deleteGrammar(Long grammarId) {
-        Grammar grammar = this.grammarRepository.findById(grammarId).orElseThrow(() ->
-                new ResourceNotFoundException(
-                        "Grammar not found with id: "
-                                + grammarId
-                )
-        );
-        this.grammarRepository.delete(grammar);
+
+        grammarRepository.delete(getGrammarById(grammarId));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<GrammarResponse> getAllGrammarByLesson(Long lessonId) {
-        List<Grammar> grammars = this.grammarRepository.findByLessons_LessonId(lessonId);
-        List<GrammarResponse> grammarResponses = new ArrayList<>();
-        for (Grammar grammar : grammars) {
-            GrammarResponse grammarResponse = this.mapGrammarToResponse(grammar);
-            grammarResponses.add(grammarResponse);
-        }
-        return grammarResponses;
+
+        return grammarRepository.findByLessons_LessonId(lessonId)
+                .stream()
+                .map(this::mapGrammarToResponse)
+                .toList();
     }
+
+    /* =========================================================
+                            EXAMPLE
+       ========================================================= */
 
     @Override
     public ExampleResponse createNewExample(ExampleRequest request) {
+
         Example example = new Example();
-        example.setNihongo(request.getNihongo());
-        example.setVietnamese(request.getVietnamese());
-        example.setGrammar(this.grammarRepository.findById(request.getGrammarId()).orElseThrow(() -> new ResourceNotFoundException("Grammar not found")));
-        return null;
+
+        example.setNihongo(request.getNihongo().trim());
+        example.setVietnamese(request.getVietnamese().trim());
+        example.setGrammar(getGrammarById(request.getGrammarId()));
+
+        return mapExampleToDTO(
+                exampleRepository.save(example)
+        );
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<ExampleResponse> findAllExampleOfGrammar(Long grammarId) {
+
+        return exampleRepository.findByGrammar_GrammarId(grammarId)
+                .stream()
+                .map(this::mapExampleToDTO)
+                .toList();
+    }
+
+    /* =========================================================
+                            TYPE / LEVEL
+       ========================================================= */
 
     @Override
+    @Transactional(readOnly = true)
+    @Cacheable("types")
+    public List<Types> getTypes() {
+        return typeRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    @Cacheable("levels")
+    public List<Levels> getLevels() {
+        return levelsRepository.findAll();
+    }
+
+    /* =========================================================
+                            MAPPING
+       ========================================================= */
+
+    @Override
+    @Transactional(readOnly = true)
     public BookResponse mappingBookToBookResponse(Books book) {
 
-        List<ImageDTO> images = imageRepository.findByBooks_BookId(book.getBookId()).stream().map(this::mapImageToDTO).toList();
+        List<ImageDTO> images = imageRepository
+                .findByBooks_BookId(book.getBookId())
+                .stream()
+                .map(this::mapImageToDTO)
+                .toList();
 
         return mapBook(book, images);
     }
 
-    /* =========================================================
-                            PRIVATE METHODS
-       ========================================================= */
+    private List<BookResponse> mapBooks(List<Books> books) {
 
-    private Books getBookById(Long bookId) {
+        Map<Long, List<ImageDTO>> imageMap = getImageMap(books);
 
-        return bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
-    }
-
-    private Levels getLevelById(Long levelId) {
-
-        return levelsRepository.findById(levelId).orElseThrow(() -> new RuntimeException("Level not found"));
-    }
-
-    private Types getTypeById(Long typeId) {
-
-        return typeRepository.findById(typeId).orElseThrow(() -> new RuntimeException("Type not found"));
-    }
-
-    private void saveImages(Books book, List<String> urls) {
-
-        if (urls == null || urls.isEmpty()) {
-            return;
-        }
-
-        List<Images> images = urls.stream().map(url -> {
-            Images image = new Images();
-            image.setBooks(book);
-            image.setUrl(url);
-            return image;
-        }).toList();
-
-        imageRepository.saveAll(images);
+        return books.stream()
+                .map(book ->
+                        mapBook(
+                                book,
+                                imageMap.getOrDefault(
+                                        book.getBookId(),
+                                        Collections.emptyList()
+                                )
+                        )
+                )
+                .toList();
     }
 
     private BookResponse mapBook(Books book, List<ImageDTO> images) {
@@ -256,7 +262,7 @@ public class StaffServiceImpl implements IStaffService {
         response.setBookName(book.getBookName());
         response.setLevelName(book.getLevel().getLevelName());
         response.setTypeName(book.getTypes().getTypeName());
-        response.setImageUrls(images == null ? new ArrayList<>() : images);
+        response.setImageUrls(images);
 
         return response;
     }
@@ -280,8 +286,9 @@ public class StaffServiceImpl implements IStaffService {
         response.setGrammarId(grammar.getGrammarId());
         response.setTitle(grammar.getTitle());
         response.setDescription(grammar.getDescription());
-        response.setLessonId(grammar.getLessons().getLessonId());
         response.setStructure(grammar.getStructure());
+        response.setLessonId(grammar.getLessons().getLessonId());
+
         return response;
     }
 
@@ -295,15 +302,115 @@ public class StaffServiceImpl implements IStaffService {
         return dto;
     }
 
+    private ExampleResponse mapExampleToDTO(Example example) {
+
+        ExampleResponse response = new ExampleResponse();
+
+        response.setExampleId(example.getExampleId());
+        response.setNihongo(example.getNihongo());
+        response.setVietnamese(example.getVietnamese());
+        response.setGrammarId(example.getGrammar().getGrammarId());
+
+        return response;
+    }
+
+    /* =========================================================
+                            PRIVATE METHODS
+       ========================================================= */
+
+    private Books getBookById(Long bookId) {
+
+        return bookRepository.findById(bookId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Book not found with id: " + bookId
+                        )
+                );
+    }
+
+    private Lessons getLessonById(Long lessonId) {
+
+        return lessonsRepository.findById(lessonId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Lesson not found with id: " + lessonId
+                        )
+                );
+    }
+
+    private Grammar getGrammarById(Long grammarId) {
+
+        return grammarRepository.findById(grammarId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Grammar not found with id: " + grammarId
+                        )
+                );
+    }
+
+    private Levels getLevelById(Long levelId) {
+
+        return levelsRepository.findById(levelId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Level not found with id: " + levelId
+                        )
+                );
+    }
+
+    private Types getTypeById(Long typeId) {
+
+        return typeRepository.findById(typeId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Type not found with id: " + typeId
+                        )
+                );
+    }
+
+    private void saveImages(Books book, List<String> urls) {
+
+        if (urls == null || urls.isEmpty()) {
+            return;
+        }
+
+        List<Images> images = urls.stream()
+                .filter(Objects::nonNull)
+                .map(String::trim)
+                .filter(url -> !url.isBlank())
+                .distinct()
+                .map(url -> {
+                    Images image = new Images();
+                    image.setBooks(book);
+                    image.setUrl(url);
+                    return image;
+                })
+                .toList();
+
+        imageRepository.saveAll(images);
+    }
+
     /**
-     * Tối ưu tránh N+1 query images
+     * Tránh N+1 query images
      */
     private Map<Long, List<ImageDTO>> getImageMap(List<Books> books) {
-        if (books.isEmpty()) {
-            return Map.of();
-        }
-        List<Long> bookIds = books.stream().map(Books::getBookId).toList();
 
-        return imageRepository.findByBooks_BookIdIn(bookIds).stream().collect(Collectors.groupingBy(image -> image.getBooks().getBookId(), Collectors.mapping(this::mapImageToDTO, Collectors.toList())));
+        if (books.isEmpty()) {
+            return Collections.emptyMap();
+        }
+
+        List<Long> bookIds = books.stream()
+                .map(Books::getBookId)
+                .toList();
+
+        return imageRepository.findByBooks_BookIdIn(bookIds)
+                .stream()
+                .collect(Collectors.groupingBy(
+                        image -> image.getBooks().getBookId(),
+                        Collectors.mapping(
+                                this::mapImageToDTO,
+                                Collectors.toList()
+                        )
+                ));
     }
 }

@@ -120,4 +120,18 @@ public class StaffRestController {
                 .body("Delete successfully");
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PostMapping("/examples")
+    public ResponseEntity<ExampleResponse> createNewExample(@RequestBody ExampleRequest exampleRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.createNewExample(exampleRequest));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/getAllExampleByGrammar")
+    public ResponseEntity<List<ExampleResponse>> getAllExampleByGrammar(@RequestParam Long grammarId) {
+        return ResponseEntity.ok(this.staffService.findAllExampleOfGrammar(grammarId));
+    }
+
 }
