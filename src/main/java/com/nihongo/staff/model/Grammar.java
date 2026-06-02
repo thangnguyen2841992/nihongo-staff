@@ -22,13 +22,11 @@ public class Grammar {
 
     private String title;
 
-    @Lob
-    @Column(columnDefinition = "LONGTEXT")
-    private String description;
+    private String imageUrl;
 
     @Lob
     @Column(columnDefinition = "LONGTEXT")
-    private String structure;
+    private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lesson_id", nullable = false)

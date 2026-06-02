@@ -14,9 +14,9 @@ public class GrammarResponse {
 
     private String title;
 
-    private String structure;
-
     private Long lessonId;
 
     private String description;
+
+    private String imageUrl;
 }

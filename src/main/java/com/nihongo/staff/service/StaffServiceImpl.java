@@ -138,8 +138,8 @@ public class StaffServiceImpl implements IStaffService {
 
         grammar.setTitle(request.getTitle().trim());
         grammar.setDescription(request.getDescription());
-        grammar.setStructure(request.getStructure().trim());
         grammar.setLessons(getLessonById(request.getLessonId()));
+        grammar.setImageUrl(request.getImageUrl().trim());
 
         return mapGrammarToResponse(
                 grammarRepository.save(grammar)
@@ -153,7 +153,7 @@ public class StaffServiceImpl implements IStaffService {
 
         grammar.setTitle(request.getTitle().trim());
         grammar.setDescription(request.getDescription());
-        grammar.setStructure(request.getStructure().trim());
+        grammar.setImageUrl(request.getImageUrl().trim());
 
         return mapGrammarToResponse(grammar);
     }
@@ -295,8 +295,8 @@ public class StaffServiceImpl implements IStaffService {
         response.setGrammarId(grammar.getGrammarId());
         response.setTitle(grammar.getTitle());
         response.setDescription(grammar.getDescription());
-        response.setStructure(grammar.getStructure());
         response.setLessonId(grammar.getLessons().getLessonId());
+        response.setImageUrl(grammar.getImageUrl());
 
         return response;
     }
