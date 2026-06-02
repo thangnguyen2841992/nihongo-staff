@@ -193,6 +193,15 @@ public class StaffServiceImpl implements IStaffService {
     }
 
     @Override
+    @Transactional
+    public ExampleResponse updateExample(ExampleRequest request) {
+        Example example = this.exampleRepository.findById(request.getExampleId()).orElseThrow(() -> new ResourceNotFoundException("Example not found"));
+        example.setNihongo(request.getNihongo());
+        example.setVietnamese(request.getVietnamese());
+        return mapExampleToDTO(example);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<ExampleResponse> findAllExampleOfGrammar(Long grammarId) {
 

@@ -129,6 +129,14 @@ public class StaffRestController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PutMapping("/examples")
+    public ResponseEntity<ExampleResponse> updateExample(@RequestBody ExampleRequest exampleRequest) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.updateExample(exampleRequest));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/getAllExampleByGrammar")
     public ResponseEntity<List<ExampleResponse>> getAllExampleByGrammar(@RequestParam Long grammarId) {
         return ResponseEntity.ok(this.staffService.findAllExampleOfGrammar(grammarId));

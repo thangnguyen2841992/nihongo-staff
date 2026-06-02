@@ -20,8 +20,12 @@ public class Example {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exampleId;
 
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String nihongo;
 
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String vietnamese;
 
 
