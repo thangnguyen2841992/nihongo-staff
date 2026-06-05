@@ -17,6 +17,8 @@ public interface IStaffService {
     List<BookResponse> getBooksByLevelAndType(Long levelId, Long typeId);
     List<LessonResponse> getAllLessonByBook(Long bookId);
     LessonResponse createNewLesson(CreateNewLessonRequest request);
+    LessonResponse updateLesson(CreateNewLessonRequest request);
+    void deleteLesson(Long lessonId);
     BookResponse mappingBookToBookResponse(Books book);
     List<ImageDTO> updateImagesOfBooks(UpdateImageOfBookRequest newBookRequest);
     GrammarResponse createNewGrammar(GrammarRequest request);

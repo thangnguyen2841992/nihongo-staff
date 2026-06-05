@@ -4,6 +4,7 @@ import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.*;
 import com.nihongo.staff.service.IStaffService;
+import jakarta.ws.rs.PUT;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -81,6 +82,21 @@ public class StaffRestController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.staffService.createNewLesson(lessonRequest));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PutMapping("/lessons")
+    public ResponseEntity<LessonResponse> updateLesson(@RequestBody CreateNewLessonRequest lessonRequest) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.staffService.updateLesson(lessonRequest));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @DeleteMapping("/lessons")
+    public ResponseEntity<?> deleteLesson(@RequestBody CreateNewLessonRequest lessonRequest) {
+        this.staffService.deleteLesson(lessonRequest.getLessonId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")

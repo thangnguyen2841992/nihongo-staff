@@ -17,4 +17,6 @@ public class CreateNewLessonRequest {
     private String description;
 
     private Long bookId;
+
+    private String reading;
 }

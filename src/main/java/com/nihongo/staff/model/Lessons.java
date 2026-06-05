@@ -21,6 +21,10 @@ public class Lessons {
 
     private String description;
 
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String reading;
+
     @CreationTimestamp
     private LocalDateTime dateCreated;
 

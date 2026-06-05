@@ -17,4 +17,6 @@ public class LessonResponse {
     private String name;
 
     private String description;
+
+    private String reading;
 }

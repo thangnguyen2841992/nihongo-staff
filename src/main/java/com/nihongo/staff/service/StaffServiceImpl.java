@@ -114,6 +114,7 @@ public class StaffServiceImpl implements IStaffService {
     }
 
     @Override
+    @Transactional
     public LessonResponse createNewLesson(CreateNewLessonRequest request) {
 
         Lessons lesson = new Lessons();
@@ -121,10 +122,28 @@ public class StaffServiceImpl implements IStaffService {
         lesson.setName(request.getName().trim());
         lesson.setDescription(request.getDescription());
         lesson.setBook(getBookById(request.getBookId()));
+        lesson.setReading(request.getReading());
 
         return mapLessonToResponse(
                 lessonsRepository.save(lesson)
         );
+    }
+
+    @Override
+    @Transactional
+    public LessonResponse updateLesson(CreateNewLessonRequest request) {
+        Lessons lessons = this.lessonsRepository.findById(request.getLessonId()).orElseThrow(() -> new ResourceNotFoundException("Lessons not found"));
+        lessons.setName(request.getName().trim());
+        lessons.setReading(request.getReading());
+        lessons.setDescription(request.getDescription());
+        return mapLessonToResponse(lessons);
+    }
+
+    @Override
+    @Transactional
+    public void deleteLesson(Long lessonId) {
+        Lessons lessons = this.lessonsRepository.findById(lessonId).orElseThrow(() -> new ResourceNotFoundException("Lessons not found"));
+        this.lessonsRepository.deleteById(lessons.getLessonId());
     }
 
     /* =========================================================
@@ -148,26 +167,21 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     public GrammarResponse updateGrammar(GrammarRequest request) {
-
         Grammar grammar = getGrammarById(request.getGrammarId());
-
         grammar.setTitle(request.getTitle().trim());
         grammar.setDescription(request.getDescription());
         grammar.setImageUrl(request.getImageUrl().trim());
-
         return mapGrammarToResponse(grammar);
     }
 
     @Override
     public void deleteGrammar(Long grammarId) {
-
         grammarRepository.delete(getGrammarById(grammarId));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<GrammarResponse> getAllGrammarByLesson(Long lessonId) {
-
         return grammarRepository.findByLessons_LessonId(lessonId)
                 .stream()
                 .map(this::mapGrammarToResponse)
@@ -180,16 +194,11 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     public ExampleResponse createNewExample(ExampleRequest request) {
-
         Example example = new Example();
-
         example.setNihongo(request.getNihongo().trim());
         example.setVietnamese(request.getVietnamese().trim());
         example.setGrammar(getGrammarById(request.getGrammarId()));
-
-        return mapExampleToDTO(
-                exampleRepository.save(example)
-        );
+        return mapExampleToDTO(exampleRepository.save(example));
     }
 
     @Override
@@ -284,6 +293,7 @@ public class StaffServiceImpl implements IStaffService {
         response.setName(lesson.getName());
         response.setDescription(lesson.getDescription());
         response.setBookId(lesson.getBook().getBookId());
+        response.setReading(lesson.getReading());
 
         return response;
     }
