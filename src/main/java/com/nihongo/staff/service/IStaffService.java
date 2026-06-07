@@ -1,6 +1,7 @@
 package com.nihongo.staff.service;
 
 import com.nihongo.staff.model.Books;
+import com.nihongo.staff.model.ExerciseKeywordDTO;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.*;
@@ -18,6 +19,7 @@ public interface IStaffService {
     List<LessonResponse> getAllLessonByBook(Long bookId);
     LessonResponse createNewLesson(CreateNewLessonRequest request);
     LessonResponse updateLesson(CreateNewLessonRequest request);
+    LessonResponse getLessonByIdAPI(Long lessonId);
     void deleteLesson(Long lessonId);
     BookResponse mappingBookToBookResponse(Books book);
     List<ImageDTO> updateImagesOfBooks(UpdateImageOfBookRequest newBookRequest);
@@ -28,4 +30,9 @@ public interface IStaffService {
     ExampleResponse createNewExample(ExampleRequest request);
     ExampleResponse updateExample(ExampleRequest request);
     List<ExampleResponse> findAllExampleOfGrammar(Long grammarId);
+    ExerciseKeywordDTO createNewExcercise(ExerciseKeywordDTO exerciseKeywordDTO);
+    ExerciseKeywordDTO updateExcercise(ExerciseKeywordDTO exerciseKeywordDTO);
+    List<ExerciseKeywordDTO> getAllExcercisesKeywordOfLesson(Long lessonId);
+
+
 }

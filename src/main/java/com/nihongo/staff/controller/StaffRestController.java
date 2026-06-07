@@ -1,5 +1,6 @@
 package com.nihongo.staff.controller;
 
+import com.nihongo.staff.model.ExerciseKeywordDTO;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.*;
@@ -100,6 +101,16 @@ public class StaffRestController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/lessons/{id}")
+    public ResponseEntity<LessonResponse> getLessonById(
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(
+                this.staffService.getLessonByIdAPI(id)
+        );
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/getLessonsByBook")
     public ResponseEntity<List<LessonResponse>> getLessonsByBook(@RequestParam Long bookId) {
         return ResponseEntity.ok(this.staffService.getAllLessonByBook(bookId));
@@ -156,6 +167,30 @@ public class StaffRestController {
     @GetMapping("/getAllExampleByGrammar")
     public ResponseEntity<List<ExampleResponse>> getAllExampleByGrammar(@RequestParam Long grammarId) {
         return ResponseEntity.ok(this.staffService.findAllExampleOfGrammar(grammarId));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PostMapping("/exercises")
+    public ResponseEntity<ExerciseKeywordDTO> createNewExercise(@RequestBody ExerciseKeywordDTO exerciseKeywordDTO) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.createNewExcercise(exerciseKeywordDTO));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PutMapping("/exercises")
+    public ResponseEntity<ExerciseKeywordDTO> updateExercise(@RequestBody ExerciseKeywordDTO exerciseKeywordDTO) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.updateExcercise(exerciseKeywordDTO));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/getAllExcercisesKeywordOfLesson/{lessonId}")
+    public ResponseEntity<List<ExerciseKeywordDTO>> getAllExcercisesKeywordOfLesson(@PathVariable Long lessonId) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.staffService.getAllExcercisesKeywordOfLesson(lessonId));
     }
 
 }

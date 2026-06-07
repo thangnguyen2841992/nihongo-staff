@@ -5,6 +5,9 @@ import com.nihongo.staff.model.*;
 import com.nihongo.staff.model.dto.*;
 import com.nihongo.staff.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +27,7 @@ public class StaffServiceImpl implements IStaffService {
     private final IImageRepository imageRepository;
     private final IGrammarRepository grammarRepository;
     private final IExampleRepository exampleRepository;
+    private final IExerciseKeywordRepository excersiceKeywordRepository;
 
     /* =========================================================
                             BOOK
@@ -140,6 +144,11 @@ public class StaffServiceImpl implements IStaffService {
     }
 
     @Override
+    public LessonResponse getLessonByIdAPI(Long lessonId) {
+        return mapLessonToResponse(getLessonById(lessonId));
+    }
+
+    @Override
     @Transactional
     public void deleteLesson(Long lessonId) {
         Lessons lessons = this.lessonsRepository.findById(lessonId).orElseThrow(() -> new ResourceNotFoundException("Lessons not found"));
@@ -220,6 +229,89 @@ public class StaffServiceImpl implements IStaffService {
                 .toList();
     }
 
+    @Override
+    @Transactional
+    public ExerciseKeywordDTO createNewExcercise(
+            ExerciseKeywordDTO dto
+    ) {
+
+        Lessons lesson =
+                getLessonById(
+                        dto.getLessonId()
+                );
+
+        return mapExcerciseToDTO(
+                excersiceKeywordRepository.save(
+                        mapToEntity(
+                                dto,
+                                lesson
+                        )
+                )
+        );
+    }
+
+    @Override
+    @Transactional
+    public ExerciseKeywordDTO updateExcercise(
+            ExerciseKeywordDTO dto
+    ) {
+
+        ExersiceKeyword entity =
+                excersiceKeywordRepository
+                        .findById(
+                                dto.getExerciseKeywordId()
+                        )
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Exercise not found"
+                                )
+                        );
+
+        ExersiceKeyword updated =
+                mapToEntity(
+                        dto,
+                        getLessonById(
+                                dto.getLessonId()
+                        )
+                );
+
+        entity.setContentNihongo(
+                updated.getContentNihongo()
+        );
+        entity.setAnswerA(
+                updated.getAnswerA()
+        );
+        entity.setAnswerB(
+                updated.getAnswerB()
+        );
+        entity.setAnswerC(
+                updated.getAnswerC()
+        );
+        entity.setAnswerD(
+                updated.getAnswerD()
+        );
+        entity.setCorrectAnswer(
+                updated.getCorrectAnswer()
+        );
+        entity.setLessons(
+                updated.getLessons()
+        );
+
+        return mapExcerciseToDTO(
+                entity
+        );
+    }
+
+    @Override
+    public List<ExerciseKeywordDTO> getAllExcercisesKeywordOfLesson(Long lessonId) {
+        List<ExersiceKeyword> exersiceKeywords = this.excersiceKeywordRepository.findByLessons_LessonId(lessonId);
+        List<ExerciseKeywordDTO> dtos = new ArrayList<>();
+        for (ExersiceKeyword exersiceKeyword : exersiceKeywords) {
+            dtos.add(mapExcerciseToDTO(exersiceKeyword));
+        }
+        return dtos;
+    }
+
     /* =========================================================
                             TYPE / LEVEL
        ========================================================= */
@@ -253,6 +345,115 @@ public class StaffServiceImpl implements IStaffService {
                 .toList();
 
         return mapBook(book, images);
+    }
+
+    private void validateKeyword(
+            String contentNihongo
+    ) {
+
+        if (
+                contentNihongo == null ||
+                        contentNihongo.isBlank()
+        ) {
+            throw new RuntimeException(
+                    "Nội dung tiếng Nhật không được để trống"
+            );
+        }
+
+        Document doc =
+                Jsoup.parse(
+                        contentNihongo
+                );
+
+        Elements keywords =
+                doc.select("u");
+
+        if (keywords.size() != 1) {
+
+            throw new RuntimeException(
+                    "Phải gạch chân đúng 1 keyword"
+            );
+        }
+
+        String keyword =
+                Objects.requireNonNull(keywords.first())
+                        .text()
+                        .trim();
+
+        if (keyword.isBlank()) {
+
+            throw new RuntimeException(
+                    "Keyword không được để trống"
+            );
+        }
+    }
+
+    private ExersiceKeyword mapToEntity(
+            ExerciseKeywordDTO dto,
+            Lessons lesson
+    ) {
+        validateKeyword(
+                dto.getContentNihongo()
+        );
+        return ExersiceKeyword.builder()
+                .exerciseKeywordId(
+                        dto.getExerciseKeywordId()
+                )
+                .contentNihongo(
+                        dto.getContentNihongo()
+                )
+                .answerA(
+                        dto.getAnswerA()
+                )
+                .answerB(
+                        dto.getAnswerB()
+                )
+                .answerC(
+                        dto.getAnswerC()
+                )
+                .answerD(
+                        dto.getAnswerD()
+                )
+                .correctAnswer(
+                        dto.getCorrectAnswer()
+                )
+                .lessons(
+                        lesson
+                )
+                .build();
+    }
+
+    private ExerciseKeywordDTO mapExcerciseToDTO(
+            ExersiceKeyword entity
+    ) {
+
+        return ExerciseKeywordDTO.builder()
+                .exerciseKeywordId(
+                        entity.getExerciseKeywordId()
+                )
+                .contentNihongo(
+                        entity.getContentNihongo()
+                )
+                .answerA(
+                        entity.getAnswerA()
+                )
+                .answerB(
+                        entity.getAnswerB()
+                )
+                .answerC(
+                        entity.getAnswerC()
+                )
+                .answerD(
+                        entity.getAnswerD()
+                )
+                .correctAnswer(
+                        entity.getCorrectAnswer()
+                )
+                .lessonId(
+                        entity.getLessons()
+                                .getLessonId()
+                )
+                .build();
     }
 
     private List<BookResponse> mapBooks(List<Books> books) {
@@ -346,6 +547,7 @@ public class StaffServiceImpl implements IStaffService {
                         )
                 );
     }
+
 
     private Lessons getLessonById(Long lessonId) {
 
