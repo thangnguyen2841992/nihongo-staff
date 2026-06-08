@@ -1,6 +1,7 @@
 package com.nihongo.staff.controller;
 
 import com.nihongo.staff.model.ExerciseKeywordDTO;
+import com.nihongo.staff.model.ExerciseType;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.*;
@@ -32,6 +33,12 @@ public class StaffRestController {
     @GetMapping("/levels")
     public ResponseEntity<List<Levels>> getAllLevels() {
         return ResponseEntity.ok(this.staffService.getLevels());
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/exerciseTypes")
+    public ResponseEntity<List<ExerciseType>> getAllExerciseTypes() {
+        return ResponseEntity.ok(this.staffService.getExerciseTypes());
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")

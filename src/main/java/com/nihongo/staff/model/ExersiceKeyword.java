@@ -31,6 +31,10 @@ public class ExersiceKeyword {
     @JoinColumn(name = "lessons_id", nullable = false)
     private Lessons lessons;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exerciseType_id", nullable = false)
+    private ExerciseType exerciseType;
+
 
     @CreationTimestamp
     private LocalDateTime dateCreated;

@@ -21,5 +21,7 @@ public class ExerciseKeywordDTO {
     private String correctAnswer;
 
     private Long lessonId;
+
+    private Long exerciseTypeId;
 }
 

@@ -28,6 +28,7 @@ public class StaffServiceImpl implements IStaffService {
     private final IGrammarRepository grammarRepository;
     private final IExampleRepository exampleRepository;
     private final IExerciseKeywordRepository excersiceKeywordRepository;
+    private final IExerciseTypeRepository exerciseTypeRepository;
 
     /* =========================================================
                             BOOK
@@ -240,14 +241,10 @@ public class StaffServiceImpl implements IStaffService {
                         dto.getLessonId()
                 );
 
+        ExerciseType exerciseType = getExerciseTypeById(dto.getExerciseTypeId());
+
         return mapExcerciseToDTO(
-                excersiceKeywordRepository.save(
-                        mapToEntity(
-                                dto,
-                                lesson
-                        )
-                )
-        );
+                excersiceKeywordRepository.save(mapToEntity(dto, lesson, exerciseType)));
     }
 
     @Override
@@ -270,9 +267,9 @@ public class StaffServiceImpl implements IStaffService {
         ExersiceKeyword updated =
                 mapToEntity(
                         dto,
-                        getLessonById(
-                                dto.getLessonId()
-                        )
+                        getLessonById(dto.getLessonId()),
+                        getExerciseTypeById(dto.getExerciseTypeId())
+
                 );
 
         entity.setContentNihongo(
@@ -296,6 +293,7 @@ public class StaffServiceImpl implements IStaffService {
         entity.setLessons(
                 updated.getLessons()
         );
+        entity.setExerciseType(updated.getExerciseType());
 
         return mapExcerciseToDTO(
                 entity
@@ -328,6 +326,13 @@ public class StaffServiceImpl implements IStaffService {
     @Cacheable("levels")
     public List<Levels> getLevels() {
         return levelsRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    @Cacheable("exerciseTypes")
+    public List<ExerciseType> getExerciseTypes() {
+        return this.exerciseTypeRepository.findAll();
     }
 
     /* =========================================================
@@ -375,22 +380,23 @@ public class StaffServiceImpl implements IStaffService {
             );
         }
 
-        String keyword =
-                Objects.requireNonNull(keywords.first())
-                        .text()
-                        .trim();
-
-        if (keyword.isBlank()) {
-
-            throw new RuntimeException(
-                    "Keyword không được để trống"
-            );
-        }
+//        String keyword =
+//                Objects.requireNonNull(keywords.first())
+//                        .text()
+//                        .trim();
+//
+//        if (keyword.isBlank()) {
+//
+//            throw new RuntimeException(
+//                    "Keyword không được để trống"
+//            );
+//        }
     }
 
     private ExersiceKeyword mapToEntity(
             ExerciseKeywordDTO dto,
-            Lessons lesson
+            Lessons lesson,
+            ExerciseType exerciseType
     ) {
         validateKeyword(
                 dto.getContentNihongo()
@@ -419,7 +425,7 @@ public class StaffServiceImpl implements IStaffService {
                 )
                 .lessons(
                         lesson
-                )
+                ).exerciseType(exerciseType)
                 .build();
     }
 
@@ -452,7 +458,7 @@ public class StaffServiceImpl implements IStaffService {
                 .lessonId(
                         entity.getLessons()
                                 .getLessonId()
-                )
+                ).exerciseTypeId(entity.getExerciseType().getExerciseTypeId())
                 .build();
     }
 
@@ -555,6 +561,16 @@ public class StaffServiceImpl implements IStaffService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
                                 "Lesson not found with id: " + lessonId
+                        )
+                );
+    }
+
+    private ExerciseType getExerciseTypeById(Long exerciseTypeId) {
+
+        return exerciseTypeRepository.findById(exerciseTypeId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Exercise not found with id: " + exerciseTypeId
                         )
                 );
     }
