@@ -243,7 +243,7 @@ public class StaffServiceImpl implements IStaffService {
 
         ExerciseType exerciseType = getExerciseTypeById(dto.getExerciseTypeId());
 
-        return mapExcerciseToDTO(
+        return mapExerciseToDTO(
                 excersiceKeywordRepository.save(mapToEntity(dto, lesson, exerciseType)));
     }
 
@@ -295,7 +295,7 @@ public class StaffServiceImpl implements IStaffService {
         );
         entity.setExerciseType(updated.getExerciseType());
 
-        return mapExcerciseToDTO(
+        return mapExerciseToDTO(
                 entity
         );
     }
@@ -305,7 +305,7 @@ public class StaffServiceImpl implements IStaffService {
         List<ExersiceKeyword> exersiceKeywords = this.excersiceKeywordRepository.findByLessons_LessonId(lessonId);
         List<ExerciseKeywordDTO> dtos = new ArrayList<>();
         for (ExersiceKeyword exersiceKeyword : exersiceKeywords) {
-            dtos.add(mapExcerciseToDTO(exersiceKeyword));
+            dtos.add(mapExerciseToDTO(exersiceKeyword));
         }
         return dtos;
     }
@@ -379,18 +379,6 @@ public class StaffServiceImpl implements IStaffService {
                     "Phải gạch chân đúng 1 keyword"
             );
         }
-
-//        String keyword =
-//                Objects.requireNonNull(keywords.first())
-//                        .text()
-//                        .trim();
-//
-//        if (keyword.isBlank()) {
-//
-//            throw new RuntimeException(
-//                    "Keyword không được để trống"
-//            );
-//        }
     }
 
     private ExersiceKeyword mapToEntity(
@@ -429,7 +417,7 @@ public class StaffServiceImpl implements IStaffService {
                 .build();
     }
 
-    private ExerciseKeywordDTO mapExcerciseToDTO(
+    private ExerciseKeywordDTO mapExerciseToDTO(
             ExersiceKeyword entity
     ) {
 
@@ -459,6 +447,7 @@ public class StaffServiceImpl implements IStaffService {
                         entity.getLessons()
                                 .getLessonId()
                 ).exerciseTypeId(entity.getExerciseType().getExerciseTypeId())
+                .exerciseTypeName(entity.getExerciseType().getName())
                 .build();
     }
 

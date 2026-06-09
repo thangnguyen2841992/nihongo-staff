@@ -1,5 +1,7 @@
 package com.nihongo.staff.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import lombok.*;
 
 @AllArgsConstructor
@@ -23,5 +25,6 @@ public class ExerciseKeywordDTO {
     private Long lessonId;
 
     private Long exerciseTypeId;
+    private String exerciseTypeName;
 }
 
