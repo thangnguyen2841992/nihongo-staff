@@ -18,6 +18,9 @@ public class ExersiceKeyword {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long exerciseKeywordId;
 
+
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String contentNihongo;
 
     private String answerA;

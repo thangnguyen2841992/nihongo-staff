@@ -1,5 +1,7 @@
 package com.nihongo.staff.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import lombok.*;
 
 @AllArgsConstructor
