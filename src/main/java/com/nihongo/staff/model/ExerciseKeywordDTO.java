@@ -23,5 +23,6 @@ public class ExerciseKeywordDTO {
     private Long lessonId;
 
     private Long exerciseTypeId;
+    private String exerciseTypeName;
 }
 

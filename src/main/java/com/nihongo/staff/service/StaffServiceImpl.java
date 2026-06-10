@@ -459,6 +459,7 @@ public class StaffServiceImpl implements IStaffService {
                         entity.getLessons()
                                 .getLessonId()
                 ).exerciseTypeId(entity.getExerciseType().getExerciseTypeId())
+                .exerciseTypeName(entity.getExerciseType().getName())
                 .build();
     }
 
