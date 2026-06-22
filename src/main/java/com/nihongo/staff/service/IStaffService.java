@@ -15,6 +15,7 @@ public interface IStaffService {
     List<BookResponse> getBooks();
     List<BookResponse> getBooksByLevelAndType(Long levelId, Long typeId);
     List<LessonResponse> getAllLessonByBook(Long bookId);
+    List<BookResponse> getBooksByLevel(Long levelId);
     LessonResponse createNewLesson(CreateNewLessonRequest request);
     LessonResponse updateLesson(CreateNewLessonRequest request);
     LessonResponse getLessonByIdAPI(Long lessonId);

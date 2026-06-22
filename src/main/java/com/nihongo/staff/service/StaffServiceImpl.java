@@ -119,6 +119,15 @@ public class StaffServiceImpl implements IStaffService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<BookResponse> getBooksByLevel(Long levelId) {
+        return bookRepository.findByLevel_LevelId(levelId)
+                .stream()
+                .map(this::mappingBookToBookResponse)
+                .toList();
+    }
+
+    @Override
     @Transactional
     public LessonResponse createNewLesson(CreateNewLessonRequest request) {
 

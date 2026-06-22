@@ -25,5 +25,7 @@ public interface IBookRepository extends JpaRepository<Books, Long> {
             """)
     List<Books> findAllWithRelations();
 
+    List<Books> findByLevel_LevelId(Long levelId);
+
 
 }

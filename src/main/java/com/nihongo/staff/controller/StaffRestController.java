@@ -6,7 +6,7 @@ import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.*;
 import com.nihongo.staff.service.IStaffService;
-import jakarta.ws.rs.PUT;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,6 +58,12 @@ public class StaffRestController {
     @GetMapping("/getBooksByLevelAndType")
     public ResponseEntity<List<BookResponse>> getBooksByLevelAndType(@RequestParam Long levelId, @RequestParam Long typeId) {
         return ResponseEntity.ok(this.staffService.getBooksByLevelAndType(levelId, typeId));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
+    @GetMapping("/getBooksByLevel")
+    public ResponseEntity<List<BookResponse>> getBooksByLevel(@RequestParam("levelId") Long levelId) {
+        return ResponseEntity.ok(this.staffService.getBooksByLevel(levelId));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
