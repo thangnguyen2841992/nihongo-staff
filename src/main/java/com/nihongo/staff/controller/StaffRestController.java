@@ -47,7 +47,7 @@ public class StaffRestController {
         return ResponseEntity.ok(this.staffService.getBooks());
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/books/{bookId}")
     public ResponseEntity<BookResponse> getBookDetail(@PathVariable Long bookId) {
         return ResponseEntity.ok(this.staffService.getBookDetail(bookId));
@@ -123,7 +123,7 @@ public class StaffRestController {
         );
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/getLessonsByBook")
     public ResponseEntity<List<LessonResponse>> getLessonsByBook(@RequestParam Long bookId) {
         return ResponseEntity.ok(this.staffService.getAllLessonByBook(bookId));
@@ -137,7 +137,7 @@ public class StaffRestController {
                 .body(this.staffService.createNewGrammar(grammarRequest));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/getAllGrammarByLesson")
     public ResponseEntity<List<GrammarResponse>> getAllGrammarByLesson(@RequestParam Long lessonId) {
         return ResponseEntity.ok(this.staffService.getAllGrammarByLesson(lessonId));
@@ -176,7 +176,7 @@ public class StaffRestController {
                 .body(this.staffService.updateExample(exampleRequest));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/getAllExampleByGrammar")
     public ResponseEntity<List<ExampleResponse>> getAllExampleByGrammar(@RequestParam Long grammarId) {
         return ResponseEntity.ok(this.staffService.findAllExampleOfGrammar(grammarId));
