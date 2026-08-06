@@ -35,7 +35,7 @@ public class StaffRestController {
         return ResponseEntity.ok(this.staffService.getLevels());
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/exerciseTypes")
     public ResponseEntity<List<ExerciseType>> getAllExerciseTypes() {
         return ResponseEntity.ok(this.staffService.getExerciseTypes());
@@ -113,7 +113,7 @@ public class StaffRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/lessons/{id}")
     public ResponseEntity<LessonResponse> getLessonById(
             @PathVariable Long id
@@ -198,9 +198,9 @@ public class StaffRestController {
                 .body(this.staffService.updateExcercise(exerciseKeywordDTO));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/getAllExcercisesKeywordOfLesson/{lessonId}")
-    public ResponseEntity<List<ExerciseKeywordDTO>> getAllExcercisesKeywordOfLesson(@PathVariable Long lessonId) {
+    public ResponseEntity<List<ExerciseKeywordDTO>> getAllExercisesKeywordOfLesson(@PathVariable Long lessonId) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.staffService.getAllExcercisesKeywordOfLesson(lessonId));
