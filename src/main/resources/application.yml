@@ -4,9 +4,9 @@ spring:
   application:
     name: staff-service
   datasource:
-    url: jdbc:mysql://localhost:3306/nihongo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: root
-    password: thuthuyda1
+    url: jdbc:mysql://180.93.115.154:3306/nihongo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: nihongo_app
+    password: Nihongo@2026
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
