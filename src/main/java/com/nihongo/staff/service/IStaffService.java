@@ -4,6 +4,7 @@ import com.nihongo.staff.model.*;
 import com.nihongo.staff.model.dto.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IStaffService {
     BookResponse createNewBook(CreateNewBookRequest newBookRequest);
@@ -32,6 +33,7 @@ public interface IStaffService {
     ExerciseKeywordDTO createNewExcercise(ExerciseKeywordDTO exerciseKeywordDTO);
     ExerciseKeywordDTO updateExcercise(ExerciseKeywordDTO exerciseKeywordDTO);
     List<ExerciseKeywordDTO> getAllExcercisesKeywordOfLesson(Long lessonId);
+    Map<String, Object> getServerMetrics();
 
 
 }

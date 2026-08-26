@@ -28,3 +28,6 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+monitoring:
+  prometheus-url: http://180.93.115.154:9090

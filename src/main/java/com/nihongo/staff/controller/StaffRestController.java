@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/staff")
@@ -204,6 +205,13 @@ public class StaffRestController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.staffService.getAllExcercisesKeywordOfLesson(lessonId));
+    }
+
+    @GetMapping("/server")
+    public Map<String, Object> getServerMetrics() {
+
+        return staffService
+                .getServerMetrics();
     }
 
 }
