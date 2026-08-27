@@ -5,7 +5,11 @@ import com.nihongo.staff.model.ExerciseType;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.*;
+import com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest;
+import com.nihongo.staff.model.monitoring.dto.MonitorVpsResponse;
 import com.nihongo.staff.service.IStaffService;
+import com.nihongo.staff.service.monitor.vps.IMonitorVpsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +21,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/staff")
+@RequiredArgsConstructor
 public class StaffRestController {
     private final IStaffService staffService;
+    private final IMonitorVpsService monitorVpsService;
 
-    public StaffRestController(IStaffService staffService) {
-        this.staffService = staffService;
-    }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/types")
@@ -207,11 +210,10 @@ public class StaffRestController {
                 .body(this.staffService.getAllExcercisesKeywordOfLesson(lessonId));
     }
 
-    @GetMapping("/server")
-    public Map<String, Object> getServerMetrics() {
-
-        return staffService
-                .getServerMetrics();
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @PostMapping("/vps")
+    public MonitorVpsResponse register( @Valid @RequestBody MonitorVpsRequest request) {
+        return this.monitorVpsService.register(request);
     }
 
 }

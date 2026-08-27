@@ -48,16 +48,6 @@ public class StaffServiceImpl implements IStaffService {
      * =========================================================
      *                    MONITORING CACHE
      * =========================================================
-     *
-     * Cache metric trong 5 giây.
-     *
-     * Request 1 -> gọi Prometheus
-     * Request 2 -> dùng cache
-     * Request 3 -> dùng cache
-     * ...
-     * Sau 5 giây -> request tiếp theo gọi Prometheus lại.
-     *
-     * Không cần Redis cho trường hợp này.
      */
 
     private volatile Map<String, Object> serverMetricsCache;
@@ -75,66 +65,23 @@ public class StaffServiceImpl implements IStaffService {
     public BookResponse createNewBook(CreateNewBookRequest request) {
 
         Books book = new Books();
-
-        book.setBookName(
-                request.getBookName().trim()
-        );
-
-        book.setLevel(
-                getLevelById(
-                        request.getLevelId()
-                )
-        );
-
-        book.setTypes(
-                getTypeById(
-                        request.getTypeId()
-                )
-        );
-
-        Books savedBook =
-                bookRepository.save(book);
-
-        saveImages(
-                savedBook,
-                request.getUrls()
-        );
-
-        return mappingBookToBookResponse(
-                savedBook
-        );
+        book.setBookName(request.getBookName().trim());
+        book.setLevel(getLevelById(request.getLevelId()));
+        book.setTypes(getTypeById(request.getTypeId()));
+        Books savedBook = bookRepository.save(book);
+        saveImages(savedBook, request.getUrls());
+        return mappingBookToBookResponse(savedBook);
     }
 
 
     @Override
-    public BookResponse updateBook(
-            UpdateBookRequest request
-    ) {
+    public BookResponse updateBook(UpdateBookRequest request) {
 
-        Books book =
-                getBookById(
-                        request.getBookId()
-                );
-
-        book.setBookName(
-                request.getBookName().trim()
-        );
-
-        book.setLevel(
-                getLevelById(
-                        request.getLevelId()
-                )
-        );
-
-        book.setTypes(
-                getTypeById(
-                        request.getTypeId()
-                )
-        );
-
-        return mappingBookToBookResponse(
-                book
-        );
+        Books book = getBookById(request.getBookId());
+        book.setBookName(request.getBookName().trim());
+        book.setLevel(getLevelById(request.getLevelId()));
+        book.setTypes(getTypeById(request.getTypeId()));
+        return mappingBookToBookResponse(book);
     }
 
 
