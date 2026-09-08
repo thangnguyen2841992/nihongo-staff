@@ -4,11 +4,12 @@ import com.nihongo.staff.model.monitoring.MonitorPrometheusTarget;
 import com.nihongo.staff.model.monitoring.MonitorVps;
 import com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest;
 import com.nihongo.staff.model.monitoring.dto.NodeExporterDiscoveryResult;
+import com.nihongo.staff.model.monitoring.dto.RegisterMonitorVpsRequest;
 
 public interface IMonitorVpsService {
     NodeExporterDiscoveryResult discover(MonitorVpsRequest request);
-
-    MonitorPrometheusTarget registerTarget(MonitorVps vps);
+    MonitorVps registerVps(RegisterMonitorVpsRequest request);
+    MonitorPrometheusTarget registerTarget(Long vpsId);
 
     void enableTarget(Long targetId);
     void disableTarget(Long targetId);

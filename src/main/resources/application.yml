@@ -32,3 +32,7 @@ eureka:
 monitoring:
   prometheus-url: http://180.93.115.154:9090
   prometheus-targets-file: /etc/prometheus/targets/node_targets.json
+  prometheus-port: 22
+  prometheus-host: 180.93.115.154
+  prometheus-ssh-username: root
+  prometheus-ssh-password: iM6#QRWt16Gq

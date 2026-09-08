@@ -9,6 +9,7 @@ import com.nihongo.staff.model.monitoring.MonitorPrometheusTarget;
 import com.nihongo.staff.model.monitoring.MonitorVps;
 import com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest;
 import com.nihongo.staff.model.monitoring.dto.NodeExporterDiscoveryResult;
+import com.nihongo.staff.model.monitoring.dto.RegisterMonitorVpsRequest;
 import com.nihongo.staff.service.IStaffService;
 import com.nihongo.staff.service.monitor.vps.IMonitorVpsService;
 import jakarta.validation.Valid;
@@ -187,10 +188,11 @@ public class StaffRestController {
         return this.monitorVpsService.discover(request);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PostMapping("/vps/register")
-    public ResponseEntity<MonitorPrometheusTarget> register(@RequestBody MonitorVps request) {
-        MonitorPrometheusTarget vps = monitorVpsService.registerTarget(request);
-        return ResponseEntity.ok(vps);
+    public ResponseEntity<MonitorVps> register(@Valid @RequestBody RegisterMonitorVpsRequest request) {
+        MonitorVps savedVps = monitorVpsService.registerVps(request);
+        return ResponseEntity.ok(savedVps);
     }
 
 }

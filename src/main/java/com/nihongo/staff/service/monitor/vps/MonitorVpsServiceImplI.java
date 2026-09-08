@@ -6,19 +6,28 @@ import com.nihongo.staff.model.monitoring.MonitorVps;
 import com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest;
 import com.nihongo.staff.model.monitoring.dto.NodeExporterDiscoveryResult;
 import com.nihongo.staff.model.monitoring.dto.PrometheusFileTarget;
+import com.nihongo.staff.model.monitoring.dto.RegisterMonitorVpsRequest;
 import com.nihongo.staff.repository.MonitorPrometheusTargetRepository;
+import com.nihongo.staff.repository.MonitorVpsRepository;
 import lombok.RequiredArgsConstructor;
+import net.schmizz.sshj.SSHClient;
+import net.schmizz.sshj.connection.channel.direct.Session;
+import net.schmizz.sshj.sftp.SFTPClient;
+import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.client.RestClient;
 
-import java.io.IOException;
-import java.nio.file.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,11 +39,24 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
     private final RestClient restClient;
 
     private final MonitorPrometheusTargetRepository targetRepository;
+    private final MonitorVpsRepository vpsRepository;
 
     private final ObjectMapper objectMapper;
 
+    @Value("${monitoring.prometheus-host}")
+    private String prometheusHost;
+
+    @Value("${monitoring.prometheus-port}")
+    private int prometheusPort;
+
+    @Value("${monitoring.prometheus-ssh-username}")
+    private String prometheusUsername;
+
+    @Value("${monitoring.prometheus-ssh-password}")
+    private String prometheusPassword;
+
     @Value("${monitoring.prometheus-targets-file}")
-    private String targetsFile;
+    private String prometheusTargetsFile;
 
     @Override
     public NodeExporterDiscoveryResult discover(MonitorVpsRequest request) {
@@ -78,57 +100,47 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
         }
     }
 
+    @Transactional
+    public MonitorVps registerVps(RegisterMonitorVpsRequest request) {
+        MonitorVps vps = new MonitorVps();
+
+        vps.setIpAddress(request.getIpAddress());
+        vps.setAgentPort(request.getAgentPort());
+        vps.setHostname(request.getHostname());
+        vps.setOsType(request.getOsType());
+        vps.setOsVersion(request.getOsVersion());
+        vps.setArchitecture(request.getArchitecture());
+        vps.setLastSeenAt(LocalDateTime.now());
+
+        // 1. Lưu VPS, lúc này có vpsId
+        MonitorVps savedVps = vpsRepository.save(vps);
+
+        // 2. Tự tạo Prometheus target
+        registerTarget(savedVps.getVpsId());
+
+        // 3. registerTarget đã gọi syncAfterCommit()
+        // → sau commit, JSON được upload sang Prometheus
+
+        return savedVps;
+    }
+
     @Override
     @Transactional
-    public MonitorPrometheusTarget registerTarget(MonitorVps vps) {
+    public MonitorPrometheusTarget registerTarget(Long vpsId) {
+        MonitorVps vps = vpsRepository.findById(vpsId).orElseThrow(() -> new RuntimeException("VPS not found: " + vpsId));
 
         String jobName = "node";
-
         String target = vps.getIpAddress() + ":" + vps.getAgentPort();
 
+        MonitorPrometheusTarget targetEntity = targetRepository.findByVps_VpsIdAndJobName(vpsId, jobName).orElseGet(MonitorPrometheusTarget::new);
 
-        // ==========================================
-        // Check target của VPS đã tồn tại chưa
-        // ==========================================
-
-        Optional<MonitorPrometheusTarget> optional = targetRepository.findByVps_VpsIdAndJobName(vps.getVpsId(), jobName);
-
-
-        MonitorPrometheusTarget targetEntity;
-
-        if (optional.isPresent()) {
-
-            // Target đã tồn tại
-            targetEntity = optional.get();
-
-            targetEntity.setTarget(target);
-            targetEntity.setEnabled(true);
-
-        } else {
-
-            // Tạo target mới
-            targetEntity = new MonitorPrometheusTarget();
-
-            targetEntity.setVps(vps);
-            targetEntity.setJobName(jobName);
-            targetEntity.setTarget(target);
-            targetEntity.setEnabled(true);
-        }
-
-
-        // ==========================================
-        // Save DB
-        // ==========================================
+        targetEntity.setVps(vps);
+        targetEntity.setJobName(jobName);
+        targetEntity.setTarget(target);
+        targetEntity.setEnabled(true);
 
         MonitorPrometheusTarget saved = targetRepository.save(targetEntity);
-
-
-        // ==========================================
-        // Sync Prometheus file
-        // ==========================================
-
-        sync();
-
+        syncAfterCommit();
 
         return saved;
     }
@@ -141,7 +153,7 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
 
         targetRepository.save(target);
 
-        sync();
+        syncAfterCommit();
     }
 
     @Override
@@ -152,7 +164,7 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
 
         targetRepository.save(target);
 
-        sync();
+        syncAfterCommit();
     }
 
     @Override
@@ -163,7 +175,7 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
 
         targetRepository.delete(target);
 
-        sync();
+        syncAfterCommit();
     }
 
     @Transactional(readOnly = true)
@@ -192,37 +204,12 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
     private void writeFile(List<PrometheusFileTarget> targets) {
 
         try {
+            String content = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(targets);
 
-            Path path = Paths.get(targetsFile);
+            uploadFileViaSsh(content);
 
-            Path parent = path.getParent();
-
-            if (parent != null) {
-                Files.createDirectories(parent);
-            }
-
-
-            // File tạm
-            Path tempFile = Paths.get(targetsFile + ".tmp");
-
-
-            // Ghi file tạm
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(tempFile.toFile(), targets);
-
-
-            // Rename atomically
-            try {
-
-                Files.move(tempFile, path, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
-
-            } catch (AtomicMoveNotSupportedException e) {
-
-                Files.move(tempFile, path, StandardCopyOption.REPLACE_EXISTING);
-            }
-
-        } catch (IOException e) {
-
-            throw new RuntimeException("Cannot sync Prometheus targets", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Cannot sync Prometheus targets via SSH", e);
         }
     }
 
@@ -237,5 +224,77 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
         }
 
         return null;
+    }
+
+    private void uploadFileViaSsh(String content) throws Exception {
+
+        Path localTempFile = Files.createTempFile("node_targets_", ".json");
+
+        try {
+            // 1. Ghi JSON ra file tạm trên server Spring Boot
+            Files.writeString(localTempFile, content, StandardCharsets.UTF_8);
+
+            // 2. SSH vào Prometheus server
+            try (SSHClient ssh = new SSHClient()) {
+
+                ssh.addHostKeyVerifier(new PromiscuousVerifier());
+
+                ssh.connect(prometheusHost, prometheusPort);
+
+                // 3. Login bằng username + password
+                ssh.authPassword(prometheusUsername, prometheusPassword);
+
+                // File tạm trên Prometheus server
+                String remoteTempFile = prometheusTargetsFile + ".tmp";
+
+                // 4. Upload file
+                try (SFTPClient sftp = ssh.newSFTPClient()) {
+
+                    sftp.put(localTempFile.toString(), remoteTempFile);
+                }
+
+                // 5. Đổi file .tmp thành file chính
+                try (Session session = ssh.startSession()) {
+
+                    String command = "mv -f " + shellEscape(remoteTempFile) + " " + shellEscape(prometheusTargetsFile);
+
+                    Session.Command cmd = session.exec(command);
+
+                    cmd.join();
+
+                    Integer exitStatus = cmd.getExitStatus();
+
+                    if (exitStatus == null || exitStatus != 0) {
+
+                        String error = new String(cmd.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+
+                        throw new RuntimeException("Cannot replace Prometheus target file: " + error);
+                    }
+                }
+            }
+
+        } finally {
+
+            // 6. Xóa file tạm local
+            Files.deleteIfExists(localTempFile);
+        }
+    }
+
+    private String shellEscape(String value) {
+        return "'" + value.replace("'", "'\\''") + "'";
+    }
+
+    private void syncAfterCommit() {
+        if (!TransactionSynchronizationManager.isActualTransactionActive()) {
+            sync();
+            return;
+        }
+
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCommit() {
+                sync();
+            }
+        });
     }
 }
