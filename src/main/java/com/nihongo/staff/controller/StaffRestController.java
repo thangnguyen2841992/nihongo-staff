@@ -5,8 +5,10 @@ import com.nihongo.staff.model.ExerciseType;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.*;
+import com.nihongo.staff.model.monitoring.MonitorPrometheusTarget;
+import com.nihongo.staff.model.monitoring.MonitorVps;
 import com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest;
-import com.nihongo.staff.model.monitoring.dto.MonitorVpsResponse;
+import com.nihongo.staff.model.monitoring.dto.NodeExporterDiscoveryResult;
 import com.nihongo.staff.service.IStaffService;
 import com.nihongo.staff.service.monitor.vps.IMonitorVpsService;
 import jakarta.validation.Valid;
@@ -17,7 +19,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/staff")
@@ -73,41 +74,31 @@ public class StaffRestController {
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PostMapping("/books")
     public ResponseEntity<BookResponse> createNewBook(@RequestBody CreateNewBookRequest bookRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.createNewBook(bookRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.createNewBook(bookRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PutMapping("/books")
     public ResponseEntity<BookResponse> updateBook(@RequestBody UpdateBookRequest bookRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.updateBook(bookRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.updateBook(bookRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PostMapping("/images")
     public ResponseEntity<List<ImageDTO>> updateImagesOfBook(@RequestBody UpdateImageOfBookRequest imageOfBookRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.updateImagesOfBooks(imageOfBookRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.updateImagesOfBooks(imageOfBookRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PostMapping("/lessons")
     public ResponseEntity<LessonResponse> createNewLesson(@RequestBody CreateNewLessonRequest lessonRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.createNewLesson(lessonRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.createNewLesson(lessonRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PutMapping("/lessons")
     public ResponseEntity<LessonResponse> updateLesson(@RequestBody CreateNewLessonRequest lessonRequest) {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(this.staffService.updateLesson(lessonRequest));
+        return ResponseEntity.status(HttpStatus.OK).body(this.staffService.updateLesson(lessonRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
@@ -119,12 +110,8 @@ public class StaffRestController {
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/lessons/{id}")
-    public ResponseEntity<LessonResponse> getLessonById(
-            @PathVariable Long id
-    ) {
-        return ResponseEntity.ok(
-                this.staffService.getLessonByIdAPI(id)
-        );
+    public ResponseEntity<LessonResponse> getLessonById(@PathVariable Long id) {
+        return ResponseEntity.ok(this.staffService.getLessonByIdAPI(id));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
@@ -136,9 +123,7 @@ public class StaffRestController {
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PostMapping("/grammars")
     public ResponseEntity<GrammarResponse> createNewGrammar(@RequestBody GrammarRequest grammarRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.createNewGrammar(grammarRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.createNewGrammar(grammarRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
@@ -150,34 +135,26 @@ public class StaffRestController {
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PutMapping("/grammars")
     public ResponseEntity<GrammarResponse> updateGrammar(@RequestBody GrammarRequest grammarRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.updateGrammar(grammarRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.updateGrammar(grammarRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @DeleteMapping("/grammars")
     public ResponseEntity<?> deleteGrammar(@RequestBody GrammarRequest grammarRequest) {
         this.staffService.deleteGrammar(grammarRequest.getGrammarId());
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body("Delete successfully");
+        return ResponseEntity.status(HttpStatus.OK).body("Delete successfully");
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PostMapping("/examples")
     public ResponseEntity<ExampleResponse> createNewExample(@RequestBody ExampleRequest exampleRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.createNewExample(exampleRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.createNewExample(exampleRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PutMapping("/examples")
     public ResponseEntity<ExampleResponse> updateExample(@RequestBody ExampleRequest exampleRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.updateExample(exampleRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.updateExample(exampleRequest));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
@@ -189,31 +166,31 @@ public class StaffRestController {
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PostMapping("/exercises")
     public ResponseEntity<ExerciseKeywordDTO> createNewExercise(@RequestBody ExerciseKeywordDTO exerciseKeywordDTO) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.createNewExcercise(exerciseKeywordDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.createNewExcercise(exerciseKeywordDTO));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PutMapping("/exercises")
     public ResponseEntity<ExerciseKeywordDTO> updateExercise(@RequestBody ExerciseKeywordDTO exerciseKeywordDTO) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.updateExcercise(exerciseKeywordDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.updateExcercise(exerciseKeywordDTO));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
     @GetMapping("/getAllExcercisesKeywordOfLesson/{lessonId}")
     public ResponseEntity<List<ExerciseKeywordDTO>> getAllExercisesKeywordOfLesson(@PathVariable Long lessonId) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.staffService.getAllExcercisesKeywordOfLesson(lessonId));
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.getAllExcercisesKeywordOfLesson(lessonId));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
-    @PostMapping("/vps")
-    public MonitorVpsResponse register( @Valid @RequestBody MonitorVpsRequest request) {
-        return this.monitorVpsService.register(request);
+    @PostMapping("/vps/discovery")
+    public NodeExporterDiscoveryResult discovery(@Valid @RequestBody MonitorVpsRequest request) {
+        return this.monitorVpsService.discover(request);
+    }
+
+    @PostMapping("/vps/register")
+    public ResponseEntity<MonitorPrometheusTarget> register(@RequestBody MonitorVps request) {
+        MonitorPrometheusTarget vps = monitorVpsService.registerTarget(request);
+        return ResponseEntity.ok(vps);
     }
 
 }

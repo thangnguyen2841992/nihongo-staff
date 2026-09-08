@@ -31,3 +31,4 @@ eureka:
 
 monitoring:
   prometheus-url: http://180.93.115.154:9090
+  prometheus-targets-file: /etc/prometheus/targets/node_targets.json
