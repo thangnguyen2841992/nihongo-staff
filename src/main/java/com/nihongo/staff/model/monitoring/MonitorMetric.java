@@ -138,7 +138,11 @@ public class MonitorMetric extends BaseEntity {
     )
     private Integer scheduleSeconds = 60;
 
-
+    @Column(
+            name = "default_metric",
+            nullable = false
+    )
+    private Boolean defaultMetric = false;
 
     /**
      * true  = cho phép thu thập
