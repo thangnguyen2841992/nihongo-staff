@@ -4,9 +4,9 @@ spring:
   application:
     name: staff-service
   datasource:
-    url: jdbc:mysql://180.93.115.154:3306/nihongo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: nihongo_app
-    password: Nihongo@2026
+    url: jdbc:mysql://onehost-amdcloudhn022602.000nethost.com:3306/tsezwyvdhosting_nihongo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: tsezwyvdhosting_nihongo_app
+    password: thuThuy@1
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -36,3 +36,6 @@ monitoring:
   prometheus-host: 180.93.115.154
   prometheus-ssh-username: root
   prometheus-ssh-password: iM6#QRWt16Gq
+
+jwt:
+  secret: "U7tjRTsx0baZLsRhHGcc0FA/B7MJ65IfQ0jZHvUyYrE="
