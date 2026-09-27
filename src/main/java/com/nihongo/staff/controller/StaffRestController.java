@@ -26,6 +26,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StaffRestController {
     private final IStaffService staffService;
+    private final com.nihongo.staff.service.ExerciseGradingService grading;
+    private final com.nihongo.staff.security.ContentAccess contentAccess;
+    @PreAuthorize("@contentAccess.lesson(#id,authentication)")
+    @PostMapping("/lessons/{id}/grade")
+    public com.nihongo.staff.service.ExerciseGradingService.Grade grade(@PathVariable Long id,
+            @RequestBody java.util.Map<Long,String> answers) { return grading.grade(id,answers); }
+
     private final IMonitorVpsService monitorVpsService;
 
 
@@ -53,7 +60,7 @@ public class StaffRestController {
         return ResponseEntity.ok(this.staffService.getBooks());
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
+    @PreAuthorize("@contentAccess.book(#bookId,authentication)")
     @GetMapping("/books/{bookId}")
     public ResponseEntity<BookResponse> getBookDetail(@PathVariable Long bookId) {
         return ResponseEntity.ok(this.staffService.getBookDetail(bookId));
@@ -66,7 +73,7 @@ public class StaffRestController {
         return ResponseEntity.ok(this.staffService.getBooksByLevelAndType(levelId, typeId));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
+    @PreAuthorize("@contentAccess.level(#levelId,authentication)")
     @GetMapping("/getBooksByLevel")
     public ResponseEntity<List<BookResponse>> getBooksByLevel(@RequestParam("levelId") Long levelId) {
         return ResponseEntity.ok(this.staffService.getBooksByLevel(levelId));
@@ -109,13 +116,13 @@ public class StaffRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
+    @PreAuthorize("@contentAccess.lesson(#id,authentication)")
     @GetMapping("/lessons/{id}")
     public ResponseEntity<LessonResponse> getLessonById(@PathVariable Long id) {
         return ResponseEntity.ok(this.staffService.getLessonByIdAPI(id));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
+    @PreAuthorize("@contentAccess.book(#bookId,authentication)")
     @GetMapping("/getLessonsByBook")
     public ResponseEntity<List<LessonResponse>> getLessonsByBook(@RequestParam Long bookId) {
         return ResponseEntity.ok(this.staffService.getAllLessonByBook(bookId));
@@ -127,7 +134,7 @@ public class StaffRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.createNewGrammar(grammarRequest));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
+    @PreAuthorize("@contentAccess.lesson(#lessonId,authentication)")
     @GetMapping("/getAllGrammarByLesson")
     public ResponseEntity<List<GrammarResponse>> getAllGrammarByLesson(@RequestParam Long lessonId) {
         return ResponseEntity.ok(this.staffService.getAllGrammarByLesson(lessonId));
@@ -158,7 +165,7 @@ public class StaffRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.updateExample(exampleRequest));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
+    @PreAuthorize("@contentAccess.grammar(#grammarId,authentication)")
     @GetMapping("/getAllExampleByGrammar")
     public ResponseEntity<List<ExampleResponse>> getAllExampleByGrammar(@RequestParam Long grammarId) {
         return ResponseEntity.ok(this.staffService.findAllExampleOfGrammar(grammarId));
@@ -176,10 +183,12 @@ public class StaffRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.updateExcercise(exerciseKeywordDTO));
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF','USER')")
+    @PreAuthorize("@contentAccess.lesson(#lessonId,authentication)")
     @GetMapping("/getAllExcercisesKeywordOfLesson/{lessonId}")
-    public ResponseEntity<List<ExerciseKeywordDTO>> getAllExercisesKeywordOfLesson(@PathVariable Long lessonId) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.staffService.getAllExcercisesKeywordOfLesson(lessonId));
+    public ResponseEntity<List<ExerciseKeywordDTO>> getAllExercisesKeywordOfLesson(@PathVariable Long lessonId, org.springframework.security.core.Authentication authentication) {
+        var rows = this.staffService.getAllExcercisesKeywordOfLesson(lessonId);
+        if (!contentAccess.manager(authentication)) rows.forEach(row -> row.setCorrectAnswer(null));
+        return ResponseEntity.ok(rows);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")

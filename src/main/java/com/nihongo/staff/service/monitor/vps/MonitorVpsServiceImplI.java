@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.connection.channel.direct.Session;
 import net.schmizz.sshj.sftp.SFTPClient;
-import net.schmizz.sshj.transport.verification.PromiscuousVerifier;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +57,9 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
 
     @Value("${monitoring.prometheus-targets-file}")
     private String prometheusTargetsFile;
+
+    @Value("${PROMETHEUS_SSH_FINGERPRINT:}") private String sshFingerprint;
+    @Value("${PROMETHEUS_KNOWN_HOSTS:}") private String knownHosts;
 
     @Override
     public NodeExporterDiscoveryResult discover(MonitorVpsRequest request) {
@@ -237,7 +240,15 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
             // 2. SSH vào Prometheus server
             try (SSHClient ssh = new SSHClient()) {
 
-                ssh.addHostKeyVerifier(new PromiscuousVerifier());
+                if (!sshFingerprint.isBlank()) {
+                    ssh.addHostKeyVerifier(sshFingerprint);
+                } else if (!knownHosts.isBlank()) {
+                    ssh.loadKnownHosts(new java.io.File(knownHosts));
+                } else {
+                    ssh.loadKnownHosts();
+                }
+                ssh.setConnectTimeout(5000);
+                ssh.setTimeout(10000);
 
                 ssh.connect(prometheusHost, prometheusPort);
 
