@@ -12,13 +12,10 @@ public interface MonitorVpsRepository extends JpaRepository<MonitorVps, Long> {
     @org.springframework.data.jpa.repository.Query("select v from MonitorVps v where v.vpsId = :id")
     Optional<MonitorVps> lockById(Long id);
 
-    Optional<MonitorVps> findByHostname(String hostname);
 
-    Optional<MonitorVps> findByIpAddress(String ipAddress);
 
     boolean existsByHostname(String hostname);
 
-    boolean existsByIpAddress(String ipAddress);
 
     boolean existsByIpAddressAndAgentPort(String ipAddress, Integer agentPort);
 }

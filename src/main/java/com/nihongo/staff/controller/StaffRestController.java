@@ -5,14 +5,7 @@ import com.nihongo.staff.model.ExerciseType;
 import com.nihongo.staff.model.Levels;
 import com.nihongo.staff.model.Types;
 import com.nihongo.staff.model.dto.*;
-import com.nihongo.staff.model.monitoring.MonitorPrometheusTarget;
-import com.nihongo.staff.model.monitoring.MonitorVps;
-import com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest;
-import com.nihongo.staff.model.monitoring.dto.NodeExporterDiscoveryResult;
-import com.nihongo.staff.model.monitoring.dto.RegisterMonitorVpsRequest;
 import com.nihongo.staff.service.IStaffService;
-import com.nihongo.staff.service.monitor.vps.IMonitorVpsService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +26,6 @@ public class StaffRestController {
     public com.nihongo.staff.service.ExerciseGradingService.Grade grade(@PathVariable Long id,
             @RequestBody java.util.Map<Long,String> answers) { return grading.grade(id,answers); }
 
-    private final IMonitorVpsService monitorVpsService;
 
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
@@ -189,25 +181,6 @@ public class StaffRestController {
         var rows = this.staffService.getAllExcercisesKeywordOfLesson(lessonId);
         if (!contentAccess.manager(authentication)) rows.forEach(row -> row.setCorrectAnswer(null));
         return ResponseEntity.ok(rows);
-    }
-
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
-    @PostMapping("/vps/discovery")
-    public NodeExporterDiscoveryResult discovery(@Valid @RequestBody MonitorVpsRequest request) {
-        return this.monitorVpsService.discover(request);
-    }
-
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
-    @PostMapping("/vps/register")
-    public ResponseEntity<MonitorVps> register(@Valid @RequestBody RegisterMonitorVpsRequest request) {
-        MonitorVps savedVps = monitorVpsService.registerVps(request);
-        return ResponseEntity.ok(savedVps);
-    }
-
-    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
-    @GetMapping("/vps")
-    public List<com.nihongo.staff.model.monitoring.dto.MonitorVpsResponse> listVps() {
-        return monitorVpsService.listVps();
     }
 
 }

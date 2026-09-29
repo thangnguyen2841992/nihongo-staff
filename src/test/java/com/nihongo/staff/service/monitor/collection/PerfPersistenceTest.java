@@ -3,7 +3,7 @@ package com.nihongo.staff.service.monitor.collection;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nihongo.staff.model.monitoring.*;
 import com.nihongo.staff.repository.*;
-import com.nihongo.staff.service.monitor.vps.MonitorVpsServiceImplI;
+import com.nihongo.staff.service.monitor.vps.MonitorVpsService;
 import com.nihongo.staff.model.monitoring.dto.RegisterMonitorVpsRequest;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.web.client.RestClient;
+import com.nihongo.staff.service.monitor.metric.VpsMetricConfigService;
+import com.nihongo.staff.service.monitor.vps.PrometheusTargetService;
 import java.time.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,20 +25,21 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = PerfPersistenceTest.Config.class)
 class PerfPersistenceTest {
     @Configuration @EntityScan("com.nihongo.staff.model") @EnableJpaRepositories("com.nihongo.staff.repository")
-    @Import({MetricCatalog.class, PerfCollectionStore.class, VpsPerformanceService.class, MonitorVpsServiceImplI.class})
+    @Import({MetricCatalog.class, PerfCollectionStore.class, VpsPerformanceService.class, VpsMetricConfigService.class, MonitorVpsService.class, PrometheusTargetService.class, com.nihongo.staff.service.monitor.event.MonitorEventService.class})
     static class Config {
         @Bean ObjectMapper mapper() { return new ObjectMapper(); }
         @Bean NodeMetricSource source() { return mock(NodeMetricSource.class); }
-        @Bean RestClient restClient() { return mock(RestClient.class); }
     }
     @Autowired MetricCatalog catalog;
     @Autowired PerfCollectionStore store;
     @Autowired VpsPerformanceService performance;
+    @Autowired VpsMetricConfigService configuration;
     @Autowired MonitorVpsRepository servers;
     @Autowired MonitorVpsMetricRepository assignments;
     @Autowired MonitorPerfValueRepository values;
     @Autowired MonitorObjectRepository objects;
-    @Autowired MonitorVpsServiceImplI registration;
+    @Autowired MonitorPrometheusTargetRepository targets;
+    @Autowired MonitorVpsService registration;
     @Autowired NodeMetricSource source;
     MonitorVps vps;
     @BeforeEach void setup() {
@@ -53,6 +55,39 @@ class PerfPersistenceTest {
         var saved = registration.registerVps(request);
         assertEquals(7, assignments.findByVps_VpsIdOrderByMetric_MetricNameAsc(saved.getVpsId()).size());
         assertEquals(2, objects.findByVps_VpsId(saved.getVpsId()).size());
+        assertEquals("127.0.0.2:9100", targets.findByVps_VpsIdAndJobName(saved.getVpsId(), "node").orElseThrow().getTarget());
+    }
+
+    @Test void discoveryUsesTheSharedParserAndPreservesCustomPort() {
+        when(source.fetch("127.0.0.2", 9200, 5000)).thenReturn(NodeMetricSource.parse(
+                "node_exporter_build_info{version=\"1.9.0\"} 1\r\nnode_uname_info{nodename=\"fresh-host\",sysname=\"Linux\",release=\"6.8\",machine=\"x86_64\"} 1\r\n"));
+        var request = new com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest(" 127.0.0.2 ", 9200);
+        var result = registration.discover(request);
+        assertTrue(result.isInstalled());
+        assertEquals(9200, result.getPort());
+        assertEquals("fresh-host", result.getHostname());
+        assertEquals("1.9.0", result.getNodeExporterVersion());
+    }
+
+    @Test void failedDiscoveryKeepsTheRequestedPortAndDoesNotWriteVps() {
+        long before = servers.count();
+        when(source.fetch("127.0.0.2", 9201, 5000)).thenThrow(new IllegalStateException("Node Exporter timeout"));
+        var result = registration.discover(new com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest("127.0.0.2", 9201));
+        assertFalse(result.isInstalled());
+        assertEquals(9201, result.getPort());
+        assertEquals("Node Exporter timeout", result.getMessage());
+        assertEquals(before, servers.count());
+    }
+
+    @Test void registrationUsesFreshExporterMetadataInsteadOfStaleDiscoveryFields() {
+        when(source.fetch("127.0.0.4", 9100, 5000)).thenReturn(NodeMetricSource.parse(
+                "node_uname_info{nodename=\"fresh-host\",sysname=\"Linux\",release=\"6.8\",machine=\"x86_64\"} 1\n"));
+        var request = new RegisterMonitorVpsRequest();
+        request.setIpAddress("127.0.0.4"); request.setHostname("outdated-name"); request.setOsType("outdated-os");
+        var saved = registration.registerVps(request);
+        assertEquals("fresh-host", saved.getHostname());
+        assertEquals("Linux", saved.getOsType());
+        assertEquals("6.8", saved.getOsVersion());
     }
     @Test void cpuWarmupThenDeltaIsPersistedPerObjectAndSurvivesReset() {
         var t = PerfCollectionStore.now().minusSeconds(30);
@@ -72,9 +107,9 @@ class PerfPersistenceTest {
     }
     @Test void leaseRejectsDuplicateWorkAndScheduleCanInheritDefault() {
         var job = claim("CPU_USAGE"); assertNotNull(job); assertNull(store.claim(job.id()));
-        performance.updateVps(vps.getVpsId(), "CPU_USAGE", new VpsPerformanceService.Update(120, null, false));
+        configuration.updateVps(vps.getVpsId(), "CPU_USAGE", new VpsMetricConfigService.Update(120, null, false));
         assertEquals(120, PerfCollectionStore.interval(link("CPU_USAGE")));
-        performance.updateVps(vps.getVpsId(), "CPU_USAGE", new VpsPerformanceService.Update(null, null, true));
+        configuration.updateVps(vps.getVpsId(), "CPU_USAGE", new VpsMetricConfigService.Update(null, null, true));
         assertEquals(30, PerfCollectionStore.interval(link("CPU_USAGE")));
     }
     @Test void historyReadsOnlyRequestedObjectAndOfflineObjectsKeepValues() {
@@ -94,8 +129,8 @@ class PerfPersistenceTest {
         assertEquals("Timeout", result.collectionError()); assertEquals(70D, result.objects().get(0).points().get(0).value()); assertTrue(result.objects().get(0).stale());
     }
     @Test void rejectsInvalidScheduleAndTimeout() {
-        assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> VpsPerformanceService.validate(new VpsPerformanceService.Update(0, 5000, true)));
-        assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> VpsPerformanceService.validate(new VpsPerformanceService.Update(30, 50000, true)));
+        assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> VpsMetricConfigService.validate(new VpsMetricConfigService.Update(0, 5000, true)));
+        assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> VpsMetricConfigService.validate(new VpsMetricConfigService.Update(30, 50000, true)));
     }
     @Test void disabledAssignmentsAreNotClaimedAndOldLeaseCannotWrite() {
         var job = claim("MEMORY_USAGE");
@@ -120,10 +155,10 @@ class PerfPersistenceTest {
     }
     @Test void defaultScheduleChangesPreservePerVpsOverridesAndMetricDisablePausesReadout() {
         var cpu = link("CPU_USAGE");
-        performance.updateMetric(cpu.getMetric().getMetricId(), new VpsPerformanceService.Update(90, 6000, true));
-        assertEquals(90, performance.configs(vps.getVpsId()).stream().filter(c -> c.code().equals("CPU_USAGE")).findFirst().orElseThrow().effectiveScheduleSeconds());
-        performance.updateVps(vps.getVpsId(), "CPU_USAGE", new VpsPerformanceService.Update(120, null, true));
-        performance.updateMetric(cpu.getMetric().getMetricId(), new VpsPerformanceService.Update(45, 5000, false));
+        configuration.updateMetric(cpu.getMetric().getMetricId(), new VpsMetricConfigService.Update(90, 6000, true));
+        assertEquals(90, configuration.configs(vps.getVpsId()).stream().filter(c -> c.code().equals("CPU_USAGE")).findFirst().orElseThrow().effectiveScheduleSeconds());
+        configuration.updateVps(vps.getVpsId(), "CPU_USAGE", new VpsMetricConfigService.Update(120, null, true));
+        configuration.updateMetric(cpu.getMetric().getMetricId(), new VpsMetricConfigService.Update(45, 5000, false));
         assertEquals(120, PerfCollectionStore.interval(cpu));
         assertEquals("PAUSED", performance.read(vps.getVpsId(), "CPU_USAGE", null, null).state());
     }

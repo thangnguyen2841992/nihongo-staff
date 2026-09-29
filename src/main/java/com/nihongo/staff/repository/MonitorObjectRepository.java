@@ -1,7 +1,6 @@
 package com.nihongo.staff.repository;
 
 import com.nihongo.staff.model.monitoring.MonitorObject;
-import com.nihongo.staff.model.monitoring.ObjectStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,17 +18,7 @@ public interface MonitorObjectRepository
             String objectType
     );
 
-    List<MonitorObject> findByVps_VpsIdAndObjectTypeAndStatus(
-            Long vpsId,
-            String objectType,
-            ObjectStatus status
-    );
 
-    Optional<MonitorObject> findByVps_VpsIdAndObjectTypeAndObjectKey(
-            Long vpsId,
-            String objectType,
-            String objectKey
-    );
 
     // Current reads are required after the VPS mutex under MySQL REPEATABLE READ.
     @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
@@ -40,9 +29,4 @@ public interface MonitorObjectRepository
     @org.springframework.data.jpa.repository.Query("select o from MonitorObject o where o.vps.vpsId = :vpsId and o.objectType = :type")
     List<MonitorObject> findTypeForUpdate(Long vpsId, String type);
 
-    boolean existsByVps_VpsIdAndObjectTypeAndObjectKey(
-            Long vpsId,
-            String objectType,
-            String objectKey
-    );
 }

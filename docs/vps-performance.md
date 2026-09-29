@@ -1,5 +1,37 @@
 # Thu thập perf theo VPS, metric và object
 
+## Event theo giá trị perf
+
+Mở **Monitoring Server → Event VPS** ở sidebar (`/staff/monitoring/vps/events`), chọn VPS và metric. Màn riêng hiển thị **Cấu hình event** và **Event của metric** ngay trên trang. Có thể tạo/sửa/xóa rule, bật/tắt, chọn **một object** hoặc **tất cả object**, đặt ngưỡng `>`, `≥`, `<`, `≤`, mức độ Minor/Warning/Critical/Fatal và số mẫu liên tiếp (1–100). Mỗi metric trên một VPS hỗ trợ tối đa 100 rule. Có thể đặt nhiều ngưỡng bằng nhiều rule. Link **Event VPS** từ màn hiệu năng chuyển sang trang mới, giữ VPS/metric đang chọn; không mở popup event hay hiển thị danh sách event trong màn hiệu năng.
+
+Ví dụ CPU `≥80%`, 2 mẫu liên tiếp, phạm vi tất cả object: CPU 0 và CPU 1 có bộ đếm/trạng thái riêng; CPU phát hiện thêm về sau tự áp dụng rule. Không lấy tổng/trung bình của các object. Với MEMORY_USAGE/LOAD_1M/UPTIME, object là **Toàn VPS**; `all` cũng đánh giá chuỗi toàn VPS đó.
+
+Event có đúng 4 mức độ tăng dần: **Minor → Warning → Critical → Fatal**, phân biệt bằng màu. Bảng lịch sử có cột Mức độ riêng với trạng thái Phát sinh/Hồi phục; event hồi phục vẫn giữ cấp độ của rule.
+
+Dữ liệu `INFO` cũ được `EventSeverityConverter` đọc thành `MINOR` cho cả rule và history, tránh lỗi khi đọc lịch sử. Bản ghi mới chỉ dùng 4 giá trị hiện tại. Cột severity dùng VARCHAR(10) qua JPA converter; môi trường cũ dùng MySQL ENUM cần chạy [sql/monitor-event-severities.sql](sql/monitor-event-severities.sql) trước khi chạy phiên bản mới để mở rộng kiểu cột và chuyển `INFO` thành `MINOR`. Script giữ nguyên rule/state/history và các mức WARNING/CRITICAL; chưa chạy trên DB thật.
+
+- Rule ở `monitor_event_rule`; trạng thái từng rule/object ở `monitor_event_state`; lịch sử ở `monitor_event`.
+- `PerfCollectionStore` gọi `MonitorEventService.evaluate` sau khi tính và lưu giá trị perf hợp lệ, trong cùng transaction và dưới khóa VPS. Cấu hình rule cũng khóa VPS; collector và thao tác chỉnh rule không tạo trạng thái trùng. Rule không thay đổi schedule thu thập.
+- Đủ số mẫu thỏa điều kiện sẽ ghi `ALERT` một lần. Mẫu tiếp tục thỏa ngưỡng không ghi event lặp. Mẫu hợp lệ đầu tiên không còn thỏa điều kiện ghi `RECOVERY`, trỏ đến `openedEventId` của cảnh báo tương ứng. Sau hồi phục, một đợt mới có thể phát cảnh báo mới.
+- Warmup, counter reset, NaN/Infinity, object biến mất hoặc thu thập lỗi không phát cảnh báo/hồi phục. Chúng ngắt bộ đếm đang chờ; khoảng cách giữa mẫu lớn hơn `2 × chu kỳ + 10 giây` cũng ngắt bộ đếm. Cảnh báo đang mở vẫn giữ trạng thái khi mất dữ liệu, chỉ hồi phục khi có mẫu hợp lệ bình thường. Mẫu trùng timestamp hoặc cũ hơn mẫu đã đánh giá không được tính lại.
+- Trạng thái và cảnh báo được giữ qua restart. Rollback lưu perf đồng thời rollback event/state; socket chỉ gửi sau commit. Snapshot/socket hiện có thêm `events` (50 event mới nhất của VPS/metric). History perf không tải lại event. Không cần topic/socket mới; quyền vẫn STAFF/ADMIN.
+- Bên dưới phần cấu hình trên màn **Event VPS** là danh sách event với object, giá trị thực tế, điều kiện, mức độ, thời gian và liên kết hồi phục; **Xem event cũ hơn** tải tiếp bằng cursor ID. Màn mới dùng socket hiện có để nhận event; reconnect tải lại snapshot và event từ DB. Đổi VPS/metric hủy request và subscription cũ, bỏ qua response/frame đến muộn. Trong lúc lưu rule, khóa bộ chọn và chuyển trang để tránh mất kết quả thao tác.
+- Sửa/tắt/xóa rule reset trạng thái/bộ đếm, giữ lịch sử có snapshot tên rule, ngưỡng, object và giá trị cũ. Đây là thay đổi cấu hình, không tạo `RECOVERY` giả; áp dụng cho mẫu hợp lệ tiếp theo, không đánh giá lại perf lịch sử. Không có gửi email hay thông báo ra ngoài.
+- Event được giữ độc lập với retention perf; hiện chưa tự xóa lịch sử event. Giới hạn simple broker nhiều instance đã nêu bên dưới vẫn áp dụng.
+
+Restart staff-service sau cập nhật để tạo 3 bảng mới bằng `ddl-auto=update`. Môi trường dùng migration có script thêm bảng ở [sql/monitor-events.sql](sql/monitor-events.sql). Script chưa được chạy trên DB thật; kiểm thử dùng H2/MySQL mode, cần kiểm tra migration trên MySQL của môi trường trước triển khai. Các bảng/perf/schedule cũ không bị xóa hoặc chuyển đổi.
+
+Nếu build từng module bằng Maven, build/install `common-security` trước `staff` để tránh dùng jar cũ trong `.m2` (jar cũ dùng Keycloak role converter sẽ trả 403 với JWT có claim `roles`). Từ thư mục workspace: `.\staff\mvnw.cmd -f common-security/pom.xml install`, sau đó `.\staff\mvnw.cmd -f staff/pom.xml package`. IntelliJ cũng cần dùng module `common-security` hiện tại.
+
+REST API mới (STAFF/ADMIN), prefix `/api/staff/vps/{vpsId}/metrics/{code}`:
+
+- GET `/event-rules`: cấu hình và số object đang cảnh báo tại thời điểm đọc.
+- POST `/event-rules`, PUT `/event-rules/{ruleId}`: `{name, objectKey, operator, threshold, severity, consecutiveSamples, enabled}`. `objectKey` là `all`, `vps` hoặc ID object; server xác minh object/rule thuộc đúng VPS/metric. Operator `GT/GTE/LT/LTE`, severity `MINOR/WARNING/CRITICAL/FATAL` (hiển thị Minor, Warning, Critical, Fatal); threshold phải hữu hạn.
+- DELETE `/event-rules/{ruleId}`: xóa cấu hình và trạng thái, giữ lịch sử.
+- GET `/events?beforeId=<event_id>`: tối đa 50 event mới nhất hoặc cũ hơn cursor; ID giảm dần.
+
+`MonitorEventController` xử lý HTTP và quyền; `MonitorEventService` quản lý rule, đánh giá và đọc event; ba entity/repository lưu cấu hình/trạng thái/history. Frontend dùng `monitorEventService.ts`, editor inline `MetricEventRules.vue` và `VpsEventHistory.vue`; màn `VpsEvents.vue` chọn VPS/metric, đọc DB và nhận event qua snapshot/socket. `StaffSidebar.vue` có menu riêng, route kế thừa quyền STAFF/ADMIN của layout staff. Màn `VpsPerformance.vue` chỉ có link chuyển sang màn event.
+
 Luồng: đăng ký VPS → đọc Node Exporter → lưu VPS, metric assignment và object trong một transaction → scheduler đọc lịch trong DB → đọc Node Exporter → lưu perf → API/UI đọc DB.
 
 ## Sử dụng
@@ -7,7 +39,7 @@ Luồng: đăng ký VPS → đọc Node Exporter → lưu VPS, metric assignment
 - Restart staff-service sau khi cập nhật. Cấu hình hiện tại dùng `spring.jpa.hibernate.ddl-auto=update`; Hibernate bổ sung bảng/cột mới. Không chạy ứng dụng test với DB thật.
 - Khi service sẵn sàng, khởi tạo 7 metric mặc định nếu mã metric chưa tồn tại. Không ghi đè cấu hình metric đã có. Tự gán metric mặc định cho VPS cũ còn thiếu assignment; object của VPS cũ được khám phá trong lần thu thập thành công đầu tiên.
 - VPS đăng ký mới được kiểm tra Node Exporter trước khi lưu. VPS, assignment và object cùng transaction. Đồng bộ target Prometheus qua SSH vẫn là bước sau commit; lỗi SSH không ngăn collector DB đọc Node Exporter trực tiếp.
-- Mở **Giám sát → Hiệu năng VPS**, hoặc **Xem danh sách VPS → Xem perf**. Chọn VPS, metric, object và thời gian 1h/6h/24h/7 ngày.
+- Mở **Giám sát → Hiệu năng VPS**, hoặc **Xem danh sách VPS → Xem perf**. Chọn VPS, metric và object; mặc định xem 10 phút gần nhất, có thể đổi sang 1h/6h/24h/7 ngày.
 - Phần **Cấu hình thu thập** cho phép bật/tắt và đổi lịch mặc định của metric, timeout hoặc lịch riêng trên VPS. `scheduleSeconds=null` trên assignment nghĩa là kế thừa lịch metric.
 - CPU và network cần 2 lần thu thập; lần đầu chỉ lưu baseline. Không ghi 0 thay cho dữ liệu thiếu. Counter reset sẽ cập nhật baseline và bỏ mẫu chênh lệch không hợp lệ.
 
@@ -24,7 +56,59 @@ Mọi mẫu perf và timestamp của scheduler dùng UTC. API trả epoch second
 
 Collector hiện hỗ trợ `collector_type=NODE_EXPORTER` và 7 mã trên. Metric khác trong DB cần bổ sung collector tương ứng; lỗi được lưu ở assignment và hiện trên UI. Không tự ghi đè các metric đã có để tránh thay đổi cấu hình ngoài ý muốn.
 
-History được lọc theo VPS + metric + object tại DB, trung bình theo bucket để giới hạn khoảng 1000 điểm/chuỗi; khoảng bị gián đoạn được thêm điểm null. Latest luôn trả thời gian mẫu và cờ stale; dữ liệu cũ không bị trình bày như mẫu mới.
+History được lọc theo VPS + metric + object tại DB. Khoảng tối đa 10 phút trả mẫu gốc; khoảng dài hơn lấy trung bình theo bucket để giới hạn khoảng 1000 điểm/chuỗi. Khoảng bị gián đoạn được thêm điểm null. Latest luôn trả thời gian mẫu và cờ stale; dữ liệu cũ không bị trình bày như mẫu mới.
+
+## Cấu trúc sau refactor
+
+```mermaid
+flowchart LR
+    Register[RegisterVps.vue] --> VpsAPI[MonitorVpsController]
+    VpsAPI --> Vps[MonitorVpsService]
+    Vps --> Source[NodeMetricSource]
+    Vps --> Catalog[MetricCatalog]
+    Vps --> Store[PerfCollectionStore]
+    Vps --> Targets[PrometheusTargetService]
+    Tick[PerfCollectionScheduler] --> Collector[MetricCollector]
+    Collector --> Source
+    Collector --> Store
+    Store --> DB[(Database)]
+    Store --> Event[PerformanceChanged]
+    Event --> Publisher[PerformanceSocketPublisher sau commit]
+    DB --> Read[VpsPerformanceService]
+    Read --> Publisher
+    Publisher --> Socket[STOMP WebSocket]
+    Socket --> UI[VpsPerformance.vue]
+    UI --> PerfAPI[VpsPerformanceController]
+    PerfAPI --> Read
+    PerfAPI --> Config[VpsMetricConfigService]
+    Popup[VpsMetricSchedules.vue] --> PerfAPI
+    Config --> DB
+    Config --> Event
+```
+
+| Class/component | Trách nhiệm |
+| --- | --- |
+| `MonitorVpsController` | List, discovery, register; chỉ STAFF/ADMIN; trả DTO thay vì serialize entity JPA. |
+| `MonitorVpsService` / `IMonitorVpsService` | Kiểm tra trùng, đọc lại Node Exporter, lưu VPS + assignment + object + target trong transaction đăng ký. Metadata ưu tiên dữ liệu vừa đọc từ exporter. |
+| `PrometheusTargetService` | Lưu target `node`, đồng bộ file SD qua SSH sau commit. Không thực hiện thu thập perf. |
+| `MetricCatalog` | Tạo các metric mặc định còn thiếu, gán các metric mặc định cho VPS. |
+| `PerfCollectionScheduler` | Tìm assignment đến hạn, giới hạn 4 worker và chạy retention. |
+| `MetricCollector` | Claim một assignment, gọi HTTP ngoài transaction ghi, chuyển kết quả/lỗi sang store. |
+| `NodeMetricSource` | Bộ đọc/parser Node Exporter dùng chung cho discovery, registration và collection. |
+| `PerfCollectionStore` | Lease, token, khóa DB, object, baseline, rate, perf, backoff và event thay đổi. |
+| `VpsMetricConfigService` | Danh mục, cấu hình lịch mặc định/riêng, validate và phát event đổi cấu hình. Chỉ query assignment của metric liên quan khi đổi lịch mặc định. |
+| `VpsPerformanceService` | Chỉ đọc snapshot/history từ DB, tính state/stale và khoảng gián đoạn. |
+| `VpsPerformanceController` | Giữ nguyên URL perf/catalog/config cho frontend. |
+| `PerformanceSocketPublisher` | Sau commit, đọc snapshot trong transaction mới và gửi đến topic của VPS/metric. |
+| `PerformanceWebSocketConfig` / `PerformanceSocketAuthorization` | Endpoint STOMP, heartbeat, origin, quyền subscribe và thời hạn JWT. |
+| `RegisterVps.vue` / `monitorVpsService.ts` | Form discovery/register, popup danh sách và HTTP tương ứng. |
+| `VpsPerformance.vue` / `vpsPerformanceService.ts` | Snapshot + history 10 phút, chọn object và đồ thị; hủy request cũ, giữ/gộp mẫu socket khi history đang tải. |
+| `vpsPerformanceRealtime.ts` | STOMP, kiểm tra frame/sequence, reconnect và yêu cầu HTTP resync. |
+| `MetricScheduleDialog.vue` / `VpsMetricSchedules.vue` | Popup ở giữa và editor lịch; lưu thành công cập nhật cấu hình, tiếp tục nhận socket. |
+
+Đã bỏ màn `ServerMonitoring.vue`, service trả dữ liệu mẫu `MonitoringService`, nhánh PromQL/cache trong `StaffServiceImpl`, các HTTP client/parser trùng và service metric/object không có caller. URL `/staff/monitoring` chuyển sang màn hiệu năng, giữ query của bookmark cũ. Sidebar chỉ còn các chức năng monitoring đang hoạt động.
+
+Các bảng và dữ liệu monitoring hiện có được giữ nguyên; refactor không cần migration hay xóa lịch sử. Cấu hình SSH vẫn được dùng để đồng bộ target Prometheus. Collector DB hoạt động độc lập với việc upload target.
 
 ## Scheduler
 

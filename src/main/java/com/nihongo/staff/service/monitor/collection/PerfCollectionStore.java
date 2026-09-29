@@ -3,6 +3,7 @@ package com.nihongo.staff.service.monitor.collection;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nihongo.staff.model.monitoring.*;
 import com.nihongo.staff.repository.*;
+import com.nihongo.staff.service.monitor.event.MonitorEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +18,10 @@ public class PerfCollectionStore {
     private final MonitorObjectRepository objects;
     private final MonitorPerfValueRepository values;
     private final MonitorPerfBaselineRepository baselines;
+    private final MonitorEventService eventRules;
     private final ObjectMapper mapper;
     private final org.springframework.context.ApplicationEventPublisher events;
-    static LocalDateTime now() { return LocalDateTime.now(ZoneOffset.UTC); }
+    public static LocalDateTime now() { return LocalDateTime.now(ZoneOffset.UTC); }
     public static int interval(MonitorVpsMetric link) {
         Integer seconds = link.getScheduleSeconds() != null ? link.getScheduleSeconds() : link.getMetric().getScheduleSeconds();
         return Math.max(5, seconds == null ? 60 : seconds);
@@ -69,6 +71,7 @@ public class PerfCollectionStore {
         if (!Boolean.TRUE.equals(link.getEnabled()) || !Boolean.TRUE.equals(link.getMetric().getEnabled())) { release(link); return; }
         servers.lockById(job.vpsId()).orElseThrow();
         Set<String> seen = new HashSet<>();
+        List<MonitorEventService.Sample> collected = new ArrayList<>();
         for (NodeMetricSource.Reading reading : readings) {
             seen.add(reading.key());
             MonitorObject object = reading.type().equals("VPS") ? null : upsert(link.getVps(), reading, observedAt);
@@ -91,6 +94,7 @@ public class PerfCollectionStore {
             if (value != null && Double.isFinite(value)) {
                 MonitorPerfValue perf = new MonitorPerfValue(); perf.setVpsId(job.vpsId()); perf.setMetricId(link.getMetric().getMetricId());
                 perf.setObjectId(object == null ? null : object.getObjectId()); perf.setCollectedAt(observedAt); perf.setValue(value); values.save(perf);
+                collected.add(new MonitorEventService.Sample(perf, object == null ? "Toàn VPS" : object.getObjectName()));
             }
         }
         if (Boolean.TRUE.equals(link.getMetric().getObjectLevelYn())) {
@@ -98,15 +102,18 @@ public class PerfCollectionStore {
                 if (!seen.contains(object.getObjectKey())) object.setStatus(ObjectStatus.OFFLINE);
         }
         link.setLastSuccessAt(observedAt); link.setLastError(readings.isEmpty() ? "Node Exporter chưa cung cấp metric này." : null);
+        eventRules.evaluate(link, collected);
         link.setConsecutiveFailures(0);
         link.getVps().setStatus(VpsStatus.UP); link.getVps().setLastSeenAt(observedAt); release(link);
         events.publishEvent(new PerformanceChanged(job.vpsId(), job.code()));
     }
 
-    @Transactional
+    @Transactional(isolation = org.springframework.transaction.annotation.Isolation.READ_COMMITTED)
     public boolean fail(Job job, String message) {
         MonitorVpsMetric link = assignments.lockById(job.id()).orElseThrow();
         if (!job.token().equals(link.getLeaseToken())) return false;
+        servers.lockById(job.vpsId()).orElseThrow();
+        eventRules.evaluate(link, List.of());
         String storedMessage = message.length() > 500 ? message.substring(0, 500) : message;
         boolean changed = !java.util.Objects.equals(link.getLastError(), storedMessage);
         link.setLastError(storedMessage);

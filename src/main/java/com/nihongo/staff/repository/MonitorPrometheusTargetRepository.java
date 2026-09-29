@@ -10,11 +10,7 @@ import java.util.Optional;
 @Repository
 public interface MonitorPrometheusTargetRepository  extends JpaRepository<MonitorPrometheusTarget, Long> {
 
-    Optional<MonitorPrometheusTarget> findByTarget(String target);
 
-    Optional<MonitorPrometheusTarget> findByVps_VpsId(
-            Long vpsId
-    );
 
     Optional<MonitorPrometheusTarget> findByVps_VpsIdAndJobName(
             Long vpsId,

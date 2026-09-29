@@ -2,13 +2,13 @@ server:
   port: 8085
 spring:
   config:
-    import: "optional:file:./.local/nihongo-staff.properties,optional:file:../.local/nihongo-staff.properties"
+    import: "optional:file:./.local/nihongo-staff.properties,optional:file:../.local/nihongo-staff.properties,optional:file:./.local/audit-secrets-staff.properties,optional:file:./staff/.local/audit-secrets-staff.properties"
   application:
     name: staff-service
   datasource:
     url: jdbc:mysql://onehost-amdcloudhn022602.000nethost.com:3306/tsezwyvdhosting_nihongo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: tsezwyvdhosting_nihongo_app
-    password: thuThuy@1
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
     hikari:
@@ -35,7 +35,6 @@ eureka:
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
 
 monitoring:
-  prometheus-url: ${PROMETHEUS_URL:http://160.22.107.232:9090}
   prometheus-targets-file: /etc/prometheus/targets/node_targets.json
   prometheus-port: 22
   prometheus-host: ${PROMETHEUS_HOST:160.22.107.232}
@@ -43,4 +42,4 @@ monitoring:
   prometheus-ssh-password: ${MONITORING_PROMETHEUS_SSH_PASSWORD:thanKiemhp@1}
 
 jwt:
-  secret: "U7tjRTsx0baZLsRhHGcc0FA/B7MJ65IfQ0jZHvUyYrE="
+  secret: ${JWT_SECRET}

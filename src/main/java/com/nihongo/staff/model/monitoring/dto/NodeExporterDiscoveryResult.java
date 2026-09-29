@@ -27,37 +27,4 @@ public class NodeExporterDiscoveryResult {
 
     private String message;
 
-    public static NodeExporterDiscoveryResult failed(
-            String ipAddress,
-            String message
-    ) {
-        return NodeExporterDiscoveryResult.builder()
-                .installed(false)
-                .ipAddress(ipAddress)
-                .port(9100)
-                .message(message)
-                .build();
-    }
-
-
-    public static NodeExporterDiscoveryResult success(
-            String ipAddress,
-            String hostname,
-            String osType,
-            String osVersion,
-            String architecture,
-            String nodeExporterVersion
-    ) {
-        return NodeExporterDiscoveryResult.builder()
-                .installed(true)
-                .ipAddress(ipAddress)
-                .port(9100)
-                .hostname(hostname)
-                .osType(osType)
-                .osVersion(osVersion)
-                .architecture(architecture)
-                .nodeExporterVersion(nodeExporterVersion)
-                .message("Node Exporter detected successfully")
-                .build();
-    }
 }

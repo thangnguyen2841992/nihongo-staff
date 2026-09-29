@@ -1,7 +1,5 @@
 package com.nihongo.staff.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nihongo.staff.controller.ResourceNotFoundException;
 import com.nihongo.staff.model.*;
 import com.nihongo.staff.model.dto.*;
@@ -10,16 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.lang.NonNull;
+import org.springframework.cache.annotation.CacheEvict;
+import com.nihongo.staff.security.ContentHtml;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,30 +32,12 @@ public class StaffServiceImpl implements IStaffService {
     private final IExampleRepository exampleRepository;
     private final IExerciseKeywordRepository excersiceKeywordRepository;
     private final IExerciseTypeRepository exerciseTypeRepository;
-    private final ObjectMapper objectMapper;
-    private final RestTemplate restTemplate;
-
-    @Value("${monitoring.prometheus-url}")
-    private String prometheusUrl;
-
-    /*
-     * =========================================================
-     *                    MONITORING CACHE
-     * =========================================================
-     */
-
-    private volatile Map<String, Object> serverMetricsCache;
-
-    private volatile long serverMetricsCacheTime = 0;
-
-    private static final long SERVER_METRICS_CACHE_DURATION = 5_000L;
-
-
     /* =========================================================
                             BOOK
        ========================================================= */
 
     @Override
+    @CacheEvict(value = "books", allEntries = true)
     public BookResponse createNewBook(CreateNewBookRequest request) {
 
         Books book = new Books();
@@ -75,6 +51,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = "books", allEntries = true)
     public BookResponse updateBook(UpdateBookRequest request) {
 
         Books book = getBookById(request.getBookId());
@@ -129,6 +106,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = "books", allEntries = true)
     public List<ImageDTO>
     updateImagesOfBooks(
             UpdateImageOfBookRequest request
@@ -138,6 +116,15 @@ public class StaffServiceImpl implements IStaffService {
                 getBookById(
                         request.getBookId()
                 );
+
+        if (request.getListDeleteImg() != null && !request.getListDeleteImg().isEmpty()) {
+            Set<Long> ownedIds = imageRepository.findByBooks_BookId(book.getBookId()).stream()
+                    .map(Images::getImageId).collect(Collectors.toSet());
+            if (!ownedIds.containsAll(request.getListDeleteImg())) {
+                throw new org.springframework.web.server.ResponseStatusException(
+                        org.springframework.http.HttpStatus.BAD_REQUEST, "Ảnh cần xóa không thuộc sách này");
+            }
+        }
 
         Optional.ofNullable(
                         request.getListDeleteImg()
@@ -190,11 +177,7 @@ public class StaffServiceImpl implements IStaffService {
             Long levelId
     ) {
 
-        return bookRepository
-                .findByLevel_LevelId(levelId)
-                .stream()
-                .map(this::mappingBookToBookResponse)
-                .toList();
+        return mapBooks(bookRepository.findByLevel_LevelId(levelId));
     }
 
 
@@ -222,7 +205,7 @@ public class StaffServiceImpl implements IStaffService {
         );
 
         lesson.setReading(
-                request.getReading()
+                ContentHtml.clean(request.getReading())
         );
 
         return mapLessonToResponse(
@@ -256,7 +239,7 @@ public class StaffServiceImpl implements IStaffService {
         );
 
         lessons.setReading(
-                request.getReading()
+                ContentHtml.clean(request.getReading())
         );
 
         lessons.setDescription(
@@ -407,11 +390,11 @@ public class StaffServiceImpl implements IStaffService {
                 new Example();
 
         example.setNihongo(
-                request.getNihongo().trim()
+                ContentHtml.clean(request.getNihongo().trim())
         );
 
         example.setVietnamese(
-                request.getVietnamese().trim()
+                ContentHtml.clean(request.getVietnamese().trim())
         );
 
         example.setGrammar(
@@ -447,11 +430,11 @@ public class StaffServiceImpl implements IStaffService {
                         );
 
         example.setNihongo(
-                request.getNihongo()
+                ContentHtml.clean(request.getNihongo())
         );
 
         example.setVietnamese(
-                request.getVietnamese()
+                ContentHtml.clean(request.getVietnamese())
         );
 
         return mapExampleToDTO(
@@ -704,7 +687,7 @@ public class StaffServiceImpl implements IStaffService {
     ) {
 
         validateKeyword(
-                dto.getContentNihongo()
+                ContentHtml.clean(dto.getContentNihongo())
         );
 
         return ExersiceKeyword.builder()
@@ -712,7 +695,7 @@ public class StaffServiceImpl implements IStaffService {
                         dto.getExerciseKeywordId()
                 )
                 .contentNihongo(
-                        dto.getContentNihongo()
+                        ContentHtml.clean(dto.getContentNihongo())
                 )
                 .answerA(
                         dto.getAnswerA()
@@ -748,7 +731,7 @@ public class StaffServiceImpl implements IStaffService {
                         entity.getExerciseKeywordId()
                 )
                 .contentNihongo(
-                        entity.getContentNihongo()
+                        ContentHtml.clean(entity.getContentNihongo())
                 )
                 .answerA(
                         entity.getAnswerA()
@@ -859,7 +842,7 @@ public class StaffServiceImpl implements IStaffService {
         );
 
         response.setReading(
-                lesson.getReading()
+                ContentHtml.clean(lesson.getReading())
         );
 
         return response;
@@ -929,11 +912,11 @@ public class StaffServiceImpl implements IStaffService {
         );
 
         response.setNihongo(
-                example.getNihongo()
+                ContentHtml.clean(example.getNihongo())
         );
 
         response.setVietnamese(
-                example.getVietnamese()
+                ContentHtml.clean(example.getVietnamese())
         );
 
         response.setGrammarId(
@@ -1124,261 +1107,4 @@ public class StaffServiceImpl implements IStaffService {
     }
 
 
-    /* =========================================================
-                         PROMETHEUS
-       ========================================================= */
-
-    private double query(String promQl) {
-
-        try {
-
-            URI uri = UriComponentsBuilder
-                    .fromUriString(prometheusUrl)
-                    .path("/api/v1/query")
-                    .queryParam("query", promQl)
-                    .build()
-                    .toUri();
-
-            System.out.println("=================================");
-            System.out.println("PROMQL = " + promQl);
-            System.out.println("URI    = " + uri);
-            System.out.println("=================================");
-
-            String response =
-                    restTemplate.getForObject(
-                            uri,
-                            String.class
-                    );
-
-            JsonNode root =
-                    objectMapper.readTree(response);
-
-            String status =
-                    root.path("status")
-                            .asText();
-
-            if (!"success".equals(status)) {
-
-                String errorType =
-                        root.path("errorType")
-                                .asText();
-
-                String error =
-                        root.path("error")
-                                .asText();
-
-                throw new RuntimeException(
-                        "Prometheus query failed. "
-                                + "errorType="
-                                + errorType
-                                + ", error="
-                                + error
-                );
-            }
-
-            JsonNode result =
-                    root.path("data")
-                            .path("result");
-
-            if (!result.isArray() || result.isEmpty()) {
-                return 0D;
-            }
-
-            JsonNode valueNode =
-                    result.get(0)
-                            .path("value");
-
-            if (!valueNode.isArray()
-                    || valueNode.size() < 2) {
-
-                return 0D;
-            }
-
-            return Double.parseDouble(
-                    valueNode
-                            .get(1)
-                            .asText()
-            );
-
-        } catch (Exception e) {
-
-            throw new RuntimeException(
-                    "Cannot query Prometheus. "
-                            + "query="
-                            + promQl,
-                    e
-            );
-        }
-    }
-
-    /**
-     * CPU usage (%)
-     */
-    public double getCpuUsage() {
-
-        String query =
-                "100 - (avg by(instance) " +
-                        "(rate(node_cpu_seconds_total" +
-                        "{mode=\"idle\"}[5m])) * 100)";
-
-        return query(query);
-    }
-
-
-    /**
-     * RAM usage (%)
-     */
-    public double getMemoryUsage() {
-
-        String query =
-                "100 * (1 - " +
-                        "node_memory_MemAvailable_bytes / " +
-                        "node_memory_MemTotal_bytes)";
-
-        return query(query);
-    }
-
-
-    /**
-     * Disk usage (%)
-     */
-    public double getDiskUsage() {
-
-        String query =
-                "100 - (" +
-                        "(node_filesystem_avail_bytes" +
-                        "{mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / " +
-                        "node_filesystem_size_bytes" +
-                        "{mountpoint=\"/\",fstype!=\"rootfs\"})";
-
-        return query(query);
-    }
-
-
-    /**
-     * Load average 1 minute.
-     */
-    public double getLoad1m() {
-
-        return query(
-                "node_load1"
-        );
-    }
-
-
-    /**
-     * Network received bytes/sec.
-     */
-    public double getNetworkReceive() {
-
-        String query =
-                "sum(rate(node_network_receive_bytes_total" +
-                        "{device!=\"lo\"}[5m]))";
-
-        return query(query);
-    }
-
-
-    /**
-     * Network transmitted bytes/sec.
-     */
-    public double getNetworkTransmit() {
-
-        String query =
-                "sum(rate(node_network_transmit_bytes_total" +
-                        "{device!=\"lo\"}[5m]))";
-
-        return query(query);
-    }
-
-
-    /**
-     * Server uptime in seconds.
-     */
-    public double getUptime() {
-
-        return query(
-                "time() - node_boot_time_seconds"
-        );
-    }
-
-
-    /* =========================================================
-                     GET SERVER METRICS
-       ========================================================= */
-
-    @Override
-    public synchronized Map<String, Object> getServerMetrics() {
-
-        long now =
-                System.currentTimeMillis();
-
-        if (
-                serverMetricsCache != null
-                        &&
-                        now - serverMetricsCacheTime
-                                < SERVER_METRICS_CACHE_DURATION
-        ) {
-
-            return serverMetricsCache;
-        }
-
-        Map<String, Object> result =
-                getStringObjectMap();
-
-        serverMetricsCache =
-                Collections.unmodifiableMap(
-                        result
-                );
-
-        serverMetricsCacheTime =
-                System.currentTimeMillis();
-
-        return serverMetricsCache;
-    }
-
-
-    @NonNull
-    private Map<String, Object> getStringObjectMap() {
-
-        Map<String, Object> result =
-                new LinkedHashMap<>();
-
-        result.put(
-                "cpuUsage",
-                getCpuUsage()
-        );
-
-        result.put(
-                "memoryUsage",
-                getMemoryUsage()
-        );
-
-        result.put(
-                "diskUsage",
-                getDiskUsage()
-        );
-
-        result.put(
-                "load1m",
-                getLoad1m()
-        );
-
-        result.put(
-                "networkReceive",
-                getNetworkReceive()
-        );
-
-        result.put(
-                "networkTransmit",
-                getNetworkTransmit()
-        );
-
-        result.put(
-                "uptime",
-                getUptime()
-        );
-
-        return result;
-    }
 }

@@ -11,6 +11,10 @@ public interface MonitorVpsMetricRepository extends JpaRepository<MonitorVpsMetr
     boolean existsByVps_VpsIdAndMetric_MetricId(Long vpsId, Long metricId);
     @EntityGraph(attributePaths = {"vps", "metric"})
     List<MonitorVpsMetric> findByVps_VpsIdOrderByMetric_MetricNameAsc(Long vpsId);
+    @EntityGraph(attributePaths = {"vps", "metric"})
+    Optional<MonitorVpsMetric> findByVps_VpsIdAndMetric_MetricCode(Long vpsId, String metricCode);
+    @EntityGraph(attributePaths = {"vps", "metric"})
+    List<MonitorVpsMetric> findByMetric_MetricId(Long metricId);
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select a from MonitorVpsMetric a where a.vpsMetricId = :id")
     Optional<MonitorVpsMetric> lockById(Long id);

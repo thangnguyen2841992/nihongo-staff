@@ -17,7 +17,7 @@ import java.util.concurrent.*;
 public class PerfCollectionScheduler {
     private final MonitorVpsMetricRepository assignments;
     private final MonitorPerfValueRepository values;
-    private final MonitorCollectionServiceImpl collector;
+    private final MetricCollector collector;
     private final PlatformTransactionManager transactionManager;
     @Value("${monitoring.collection.enabled:true}") private boolean enabled;
     @Value("${monitoring.collection.retention-days:0}") private int retentionDays;
