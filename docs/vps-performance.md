@@ -44,7 +44,42 @@ retention-days: 0
 
 `retention-days=0` giữ toàn bộ perf. Nếu cấu hình số ngày >0, cleanup mỗi giờ xóa tối đa 10000 mẫu cũ/lần. Với nhiều VPS cần chọn retention và theo dõi kích thước bảng/index. Không có thao tác xóa lịch sử mặc định.
 
-## API (ADMIN/STAFF)
+## Hiệu năng realtime và lịch thu thập
+
+- Màn `/staff/monitoring/vps/performance` đọc snapshot/lịch sử ban đầu qua HTTP,
+  sau đó nhận giá trị trực tiếp qua STOMP WebSocket. Không polling perf định kỳ.
+  Khoảng mặc định là 10 phút gần nhất (DB lọc từ UTC hiện tại trừ 10 phút đến
+  UTC hiện tại). Snapshot giữ giá trị mới nhất từng object; biểu đồ nối tiếp các
+  mẫu socket, loại điểm đã ra khỏi cửa sổ và gộp theo timestamp để tránh trùng.
+  Mẫu socket đến khi DB đang tải được giữ và gộp vào kết quả, không ghi đè mất mẫu.
+  Với khoảng tối đa 10 phút, DB trả mẫu gốc và timestamp thu thập, không lấy
+  trung bình theo bucket; khoảng dài hơn vẫn dùng bucket giới hạn số điểm.
+- Nút “Lịch thu thập” trên màn hiệu năng mở popup, chọn sẵn VPS và metric đang
+  xem để sửa nhanh: chu kỳ mặc định, timeout, bật/tắt hoặc chu kỳ riêng trên VPS.
+  `null` khôi phục dùng lịch mặc định. Biểu đồ/socket tiếp tục cập nhật khi mở popup.
+  Mục sidebar cũng mở popup; URL cũ `/staff/monitoring/vps/schedules` chuyển sang
+  màn hiệu năng kèm popup. Escape/nút Đóng/click ngoài đóng popup và khôi phục cuộn.
+- Socket handshake `/api/staff/vps-performance/ws` đi qua gateway với route
+  `lb:ws://staff-service`. JWT lấy từ HttpOnly cookie qua bộ lọc hiện có; không
+  đặt token trong URL hay localStorage. Cần restart cả gateway và staff-service.
+- Client chỉ được subscribe `/topic/vps-performance/{vpsId}/{metricCode}` với
+  quyền STAFF/ADMIN. Chặn wildcard và client SEND. Socket đóng khi access JWT
+  hết hạn; client refresh cookie qua HTTP trước khi nối lại.
+- Chỉ gửi snapshot sau khi transaction thu thập hoặc thay đổi cấu hình commit.
+  Lỗi thu thập cũng đẩy trạng thái và giữ mẫu cũ. Lỗi gửi socket không làm hỏng
+  transaction đã commit. Payload gồm `sequence` và `performance` (latest từng
+  object, lỗi, trạng thái, chu kỳ hiệu lực). Nối lại sẽ tải snapshot và lịch sử.
+- Realtime phản ánh lịch thu thập: metric chu kỳ 30 giây có mẫu mới sau mỗi lần
+  thu thập, không tự tăng tốc collector khi người dùng mở màn hình.
+
+Origin mặc định `http://localhost:5173`; cấu hình
+`monitoring.websocket.allowed-origins` / `MONITORING_WEBSOCKET_ALLOWED_ORIGINS`
+với origin thực tế khi triển khai. Reverse proxy cần forward WebSocket Upgrade.
+Simple broker hiện chạy trong một instance staff-service. Nếu chạy nhiều
+instance staff-service, cần broker dùng chung và phân phối sự kiện sau commit
+giữa các instance; sticky session riêng không đủ vì collector claim qua DB.
+
+## REST API (ADMIN/STAFF)
 
 - GET `/api/staff/vps-metrics`: danh mục từ DB.
 - GET `/api/staff/vps/{id}/metric-configs`: assignment và cấu hình hiệu lực.
@@ -52,6 +87,7 @@ retention-days: 0
 - PUT `/api/staff/vps/{id}/metrics/{code}/config`: `{scheduleSeconds, enabled}`.
 - GET `/api/staff/vps/{id}/performance?metric=CPU_USAGE`: giá trị mới nhất của mọi object.
 - GET cùng URL với `hours=24&objectKey=<object_id>`: lịch sử riêng; object toàn VPS dùng `objectKey=vps`.
+- GET cùng URL với `minutes=10&objectKey=<object_id>`: 10 phút gần nhất. Không truyền đồng thời `hours` và `minutes`.
 
 Chu kỳ hợp lệ 5–86400 giây; timeout 1000–30000 ms. Lấy history tối đa 168 giờ/lần. API đọc không tạo object hay thu thập thêm mẫu.
 

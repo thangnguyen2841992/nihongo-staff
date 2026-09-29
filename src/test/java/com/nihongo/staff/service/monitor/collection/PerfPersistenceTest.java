@@ -138,4 +138,20 @@ class PerfPersistenceTest {
         assertEquals(0, link("CPU_USAGE").getConsecutiveFailures());
         assertNull(link("CPU_USAGE").getLastError());
     }
+    @Test void tenMinuteHistoryExcludesOlderFutureAndOtherMetricSamples() {
+        var memory = link("MEMORY_USAGE");
+        var time = PerfCollectionStore.now();
+        for (int offset : new int[]{-660, -540, -60, 60}) {
+            var value = new MonitorPerfValue(); value.setVpsId(vps.getVpsId()); value.setMetricId(memory.getMetric().getMetricId());
+            value.setCollectedAt(time.plusSeconds(offset)); value.setValue((double) Math.abs(offset)); values.save(value);
+        }
+        var wrongMetric = new MonitorPerfValue(); wrongMetric.setVpsId(vps.getVpsId()); wrongMetric.setMetricId(link("LOAD_1M").getMetric().getMetricId());
+        wrongMetric.setCollectedAt(time.minusSeconds(60)); wrongMetric.setValue(999D); values.save(wrongMetric);
+        var points = performance.read(vps.getVpsId(), "MEMORY_USAGE", null, "vps", 10).objects().get(0).points();
+        assertEquals(List.of(540D, 60D), points.stream().map(VpsPerformanceService.Point::value).filter(java.util.Objects::nonNull).toList());
+        assertEquals(time.minusSeconds(540).toEpochSecond(java.time.ZoneOffset.UTC), points.get(0).timestamp());
+        assertTrue(points.stream().allMatch(p -> p.timestamp() >= time.minusMinutes(10).toEpochSecond(java.time.ZoneOffset.UTC) && p.timestamp() <= time.toEpochSecond(java.time.ZoneOffset.UTC)));
+        assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> performance.read(vps.getVpsId(), "MEMORY_USAGE", null, "vps", 0));
+        assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> performance.read(vps.getVpsId(), "MEMORY_USAGE", 1, "vps", 10));
+    }
 }

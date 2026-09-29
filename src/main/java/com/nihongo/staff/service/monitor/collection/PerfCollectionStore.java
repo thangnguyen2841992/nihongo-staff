@@ -18,6 +18,7 @@ public class PerfCollectionStore {
     private final MonitorPerfValueRepository values;
     private final MonitorPerfBaselineRepository baselines;
     private final ObjectMapper mapper;
+    private final org.springframework.context.ApplicationEventPublisher events;
     static LocalDateTime now() { return LocalDateTime.now(ZoneOffset.UTC); }
     public static int interval(MonitorVpsMetric link) {
         Integer seconds = link.getScheduleSeconds() != null ? link.getScheduleSeconds() : link.getMetric().getScheduleSeconds();
@@ -99,6 +100,7 @@ public class PerfCollectionStore {
         link.setLastSuccessAt(observedAt); link.setLastError(readings.isEmpty() ? "Node Exporter chưa cung cấp metric này." : null);
         link.setConsecutiveFailures(0);
         link.getVps().setStatus(VpsStatus.UP); link.getVps().setLastSeenAt(observedAt); release(link);
+        events.publishEvent(new PerformanceChanged(job.vpsId(), job.code()));
     }
 
     @Transactional
@@ -111,6 +113,7 @@ public class PerfCollectionStore {
         link.setConsecutiveFailures(Math.min(20, link.getConsecutiveFailures() + 1));
         release(link);
         link.setNextCollectionAt(now().plusSeconds(retryDelay(interval(link), link.getConsecutiveFailures())));
+        events.publishEvent(new PerformanceChanged(job.vpsId(), job.code()));
         return changed;
     }
     static long retryDelay(int interval, int failures) {

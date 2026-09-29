@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://onehost-amdcloudhn022602.000nethost.com:3306/tsezwyvdhosting_nihongo?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: tsezwyvdhosting_nihongo_app
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    password: thuThuy@1
     driver-class-name: com.mysql.cj.jdbc.Driver
 
     hikari:
@@ -24,11 +24,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8180/realms/nihongo}
 
 eureka:
   instance:
@@ -45,7 +40,7 @@ monitoring:
   prometheus-port: 22
   prometheus-host: ${PROMETHEUS_HOST:160.22.107.232}
   prometheus-ssh-username: root
-  prometheus-ssh-password: ${MONITORING_PROMETHEUS_SSH_PASSWORD}
+  prometheus-ssh-password: ${MONITORING_PROMETHEUS_SSH_PASSWORD:thanKiemhp@1}
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: "U7tjRTsx0baZLsRhHGcc0FA/B7MJ65IfQ0jZHvUyYrE="

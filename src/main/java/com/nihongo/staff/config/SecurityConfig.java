@@ -46,6 +46,7 @@ public class SecurityConfig {
                         .permitAll()
 
                         // staff/admin api
+                        .requestMatchers("/api/staff/vps-performance/ws").hasAnyRole("STAFF", "ADMIN")
                         .requestMatchers("/api/staff/**")
                         .hasAnyRole("STAFF", "ADMIN", "USER")
 

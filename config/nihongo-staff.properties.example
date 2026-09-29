@@ -1,0 +1,14 @@
+# Copy to staff/.local/nihongo-staff.properties and fill in locally.
+# Do not commit the populated file or paste its values into logs/chat.
+# Java .properties syntax: escape literal backslashes as \\.
+
+# MySQL password for the datasource user configured in application.yml.
+SPRING_DATASOURCE_PASSWORD=
+
+# SSH password for the configured Prometheus server/user.
+MONITORING_PROMETHEUS_SSH_PASSWORD=
+
+# Use the same JWT signing secret as the services issuing/verifying your tokens.
+# Do not generate a different secret just for staff-service.
+# The configured decoder expects a Base64-encoded secret (at least 32 decoded bytes).
+JWT_SECRET=

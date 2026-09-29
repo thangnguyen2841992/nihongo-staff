@@ -18,7 +18,7 @@ public class VpsPerformanceService {
     public record Config(long assignmentId, String code, Integer scheduleSeconds, int effectiveScheduleSeconds, boolean enabled, String lastError, LocalDateTime lastSuccessAt) {}
     public record Point(double timestamp, Double value) {}
     public record Series(String objectKey, String objectName, Map<String, String> labels, String status, boolean stale, List<Point> points) {}
-    public record Performance(long vpsId, String metricCode, String state, String collectionError, List<Series> objects) {}
+    public record Performance(long vpsId, String metricCode, String state, String collectionError, List<Series> objects, int scheduleSeconds) {}
     public record Update(Integer scheduleSeconds, Integer timeoutMs, Boolean enabled) {}
     private final MonitorMetricRepository metrics;
     private final MonitorVpsRepository servers;
@@ -26,6 +26,7 @@ public class VpsPerformanceService {
     private final MonitorObjectRepository objects;
     private final MonitorPerfValueRepository values;
     private final ObjectMapper mapper;
+    private final org.springframework.context.ApplicationEventPublisher events;
 
     public List<Metric> metrics() {
         return metrics.findAll().stream().map(m -> new Metric(m.getMetricId(), m.getMetricCode(), m.getMetricName(), m.getUnit(), m.getObjectType(), Optional.ofNullable(m.getScheduleSeconds()).orElse(60), Optional.ofNullable(m.getTimeoutMs()).orElse(5000), Boolean.TRUE.equals(m.getEnabled()))).toList();
@@ -55,6 +56,7 @@ public class VpsPerformanceService {
         link.setScheduleSeconds(update.scheduleSeconds());
         if (update.enabled() != null) link.setEnabled(update.enabled());
         link.setNextCollectionAt(PerfCollectionStore.now());
+        events.publishEvent(new PerformanceChanged(vpsId, code));
         return config(link);
     }
     @Transactional
@@ -65,13 +67,24 @@ public class VpsPerformanceService {
         if (update.timeoutMs() != null) metric.setTimeoutMs(update.timeoutMs());
         if (update.enabled() != null) metric.setEnabled(update.enabled());
         for (MonitorVpsMetric link : assignments.findAll()) {
-            if (link.getMetric().getMetricId().equals(metricId) && link.getScheduleSeconds() == null)
-                assignments.lockById(link.getVpsMetricId()).orElseThrow().setNextCollectionAt(PerfCollectionStore.now());
+            if (link.getMetric().getMetricId().equals(metricId)) {
+                if (link.getScheduleSeconds() == null)
+                    assignments.lockById(link.getVpsMetricId()).orElseThrow().setNextCollectionAt(PerfCollectionStore.now());
+                events.publishEvent(new PerformanceChanged(link.getVps().getVpsId(), metric.getMetricCode()));
+            }
         }
     }
     public Performance read(long vpsId, String code, Integer hours, String objectKey) {
+        return read(vpsId, code, hours, objectKey, null);
+    }
+    public Performance read(long vpsId, String code, Integer hours, String objectKey, Integer minutes) {
         if (hours != null && (hours < 1 || hours > 168)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Khoảng thời gian phải từ 1 đến 168 giờ.");
-        if (hours != null && (objectKey == null || objectKey.isBlank())) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Vui lòng chọn object để xem lịch sử.");
+        if (minutes != null && (minutes < 1 || minutes > 10080)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Khoảng thời gian phải từ 1 đến 10080 phút.");
+        if (hours != null && minutes != null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Chỉ chọn một khoảng thời gian theo giờ hoặc phút.");
+        Integer windowSeconds = null;
+        if (minutes != null) windowSeconds = minutes * 60;
+        else if (hours != null) windowSeconds = hours * 3600;
+        if (windowSeconds != null && (objectKey == null || objectKey.isBlank())) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Vui lòng chọn object để xem lịch sử.");
         MonitorVpsMetric link = assignment(vpsId, code);
         MonitorMetric metric = link.getMetric();
         LocalDateTime now = PerfCollectionStore.now();
@@ -80,31 +93,38 @@ public class VpsPerformanceService {
         if (!Boolean.TRUE.equals(link.getEnabled()) || !Boolean.TRUE.equals(metric.getEnabled())) state = "PAUSED";
         List<Series> result = new ArrayList<>();
         if (!Boolean.TRUE.equals(metric.getObjectLevelYn())) {
-            if (objectKey == null || objectKey.equals("vps")) result.add(series(link, null, hours, now));
+            if (objectKey == null || objectKey.equals("vps")) result.add(series(link, null, windowSeconds, now));
         } else {
             for (MonitorObject object : objects.findByVps_VpsIdAndObjectType(vpsId, metric.getObjectType()))
-                if (objectKey == null || objectKey.equals(object.getObjectId().toString())) result.add(series(link, object, hours, now));
+                if (objectKey == null || objectKey.equals(object.getObjectId().toString())) result.add(series(link, object, windowSeconds, now));
         }
         result.sort(Comparator.comparing(Series::objectName));
-        return new Performance(vpsId, code, state, link.getLastError(), result);
+        return new Performance(vpsId, code, state, link.getLastError(), result, PerfCollectionStore.interval(link));
     }
-    private Series series(MonitorVpsMetric link, MonitorObject object, Integer hours, LocalDateTime now) {
+    private Series series(MonitorVpsMetric link, MonitorObject object, Integer windowSeconds, LocalDateTime now) {
         Long objectId = object == null ? null : object.getObjectId();
         List<Point> points = new ArrayList<>();
         boolean stale = true;
-        if (hours == null) {
+        if (windowSeconds == null) {
             Optional<MonitorPerfValue> latest = values.findFirstByVpsIdAndMetricIdAndObjectIdOrderByCollectedAtDesc(link.getVps().getVpsId(), link.getMetric().getMetricId(), objectId);
             if (latest.isPresent()) {
                 var value = latest.get(); points.add(new Point(value.getCollectedAt().toEpochSecond(ZoneOffset.UTC), value.getValue()));
                 stale = value.getCollectedAt().isBefore(now.minusSeconds(PerfCollectionStore.interval(link) * 2L + 10)) || link.getLastError() != null;
             }
         } else {
-            int step = Math.max(5, (int) Math.ceil(hours * 3600D / 1000));
-            var buckets = values.history(link.getVps().getVpsId(), link.getMetric().getMetricId(), objectId, now.minusHours(hours), now, step);
-            for (var bucket : buckets) {
-                if (!points.isEmpty() && bucket.getTimestamp() - points.get(points.size() - 1).timestamp() > Math.max(step * 2, PerfCollectionStore.interval(link) * 2))
+            int step = Math.max(5, (int) Math.ceil(windowSeconds / 1000D));
+            List<Point> samples;
+            if (windowSeconds <= 600) {
+                samples = values.findByVpsIdAndMetricIdAndObjectIdAndCollectedAtBetweenOrderByCollectedAtAsc(link.getVps().getVpsId(), link.getMetric().getMetricId(), objectId, now.minusSeconds(windowSeconds), now)
+                        .stream().map(v -> new Point(v.getCollectedAt().toEpochSecond(ZoneOffset.UTC), v.getValue())).toList();
+            } else {
+                samples = values.history(link.getVps().getVpsId(), link.getMetric().getMetricId(), objectId, now.minusSeconds(windowSeconds), now, step)
+                        .stream().map(b -> new Point(b.getTimestamp(), b.getValue())).toList();
+            }
+            for (var sample : samples) {
+                if (!points.isEmpty() && sample.timestamp() - points.get(points.size() - 1).timestamp() > Math.max(step * 2, PerfCollectionStore.interval(link) * 2))
                     points.add(new Point(points.get(points.size() - 1).timestamp() + step, null));
-                points.add(new Point(bucket.getTimestamp(), bucket.getValue()));
+                points.add(sample);
             }
         }
         Map<String, String> labels = Map.of();

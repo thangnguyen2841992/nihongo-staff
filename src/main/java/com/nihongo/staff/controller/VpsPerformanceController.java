@@ -25,7 +25,8 @@ public class VpsPerformanceController {
     @GetMapping("/vps/{vpsId}/performance")
     public VpsPerformanceService.Performance performance(@PathVariable long vpsId, @RequestParam String metric,
                                                           @RequestParam(required = false) Integer hours,
+                                                          @RequestParam(required = false) Integer minutes,
                                                           @RequestParam(required = false) String objectKey) {
-        return service.read(vpsId, metric, hours, objectKey);
+        return service.read(vpsId, metric, hours, objectKey, minutes);
     }
 }

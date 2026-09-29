@@ -268,6 +268,10 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
 
     private void uploadFileViaSsh(String content) throws Exception {
 
+        if (prometheusPassword == null || prometheusPassword.isBlank()) {
+            throw new IllegalStateException("Chưa cấu hình MONITORING_PROMETHEUS_SSH_PASSWORD để đồng bộ target sang Prometheus.");
+        }
+
         Path localTempFile = Files.createTempFile("node_targets_", ".json");
 
         try {
@@ -345,7 +349,9 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
                     sync();
                 } catch (RuntimeException e) {
                     throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE,
-                            "Thay đổi đã được lưu, nhưng chưa đồng bộ được với Prometheus. Vui lòng kiểm tra kết nối SSH; không đăng ký lại VPS.", e);
+                            prometheusPassword == null || prometheusPassword.isBlank()
+                                    ? "Thay đổi đã được lưu, nhưng chưa đồng bộ Prometheus do thiếu MONITORING_PROMETHEUS_SSH_PASSWORD. Vui lòng bổ sung cấu hình SSH; không đăng ký lại VPS."
+                                    : "Thay đổi đã được lưu, nhưng chưa đồng bộ được với Prometheus. Vui lòng kiểm tra kết nối SSH; không đăng ký lại VPS.", e);
                 }
             }
         });
