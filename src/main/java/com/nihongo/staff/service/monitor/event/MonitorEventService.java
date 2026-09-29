@@ -162,7 +162,8 @@ public class MonitorEventService {
             state.setLastObservedAt(perf.getCollectedAt());
             if (rule.getOperator().matches(perf.getValue(), rule.getThreshold())) {
                 state.setBreaches(Math.min(rule.getConsecutiveSamples(), state.getBreaches() + 1));
-                if (!state.isActive() && state.getBreaches() >= rule.getConsecutiveSamples()) {
+                // Each accepted collection can produce a new alert once the streak qualifies.
+                if (state.getBreaches() >= rule.getConsecutiveSamples()) {
                     state.setActive(true);
                     var event = emit(rule, sample, objectKey, MonitorEvent.Kind.ALERT, null);
                     state.setOpenedEventId(event.getEventId()); created.add(event.getEventId());

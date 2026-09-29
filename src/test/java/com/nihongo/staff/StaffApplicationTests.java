@@ -166,6 +166,43 @@ class StaffApplicationTests {
         assertTrue(eventRules.events(vpsId, "MEMORY_USAGE", null).isEmpty());
     }
 
+    @Test void eachMatchingCollectionPublishesOnlyItsNewPersistedEvent() throws Exception {
+        long id = assignment();
+        long vpsId = eventRule(id);
+        var at = java.time.LocalDateTime.now(java.time.ZoneOffset.UTC);
+        java.util.List<Long> ids = new java.util.ArrayList<>();
+        for (int cycle = 0; cycle < 3; cycle++) {
+            new org.springframework.transaction.support.TransactionTemplate(transactions).executeWithoutResult(status -> {
+                assignments.findById(id).orElseThrow().setNextCollectionAt(at.minusSeconds(1));
+            });
+            org.mockito.Mockito.clearInvocations(messaging);
+            double value = 25D + cycle;
+            store.complete(store.claim(id), java.util.List.of(new com.nihongo.staff.service.monitor.collection.NodeMetricSource.Reading(
+                    "VPS", "vps", java.util.Map.of(), value, null, null)), at.plusSeconds(cycle * 60L));
+            var frame = org.mockito.ArgumentCaptor.forClass(com.nihongo.staff.service.monitor.realtime.MonitorEventSocketPublisher.Update.class);
+            org.mockito.Mockito.verify(messaging).convertAndSend(org.mockito.ArgumentMatchers.eq("/topic/vps-events/" + vpsId), frame.capture());
+            assertEquals(1, frame.getValue().events().size());
+            assertEquals(value, frame.getValue().events().get(0).value());
+            ids.add(frame.getValue().events().get(0).eventId());
+            assertFalse(mapper.readTree(mapper.writeValueAsString(frame.getValue())).has("performance"));
+        }
+        assertEquals(3, new java.util.HashSet<>(ids).size());
+        var history = eventRules.events(vpsId, "MEMORY_USAGE", null);
+        assertEquals(java.util.List.of(27D, 26D, 25D), history.stream().map(com.nihongo.staff.service.monitor.event.MonitorEventService.Event::value).toList());
+        org.mockito.Mockito.clearInvocations(messaging);
+        new org.springframework.transaction.support.TransactionTemplate(transactions).executeWithoutResult(status -> {
+            assignments.findById(id).orElseThrow().setNextCollectionAt(at.minusSeconds(1));
+        });
+        store.fail(store.claim(id), "Node Exporter timeout");
+        org.mockito.Mockito.verify(messaging, org.mockito.Mockito.never()).convertAndSend(
+                org.mockito.ArgumentMatchers.eq("/topic/vps-events/" + vpsId), org.mockito.ArgumentMatchers.any(Object.class));
+        assertEquals(3, eventRules.events(vpsId, "MEMORY_USAGE", null).size());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get("/api/staff/vps/" + vpsId + "/events")
+                .header("Authorization", bearer("STAFF")))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isOk())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.events.length()").value(3));
+    }
+
     @Autowired PrometheusTargetService vpsService;
 
 	@Test

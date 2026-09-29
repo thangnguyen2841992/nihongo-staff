@@ -79,20 +79,21 @@ class MonitorEventTest {
         assertEquals("MINOR", entityManager.createNativeQuery("select severity from monitor_event_rule where rule_id = :id").setParameter("id", rule.ruleId()).getSingleResult());
     }
 
-    @Test void consecutiveBreachDeduplicatesPersistsStateAndLinksRecovery() {
+    @Test void qualifyingCyclesEachCreateAnAlertAndRecoveryLinksToTheLatestAlert() {
         events.save(vpsId, "MEMORY_USAGE", null, input("vps", MonitorEventRule.Operator.GTE, 80, 2, true));
         memory(80, 0); assertEquals(0, history.count());
         memory(90, 60); assertEquals(1, history.count());
         entityManager.flush(); entityManager.clear(); // No in-memory state is needed across collectors/restarts.
-        memory(95, 120); assertEquals(1, history.count());
+        memory(95, 120); assertEquals(2, history.count());
         memory(79, 180); memory(60, 240);
         var recorded = events.events(vpsId, "MEMORY_USAGE", null);
-        assertEquals(2, recorded.size()); assertEquals(MonitorEvent.Kind.RECOVERY, recorded.get(0).kind());
+        assertEquals(3, recorded.size()); assertEquals(MonitorEvent.Kind.RECOVERY, recorded.get(0).kind());
         assertEquals(recorded.get(1).eventId(), recorded.get(0).openedEventId());
-        assertEquals(90D, recorded.get(1).value()); assertEquals(80D, recorded.get(1).threshold());
-        memory(90, 300); memory(90, 360); assertEquals(3, history.count());
+        assertEquals(95D, recorded.get(1).value()); assertEquals(90D, recorded.get(2).value());
+        assertEquals(80D, recorded.get(1).threshold());
+        memory(90, 300); memory(90, 360); assertEquals(4, history.count());
         assertEquals(1, events.rules(vpsId, "MEMORY_USAGE").get(0).activeObjects());
-        assertEquals(3, performance.read(vpsId, "MEMORY_USAGE", null, null).events().size());
+        assertEquals(4, performance.read(vpsId, "MEMORY_USAGE", null, null).events().size());
     }
     @Test void allObjectRuleAutomaticallyAppliesToNewObjectsIndependently() {
         events.save(vpsId, "DISK_USAGE", null, input("all", MonitorEventRule.Operator.GT, 80, 2, true));
@@ -102,7 +103,7 @@ class MonitorEventTest {
         disks(120, disk("/", 50), disk("/data", 90), disk("/new", 99));
         assertEquals(3, history.count());
         disks(180, disk("/", 50), disk("/data", 90), disk("/new", 99));
-        assertEquals(4, history.count());
+        assertEquals(5, history.count());
         assertEquals(2, events.rules(vpsId, "DISK_USAGE").get(0).activeObjects());
         assertEquals(3, events.events(vpsId, "DISK_USAGE", null).stream().filter(e -> e.kind() == MonitorEvent.Kind.ALERT).map(MonitorEventService.Event::objectKey).distinct().count());
     }
@@ -148,6 +149,28 @@ class MonitorEventTest {
         events.save(vpsId, "MEMORY_USAGE", null, input("all", MonitorEventRule.Operator.GTE, 80, 2, true));
         memory(90, 0); memory(90, 0); memory(90, -60); assertEquals(0, history.count());
         memory(90, 60); assertEquals(1, history.count());
+        memory(99, 60); memory(99, 0); assertEquals(1, history.count());
+        memory(95, 120); assertEquals(2, history.count());
+    }
+
+    @Test void oneSampleRuleEmitsAtEveryMatchingCycleButNotForFailureOrMissingSamples() {
+        var assignment = link("MEMORY_USAGE");
+        assignment.setScheduleSeconds(5);
+        events.save(vpsId, "MEMORY_USAGE", null, input("all", MonitorEventRule.Operator.GTE, 80, 1, true));
+        memory(81, 0); memory(82, 5); memory(83, 10);
+        var recorded = events.events(vpsId, "MEMORY_USAGE", null);
+        assertEquals(List.of(83D, 82D, 81D), recorded.stream().map(MonitorEventService.Event::value).toList());
+        assertEquals(3, recorded.stream().map(MonitorEventService.Event::eventId).distinct().count());
+        assertTrue(recorded.stream().allMatch(e -> e.kind() == MonitorEvent.Kind.ALERT));
+        store.fail(claim("MEMORY_USAGE"), "timeout");
+        store.complete(claim("MEMORY_USAGE"), List.of(), time.plusSeconds(15));
+        assertEquals(3, history.count());
+        memory(84, 20); assertEquals(4, history.count());
+        memory(50, 25); memory(40, 30);
+        recorded = events.events(vpsId, "MEMORY_USAGE", null);
+        assertEquals(5, recorded.size());
+        assertEquals(MonitorEvent.Kind.RECOVERY, recorded.get(0).kind());
+        assertEquals(recorded.get(1).eventId(), recorded.get(0).openedEventId());
     }
     @Test void validationRejectsCrossMetricCrossVpsAndInvalidThresholds() {
         disks(0, disk("/", 20));
