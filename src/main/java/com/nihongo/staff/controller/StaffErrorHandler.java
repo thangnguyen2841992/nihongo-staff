@@ -9,7 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
-@RestControllerAdvice(assignableTypes = {StaffRestController.class, MonitorVpsController.class, VpsPerformanceController.class, MonitorEventController.class})
+@RestControllerAdvice(assignableTypes = {StaffRestController.class, MonitorVpsController.class, VpsPerformanceController.class, MonitorEventController.class, VpsEventController.class})
 public class StaffErrorHandler {
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<Map<String, String>> status(ResponseStatusException exception) {

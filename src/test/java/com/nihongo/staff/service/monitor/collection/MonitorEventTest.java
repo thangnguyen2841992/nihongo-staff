@@ -178,4 +178,55 @@ class MonitorEventTest {
         memory(80, 0); assertEquals(0, history.count()); memory(79, 60); memory(80, 120);
         assertEquals(List.of(MonitorEvent.Kind.RECOVERY, MonitorEvent.Kind.ALERT), events.events(vpsId, "MEMORY_USAGE", null).stream().map(MonitorEventService.Event::kind).toList());
     }
+
+    MonitorEvent recorded(String code, MonitorEventRule.Severity severity, LocalDateTime at) {
+        var event = new MonitorEvent();
+        event.setVpsId(vpsId); event.setMetricId(link(code).getMetric().getMetricId()); event.setRuleId(100L);
+        event.setRuleName("High " + code); event.setObjectKey("vps"); event.setObjectName("VPS");
+        event.setKind(MonitorEvent.Kind.ALERT); event.setSeverity(severity); event.setOperator(MonitorEventRule.Operator.GTE);
+        event.setThreshold(80D); event.setPerfValue(95D); event.setCollectedAt(at);
+        return history.save(event);
+    }
+    @Test void vpsSearchFiltersUtcTimeMetricSeverityAndIncludesLegacyMinor() {
+        var at = LocalDateTime.of(2026, 9, 29, 1, 0);
+        var minor = recorded("MEMORY_USAGE", MonitorEventRule.Severity.MINOR, at);
+        recorded("DISK_USAGE", MonitorEventRule.Severity.FATAL, at.plusSeconds(1));
+        recorded("MEMORY_USAGE", MonitorEventRule.Severity.FATAL, at.minusSeconds(1));
+        recorded("MEMORY_USAGE", MonitorEventRule.Severity.WARNING, at.plusSeconds(2));
+        entityManager.flush();
+        entityManager.createNativeQuery("update monitor_event set severity='INFO' where event_id=:id").setParameter("id", minor.getEventId()).executeUpdate();
+        entityManager.clear();
+        var from = at.toInstant(java.time.ZoneOffset.UTC); var to = from.plusSeconds(1);
+        var all = events.search(vpsId, null, from, to, null, null);
+        assertEquals(List.of("DISK_USAGE", "MEMORY_USAGE"), all.events().stream().map(MonitorEventService.Event::metricCode).toList());
+        assertEquals("%", all.events().get(0).unit());
+        assertNull(all.nextCursor());
+        var filtered = events.search(vpsId, "MEMORY_USAGE", from, to, MonitorEventRule.Severity.MINOR, null);
+        assertEquals(1, filtered.events().size()); assertEquals(minor.getEventId(), filtered.events().get(0).eventId());
+        assertEquals(MonitorEventRule.Severity.MINOR, filtered.events().get(0).severity());
+    }
+    @Test void vpsSearchCursorOrdersByCollectionTimeThenIdWithoutSkippingLateSamples() {
+        var at = LocalDateTime.of(2026, 9, 29, 1, 0);
+        for (int i = 0; i < 54; i++) recorded(i % 2 == 0 ? "MEMORY_USAGE" : "DISK_USAGE", MonitorEventRule.Severity.WARNING, at);
+        var late = recorded("MEMORY_USAGE", MonitorEventRule.Severity.CRITICAL, at.minusSeconds(1));
+        entityManager.flush(); entityManager.clear();
+        var first = events.search(vpsId, null, null, null, null, null);
+        assertEquals(50, first.events().size()); assertNotNull(first.nextCursor());
+        var second = events.search(vpsId, null, null, null, null, first.nextCursor());
+        assertEquals(5, second.events().size()); assertNull(second.nextCursor());
+        assertEquals(late.getEventId(), second.events().get(4).eventId());
+        Set<Long> ids = new HashSet<>();
+        first.events().forEach(e -> assertTrue(ids.add(e.eventId()))); second.events().forEach(e -> assertTrue(ids.add(e.eventId())));
+        assertEquals(55, ids.size());
+    }
+    @Test void vpsSearchRejectsInvalidTimesMetricsAndForeignCursor() {
+        var at = java.time.Instant.parse("2026-09-29T01:00:00Z");
+        assertThrows(ResponseStatusException.class, () -> events.search(vpsId, null, at, null, null, null));
+        assertThrows(ResponseStatusException.class, () -> events.search(vpsId, null, at, at.minusSeconds(1), null, null));
+        assertThrows(ResponseStatusException.class, () -> events.search(vpsId, "UNKNOWN", null, null, null, null));
+        assertThrows(ResponseStatusException.class, () -> events.search(vpsId, null, null, null, null, 0L));
+        var row = recorded("MEMORY_USAGE", MonitorEventRule.Severity.WARNING, LocalDateTime.ofInstant(at, java.time.ZoneOffset.UTC));
+        var other = new MonitorVps(); other.setHostname("cursor-other"); other.setIpAddress("127.0.0.2"); other.setAgentPort(9100); servers.save(other);
+        assertThrows(ResponseStatusException.class, () -> events.search(other.getVpsId(), null, null, null, null, row.getEventId()));
+    }
 }

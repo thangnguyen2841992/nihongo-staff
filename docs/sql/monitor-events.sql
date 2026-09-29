@@ -41,5 +41,6 @@ CREATE TABLE IF NOT EXISTS monitor_event (
     collected_at DATETIME(6) NOT NULL,
     opened_event_id BIGINT NULL,
     PRIMARY KEY (event_id),
-    INDEX idx_monitor_event_history (vps_id, metric_id, event_id)
+    INDEX idx_monitor_event_history (vps_id, metric_id, event_id),
+    INDEX idx_monitor_event_time (vps_id, collected_at, event_id)
 );

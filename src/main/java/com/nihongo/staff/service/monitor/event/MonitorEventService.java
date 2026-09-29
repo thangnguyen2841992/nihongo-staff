@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.ZoneOffset;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service @RequiredArgsConstructor @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
@@ -22,7 +24,9 @@ public class MonitorEventService {
                        double threshold, MonitorEventRule.Severity severity, int consecutiveSamples, boolean enabled, long activeObjects) {}
     public record Event(long eventId, long ruleId, String ruleName, String objectKey, String objectName,
                         MonitorEvent.Kind kind, MonitorEventRule.Severity severity, MonitorEventRule.Operator operator,
-                        double threshold, double value, double timestamp, Long openedEventId) {}
+                        double threshold, double value, double timestamp, Long openedEventId,
+                        long metricId, String metricCode, String metricName, String unit) {}
+    public record Page(List<Event> events, Long nextCursor) {}
     public record Sample(MonitorPerfValue perf, String objectName) {}
     private final MonitorVpsRepository servers;
     private final MonitorVpsMetricRepository assignments;
@@ -30,6 +34,7 @@ public class MonitorEventService {
     private final MonitorEventRuleRepository rules;
     private final MonitorEventStateRepository states;
     private final MonitorEventRepository history;
+    private final MonitorMetricRepository metrics;
     private final ApplicationEventPublisher publisher;
 
     private MonitorVpsMetric assignment(long vpsId, String code) {
@@ -50,13 +55,41 @@ public class MonitorEventService {
         return recent(vpsId, assignment(vpsId, code).getMetric().getMetricId(), beforeId);
     }
     public List<Event> recent(long vpsId, long metricId, Long beforeId) {
-        return history.history(vpsId, metricId, beforeId, PageRequest.of(0, 50)).stream().map(MonitorEventService::dto).toList();
+        return describe(history.history(vpsId, metricId, beforeId, PageRequest.of(0, 50)));
+    }
+    public Page search(long vpsId, String code, Instant from, Instant to, MonitorEventRule.Severity severity, Long beforeId) {
+        if (!servers.existsById(vpsId)) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "VPS không tồn tại.");
+        if ((from == null) != (to == null) || (from != null && from.isAfter(to))) throw bad("Chọn đầy đủ mốc bắt đầu và kết thúc; bắt đầu không được sau kết thúc.");
+        if (beforeId != null && beforeId < 1) throw bad("Mốc event không hợp lệ.");
+        Long metricId = code == null || code.isBlank() ? null : metrics.findByMetricCode(code)
+                .orElseThrow(() -> bad("Metric không tồn tại.")).getMetricId();
+        var cursor = beforeId == null ? null : history.findById(beforeId).filter(e -> e.getVpsId() == vpsId)
+                .orElseThrow(() -> bad("Mốc event không thuộc VPS này."));
+        var rows = history.search(vpsId, metricId, from == null ? null : LocalDateTime.ofInstant(from, ZoneOffset.UTC),
+                to == null ? null : LocalDateTime.ofInstant(to, ZoneOffset.UTC), severity == null ? null : severity.name(),
+                cursor == null ? null : cursor.getCollectedAt(), beforeId, PageRequest.of(0, 51));
+        boolean more = rows.size() > 50;
+        var page = more ? rows.subList(0, 50) : rows;
+        return new Page(describe(page), more ? page.get(49).getEventId() : null);
+    }
+    public List<Event> committed(long vpsId, List<Long> ids) {
+        return describe(history.findAllById(ids).stream().filter(e -> e.getVpsId() == vpsId)
+                .sorted(Comparator.comparing(MonitorEvent::getEventId).reversed()).toList());
+    }
+    private List<Event> describe(List<MonitorEvent> rows) {
+        if (rows.isEmpty()) return List.of();
+        Map<Long, MonitorMetric> catalog = new HashMap<>();
+        metrics.findAllById(rows.stream().map(MonitorEvent::getMetricId).distinct().toList()).forEach(m -> catalog.put(m.getMetricId(), m));
+        return rows.stream().map(e -> dto(e, catalog.get(e.getMetricId()))).toList();
     }
     private static Rule dto(MonitorEventRule r, long active) {
         return new Rule(r.getRuleId(), r.getName(), r.getObjectKey(), r.getOperator(), r.getThreshold(), r.getSeverity(), r.getConsecutiveSamples(), r.getEnabled(), active);
     }
-    private static Event dto(MonitorEvent e) {
-        return new Event(e.getEventId(), e.getRuleId(), e.getRuleName(), e.getObjectKey(), e.getObjectName(), e.getKind(), e.getSeverity(), e.getOperator(), e.getThreshold(), e.getPerfValue(), e.getCollectedAt().toEpochSecond(ZoneOffset.UTC), e.getOpenedEventId());
+    private static Event dto(MonitorEvent e, MonitorMetric metric) {
+        return new Event(e.getEventId(), e.getRuleId(), e.getRuleName(), e.getObjectKey(), e.getObjectName(), e.getKind(), e.getSeverity(), e.getOperator(), e.getThreshold(), e.getPerfValue(), e.getCollectedAt().toEpochSecond(ZoneOffset.UTC) + e.getCollectedAt().getNano() / 1_000_000_000D, e.getOpenedEventId(),
+                e.getMetricId(), metric == null ? "METRIC_" + e.getMetricId() : metric.getMetricCode(),
+                metric == null ? "Metric #" + e.getMetricId() : metric.getMetricName(),
+                metric == null || metric.getUnit() == null ? "" : metric.getUnit());
     }
     @Transactional(isolation = Isolation.READ_COMMITTED)
     public Rule save(long vpsId, String code, Long ruleId, Input input) {
@@ -112,6 +145,7 @@ public class MonitorEventService {
         Map<String, MonitorEventState> byKey = new HashMap<>();
         for (var s : persisted) byKey.put(s.getRuleId() + ":" + s.getObjectKey(), s);
         Set<String> observed = new HashSet<>();
+        List<Long> created = new ArrayList<>();
         for (var rule : enabled) for (var sample : samples) {
             var perf = sample.perf();
             String objectKey = perf.getObjectId() == null ? "vps" : perf.getObjectId().toString();
@@ -130,12 +164,13 @@ public class MonitorEventService {
                 state.setBreaches(Math.min(rule.getConsecutiveSamples(), state.getBreaches() + 1));
                 if (!state.isActive() && state.getBreaches() >= rule.getConsecutiveSamples()) {
                     state.setActive(true);
-                    state.setOpenedEventId(emit(rule, sample, objectKey, MonitorEvent.Kind.ALERT, null).getEventId());
+                    var event = emit(rule, sample, objectKey, MonitorEvent.Kind.ALERT, null);
+                    state.setOpenedEventId(event.getEventId()); created.add(event.getEventId());
                 }
             } else {
                 state.setBreaches(0);
                 if (state.isActive()) {
-                    emit(rule, sample, objectKey, MonitorEvent.Kind.RECOVERY, state.getOpenedEventId());
+                    created.add(emit(rule, sample, objectKey, MonitorEvent.Kind.RECOVERY, state.getOpenedEventId()).getEventId());
                     state.setActive(false); state.setOpenedEventId(null);
                 }
             }
@@ -143,6 +178,7 @@ public class MonitorEventService {
         }
         // Missing/reset/failed samples break pending streaks, but never imply recovery.
         for (var state : persisted) if (!observed.contains(state.getRuleId() + ":" + state.getObjectKey())) state.setBreaches(0);
+        if (!created.isEmpty()) publisher.publishEvent(new MonitorEventsChanged(link.getVps().getVpsId(), List.copyOf(created)));
     }
     private MonitorEvent emit(MonitorEventRule rule, Sample sample, String key, MonitorEvent.Kind kind, Long openedId) {
         var event = new MonitorEvent();

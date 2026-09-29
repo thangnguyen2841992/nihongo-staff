@@ -146,7 +146,8 @@ retention-days: 0
 - Socket handshake `/api/staff/vps-performance/ws` đi qua gateway với route
   `lb:ws://staff-service`. JWT lấy từ HttpOnly cookie qua bộ lọc hiện có; không
   đặt token trong URL hay localStorage. Cần restart cả gateway và staff-service.
-- Client chỉ được subscribe `/topic/vps-performance/{vpsId}/{metricCode}` với
+- Client được subscribe `/topic/vps-performance/{vpsId}/{metricCode}` hoặc
+  `/topic/vps-events/{vpsId}` với
   quyền STAFF/ADMIN. Chặn wildcard và client SEND. Socket đóng khi access JWT
   hết hạn; client refresh cookie qua HTTP trước khi nối lại.
 - Chỉ gửi snapshot sau khi transaction thu thập hoặc thay đổi cấu hình commit.
@@ -163,7 +164,32 @@ Simple broker hiện chạy trong một instance staff-service. Nếu chạy nhi
 instance staff-service, cần broker dùng chung và phân phối sự kiện sau commit
 giữa các instance; sticky session riêng không đủ vì collector claim qua DB.
 
-## REST API (ADMIN/STAFF)
+## Hai màn xem event
+
+- Sidebar **Event realtime** mở `/staff/monitoring/vps/events/realtime`.
+  Chọn một VPS, đọc 50 event gần nhất từ DB rồi nhận ALERT/RECOVERY của tất cả
+  metric qua một topic `/topic/vps-events/{vpsId}`. Giữ tối đa 200 event trong
+  màn; lọc metric/cấp độ trên bộ đệm này. Mỗi dòng có metric, object, ngưỡng,
+  giá trị và đơn vị. Socket chỉ gửi event mới sau commit, không gửi toàn bộ lịch sử.
+  Nối lại socket đồng bộ DB; đổi VPS/đổi màn hủy request và socket cũ.
+- Sidebar **Lịch sử event** mở `/staff/monitoring/vps/events/history`.
+  Chọn VPS, thời điểm bắt đầu/kết thúc, metric và cấp độ rồi bấm Tra cứu.
+  Form dùng giờ trên máy, HTTP chuyển sang UTC; kết quả hiển thị lại giờ trên máy.
+  Màn này không mở socket. Nút Xem thêm giữ nguyên bộ lọc đã tra cứu.
+- GET `/api/staff/vps/{id}/events` nhận tùy chọn `metric`, `severity`, `from`,
+  `to`, `beforeId`. `from`/`to` phải đi cùng nhau, dạng ISO Instant có múi giờ.
+  Không truyền khoảng thời gian thì lấy event mới nhất. Trả `{events,nextCursor}`,
+  50 dòng/trang; `nextCursor=null` khi hết. Sắp theo thời điểm thu thập giảm dần,
+  rồi ID giảm dần, tránh mất event có cùng thời điểm hoặc mẫu đến muộn.
+- Thêm index `idx_monitor_event_time(vps_id,collected_at,event_id)`. Hibernate
+  `ddl-auto=update` tạo index; nếu quản lý schema thủ công dùng
+  `docs/sql/monitor-event-time-index.sql`. Script chưa chạy trên DB thật.
+- `VpsEventController` → `MonitorEventService.search` → `MonitorEventRepository.search`.
+  `MonitorEventsChanged` → `MonitorEventSocketPublisher` đọc event đã commit,
+  thêm thông tin metric và phát socket. FE dùng `VpsEventViewer.vue`,
+  `EventTable.vue`, `monitorEventService.ts`, `vpsEventRealtime.ts`.
+
+## REST API hiệu năng (ADMIN/STAFF)
 
 - GET `/api/staff/vps-metrics`: danh mục từ DB.
 - GET `/api/staff/vps/{id}/metric-configs`: assignment và cấu hình hiệu lực.

@@ -24,7 +24,8 @@ public class PerformanceSocketAuthorization implements ChannelInterceptor {
             throw new AccessDeniedException("Staff authentication required");
         if (command == StompCommand.SUBSCRIBE) {
             String destination = headers.getDestination();
-            if (destination == null || !destination.matches("/topic/vps-performance/[1-9][0-9]*/[A-Z][A-Z0-9_]{0,63}"))
+            if (destination == null || !(destination.matches("/topic/vps-performance/[1-9][0-9]*/[A-Z][A-Z0-9_]{0,63}")
+                    || destination.matches("/topic/vps-events/[1-9][0-9]*")))
                 throw new AccessDeniedException("Subscription forbidden");
         } else if (command != null && command != StompCommand.CONNECT && command != StompCommand.STOMP && command != StompCommand.UNSUBSCRIBE)
             throw new AccessDeniedException("Client publishing forbidden");

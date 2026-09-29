@@ -118,7 +118,7 @@ class StaffApplicationTests {
     }
     @Test void socketReceivesPersistedSnapshotOnlyAfterCommit() {
         long id = assignment();
-        eventRule(id);
+        long vpsId = eventRule(id);
         org.mockito.Mockito.clearInvocations(messaging);
         new org.springframework.transaction.support.TransactionTemplate(transactions).executeWithoutResult(status -> {
             var job = store.claim(id);
@@ -131,6 +131,28 @@ class StaffApplicationTests {
         assertEquals("UP", frame.getValue().performance().state());
         assertEquals(1, frame.getValue().performance().events().size());
         assertEquals(25D, frame.getValue().performance().events().get(0).value());
+        var eventsFrame = org.mockito.ArgumentCaptor.forClass(com.nihongo.staff.service.monitor.realtime.MonitorEventSocketPublisher.Update.class);
+        org.mockito.Mockito.verify(messaging).convertAndSend(org.mockito.ArgumentMatchers.eq("/topic/vps-events/" + vpsId), eventsFrame.capture());
+        assertEquals(vpsId, eventsFrame.getValue().vpsId());
+        assertEquals("MEMORY_USAGE", eventsFrame.getValue().events().get(0).metricCode());
+        assertEquals("%", eventsFrame.getValue().events().get(0).unit());
+        assertEquals(frame.getValue().performance().events().get(0).eventId(), eventsFrame.getValue().events().get(0).eventId());
+    }
+    @Test void vpsEventSearchAcceptsIsoUtcDatesValidatesRangeAndRequiresStaff() throws Exception {
+        long vpsId = eventRule(assignment());
+        String path = "/api/staff/vps/" + vpsId + "/events";
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get(path).header("Authorization", bearer("STAFF"))
+                .param("from", "2026-09-29T01:00:00Z").param("to", "2026-09-29T02:00:00Z").param("severity", "FATAL").param("metric", "MEMORY_USAGE"))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isOk())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.events").isArray());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get(path).header("Authorization", bearer("ADMIN"))
+                .param("from", "2026-09-29T02:00:00Z").param("to", "2026-09-29T01:00:00Z"))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath("$.message").isNotEmpty());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get(path).header("Authorization", bearer("USER")))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isForbidden());
+        mvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get(path))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isUnauthorized());
     }
     @Test void rolledBackCollectionDoesNotSendSocketData() {
         long id = assignment();

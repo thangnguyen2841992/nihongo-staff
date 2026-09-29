@@ -35,4 +35,13 @@ class PerformanceSocketAuthorizationTest {
         assertThrows(AccessDeniedException.class, () -> send(StompCommand.CONNECT, null, auth("ROLE_STAFF", "refresh", Instant.now().plusSeconds(60))));
         assertThrows(AccessDeniedException.class, () -> send(StompCommand.CONNECT, null, null));
     }
+    @Test void eventTopicsRequireExactVpsAndStaffAccess() {
+        var staff = auth("ROLE_STAFF", "access", Instant.now().plusSeconds(60));
+        assertDoesNotThrow(() -> send(StompCommand.SUBSCRIBE, "/topic/vps-events/1", staff));
+        assertDoesNotThrow(() -> send(StompCommand.SUBSCRIBE, "/topic/vps-events/2", auth("ROLE_ADMIN", "access", Instant.now().plusSeconds(60))));
+        for (String topic : List.of("/topic/vps-events/*", "/topic/vps-events/0", "/topic/vps-events/1/CPU_USAGE", "/topic/vps-events/01"))
+            assertThrows(AccessDeniedException.class, () -> send(StompCommand.SUBSCRIBE, topic, staff));
+        assertThrows(AccessDeniedException.class, () -> send(StompCommand.SEND, "/topic/vps-events/1", staff));
+        assertThrows(AccessDeniedException.class, () -> send(StompCommand.SUBSCRIBE, "/topic/vps-events/1", auth("ROLE_USER", "access", Instant.now().plusSeconds(60))));
+    }
 }
