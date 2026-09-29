@@ -57,6 +57,11 @@ public class MonitorObject extends BaseEntity {
     )
     private String objectKey;
 
+    @Column(length = 255)
+    private String objectName;
+    @Column(columnDefinition = "TEXT")
+    private String labelsJson;
+
 
     @Enumerated(EnumType.STRING)
     @Column(

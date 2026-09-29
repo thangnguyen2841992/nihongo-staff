@@ -8,6 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface MonitorVpsRepository extends JpaRepository<MonitorVps, Long> {
+    @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @org.springframework.data.jpa.repository.Query("select v from MonitorVps v where v.vpsId = :id")
+    Optional<MonitorVps> lockById(Long id);
 
     Optional<MonitorVps> findByHostname(String hostname);
 

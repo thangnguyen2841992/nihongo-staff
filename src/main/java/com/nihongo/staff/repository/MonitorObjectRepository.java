@@ -31,6 +31,15 @@ public interface MonitorObjectRepository
             String objectKey
     );
 
+    // Current reads are required after the VPS mutex under MySQL REPEATABLE READ.
+    @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @org.springframework.data.jpa.repository.Query("select o from MonitorObject o where o.vps.vpsId = :vpsId and o.objectType = :type and o.objectKey = :key")
+    Optional<MonitorObject> findForUpdate(Long vpsId, String type, String key);
+
+    @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @org.springframework.data.jpa.repository.Query("select o from MonitorObject o where o.vps.vpsId = :vpsId and o.objectType = :type")
+    List<MonitorObject> findTypeForUpdate(Long vpsId, String type);
+
     boolean existsByVps_VpsIdAndObjectTypeAndObjectKey(
             Long vpsId,
             String objectType,

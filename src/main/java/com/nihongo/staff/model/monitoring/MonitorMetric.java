@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@org.hibernate.annotations.DynamicUpdate
 @Table(
         name = "monitor_metric",
         uniqueConstraints = {

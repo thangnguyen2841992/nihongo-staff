@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@org.hibernate.annotations.DynamicUpdate
 @Table(
         name = "monitor_vps_metric",
         uniqueConstraints = {
@@ -17,6 +18,7 @@ import lombok.Setter;
                 )
         },
         indexes = {
+                @Index(name = "idx_vps_metric_due", columnList = "enabled, next_collection_at, lease_until"),
                 @Index(
                         name = "idx_vps_metric_vps",
                         columnList = "vps_id"
@@ -77,6 +79,17 @@ public class MonitorVpsMetric extends BaseEntity {
      */
     @Column(name = "schedule_seconds")
     private Integer scheduleSeconds;
+
+    private java.time.LocalDateTime nextCollectionAt;
+    private java.time.LocalDateTime leaseUntil;
+    @Column(length = 36)
+    private String leaseToken;
+    private java.time.LocalDateTime lastAttemptAt;
+    private java.time.LocalDateTime lastSuccessAt;
+    @Column(length = 500)
+    private String lastError;
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    private int consecutiveFailures;
 
     /**
      * Thứ tự hiển thị trên UI.

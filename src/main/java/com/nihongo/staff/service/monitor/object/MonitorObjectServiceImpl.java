@@ -38,7 +38,8 @@ public class MonitorObjectServiceImpl implements MonitorObjectService {
 
         LocalDateTime now = LocalDateTime.now();
 
-        MonitorObject object = objectRepository.findByVps_VpsIdAndObjectTypeAndObjectKey(vpsId, objectType, objectKey).orElse(null);
+        vpsRepository.lockById(vpsId).orElseThrow(() -> new RuntimeException("VPS not found: " + vpsId));
+        MonitorObject object = objectRepository.findForUpdate(vpsId, objectType, objectKey).orElse(null);
 
         if (object == null) {
 

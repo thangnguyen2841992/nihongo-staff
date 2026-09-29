@@ -204,4 +204,10 @@ public class StaffRestController {
         return ResponseEntity.ok(savedVps);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
+    @GetMapping("/vps")
+    public List<com.nihongo.staff.model.monitoring.dto.MonitorVpsResponse> listVps() {
+        return monitorVpsService.listVps();
+    }
+
 }

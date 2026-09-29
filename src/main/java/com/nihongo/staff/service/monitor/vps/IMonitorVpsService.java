@@ -7,6 +7,7 @@ import com.nihongo.staff.model.monitoring.dto.NodeExporterDiscoveryResult;
 import com.nihongo.staff.model.monitoring.dto.RegisterMonitorVpsRequest;
 
 public interface IMonitorVpsService {
+    java.util.List<com.nihongo.staff.model.monitoring.dto.MonitorVpsResponse> listVps();
     NodeExporterDiscoveryResult discover(MonitorVpsRequest request);
     MonitorVps registerVps(RegisterMonitorVpsRequest request);
     MonitorPrometheusTarget registerTarget(Long vpsId);

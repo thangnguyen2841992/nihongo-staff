@@ -20,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.client.RestClient;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -42,6 +44,9 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
     private final MonitorVpsRepository vpsRepository;
 
     private final ObjectMapper objectMapper;
+    private final com.nihongo.staff.service.monitor.collection.NodeMetricSource nodeMetricSource;
+    private final com.nihongo.staff.service.monitor.collection.MetricCatalog metricCatalog;
+    private final com.nihongo.staff.service.monitor.collection.PerfCollectionStore perfStore;
 
     @Value("${monitoring.prometheus-host}")
     private String prometheusHost;
@@ -62,10 +67,24 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
     @Value("${PROMETHEUS_KNOWN_HOSTS:}") private String knownHosts;
 
     @Override
+    @Transactional(readOnly = true)
+    public List<com.nihongo.staff.model.monitoring.dto.MonitorVpsResponse> listVps() {
+        return vpsRepository.findAll(org.springframework.data.domain.Sort.by("vpsId").descending()).stream()
+                .map(vps -> com.nihongo.staff.model.monitoring.dto.MonitorVpsResponse.builder()
+                        .vpsId(vps.getVpsId()).hostname(vps.getHostname()).ipAddress(vps.getIpAddress())
+                        .agentPort(vps.getAgentPort()).osType(vps.getOsType()).osVersion(vps.getOsVersion())
+                        .architecture(vps.getArchitecture()).status(vps.getStatus()).lastSeenAt(vps.getLastSeenAt())
+                        .build()).toList();
+    }
+
+    @Override
     public NodeExporterDiscoveryResult discover(MonitorVpsRequest request) {
 
         String ipAddress = request.getIpAddress();
-        Integer port = 9100;
+        Integer port = request.getAgentPort() == null ? 9100 : request.getAgentPort();
+        if (port < 1 || port > 65535) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cổng phải nằm trong khoảng 1 đến 65535.");
+        }
 
         String url = "http://" + ipAddress + ":" + port + "/metrics";
 
@@ -105,6 +124,21 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
 
     @Transactional
     public MonitorVps registerVps(RegisterMonitorVpsRequest request) {
+        int port = request.getAgentPort() == null ? 9100 : request.getAgentPort();
+        if (port < 1 || port > 65535 || request.getIpAddress() == null || request.getIpAddress().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Vui lòng nhập địa chỉ VPS và cổng hợp lệ.");
+        }
+        request.setIpAddress(request.getIpAddress().trim()); request.setAgentPort(port);
+        if (request.getHostname() != null) request.setHostname(request.getHostname().trim());
+        if (request.getHostname() != null && vpsRepository.existsByHostname(request.getHostname())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "VPS với hostname này đã được đăng ký. Vui lòng kiểm tra danh sách VPS.");
+        }
+        if (vpsRepository.existsByIpAddressAndAgentPort(request.getIpAddress(), request.getAgentPort())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Địa chỉ IP và cổng này đã được đăng ký. Vui lòng kiểm tra danh sách VPS.");
+        }
+        List<com.nihongo.staff.service.monitor.collection.NodeMetricSource.Sample> samples;
+        try { samples = nodeMetricSource.fetch(request.getIpAddress(), port, 5000); }
+        catch (RuntimeException e) { throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Không thể khám phá object của VPS. Vui lòng kiểm tra Node Exporter rồi thử lại.", e); }
         MonitorVps vps = new MonitorVps();
 
         vps.setIpAddress(request.getIpAddress());
@@ -113,10 +147,13 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
         vps.setOsType(request.getOsType());
         vps.setOsVersion(request.getOsVersion());
         vps.setArchitecture(request.getArchitecture());
-        vps.setLastSeenAt(LocalDateTime.now());
+        vps.setLastSeenAt(LocalDateTime.now(java.time.ZoneOffset.UTC));
+        vps.setStatus(com.nihongo.staff.model.monitoring.VpsStatus.UP);
 
         // 1. Lưu VPS, lúc này có vpsId
         MonitorVps savedVps = vpsRepository.save(vps);
+        metricCatalog.bindDefaults(savedVps);
+        perfStore.discover(savedVps, samples);
 
         // 2. Tự tạo Prometheus target
         registerTarget(savedVps.getVpsId());
@@ -304,7 +341,12 @@ public class MonitorVpsServiceImplI implements IMonitorVpsService {
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
             @Override
             public void afterCommit() {
-                sync();
+                try {
+                    sync();
+                } catch (RuntimeException e) {
+                    throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE,
+                            "Thay đổi đã được lưu, nhưng chưa đồng bộ được với Prometheus. Vui lòng kiểm tra kết nối SSH; không đăng ký lại VPS.", e);
+                }
             }
         });
     }

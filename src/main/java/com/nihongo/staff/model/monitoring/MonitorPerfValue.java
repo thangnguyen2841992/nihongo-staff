@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Table(
         name = "monitor_perf_value",
         indexes = {
+                @Index(name = "idx_perf_collected_at", columnList = "collected_at"),
                 @Index(
                         name = "idx_perf_vps_metric_time",
                         columnList = "vps_id, metric_id, collected_at"
