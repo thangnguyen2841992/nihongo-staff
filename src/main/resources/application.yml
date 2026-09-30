@@ -2,7 +2,7 @@ server:
   port: 8085
 spring:
   config:
-    import: "optional:file:./.local/nihongo-staff.properties,optional:file:../.local/nihongo-staff.properties,optional:file:./.local/audit-secrets-staff.properties,optional:file:./staff/.local/audit-secrets-staff.properties"
+    import: "optional:file:./.local/shared.properties,optional:file:../.local/shared.properties"
   application:
     name: staff-service
   datasource:
@@ -39,7 +39,7 @@ monitoring:
   prometheus-port: 22
   prometheus-host: ${PROMETHEUS_HOST:160.22.107.232}
   prometheus-ssh-username: root
-  prometheus-ssh-password: ${MONITORING_PROMETHEUS_SSH_PASSWORD:thanKiemhp@1}
+  prometheus-ssh-password: ${MONITORING_PROMETHEUS_SSH_PASSWORD}
 
 jwt:
   secret: ${JWT_SECRET}
