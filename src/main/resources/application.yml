@@ -35,11 +35,8 @@ eureka:
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
 
 monitoring:
-  prometheus-targets-file: /etc/prometheus/targets/node_targets.json
-  prometheus-port: 22
-  prometheus-host: ${PROMETHEUS_HOST:160.22.107.232}
-  prometheus-ssh-username: root
-  prometheus-ssh-password: ${MONITORING_PROMETHEUS_SSH_PASSWORD}
+  prometheus-targets-file: ${PROMETHEUS_TARGETS_FILE:${user.home}/Downloads/prometheus-3.15.0.windows-amd64/targets/node_targets.json}
+  prometheus-windows-targets-file: ${PROMETHEUS_WINDOWS_TARGETS_FILE:${user.home}/Downloads/prometheus-3.15.0.windows-amd64/targets/windows_targets.json}
 
 jwt:
   secret: ${JWT_SECRET}

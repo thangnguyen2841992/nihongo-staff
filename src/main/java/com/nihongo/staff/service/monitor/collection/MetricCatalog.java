@@ -46,6 +46,7 @@ public class MetricCatalog {
     public void bindDefaults(MonitorVps vps) {
         for (MonitorMetric metric : metrics.findAll()) {
             if (!Boolean.TRUE.equals(metric.getDefaultMetric()) || assignments.existsByVps_VpsIdAndMetric_MetricId(vps.getVpsId(), metric.getMetricId())) continue;
+            if (ExporterType.forVps(vps) == ExporterType.WINDOWS_EXPORTER && "LOAD_1M".equals(metric.getMetricCode())) continue;
             MonitorVpsMetric link = new MonitorVpsMetric(); link.setVps(vps); link.setMetric(metric);
             link.setNextCollectionAt(LocalDateTime.now(ZoneOffset.UTC)); assignments.save(link);
         }

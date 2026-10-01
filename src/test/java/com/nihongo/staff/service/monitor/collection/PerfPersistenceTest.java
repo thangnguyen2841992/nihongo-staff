@@ -20,7 +20,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@DataJpaTest(showSql = false, properties = {"spring.datasource.url=jdbc:h2:mem:perf;MODE=MySQL;NON_KEYWORDS=VALUE;DB_CLOSE_DELAY=-1", "spring.datasource.driver-class-name=org.h2.Driver", "spring.datasource.username=sa", "spring.datasource.password=", "spring.jpa.hibernate.ddl-auto=create-drop", "spring.jpa.show-sql=false", "monitoring.prometheus-host=localhost", "monitoring.prometheus-port=22", "monitoring.prometheus-ssh-username=test", "monitoring.prometheus-ssh-password=test", "monitoring.prometheus-targets-file=/tmp/targets.json"})
+@DataJpaTest(showSql = false, properties = {"spring.datasource.url=jdbc:h2:mem:perf;MODE=MySQL;NON_KEYWORDS=VALUE;DB_CLOSE_DELAY=-1", "spring.datasource.driver-class-name=org.h2.Driver", "spring.datasource.username=sa", "spring.datasource.password=", "spring.jpa.hibernate.ddl-auto=create-drop", "spring.jpa.show-sql=false", "monitoring.prometheus-targets-file=target/prometheus-test/node_targets.json", "monitoring.prometheus-windows-targets-file=target/prometheus-test/windows_targets.json"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = PerfPersistenceTest.Config.class)
 class PerfPersistenceTest {
@@ -39,6 +39,7 @@ class PerfPersistenceTest {
     @Autowired MonitorPerfValueRepository values;
     @Autowired MonitorObjectRepository objects;
     @Autowired MonitorPrometheusTargetRepository targets;
+    @Autowired PrometheusTargetService prometheus;
     @Autowired MonitorVpsService registration;
     @Autowired NodeMetricSource source;
     MonitorVps vps;
@@ -56,6 +57,46 @@ class PerfPersistenceTest {
         assertEquals(7, assignments.findByVps_VpsIdOrderByMetric_MetricNameAsc(saved.getVpsId()).size());
         assertEquals(2, objects.findByVps_VpsId(saved.getVpsId()).size());
         assertEquals("127.0.0.2:9100", targets.findByVps_VpsIdAndJobName(saved.getVpsId(), "node").orElseThrow().getTarget());
+        prometheus.sync();
+        String targetFile = assertDoesNotThrow(() -> java.nio.file.Files.readString(
+                java.nio.file.Path.of("target/prometheus-test/node_targets.json")));
+        assertTrue(targetFile.contains("127.0.0.2:9100"));
+        assertTrue(targetFile.contains("new-host"));
+    }
+
+    @Test void windowsRegistrationUsesWindowsCollectorAndTargetFile() {
+        when(source.fetch("127.0.0.3", 9182, 5000)).thenReturn(NodeMetricSource.parse("""
+                windows_exporter_build_info{version="0.31.8",goarch="amd64"} 1
+                windows_os_hostname{hostname="LAPTOP"} 1
+                windows_os_info{product="Windows 10",version="10.0"} 1
+                windows_cpu_time_total{core="0,0",mode="idle"} 70
+                windows_cpu_time_total{core="0,0",mode="user"} 30
+                windows_logical_disk_size_bytes{volume="C:"} 100
+                windows_logical_disk_free_bytes{volume="C:"} 40
+                """));
+        var discovery = registration.discover(new com.nihongo.staff.model.monitoring.dto.MonitorVpsRequest("127.0.0.3", 9182));
+        assertEquals(ExporterType.WINDOWS_EXPORTER, discovery.getExporterType());
+        assertEquals("LAPTOP", discovery.getHostname());
+        var request = new RegisterMonitorVpsRequest();
+        request.setIpAddress("127.0.0.3");
+        request.setAgentPort(9182);
+        request.setHostname("stale-name");
+        var saved = registration.registerVps(request);
+        assertEquals(ExporterType.WINDOWS_EXPORTER, saved.getExporterType());
+        assertEquals("LAPTOP", saved.getHostname());
+        assertEquals("Windows", saved.getOsType());
+        assertEquals(6, assignments.findByVps_VpsIdOrderByMetric_MetricNameAsc(saved.getVpsId()).size());
+        assertEquals(2, objects.findByVps_VpsId(saved.getVpsId()).size());
+        assertEquals("WINDOWS_EXPORTER", store.claim(assignments.findByVps_VpsIdAndMetric_MetricCode(
+                saved.getVpsId(), "CPU_USAGE").orElseThrow().getVpsMetricId()).collector());
+        assertEquals("127.0.0.3:9182", targets.findByVps_VpsIdAndJobName(saved.getVpsId(), "windows_vps").orElseThrow().getTarget());
+        prometheus.sync();
+        String windowsTargets = assertDoesNotThrow(() -> java.nio.file.Files.readString(
+                java.nio.file.Path.of("target/prometheus-test/windows_targets.json")));
+        assertTrue(windowsTargets.contains("127.0.0.3:9182"));
+        String nodeTargets = assertDoesNotThrow(() -> java.nio.file.Files.readString(
+                java.nio.file.Path.of("target/prometheus-test/node_targets.json")));
+        assertFalse(nodeTargets.contains("127.0.0.3:9182"));
     }
 
     @Test void discoveryUsesTheSharedParserAndPreservesCustomPort() {

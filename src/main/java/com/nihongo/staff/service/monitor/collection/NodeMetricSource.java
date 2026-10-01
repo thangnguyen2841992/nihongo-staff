@@ -1,5 +1,6 @@
 package com.nihongo.staff.service.monitor.collection;
 
+import com.nihongo.staff.model.monitoring.ExporterType;
 import org.springframework.stereotype.Component;
 import java.net.URI;
 import java.net.http.*;
@@ -12,7 +13,7 @@ import java.util.regex.*;
 public class NodeMetricSource {
     public record Sample(String metric, Map<String, String> labels, double value) {}
     public record Reading(String type, String key, Map<String, String> labels, Double value, Double counter, Double auxiliary) {}
-    private static final Pattern LINE = Pattern.compile("^(node_[a-zA-Z0-9_]+)(?:\\{(.*)\\})?\\s+([^\\s]+)(?:\\s+.*)?$");
+    private static final Pattern LINE = Pattern.compile("^((?:node|windows)_[a-zA-Z0-9_]+)(?:\\{(.*)\\})?\\s+([^\\s]+)(?:\\s+.*)?$");
     private static final Pattern LABEL = Pattern.compile("([a-zA-Z_][a-zA-Z0-9_]*)=\"((?:\\\\.|[^\"\\\\])*)\"");
     private final HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).followRedirects(HttpClient.Redirect.NEVER).build();
 
@@ -24,15 +25,16 @@ public class NodeMetricSource {
             HttpResponse<String> response;
             try { response = future.get(timeoutMs, TimeUnit.MILLISECONDS); }
             finally { if (!future.isDone()) future.cancel(true); }
-            if (response.statusCode() != 200) throw new IllegalStateException("Node Exporter trả HTTP " + response.statusCode());
+            if (response.statusCode() != 200) throw new IllegalStateException("Exporter trả HTTP " + response.statusCode());
             List<Sample> samples = parse(response.body());
-            if (samples.stream().noneMatch(s -> s.metric().equals("node_exporter_build_info")))
-                throw new IllegalStateException("Không tìm thấy Node Exporter tại địa chỉ này.");
+            if (samples.stream().noneMatch(s -> s.metric().equals("node_exporter_build_info")
+                    || s.metric().equals("windows_exporter_build_info")))
+                throw new IllegalStateException("Không tìm thấy Node Exporter hoặc Windows Exporter tại địa chỉ này.");
             return samples;
         } catch (Exception e) {
             if (e instanceof InterruptedException) Thread.currentThread().interrupt();
             String reason = failureReason(e);
-            throw new IllegalStateException("Không thể đọc Node Exporter " + host + ":" + port + ": " + reason, e);
+            throw new IllegalStateException("Không thể đọc exporter " + host + ":" + port + ": " + reason, e);
         }
     }
     static String failureReason(Throwable error) {
@@ -74,7 +76,22 @@ public class NodeMetricSource {
         }
         return result.toString();
     }
+    public static ExporterType exporterType(List<Sample> samples) {
+        boolean windows = samples.stream().anyMatch(s -> s.metric().equals("windows_exporter_build_info"));
+        boolean node = samples.stream().anyMatch(s -> s.metric().equals("node_exporter_build_info"));
+        if (windows && node) throw new IllegalStateException("Endpoint trả về nhiều loại exporter.");
+        if (windows) return ExporterType.WINDOWS_EXPORTER;
+        if (node) return ExporterType.NODE_EXPORTER;
+        // Also classify fixtures and older exporters that omit build metadata.
+        if (samples.stream().anyMatch(s -> s.metric().startsWith("windows_"))) return ExporterType.WINDOWS_EXPORTER;
+        if (samples.stream().anyMatch(s -> s.metric().startsWith("node_"))) return ExporterType.NODE_EXPORTER;
+        throw new IllegalStateException("Không nhận diện được loại exporter.");
+    }
     public static List<Reading> readings(String code, List<Sample> samples) {
+        return readings(code, samples, ExporterType.NODE_EXPORTER);
+    }
+    public static List<Reading> readings(String code, List<Sample> samples, ExporterType exporter) {
+        if (exporter == ExporterType.WINDOWS_EXPORTER) return windowsReadings(code, samples);
         List<Reading> result = new ArrayList<>();
         if (code.equals("CPU_USAGE")) {
             Map<String, Double> totals = new TreeMap<>(), idle = new TreeMap<>();
@@ -104,6 +121,55 @@ public class NodeMetricSource {
             else if (code.equals("LOAD_1M")) value = scalar(samples, "node_load1");
             else if (code.equals("UPTIME")) { Double time = scalar(samples, "node_time_seconds"), boot = scalar(samples, "node_boot_time_seconds"); if (time != null && boot != null) value = Math.max(0, time - boot); }
             else throw new IllegalArgumentException("Metric không có collector: " + code);
+            if (value != null && Double.isFinite(value)) result.add(new Reading("VPS", "vps", Map.of(), value, null, null));
+        }
+        return result;
+    }
+    private static List<Reading> windowsReadings(String code, List<Sample> samples) {
+        List<Reading> result = new ArrayList<>();
+        if (code.equals("CPU_USAGE")) {
+            Map<String, Double> totals = new TreeMap<>(), idle = new TreeMap<>();
+            for (Sample sample : samples) if (sample.metric().equals("windows_cpu_time_total")) {
+                String core = sample.labels().get("core"), mode = sample.labels().get("mode");
+                if (core == null || core.equals("_Total")) continue;
+                if (mode != null && Set.of("idle", "user", "privileged").contains(mode)) totals.merge(core, sample.value(), Double::sum);
+                if ("idle".equals(mode)) idle.put(core, sample.value());
+            }
+            totals.forEach((core, total) -> {
+                if (idle.containsKey(core) && total > idle.get(core))
+                    result.add(new Reading("CPU", core, Map.of("cpu", core), null, total, idle.get(core)));
+            });
+        } else if (code.equals("DISK_USAGE")) {
+            Map<String, Double> free = new HashMap<>();
+            for (Sample sample : samples) if (sample.metric().equals("windows_logical_disk_free_bytes"))
+                free.put(sample.labels().get("volume"), sample.value());
+            for (Sample sample : samples) if (sample.metric().equals("windows_logical_disk_size_bytes")) {
+                String volume = sample.labels().get("volume");
+                if (volume == null || volume.equals("_Total") || sample.value() <= 0 || !free.containsKey(volume)) continue;
+                Map<String, String> labels = Map.of("device", volume, "mountpoint", volume);
+                result.add(new Reading("FILESYSTEM", key(labels), labels,
+                        Math.max(0, Math.min(100, 100 * (1 - free.get(volume) / sample.value()))), null, null));
+            }
+        } else if (code.equals("NETWORK_RECEIVE") || code.equals("NETWORK_TRANSMIT")) {
+            String metric = code.equals("NETWORK_RECEIVE") ? "windows_net_bytes_received_total" : "windows_net_bytes_sent_total";
+            for (Sample sample : samples) if (sample.metric().equals(metric)) {
+                String nic = sample.labels().get("nic");
+                if (nic != null && !nic.toLowerCase(Locale.ROOT).contains("loopback"))
+                    result.add(new Reading("NETWORK", nic, Map.of("device", nic), null, sample.value(), null));
+            }
+        } else {
+            Double value = null;
+            if (code.equals("MEMORY_USAGE")) {
+                Double total = scalar(samples, "windows_memory_physical_total_bytes");
+                Double available = scalar(samples, "windows_memory_available_bytes");
+                if (total != null && total > 0 && available != null)
+                    value = Math.max(0, Math.min(100, 100 * (1 - available / total)));
+            } else if (code.equals("UPTIME")) {
+                Double boot = scalar(samples, "windows_system_boot_time_timestamp");
+                if (boot != null) value = Math.max(0, java.time.Instant.now().getEpochSecond() - boot);
+            } else if (!code.equals("LOAD_1M")) {
+                throw new IllegalArgumentException("Metric không có collector: " + code);
+            }
             if (value != null && Double.isFinite(value)) result.add(new Reading("VPS", "vps", Map.of(), value, null, null));
         }
         return result;

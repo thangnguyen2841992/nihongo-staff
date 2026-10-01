@@ -34,6 +34,10 @@ public class MonitorVps extends BaseEntity {
     @Column(name = "agent_port")
     private Integer agentPort = 9100;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "exporter_type", length = 30)
+    private ExporterType exporterType;
+
     @Column(name = "os_type", length = 50)
     private String osType;
 

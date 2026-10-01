@@ -32,13 +32,13 @@ REST API mới (STAFF/ADMIN), prefix `/api/staff/vps/{vpsId}/metrics/{code}`:
 
 `MonitorEventController` xử lý HTTP và quyền; `MonitorEventService` quản lý rule, đánh giá và đọc event; ba entity/repository lưu cấu hình/trạng thái/history. Frontend dùng `monitorEventService.ts`, editor inline `MetricEventRules.vue` và `VpsEventHistory.vue`; màn `VpsEvents.vue` chọn VPS/metric, đọc DB và nhận event qua snapshot/socket. `StaffSidebar.vue` có menu riêng, route kế thừa quyền STAFF/ADMIN của layout staff. Màn `VpsPerformance.vue` chỉ có link chuyển sang màn event.
 
-Luồng: đăng ký VPS → đọc Node Exporter → lưu VPS, metric assignment và object trong một transaction → scheduler đọc lịch trong DB → đọc Node Exporter → lưu perf → API/UI đọc DB.
+Luồng: đăng ký máy chủ → đọc Node Exporter hoặc Windows Exporter và lưu loại exporter → lưu máy chủ, metric assignment và object trong một transaction → scheduler đọc lịch trong DB → đọc đúng exporter → lưu perf → API/UI đọc DB. Linux giữ 7 metric mặc định. Windows dùng CPU theo core, bộ nhớ, ổ đĩa theo volume, mạng theo NIC và uptime; không gán `LOAD_1M` vì Windows Exporter không cung cấp load average cùng nghĩa với Linux.
 
 ## Sử dụng
 
 - Restart staff-service sau khi cập nhật. Cấu hình hiện tại dùng `spring.jpa.hibernate.ddl-auto=update`; Hibernate bổ sung bảng/cột mới. Không chạy ứng dụng test với DB thật.
 - Khi service sẵn sàng, khởi tạo 7 metric mặc định nếu mã metric chưa tồn tại. Không ghi đè cấu hình metric đã có. Tự gán metric mặc định cho VPS cũ còn thiếu assignment; object của VPS cũ được khám phá trong lần thu thập thành công đầu tiên.
-- VPS đăng ký mới được kiểm tra Node Exporter trước khi lưu. VPS, assignment và object cùng transaction. Đồng bộ target Prometheus qua SSH vẫn là bước sau commit; lỗi SSH không ngăn collector DB đọc Node Exporter trực tiếp.
+- Máy chủ đăng ký mới được kiểm tra đúng exporter trước khi lưu. Máy chủ, assignment và object cùng transaction. Hai file target Prometheus local được đồng bộ sau commit; lỗi ghi file không ngăn collector DB đọc exporter trực tiếp.
 - Mở **Giám sát → Hiệu năng VPS**, hoặc **Xem danh sách VPS → Xem perf**. Chọn VPS, metric và object; mặc định xem 10 phút gần nhất, có thể đổi sang 1h/6h/24h/7 ngày.
 - Phần **Cấu hình thu thập** cho phép bật/tắt và đổi lịch mặc định của metric, timeout hoặc lịch riêng trên VPS. `scheduleSeconds=null` trên assignment nghĩa là kế thừa lịch metric.
 - CPU và network cần 2 lần thu thập; lần đầu chỉ lưu baseline. Không ghi 0 thay cho dữ liệu thiếu. Counter reset sẽ cập nhật baseline và bỏ mẫu chênh lệch không hợp lệ.
@@ -89,12 +89,12 @@ flowchart LR
 | Class/component | Trách nhiệm |
 | --- | --- |
 | `MonitorVpsController` | List, discovery, register; chỉ STAFF/ADMIN; trả DTO thay vì serialize entity JPA. |
-| `MonitorVpsService` / `IMonitorVpsService` | Kiểm tra trùng, đọc lại Node Exporter, lưu VPS + assignment + object + target trong transaction đăng ký. Metadata ưu tiên dữ liệu vừa đọc từ exporter. |
-| `PrometheusTargetService` | Lưu target `node`, đồng bộ file SD qua SSH sau commit. Không thực hiện thu thập perf. |
+| `MonitorVpsService` / `IMonitorVpsService` | Kiểm tra trùng, nhận diện Node/Windows Exporter, lưu máy chủ + assignment + object + target trong transaction đăng ký. Metadata ưu tiên dữ liệu vừa đọc từ exporter. |
+| `PrometheusTargetService` | Lưu target `node`, ghi file SD local khi service khởi động và sau commit. Không thực hiện thu thập perf. |
 | `MetricCatalog` | Tạo các metric mặc định còn thiếu, gán các metric mặc định cho VPS. |
 | `PerfCollectionScheduler` | Tìm assignment đến hạn, giới hạn 4 worker và chạy retention. |
 | `MetricCollector` | Claim một assignment, gọi HTTP ngoài transaction ghi, chuyển kết quả/lỗi sang store. |
-| `NodeMetricSource` | Bộ đọc/parser Node Exporter dùng chung cho discovery, registration và collection. |
+| `NodeMetricSource` | Bộ đọc/parser Node/Windows Exporter dùng chung cho discovery, registration và collection. |
 | `PerfCollectionStore` | Lease, token, khóa DB, object, baseline, rate, perf, backoff và event thay đổi. |
 | `VpsMetricConfigService` | Danh mục, cấu hình lịch mặc định/riêng, validate và phát event đổi cấu hình. Chỉ query assignment của metric liên quan khi đổi lịch mặc định. |
 | `VpsPerformanceService` | Chỉ đọc snapshot/history từ DB, tính state/stale và khoảng gián đoạn. |
@@ -108,7 +108,7 @@ flowchart LR
 
 Đã bỏ màn `ServerMonitoring.vue`, service trả dữ liệu mẫu `MonitoringService`, nhánh PromQL/cache trong `StaffServiceImpl`, các HTTP client/parser trùng và service metric/object không có caller. URL `/staff/monitoring` chuyển sang màn hiệu năng, giữ query của bookmark cũ. Sidebar chỉ còn các chức năng monitoring đang hoạt động.
 
-Các bảng và dữ liệu monitoring hiện có được giữ nguyên; refactor không cần migration hay xóa lịch sử. Cấu hình SSH vẫn được dùng để đồng bộ target Prometheus. Collector DB hoạt động độc lập với việc upload target.
+Các bảng và dữ liệu monitoring hiện có được giữ nguyên; refactor không cần migration hay xóa lịch sử. Staff-service ghi file target trong thư mục Prometheus local; collector DB vẫn hoạt động độc lập với việc đồng bộ file này.
 
 ## Scheduler
 
@@ -203,6 +203,6 @@ Chu kỳ hợp lệ 5–86400 giây; timeout 1000–30000 ms. Lấy history tố
 
 ## Kiểm thử
 
-Backend test dùng H2 riêng ở chế độ MySQL, fixture Node Exporter và mock HTTP/SSH; không truy cập hay thay đổi DB/VPS thật. Test xác minh đăng ký, gán metric, baseline, rate, reset counter, đọc history, giữ mẫu khi lỗi, khóa tác vụ và schedule. Native query cần được smoke-test thêm khi triển khai trên phiên bản MySQL của môi trường.
+Backend test dùng H2 riêng ở chế độ MySQL, fixture Node/Windows Exporter và mock HTTP; không truy cập hay thay đổi DB/VPS thật. Test xác minh đăng ký, ghi file target local, gán metric, baseline, rate, reset counter, đọc history, giữ mẫu khi lỗi, khóa tác vụ và schedule. Native query cần được smoke-test thêm khi triển khai trên phiên bản MySQL của môi trường.
 
-Parser đọc định dạng text Node Exporter, hỗ trợ CRLF và nhãn escaped theo [Prometheus text format](https://prometheus.io/docs/instrumenting/exposition_formats/).
+Parser đọc định dạng text của cả hai exporter, hỗ trợ CRLF và nhãn escaped theo [Prometheus text format](https://prometheus.io/docs/instrumenting/exposition_formats/).

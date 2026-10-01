@@ -1,5 +1,6 @@
 package com.nihongo.staff.model.monitoring.dto;
 
+import com.nihongo.staff.model.monitoring.ExporterType;
 import lombok.*;
 
 @AllArgsConstructor
@@ -22,6 +23,8 @@ public class NodeExporterDiscoveryResult {
     private String osVersion;
 
     private String architecture;
+
+    private ExporterType exporterType;
 
     private String nodeExporterVersion;
 

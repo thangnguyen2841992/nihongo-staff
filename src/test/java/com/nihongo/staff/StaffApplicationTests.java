@@ -15,7 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
         "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect",
         "spring.jpa.hibernate.ddl-auto=create-drop",
         "eureka.client.enabled=false", "spring.cloud.discovery.enabled=false",
-        "monitoring.collection.enabled=false", "MONITORING_PROMETHEUS_SSH_PASSWORD=",
+        "monitoring.collection.enabled=false",
+        "monitoring.prometheus-targets-file=target/prometheus-test/node_targets.json",
+        "monitoring.prometheus-windows-targets-file=target/prometheus-test/windows_targets.json",
         "jwt.secret=MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTA="
 })
 @org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -210,10 +212,11 @@ class StaffApplicationTests {
 	}
 
     @Test
-    void missingSshPasswordFailsOnlyWhenSyncIsRequested() {
-        RuntimeException error = assertThrows(RuntimeException.class, () -> vpsService.sync());
-        assertNotNull(error.getCause());
-        assertTrue(error.getCause().getMessage().contains("MONITORING_PROMETHEUS_SSH_PASSWORD"));
+    void localPrometheusTargetFileIsCreatedOnStartup() throws Exception {
+        java.nio.file.Path file = java.nio.file.Path.of("target/prometheus-test/node_targets.json");
+        assertTrue(java.nio.file.Files.exists(file));
+        assertTrue(java.nio.file.Files.readString(file).trim().startsWith("["));
+        assertDoesNotThrow(() -> vpsService.sync());
     }
 
 }

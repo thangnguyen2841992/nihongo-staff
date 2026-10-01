@@ -1,12 +1,14 @@
-# Copy to staff/.local/nihongo-staff.properties and fill in locally.
+# Copy needed keys to the workspace .local/shared.properties file and fill in locally.
 # Do not commit the populated file or paste its values into logs/chat.
 # Java .properties syntax: escape literal backslashes as \\.
 
 # MySQL password for the datasource user configured in application.yml.
 SPRING_DATASOURCE_PASSWORD=
 
-# SSH password for the configured Prometheus server/user.
-MONITORING_PROMETHEUS_SSH_PASSWORD=
+# Optional: location of the file_sd target file read by local Prometheus.
+# Use forward slashes in Java .properties files on Windows.
+PROMETHEUS_TARGETS_FILE=C:/Users/thang/Downloads/prometheus-3.15.0.windows-amd64/targets/node_targets.json
+PROMETHEUS_WINDOWS_TARGETS_FILE=C:/Users/thang/Downloads/prometheus-3.15.0.windows-amd64/targets/windows_targets.json
 
 # Use the same JWT signing secret as the services issuing/verifying your tokens.
 # Do not generate a different secret just for staff-service.

@@ -37,13 +37,17 @@ public class PerfCollectionStore {
         String token = UUID.randomUUID().toString();
         link.setLeaseToken(token); link.setLeaseUntil(now.plusSeconds(timeout / 1000 + 30));
         link.setLastAttemptAt(now); link.setNextCollectionAt(now.plusSeconds(interval(link)));
-        return new Job(id, token, link.getVps().getVpsId(), link.getVps().getIpAddress(), link.getVps().getAgentPort(), link.getMetric().getMetricCode(), link.getMetric().getCollectorType(), timeout);
+        String collector = link.getMetric().getCollectorType();
+        if ("NODE_EXPORTER".equals(collector) && ExporterType.forVps(link.getVps()) == ExporterType.WINDOWS_EXPORTER)
+            collector = ExporterType.WINDOWS_EXPORTER.name();
+        return new Job(id, token, link.getVps().getVpsId(), link.getVps().getIpAddress(), link.getVps().getAgentPort(), link.getMetric().getMetricCode(), collector, timeout);
     }
 
     @Transactional
     public void discover(MonitorVps vps, List<NodeMetricSource.Sample> samples) {
         for (MetricCatalog.Definition definition : MetricCatalog.DEFAULTS) {
-            List<NodeMetricSource.Reading> readings = NodeMetricSource.readings(definition.code(), samples);
+            if (ExporterType.forVps(vps) == ExporterType.WINDOWS_EXPORTER && "LOAD_1M".equals(definition.code())) continue;
+            List<NodeMetricSource.Reading> readings = NodeMetricSource.readings(definition.code(), samples, ExporterType.forVps(vps));
             for (NodeMetricSource.Reading reading : readings) if (!reading.type().equals("VPS")) upsert(vps, reading, now());
         }
     }
@@ -101,7 +105,7 @@ public class PerfCollectionStore {
             for (MonitorObject object : objects.findTypeForUpdate(job.vpsId(), link.getMetric().getObjectType()))
                 if (!seen.contains(object.getObjectKey())) object.setStatus(ObjectStatus.OFFLINE);
         }
-        link.setLastSuccessAt(observedAt); link.setLastError(readings.isEmpty() ? "Node Exporter chưa cung cấp metric này." : null);
+        link.setLastSuccessAt(observedAt); link.setLastError(readings.isEmpty() ? "Exporter chưa cung cấp metric này." : null);
         eventRules.evaluate(link, collected);
         link.setConsecutiveFailures(0);
         link.getVps().setStatus(VpsStatus.UP); link.getVps().setLastSeenAt(observedAt); release(link);

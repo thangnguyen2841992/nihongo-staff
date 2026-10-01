@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@DataJpaTest(showSql = false, properties = {"spring.datasource.url=jdbc:h2:mem:monitor_events;MODE=MySQL;NON_KEYWORDS=VALUE;DB_CLOSE_DELAY=-1", "spring.datasource.driver-class-name=org.h2.Driver", "spring.datasource.username=sa", "spring.datasource.password=", "spring.jpa.hibernate.ddl-auto=create-drop", "monitoring.prometheus-host=localhost", "monitoring.prometheus-port=22", "monitoring.prometheus-ssh-username=test", "monitoring.prometheus-ssh-password=test", "monitoring.prometheus-targets-file=/tmp/targets.json"})
+@DataJpaTest(showSql = false, properties = {"spring.datasource.url=jdbc:h2:mem:monitor_events;MODE=MySQL;NON_KEYWORDS=VALUE;DB_CLOSE_DELAY=-1", "spring.datasource.driver-class-name=org.h2.Driver", "spring.datasource.username=sa", "spring.datasource.password=", "spring.jpa.hibernate.ddl-auto=create-drop", "monitoring.prometheus-targets-file=target/prometheus-test/node_targets.json", "monitoring.prometheus-windows-targets-file=target/prometheus-test/windows_targets.json"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = PerfPersistenceTest.Config.class)
 class MonitorEventTest {

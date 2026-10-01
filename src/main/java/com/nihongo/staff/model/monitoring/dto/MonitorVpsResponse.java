@@ -2,6 +2,7 @@ package com.nihongo.staff.model.monitoring.dto;
 
 import com.nihongo.staff.model.monitoring.VpsStatus;
 import com.nihongo.staff.model.monitoring.MonitorVps;
+import com.nihongo.staff.model.monitoring.ExporterType;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -19,6 +20,8 @@ public class MonitorVpsResponse {
 
     private Integer agentPort;
 
+    private ExporterType exporterType;
+
     private String osType;
 
     private String osVersion;
@@ -31,7 +34,8 @@ public class MonitorVpsResponse {
 
     public static MonitorVpsResponse from(MonitorVps vps) {
         return MonitorVpsResponse.builder().vpsId(vps.getVpsId()).hostname(vps.getHostname())
-                .ipAddress(vps.getIpAddress()).agentPort(vps.getAgentPort()).osType(vps.getOsType())
+                .ipAddress(vps.getIpAddress()).agentPort(vps.getAgentPort())
+                .exporterType(ExporterType.forVps(vps)).osType(vps.getOsType())
                 .osVersion(vps.getOsVersion()).architecture(vps.getArchitecture())
                 .status(vps.getStatus()).lastSeenAt(vps.getLastSeenAt()).build();
     }

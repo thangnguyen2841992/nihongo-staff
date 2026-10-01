@@ -2,6 +2,7 @@ package com.nihongo.staff.service.monitor.vps;
 
 import com.nihongo.staff.model.monitoring.MonitorVps;
 import com.nihongo.staff.model.monitoring.VpsStatus;
+import com.nihongo.staff.model.monitoring.ExporterType;
 import com.nihongo.staff.model.monitoring.dto.*;
 import com.nihongo.staff.repository.MonitorVpsRepository;
 import com.nihongo.staff.service.monitor.collection.MetricCatalog;
@@ -42,12 +43,12 @@ public class MonitorVpsService implements IMonitorVpsService {
         int port = port(request.getAgentPort());
         try {
             var samples = source.fetch(host, port, 5000);
-            var uname = labels(samples, "node_uname_info");
+            var details = details(samples, null, null, null, null);
             return NodeExporterDiscoveryResult.builder().installed(true).ipAddress(host).port(port)
-                    .hostname(uname.get("nodename")).osType(uname.get("sysname"))
-                    .osVersion(uname.get("release")).architecture(uname.get("machine"))
-                    .nodeExporterVersion(labels(samples, "node_exporter_build_info").get("version"))
-                    .message("Đã tìm thấy Node Exporter.").build();
+                    .hostname(details.hostname()).osType(details.osType())
+                    .osVersion(details.osVersion()).architecture(details.architecture())
+                    .exporterType(details.type()).nodeExporterVersion(details.version())
+                    .message("Đã tìm thấy " + exporterName(details.type()) + ".").build();
         } catch (IllegalStateException error) {
             return NodeExporterDiscoveryResult.builder().installed(false).ipAddress(host).port(port)
                     .message(error.getMessage()).build();
@@ -60,29 +61,31 @@ public class MonitorVpsService implements IMonitorVpsService {
         int port = port(request.getAgentPort());
         if (servers.existsByIpAddressAndAgentPort(host, port)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    "Địa chỉ IP và cổng này đã được đăng ký. Vui lòng kiểm tra danh sách VPS.");
+                    "Địa chỉ IP và cổng này đã được đăng ký. Vui lòng kiểm tra danh sách máy chủ.");
         }
         List<NodeMetricSource.Sample> samples;
         try {
             samples = source.fetch(host, port, 5000);
         } catch (IllegalStateException error) {
             throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE,
-                    "Không thể khám phá object của VPS. Vui lòng kiểm tra Node Exporter rồi thử lại.", error);
+                    "Không thể khám phá object của máy chủ. Vui lòng kiểm tra exporter rồi thử lại.", error);
         }
         // Re-read exporter metadata on registration instead of trusting an old UI discovery.
-        var uname = labels(samples, "node_uname_info");
-        String hostname = metadata(uname, "nodename", request.getHostname());
+        var details = details(samples, request.getHostname(), request.getOsType(),
+                request.getOsVersion(), request.getArchitecture());
+        String hostname = details.hostname();
         if (hostname != null && servers.existsByHostname(hostname)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    "VPS với hostname này đã được đăng ký. Vui lòng kiểm tra danh sách VPS.");
+                    "Máy chủ với hostname này đã được đăng ký. Vui lòng kiểm tra danh sách máy chủ.");
         }
         var vps = new MonitorVps();
         vps.setIpAddress(host);
         vps.setAgentPort(port);
         vps.setHostname(hostname);
-        vps.setOsType(metadata(uname, "sysname", request.getOsType()));
-        vps.setOsVersion(metadata(uname, "release", request.getOsVersion()));
-        vps.setArchitecture(metadata(uname, "machine", request.getArchitecture()));
+        vps.setExporterType(details.type());
+        vps.setOsType(details.osType());
+        vps.setOsVersion(details.osVersion());
+        vps.setArchitecture(details.architecture());
         vps.setStatus(VpsStatus.UP);
         vps.setLastSeenAt(LocalDateTime.now(ZoneOffset.UTC));
         servers.save(vps);
@@ -90,6 +93,31 @@ public class MonitorVpsService implements IMonitorVpsService {
         store.discover(vps, samples);
         targets.registerTarget(vps.getVpsId());
         return vps;
+    }
+
+    private record Details(ExporterType type, String hostname, String osType,
+                           String osVersion, String architecture, String version) {}
+
+    private static Details details(List<NodeMetricSource.Sample> samples, String hostname,
+                                   String osType, String osVersion, String architecture) {
+        ExporterType type = NodeMetricSource.exporterType(samples);
+        if (type == ExporterType.WINDOWS_EXPORTER) {
+            Map<String, String> host = labels(samples, "windows_os_hostname");
+            Map<String, String> os = labels(samples, "windows_os_info");
+            Map<String, String> build = labels(samples, "windows_exporter_build_info");
+            return new Details(type, metadata(host, "hostname", hostname), "Windows",
+                    metadata(os, "product", metadata(os, "version", osVersion)),
+                    metadata(build, "goarch", architecture), build.get("version"));
+        }
+        Map<String, String> uname = labels(samples, "node_uname_info");
+        return new Details(type, metadata(uname, "nodename", hostname),
+                metadata(uname, "sysname", osType), metadata(uname, "release", osVersion),
+                metadata(uname, "machine", architecture),
+                labels(samples, "node_exporter_build_info").get("version"));
+    }
+
+    private static String exporterName(ExporterType type) {
+        return type == ExporterType.WINDOWS_EXPORTER ? "Windows Exporter" : "Node Exporter";
     }
 
     private static Map<String, String> labels(List<NodeMetricSource.Sample> samples, String metric) {
@@ -104,7 +132,7 @@ public class MonitorVpsService implements IMonitorVpsService {
 
     private static String address(String host) {
         if (host == null || host.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Vui lòng nhập địa chỉ VPS.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Vui lòng nhập địa chỉ máy chủ.");
         }
         return host.trim();
     }
