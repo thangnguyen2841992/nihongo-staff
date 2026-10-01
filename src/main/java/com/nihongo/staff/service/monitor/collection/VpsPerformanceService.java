@@ -89,7 +89,9 @@ public class VpsPerformanceService {
             try { labels = mapper.readValue(object.getLabelsJson(), new TypeReference<Map<String, String>>() {}); }
             catch (Exception ignored) { /* Older objects may not yet have label metadata. */ }
         }
-        return new Series(object == null ? "vps" : objectId.toString(), object == null ? "Toàn VPS" : Optional.ofNullable(object.getObjectName()).orElse(object.getObjectKey()), labels,
+        return new Series(object == null ? "vps" : objectId.toString(), object == null
+                ? (ExporterType.forVps(link.getVps()) == ExporterType.MYSQL_JDBC ? "Toàn MySQL" : "Toàn VPS")
+                : Optional.ofNullable(object.getObjectName()).orElse(object.getObjectKey()), labels,
                 object == null ? "ACTIVE" : object.getStatus().name(), stale || (object != null && object.getStatus() == ObjectStatus.OFFLINE), points);
     }
 }

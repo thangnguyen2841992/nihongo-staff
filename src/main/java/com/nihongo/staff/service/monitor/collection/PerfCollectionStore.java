@@ -98,14 +98,18 @@ public class PerfCollectionStore {
             if (value != null && Double.isFinite(value)) {
                 MonitorPerfValue perf = new MonitorPerfValue(); perf.setVpsId(job.vpsId()); perf.setMetricId(link.getMetric().getMetricId());
                 perf.setObjectId(object == null ? null : object.getObjectId()); perf.setCollectedAt(observedAt); perf.setValue(value); values.save(perf);
-                collected.add(new MonitorEventService.Sample(perf, object == null ? "Toàn VPS" : object.getObjectName()));
+                collected.add(new MonitorEventService.Sample(perf, object == null
+                        ? ExporterType.forVps(link.getVps()) == ExporterType.MYSQL_JDBC ? "Toàn MySQL" : "Toàn VPS"
+                        : object.getObjectName()));
             }
         }
         if (Boolean.TRUE.equals(link.getMetric().getObjectLevelYn())) {
             for (MonitorObject object : objects.findTypeForUpdate(job.vpsId(), link.getMetric().getObjectType()))
                 if (!seen.contains(object.getObjectKey())) object.setStatus(ObjectStatus.OFFLINE);
         }
-        link.setLastSuccessAt(observedAt); link.setLastError(readings.isEmpty() ? "Exporter chưa cung cấp metric này." : null);
+        link.setLastSuccessAt(observedAt); link.setLastError(readings.isEmpty()
+                ? ("MYSQL_JDBC".equals(job.collector()) ? "MySQL chưa cung cấp metric này." : "Exporter chưa cung cấp metric này.")
+                : null);
         eventRules.evaluate(link, collected);
         link.setConsecutiveFailures(0);
         link.getVps().setStatus(VpsStatus.UP); link.getVps().setLastSeenAt(observedAt); release(link);

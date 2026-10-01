@@ -22,6 +22,15 @@ public class MetricCatalog {
             new Definition("NETWORK_TRANSMIT", "Network transmit", "bytes/s", "NETWORK", 30),
             new Definition("LOAD_1M", "Load average (1 phút)", "", null, 60),
             new Definition("UPTIME", "Uptime", "seconds", null, 60));
+    public static final List<Definition> MYSQL_DEFAULTS = List.of(
+            new Definition("MYSQL_UPTIME", "MySQL uptime", "seconds", null, 60),
+            new Definition("MYSQL_THREADS_CONNECTED", "Kết nối đang mở", "connections", null, 30),
+            new Definition("MYSQL_THREADS_RUNNING", "Luồng đang hoạt động", "threads", null, 30),
+            new Definition("MYSQL_QUERIES_RATE", "Truy vấn mỗi giây", "queries/s", null, 30),
+            new Definition("MYSQL_SLOW_QUERIES_RATE", "Truy vấn chậm mỗi giây", "queries/s", null, 60),
+            new Definition("MYSQL_CONNECTIONS_RATE", "Kết nối mới mỗi giây", "connections/s", null, 30),
+            new Definition("MYSQL_BYTES_RECEIVED_RATE", "Dữ liệu nhận mỗi giây", "bytes/s", null, 30),
+            new Definition("MYSQL_BYTES_SENT_RATE", "Dữ liệu gửi mỗi giây", "bytes/s", null, 30));
     private final MonitorMetricRepository metrics;
     private final MonitorVpsMetricRepository assignments;
     private final MonitorVpsRepository servers;
@@ -39,6 +48,15 @@ public class MetricCatalog {
             metric.setValueType(definition.code().startsWith("NETWORK_") ? MetricValueType.RATE : MetricValueType.GAUGE);
             metric.setDefaultMetric(true); metrics.save(metric);
         }
+        for (Definition definition : MYSQL_DEFAULTS) {
+            if (metrics.existsByMetricCode(definition.code())) continue;
+            MonitorMetric metric = new MonitorMetric();
+            metric.setMetricCode(definition.code()); metric.setMetricName(definition.name()); metric.setUnit(definition.unit());
+            metric.setObjectLevelYn(false); metric.setScheduleSeconds(definition.interval());
+            metric.setTimeoutMs(5000); metric.setCollectorType("MYSQL_JDBC");
+            metric.setValueType(definition.code().endsWith("_RATE") ? MetricValueType.RATE : MetricValueType.GAUGE);
+            metric.setDefaultMetric(true); metrics.save(metric);
+        }
         for (MonitorVps vps : servers.findAll()) bindDefaults(vps);
     }
 
@@ -46,6 +64,8 @@ public class MetricCatalog {
     public void bindDefaults(MonitorVps vps) {
         for (MonitorMetric metric : metrics.findAll()) {
             if (!Boolean.TRUE.equals(metric.getDefaultMetric()) || assignments.existsByVps_VpsIdAndMetric_MetricId(vps.getVpsId(), metric.getMetricId())) continue;
+            boolean mysql = ExporterType.forVps(vps) == ExporterType.MYSQL_JDBC;
+            if (mysql != "MYSQL_JDBC".equals(metric.getCollectorType())) continue;
             if (ExporterType.forVps(vps) == ExporterType.WINDOWS_EXPORTER && "LOAD_1M".equals(metric.getMetricCode())) continue;
             MonitorVpsMetric link = new MonitorVpsMetric(); link.setVps(vps); link.setMetric(metric);
             link.setNextCollectionAt(LocalDateTime.now(ZoneOffset.UTC)); assignments.save(link);

@@ -1,5 +1,6 @@
 package com.nihongo.staff.service.monitor.collection;
 
+import com.nihongo.staff.service.monitor.mysql.MysqlMetricSource;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import org.mockito.ArgumentCaptor;
@@ -13,12 +14,12 @@ class CollectionRunnerTest {
         var job = new PerfCollectionStore.Job(1, "token", 2, "127.0.0.1", 9100, "CPU_USAGE", "NODE_EXPORTER", 5000);
         when(store.claim(1)).thenReturn(job);
         when(source.fetch("127.0.0.1", 9100, 5000)).thenThrow(new IllegalStateException("Node Exporter timeout"));
-        new MetricCollector(store, source).collectAssignment(1);
+        new MetricCollector(store, source, mock(MysqlMetricSource.class)).collectAssignment(1);
         verify(store).fail(job, "Node Exporter timeout"); verify(store, never()).complete(any(), any(), any());
     }
     @Test void aClaimedOrDisabledAssignmentDoesNotMakeAnotherHttpRequest() {
         var store = mock(PerfCollectionStore.class); var source = mock(NodeMetricSource.class);
-        new MetricCollector(store, source).collectAssignment(1);
+        new MetricCollector(store, source, mock(MysqlMetricSource.class)).collectAssignment(1);
         verifyNoInteractions(source);
     }
     @Test void windowsAssignmentUsesWindowsCpuCounters() {
@@ -31,11 +32,23 @@ class CollectionRunnerTest {
                 windows_cpu_time_total{core="0,0",mode="idle"} 70
                 windows_cpu_time_total{core="0,0",mode="user"} 30
                 """));
-        new MetricCollector(store, source).collectAssignment(2);
+        new MetricCollector(store, source, mock(MysqlMetricSource.class)).collectAssignment(2);
         @SuppressWarnings("unchecked")
         ArgumentCaptor<List<NodeMetricSource.Reading>> readings = ArgumentCaptor.forClass(List.class);
         verify(store).complete(eq(job), readings.capture(), any());
         assertEquals(100D, readings.getValue().get(0).counter());
         verify(store, never()).fail(any(), any());
+    }
+    @Test void mysqlAssignmentUsesMysqlSourceOnly() {
+        var store = mock(PerfCollectionStore.class);
+        var node = mock(NodeMetricSource.class);
+        var mysql = mock(MysqlMetricSource.class);
+        var job = new PerfCollectionStore.Job(3, "token", 4, "127.0.0.1", 3306, "MYSQL_THREADS_CONNECTED", "MYSQL_JDBC", 5000);
+        when(store.claim(3)).thenReturn(job);
+        var reading = new NodeMetricSource.Reading("VPS", "vps", java.util.Map.of(), 3D, null, null);
+        when(mysql.readings(4, "127.0.0.1", 3306, "MYSQL_THREADS_CONNECTED", 5000)).thenReturn(List.of(reading));
+        new MetricCollector(store, node, mysql).collectAssignment(3);
+        verify(store).complete(eq(job), eq(List.of(reading)), any());
+        verifyNoInteractions(node);
     }
 }

@@ -1,6 +1,7 @@
 package com.nihongo.staff.service.monitor.collection;
 
 import com.nihongo.staff.model.monitoring.ExporterType;
+import com.nihongo.staff.service.monitor.mysql.MysqlMetricSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,12 +10,18 @@ import org.springframework.stereotype.Service;
 public class MetricCollector {
     private final PerfCollectionStore store;
     private final NodeMetricSource source;
+    private final MysqlMetricSource mysql;
 
     public void collectAssignment(long id) {
         PerfCollectionStore.Job job = null;
         try {
             job = store.claim(id);
             if (job == null) return;
+            if ("MYSQL_JDBC".equals(job.collector())) {
+                store.complete(job, mysql.readings(job.vpsId(), job.host(), job.port(), job.code(), job.timeout()),
+                        PerfCollectionStore.now());
+                return;
+            }
             if (!"NODE_EXPORTER".equals(job.collector()) && !"WINDOWS_EXPORTER".equals(job.collector()))
                 throw new IllegalStateException("Collector chưa được hỗ trợ: " + job.collector());
             var samples = source.fetch(job.host(), job.port(), job.timeout());
@@ -28,7 +35,7 @@ public class MetricCollector {
                 try {
                     String message = e.getMessage() == null ? "Thu thập thất bại." : e.getMessage();
                     if (store.fail(job, message))
-                        log.warn("Metric collection failed: assignment={}, VPS={}:{}, metric={}, reason={}", id, job.host(), job.port(), job.code(), message);
+                        log.warn("Metric collection failed: assignment={}, target={}:{}, metric={}, reason={}", id, job.host(), job.port(), job.code(), message);
                 }
                 catch (Exception saveError) { log.warn("Cannot save collection failure for assignment {}: {}", id, saveError.getClass().getSimpleName()); }
             } else {

@@ -54,7 +54,7 @@ Danh mục nằm ở `monitor_metric`; assignment/lịch/trạng thái tác vụ
 
 Mọi mẫu perf và timestamp của scheduler dùng UTC. API trả epoch seconds; UI đổi sang múi giờ trình duyệt. Object không còn xuất hiện sau một lần đọc thành công được đánh dấu OFFLINE và giữ lịch sử. Lỗi mạng không đánh dấu toàn bộ object biến mất.
 
-Collector hiện hỗ trợ `collector_type=NODE_EXPORTER` và 7 mã trên. Metric khác trong DB cần bổ sung collector tương ứng; lỗi được lưu ở assignment và hiện trên UI. Không tự ghi đè các metric đã có để tránh thay đổi cấu hình ngoài ý muốn.
+Collector hỗ trợ `NODE_EXPORTER`, `WINDOWS_EXPORTER` và `MYSQL_JDBC`. Bộ metric MySQL riêng được mô tả trong [hướng dẫn giám sát MySQL](mysql-monitoring.md). Metric khác trong DB cần bổ sung collector tương ứng; lỗi được lưu ở assignment và hiện trên UI. Không tự ghi đè các metric đã có để tránh thay đổi cấu hình ngoài ý muốn.
 
 History được lọc theo VPS + metric + object tại DB. Khoảng tối đa 10 phút trả mẫu gốc; khoảng dài hơn lấy trung bình theo bucket để giới hạn khoảng 1000 điểm/chuỗi. Khoảng bị gián đoạn được thêm điểm null. Latest luôn trả thời gian mẫu và cờ stale; dữ liệu cũ không bị trình bày như mẫu mới.
 
