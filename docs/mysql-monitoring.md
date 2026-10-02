@@ -4,7 +4,9 @@ Mở **Monitoring Server → Đăng ký MySQL**. Nhập tên target, host, cổn
 
 Kết nối mặc định `VERIFY_IDENTITY`: xác thực chứng chỉ và hostname của server. Nếu server dùng CA riêng, cấu hình trust store cho JVM chạy staff-service. Có thể chọn `DISABLED` cho mạng nội bộ tin cậy; khi đó dữ liệu kết nối không được mã hóa. Xem [chế độ TLS của Connector/J](https://dev.mysql.com/doc/connectors/en/connector-j-connp-props-security.html).
 
-`staff-service` cần `MONITORING_ENCRYPTION_KEY`: khóa AES 32 byte mã hóa Base64. File local `.local/shared.properties` của workspace đã có khóa này và được ignore khỏi Git. Khi chạy trên máy khác với **cùng DB chứa target**, sao chép đúng khóa sang file local tương ứng; đổi hoặc mất khóa sẽ làm các mật khẩu target đã lưu không giải mã được. Không đưa khóa/mật khẩu lên Git. Mật khẩu target chỉ được nhận ở API đăng ký và lưu dưới dạng AES-GCM trong `monitor_mysql_target`.
+`staff-service` cần `MONITORING_ENCRYPTION_KEY`: khóa AES 32 byte mã hóa Base64. File local `.local/shared.properties` của workspace có khóa này và được ignore khỏi Git. Khi chạy trên máy khác với **cùng DB chứa target**, sao chép đúng khóa sang file local tương ứng; đổi hoặc mất khóa sẽ làm các mật khẩu target đã lưu không giải mã được. Không đưa khóa/mật khẩu lên Git. Mật khẩu target chỉ được nhận ở API đăng ký và lưu dưới dạng AES-GCM trong `monitor_mysql_target`.
+
+Nếu đã mất khóa cũ nhưng còn biết mật khẩu tài khoản giám sát, mở **Đăng ký MySQL → Database đã đăng ký → Cập nhật mật khẩu**. Nhập lại mật khẩu của tài khoản hiện tại; hệ thống kiểm tra kết nối trước rồi mã hóa lại bằng khóa đang dùng. Target, metric và lịch sử vẫn giữ nguyên. Nếu còn khóa cũ, khôi phục khóa đó trong `.local/shared.properties` rồi khởi động lại `staff-service` là cách nhanh nhất. Không thể khôi phục mật khẩu từ bản mã AES-GCM khi không còn khóa cũ và cũng không biết mật khẩu MySQL.
 
 Các metric mặc định được tạo riêng, không gán cho VPS Linux/Windows:
 

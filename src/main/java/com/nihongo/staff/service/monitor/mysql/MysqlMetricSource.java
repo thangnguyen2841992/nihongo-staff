@@ -42,6 +42,10 @@ public class MysqlMetricSource {
         return fetch(host, port, username, password, sslMode, timeoutMs, true);
     }
 
+    public void invalidate(long vpsId) {
+        cache.remove(vpsId);
+    }
+
     public List<NodeMetricSource.Reading> readings(long vpsId, String host, int port, String code, int timeoutMs) {
         CachedStatus current = cache.get(vpsId);
         if (fresh(current)) return map(code, current.values());

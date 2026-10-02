@@ -82,6 +82,35 @@ public class MysqlTargetService {
         });
     }
 
+    public void replacePassword(long vpsId, String password) {
+        if (password == null || password.isBlank() || password.length() > 256)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Mật khẩu MySQL không hợp lệ.");
+        MonitorVps server = servers.findById(vpsId)
+                .filter(vps -> ExporterType.forVps(vps) == ExporterType.MYSQL_JDBC)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy target MySQL."));
+        MonitorMysqlTarget target = targets.findById(vpsId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Thiếu cấu hình target MySQL."));
+        try {
+            source.probe(server.getIpAddress(), server.getAgentPort(), target.getUsername(),
+                    password, target.getSslMode(), 5000);
+        } catch (IllegalStateException error) {
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, error.getMessage());
+        }
+        String encrypted;
+        try {
+            encrypted = cipher.encrypt(password);
+        } catch (IllegalStateException error) {
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, error.getMessage());
+        }
+        new TransactionTemplate(transactionManager).executeWithoutResult(status -> {
+            MonitorMysqlTarget current = targets.findById(vpsId)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Thiếu cấu hình target MySQL."));
+            current.setPasswordEncrypted(encrypted);
+            targets.save(current);
+        });
+        source.invalidate(vpsId);
+    }
+
     private record Validated(String name, String host, int port, String username,
                              String password, String sslMode) {}
 

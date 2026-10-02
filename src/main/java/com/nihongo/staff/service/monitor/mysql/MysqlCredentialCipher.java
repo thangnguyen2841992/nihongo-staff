@@ -48,7 +48,7 @@ public class MysqlCredentialCipher {
         } catch (IllegalStateException e) {
             throw e;
         } catch (Exception e) {
-            throw new IllegalStateException("Không thể giải mã mật khẩu MySQL; kiểm tra MONITORING_ENCRYPTION_KEY.", e);
+            throw new IllegalStateException("Không thể giải mã mật khẩu MySQL; khôi phục MONITORING_ENCRYPTION_KEY cũ hoặc nhập lại mật khẩu tại Đăng ký MySQL.", e);
         }
     }
 
