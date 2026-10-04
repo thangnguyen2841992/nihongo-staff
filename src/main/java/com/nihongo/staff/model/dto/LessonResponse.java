@@ -19,4 +19,6 @@ public class LessonResponse {
     private String description;
 
     private String reading;
+    private String audioTrack;
+    private String audioUrl;
 }

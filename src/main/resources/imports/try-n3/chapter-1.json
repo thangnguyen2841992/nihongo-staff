@@ -1,0 +1,623 @@
+{
+  "sourceKey": "try-n3-vietnamese:386895b5:chapter-1:v1",
+  "bookName": "TRY! N3 - Tiếng Việt (Mẫu chương 1)",
+  "levelName": "N3",
+  "typeName": "Ngữ Pháp",
+  "description": "Chương 1: Lần đầu leo núi Phú Sĩ. Bản nhập thử từ PDF và audio gốc do người dùng cung cấp. Hai bài đọc, 10 mục ngữ pháp, các mục Plus và 18 câu ôn tập có chấm điểm, gồm ba câu nghe CD 04–06.",
+  "sourceFile": "Try_N3_TiengViet.pdf",
+  "sourcePdfPages": [
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29
+  ],
+  "notes": [
+    "Đây là bản thử chương 1, chưa phải toàn bộ sách.",
+    "Các ví dụ giữ tiếng Nhật gốc và có bản dịch tiếng Việt bổ sung để học; bản dịch không phải nguyên văn của sách. Chưa bổ sung furigana đầy đủ.",
+    "18 câu ôn tập của 問題1–4 được đối chiếu phụ lục. CD 06 chỉ có ba lựa chọn như sách. Bài Check trong từng phần giữ ở trang scan.",
+    "Đã gắn audio gốc CD 04–06 vào phần nghe chương 1. Trang sách in 16-30 tương ứng trang PDF 15-29."
+  ],
+  "lessons": [
+    {
+      "name": "01. Lần đầu leo núi Phú Sĩ (1)",
+      "description": "Bạn có thể nói lên những điều bạn đã trải nghiệm, suy nghĩ hay cảm nhận về kinh nghiệm lần đầu của mình, chẳng hạn như về chuyến đi du lịch của bạn.",
+      "reading": "<p>先週の日曜日、リンさんと富士山に登った。途中までバスで行って、そこから登り始めた。登る前に水を買った店で、酸素缶も持っていくように言われた。山の上は空気が少ないから、必要になるかもしれないそうだ。空気が薄いと病気になる人もいるということを思い出したが、富士山は小学生でも登れると聞いたので、大丈夫だろうと思った。だから買わなかった。</p><p>私は登山をしたことはないが、富士山はけわしい山じゃないし、それほど大変じゃなさそうだった。</p>",
+      "audioTrack": "02",
+      "sourcePrintedPages": [
+        16,
+        21
+      ],
+      "grammars": [
+        {
+          "number": 1,
+          "title": "01. 登り始めた",
+          "sourcePrintedPage": 16,
+          "description": "<p>Cấu trúc: V bỏ ます + 始める</p><p>～始める sử dụng khi bạn nói rõ về sự bắt đầu của một việc làm gì đó mà cần có thời gian.</p><h4>Plus: ～終わる</h4><p>&quot;～終わる&quot; sử dụng khi bạn nói rõ sự kết thúc của việc gì đó.</p><ul><li>その本、読み終わったら貸してもらえませんか。<br><em>Khi đọc xong cuốn sách đó, bạn có thể cho tôi mượn được không?</em></li><li>晩ご飯を食べ終わってから、みんなでゲームをした。<br><em>Sau khi ăn tối xong, mọi người cùng chơi trò chơi.</em></li></ul>",
+          "examples": [
+            {
+              "nihongo": "<p>日本語を習い始めたのは半年前です。</p>",
+              "vietnamese": "<p>Tôi bắt đầu học tiếng Nhật từ nửa năm trước.</p>"
+            },
+            {
+              "nihongo": "<p>桜の花が咲き始めましたね。</p>",
+              "vietnamese": "<p>Hoa anh đào bắt đầu nở rồi nhỉ.</p>"
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "02. 持っていくように言われた",
+          "sourcePrintedPage": 17,
+          "description": "<p>Cấu trúc: Vる / Vない + ように言う</p><p>～ように言う sử dụng khi bạn truyền đạt lại nội dung của một mệnh lệnh, nghiêm cấm, chỉ thị, hay tư vấn như là &quot;しろ・するな&quot;, &quot;してください&quot; hay &quot;したほうがいい&quot;.</p><p>Ngoài 言う, có thể dùng 注意する (nhắc nhở), 頼む (nhờ) hoặc 伝える (truyền đạt).</p>",
+          "examples": [
+            {
+              "nihongo": "<p>先生に宿題を忘れないように注意された。</p>",
+              "vietnamese": "<p>Tôi được thầy/cô nhắc không được quên bài tập về nhà.</p>"
+            },
+            {
+              "nihongo": "<p>医者にお酒を飲まないように言われました。</p>",
+              "vietnamese": "<p>Bác sĩ dặn tôi không được uống rượu.</p>"
+            },
+            {
+              "nihongo": "<p>お母さんからも勉強するように言ってください。</p>",
+              "vietnamese": "<p>Xin mẹ cũng nhắc con học bài giúp.</p>"
+            },
+            {
+              "nihongo": "<p>私は佐藤さんに、会議の前に資料をコピーしておくように頼みました。</p>",
+              "vietnamese": "<p>Tôi đã nhờ anh/chị Sato photocopy sẵn tài liệu trước cuộc họp.</p>"
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "03. 病気になる人もいるということ",
+          "sourcePrintedPage": 18,
+          "description": "<p>Cấu trúc: Thể thông thường + という + N</p><p>～という thường được sử dụng khi bạn mô tả nội dung như là &quot;台風が来るというニュース&quot;.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>彼が有名な音楽家だということはあまり知られていない。</p>",
+              "vietnamese": "<p>Ít người biết rằng anh ấy là một nhạc sĩ nổi tiếng.</p>"
+            },
+            {
+              "nihongo": "<p>最近は大学を卒業しても就職が難しいという話を聞きました。</p>",
+              "vietnamese": "<p>Gần đây tôi nghe nói rằng ngay cả khi tốt nghiệp đại học cũng khó tìm được việc làm.</p>"
+            },
+            {
+              "nihongo": "<p>背が伸びるということは、骨が伸びるということです。</p>",
+              "vietnamese": "<p>Việc cao lên có nghĩa là xương dài ra.</p>"
+            },
+            {
+              "nihongo": "<p>画面に「圏外」という文字が出たら、今電波が届かないところにいるということです。</p>",
+              "vietnamese": "<p>Nếu trên màn hình xuất hiện dòng chữ “Ngoài vùng phủ sóng” thì có nghĩa là bạn đang ở nơi không có sóng.</p>"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "title": "04. 大丈夫だろうと思った",
+          "sourcePrintedPage": 19,
+          "description": "<p>Cấu trúc: Thể thông thường + だろうと思う (bỏ だ ở N / tính từ な)</p><p>～だろう là thể thông thường của ～でしょう. Sử dụng khi bạn nói với người khác về điều mà bạn nghĩ có lẽ là như thế nhưng không chắc lắm.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>たぶんこの雨は１時間ぐらいでやむだろうと思います。</p>",
+              "vietnamese": "<p>Tôi nghĩ có lẽ khoảng một tiếng nữa cơn mưa này sẽ tạnh.</p>"
+            },
+            {
+              "nihongo": "<p>外国で一人暮らしをするのはきっとさびしいだろうと思う。</p>",
+              "vietnamese": "<p>Tôi nghĩ sống một mình ở nước ngoài chắc sẽ cô đơn.</p>"
+            },
+            {
+              "nihongo": "<p>沖縄は暑いだろうと思っていたが、毎日雨で寒くて泳げなかった。</p>",
+              "vietnamese": "<p>Tôi đã nghĩ Okinawa chắc là nóng, nhưng ngày nào cũng mưa và lạnh nên tôi không thể bơi được.</p>"
+            }
+          ]
+        },
+        {
+          "number": 5,
+          "title": "05. 大変じゃなさそうだった",
+          "sourcePrintedPage": 20,
+          "description": "<p>Cấu trúc: Tính từ い bỏ い + く / tính từ な + じゃ / N + じゃ + なさそうだ</p><p>～なさそうだ sử dụng khi bạn nhìn một cái gì đó rồi cảm nhận, dự đoán, nghĩ rằng không &quot;～&quot;.</p><p>Với động từ: V bỏ ます + そうもない / そうにない / そうにもない.\nこんな難しそうな本、１週間では読めそうもない。\nCuốn sách có vẻ khó thế này thì một tuần chắc không thể đọc hết được.\n忙しいので、しばらく残業は減りそうもない。\nVì đang bận nên có vẻ việc làm thêm giờ sẽ chưa giảm trong một thời gian nữa.\n安くなったら買おうと思ったが、これ以上安くなりそうにないから、あきらめた。\nTôi định mua khi giá giảm, nhưng vì có vẻ giá sẽ không giảm thêm nữa nên tôi đã từ bỏ.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>このカレーはあまり辛くなさそうですね。</p>",
+              "vietnamese": "<p>Món cà ri này có vẻ không cay lắm nhỉ.</p>"
+            },
+            {
+              "nihongo": "<p>この仕事はそんなに大変じゃなさそうだ。</p>",
+              "vietnamese": "<p>Công việc này có vẻ không vất vả đến thế.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：この電子辞書、安いけどあまりかわいくないかなあ。\nＢ：でも、性能は悪くなさそうよ。</p>",
+              "vietnamese": "<p>A: Chiếc kim từ điển này rẻ, nhưng trông có vẻ không được dễ thương lắm nhỉ.\nB: Nhưng tính năng có vẻ không tệ đâu.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：Ｌサイズがあるかどうか、あの人に聞いてみようか。\nＢ：でも、あの人はお店の人じゃなさそうよ。</p>",
+              "vietnamese": "<p>A: Thử hỏi người kia xem có cỡ L không nhé?\nB: Nhưng người đó có vẻ không phải nhân viên cửa hàng đâu.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": []
+    },
+    {
+      "name": "02. Lần đầu leo núi Phú Sĩ (2)",
+      "description": "Bạn có thể nói lên những điều bạn đã trải nghiệm, suy nghĩ hay cảm nhận về kinh nghiệm lần đầu của mình, chẳng hạn như về chuyến đi du lịch của bạn.",
+      "reading": "<p>でも、登ってみると、本当に大変だった。途中で立っているのもつらいほど足が重くなった。もうやめたいと思ったが、前を見ると、どんどん登っていくリンさんが見えた。リンさんががんばっているのに、あきらめるのはくやしいから、私も登り続けた。</p><p>あとで聞いたら、リンさんも途中でやめようと思ったけど、私が後ろから登ってくるのが見えたからがんばったと言っていた。大変だったが、一番上まで行けて本当によかった。だから、もしこれから富士山に登る人がいたら、上まで行きたいなら、友だちと一緒に行くことをおすすめしたい。もちろん酸素缶も持っていったほうがいい。</p><p>でも、もう一度行きたいかと聞かれたら、もう二度とあんな大変なことはしたくないと答えるだろう。富士山は遠くから見るほうがずっといいと思う。</p>",
+      "audioTrack": "03",
+      "sourcePrintedPages": [
+        22,
+        27
+      ],
+      "grammars": [
+        {
+          "number": 6,
+          "title": "06. 登ってみると",
+          "sourcePrintedPage": 22,
+          "description": "<p>Cấu trúc: Vる + と</p><p>～と、… sử dụng khi bạn nhận ra điều mà trước đó mình không nhận ra. Nó cũng thường được sử dụng để bày tỏ điều bạn không ngờ đến và cuối câu thường là thì quá khứ vì lúc đó bạn đã nhận ra.</p><h4>Plus: ～たら</h4><p>～たら cũng có cách dùng tương tự: diễn tả điều nhận ra sau khi thực hiện một hành động.</p><ul><li>屋上に上がったら、東京スカイツリーが見えた。<br><em>Khi lên sân thượng, tôi nhìn thấy tháp Tokyo Skytree.</em></li><li>発車のベルが鳴っているので飛び乗ったら、反対方向の電車だった。<br><em>Vì chuông báo tàu khởi hành đang reo nên tôi vội nhảy lên, rồi mới biết đó là tàu đi hướng ngược lại.</em></li><li>就職試験の結果の連絡だと思って急いで電話に出たら、間違い電話だった。<br><em>Tưởng là cuộc gọi báo kết quả thi tuyển việc làm nên tôi vội nghe máy, nhưng hóa ra là cuộc gọi nhầm số.</em></li></ul>",
+          "examples": [
+            {
+              "nihongo": "<p>気がつくと、外はすっかり暗くなっていた。</p>",
+              "vietnamese": "<p>Khi chợt nhận ra thì bên ngoài đã tối hẳn.</p>"
+            },
+            {
+              "nihongo": "<p>待ち合わせの場所に着くと、友だちはもう来ていた。</p>",
+              "vietnamese": "<p>Khi tôi đến điểm hẹn thì bạn tôi đã đến rồi.</p>"
+            },
+            {
+              "nihongo": "<p>昔住んでいたところに行ってみると、大きいビルが建っていた。</p>",
+              "vietnamese": "<p>Khi thử quay lại nơi tôi từng sống, tôi thấy một tòa nhà lớn đã được xây lên.</p>"
+            },
+            {
+              "nihongo": "<p>国から届いた荷物を開けると、大好きなお菓子が入っていた。</p>",
+              "vietnamese": "<p>Khi mở gói hàng gửi từ quê nhà đến, tôi thấy bên trong có món bánh kẹo mình rất thích.</p>"
+            }
+          ]
+        },
+        {
+          "number": 7,
+          "title": "07. 立っているのもつらいほど",
+          "sourcePrintedPage": 23,
+          "description": "<p>Cấu trúc: Vる / Vない / N + ほど (cũng có thể dùng V bỏ ます + たい)</p><p>～ほど… sử dụng khi bạn dùng một ví dụ &quot;～&quot; để nói lên trạng thái hoặc mức độ của &quot;…&quot; không bình thường như là &quot;歩けないほど強い風&quot;.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>富士山に登って、下りてきたときは、もう一歩も歩けないほど疲れていた。</p>",
+              "vietnamese": "<p>Sau khi leo núi Phú Sĩ rồi xuống núi, tôi mệt đến mức không thể bước thêm một bước nào nữa.</p>"
+            },
+            {
+              "nihongo": "<p>あの双子は両親も間違えるほどよく似ている。</p>",
+              "vietnamese": "<p>Cặp sinh đôi ấy giống nhau đến mức bố mẹ cũng nhầm lẫn.</p>"
+            },
+            {
+              "nihongo": "<p>年末は、猫の手も借りたいほど忙しくなる。</p>",
+              "vietnamese": "<p>Cuối năm sẽ bận đến mức chỉ mong có thêm bất kỳ ai giúp một tay.</p>"
+            },
+            {
+              "nihongo": "<p>ランチタイムのレストランは、目が回るほど忙しい。</p>",
+              "vietnamese": "<p>Vào giờ ăn trưa, nhà hàng bận đến mức quay cuồng.</p>"
+            },
+            {
+              "nihongo": "<p>今週中にやらなければならない仕事が山ほどある。</p>",
+              "vietnamese": "<p>Có cả núi công việc phải làm xong trong tuần này.</p>"
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "title": "08. どんどん登っていく",
+          "sourcePrintedPage": 24,
+          "description": "<p>Cấu trúc: Vて + いく</p><p>～ていく sử dụng khi nói về một sự di chuyển nào đó ngày càng dời ra xa như là &quot;歩いていく&quot;, hoặc để nói là sau khi làm một động tác nào đó bạn sẽ di chuyển đến chỗ khác như là &quot;買っていく&quot;. Cũng có thể sử dụng khi nói một sự việc gì đó sẽ tiếp diễn hướng tới tương lai.</p><h4>Plus: ～てくる</h4><p>Ngược lại, sử dụng ～てくる khi một cái gì đó tiến gần tới mình. Cũng sử dụng khi nói một hành động hoặc sự thay đổi nào đó đang tiếp diễn từ quá khứ đến hiện tại.</p><ul><li>申し込みのときに、身分証明書を持ってきてください。<br><em>Khi đăng ký, xin hãy mang theo giấy tờ tùy thân.</em></li><li>棚から本が落ちてきて、おどろいた。<br><em>Một cuốn sách rơi từ trên kệ xuống làm tôi giật mình.</em></li><li>日本人は昔から魚を食べてきました。<br><em>Người Nhật đã ăn cá từ xa xưa đến nay.</em></li><li>私はこの町で４年間、環境調査を続けてきました。<br><em>Tôi đã liên tục khảo sát môi trường ở thị trấn này suốt bốn năm qua.</em></li></ul>",
+          "examples": [
+            {
+              "nihongo": "<p>冬になると渡り鳥は南のほうへ飛んでいく。</p>",
+              "vietnamese": "<p>Khi mùa đông đến, chim di cư bay về phía nam.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：もしもし、今からそっちへ行くけど、何か買っていこうか。\nＢ：じゃ、ジュース買ってきて。</p>",
+              "vietnamese": "<p>A: A lô, giờ tôi sẽ sang chỗ bạn, có cần mua gì mang sang không?\nB: Vậy mua nước trái cây mang đến nhé.</p>"
+            },
+            {
+              "nihongo": "<p>これからも日本語の勉強を続けていくつもりです。</p>",
+              "vietnamese": "<p>Từ nay tôi cũng định tiếp tục học tiếng Nhật.</p>"
+            },
+            {
+              "nihongo": "<p>これから、日本の会社でも外国人社員は増えていくと思います。</p>",
+              "vietnamese": "<p>Tôi nghĩ từ nay số nhân viên người nước ngoài ở các công ty Nhật cũng sẽ tăng lên.</p>"
+            }
+          ]
+        },
+        {
+          "number": 9,
+          "title": "09. 登り続けた",
+          "sourcePrintedPage": 25,
+          "description": "<p>Cấu trúc: V bỏ ます + 続ける</p><p>～続ける sử dụng khi nhấn mạnh sự lặp đi lặp lại như một thói quen hoặc tiếp tục duy trì suốt một hành động nào đó.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>あの人は歯医者に１年以上通い続けているそうです。</p>",
+              "vietnamese": "<p>Nghe nói người ấy đã liên tục đi khám nha sĩ hơn một năm rồi.</p>"
+            },
+            {
+              "nihongo": "<p>犬のハチ公は、主人の帰りを待ち続けた。</p>",
+              "vietnamese": "<p>Chú chó Hachiko đã mãi chờ chủ trở về.</p>"
+            },
+            {
+              "nihongo": "<p>この薬は途中でやめないで、１週間飲み続けてください。</p>",
+              "vietnamese": "<p>Xin hãy uống thuốc này liên tục trong một tuần, đừng ngừng giữa chừng.</p>"
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "title": "10. 上まで行きたいなら",
+          "sourcePrintedPage": 26,
+          "description": "<p>Cấu trúc: Vる (の) / N + なら (cũng dùng ほしいなら / ～たいなら)</p><p>～なら giới hạn phạm vi như &quot;trường hợp ～ thì&quot; rồi đưa ra lời khuyên hoặc đề nghị.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>台湾へ旅行に行くなら、１１月がいちばんいいと思いますよ。</p>",
+              "vietnamese": "<p>Nếu đi du lịch Đài Loan thì tôi nghĩ tháng 11 là thời điểm tốt nhất.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：論文を書くので、いろいろ調べなければならないんです。\nＢ：論文の資料なら、国会図書館にたくさんありますよ。</p>",
+              "vietnamese": "<p>A: Vì viết luận văn nên tôi phải tìm hiểu nhiều thứ.\nB: Nếu cần tài liệu cho luận văn thì Thư viện Quốc hội có rất nhiều đấy.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：今度アメリカへ行くんです。\nＢ：それなら、大きいかばんを貸しましょうか。</p>",
+              "vietnamese": "<p>A: Sắp tới tôi sẽ đi Mỹ.\nB: Nếu vậy thì để tôi cho bạn mượn một chiếc va li lớn nhé?</p>"
+            },
+            {
+              "nihongo": "<p>Ｎ３に合格したいなら、この本をよく勉強したほうがいいよ。</p>",
+              "vietnamese": "<p>Nếu muốn đỗ N3 thì bạn nên học kỹ cuốn sách này.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-1:1",
+          "sourceQuestionNumber": 1,
+          "contentNihongo": "あの２人はさっきから１時間以上話し（　）いますね。",
+          "answerA": "始めて",
+          "answerB": "終わって",
+          "answerC": "続けて",
+          "answerD": "休んで",
+          "correctAnswer": "C",
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 1,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-1:2",
+          "sourceQuestionNumber": 2,
+          "contentNihongo": "先生に、休むときは必ず連絡する（　）言われた。",
+          "answerA": "ように",
+          "answerB": "らしい",
+          "answerC": "かと",
+          "answerD": "ほど",
+          "correctAnswer": "A",
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 2,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-1:3",
+          "sourceQuestionNumber": 3,
+          "contentNihongo": "残念だけど、忙しくて今日の飲み会、（　）んだ。",
+          "answerA": "行けるかと思う",
+          "answerB": "行けるだろうと思う",
+          "answerC": "行けそうな",
+          "answerD": "行けそうにない",
+          "correctAnswer": "D",
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 3,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-1:4",
+          "sourceQuestionNumber": 4,
+          "contentNihongo": "プレゼントの箱を（　）、婚約指輪が入っていた。",
+          "answerA": "開けて",
+          "answerB": "開けると",
+          "answerC": "開けても",
+          "answerD": "開ければ",
+          "correctAnswer": "B",
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 4,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-1:5",
+          "sourceQuestionNumber": 5,
+          "contentNihongo": "妹は冬でも毎日（　）、アイスクリームが好きです。",
+          "answerA": "食べると",
+          "answerB": "食べ始める",
+          "answerC": "食べるほど",
+          "answerD": "食べるなら",
+          "correctAnswer": "C",
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 5,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-1:6",
+          "sourceQuestionNumber": 6,
+          "contentNihongo": "最近ドラマの内容がわかるようになって（　）、うれしい。",
+          "answerA": "きて",
+          "answerB": "いって",
+          "answerC": "始めて",
+          "answerD": "続けて",
+          "correctAnswer": "A",
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 6,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-1:7",
+          "sourceQuestionNumber": 7,
+          "contentNihongo": "テストのときは答えを（　）、もう一度見て、チェックしてください。",
+          "answerA": "書き始めたら",
+          "answerB": "書き終わったら",
+          "answerC": "書いてきたら",
+          "answerD": "書いていったら",
+          "correctAnswer": "B",
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 7,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-1:8",
+          "sourceQuestionNumber": 8,
+          "contentNihongo": "今週末、海へ泳ぎに行く予定ですが、天気があまり（　）なので、心配しています。",
+          "answerA": "よくなさそう",
+          "answerB": "よさそう",
+          "answerC": "よくなかったそう",
+          "answerD": "よかったそう",
+          "correctAnswer": "A",
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 8,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 1,
+          "sourceQuestionNumber": 9,
+          "contentNihongo": "医者に ＿＿ ＿＿ ★ ＿＿ 言われた。",
+          "answerA": "たばこと",
+          "answerB": "やめる",
+          "answerC": "お酒を",
+          "answerD": "ように",
+          "correctAnswer": "B",
+          "verifiedOrder": [
+            1,
+            3,
+            2,
+            4
+          ],
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題2〈文の組み立て〉",
+          "sourceKey": "try-n3:chapter-1:review:question-2:1"
+        },
+        {
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 2,
+          "sourceQuestionNumber": 10,
+          "contentNihongo": "ほしいものを安く ＿＿ ＿＿ ★ ＿＿ インターネットで値段を調べたほうがいいよ。",
+          "answerA": "買う",
+          "answerB": "なら",
+          "answerC": "前に",
+          "answerD": "買いたい",
+          "correctAnswer": "A",
+          "verifiedOrder": [
+            4,
+            2,
+            1,
+            3
+          ],
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題2〈文の組み立て〉",
+          "sourceKey": "try-n3:chapter-1:review:question-2:2"
+        },
+        {
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 3,
+          "sourceQuestionNumber": 11,
+          "contentNihongo": "友だちが来月 ＿＿ ＿＿ ★ ＿＿ 聞いて、びっくりした。",
+          "answerA": "という",
+          "answerB": "辞める",
+          "answerC": "会社を",
+          "answerD": "話を",
+          "correctAnswer": "A",
+          "verifiedOrder": [
+            3,
+            2,
+            1,
+            4
+          ],
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題2〈文の組み立て〉",
+          "sourceKey": "try-n3:chapter-1:review:question-2:3"
+        },
+        {
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 1,
+          "sourceQuestionNumber": 12,
+          "contentNihongo": "［1］",
+          "answerA": "という",
+          "answerB": "らしい",
+          "answerC": "ように",
+          "answerD": "なら",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題3〈文章の文法〉",
+          "sourceKey": "try-n3:chapter-1:review:question-3:1"
+        },
+        {
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 2,
+          "sourceQuestionNumber": 13,
+          "contentNihongo": "［2］",
+          "answerA": "見れば",
+          "answerB": "見なければ",
+          "answerC": "見ると",
+          "answerD": "見ないと",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題3〈文章の文法〉",
+          "sourceKey": "try-n3:chapter-1:review:question-3:2"
+        },
+        {
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 3,
+          "sourceQuestionNumber": 14,
+          "contentNihongo": "［3］",
+          "answerA": "泳いでいった",
+          "answerB": "泳いでいかなかった",
+          "answerC": "泳いできた",
+          "answerD": "泳いでこなかった",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題3〈文章の文法〉",
+          "sourceKey": "try-n3:chapter-1:review:question-3:3"
+        },
+        {
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 4,
+          "sourceQuestionNumber": 15,
+          "contentNihongo": "［4］",
+          "answerA": "ように",
+          "answerB": "という",
+          "answerC": "のに",
+          "answerD": "なら",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題3〈文章の文法〉",
+          "sourceKey": "try-n3:chapter-1:review:question-3:4"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-4:1:1",
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 1,
+          "sourceQuestionNumber": 16,
+          "audioTrack": "04",
+          "contentNihongo": "CD 04",
+          "answerA": "春",
+          "answerB": "夏",
+          "answerC": "秋",
+          "answerD": "冬",
+          "correctAnswer": "A",
+          "answerSourcePdfPage": 201,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題4〈聴解〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-4:1:2",
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 2,
+          "sourceQuestionNumber": 17,
+          "audioTrack": "05",
+          "contentNihongo": "CD 05",
+          "answerA": "会議室の予約を取り直す",
+          "answerB": "ほかのメンバーに連絡する",
+          "answerC": "会議室の予約を確認する",
+          "answerD": "部長に連絡する",
+          "correctAnswer": "D",
+          "answerSourcePdfPage": 202,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題4〈聴解〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-1:review:question-4:2:1",
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 1,
+          "sourceQuestionNumber": 18,
+          "audioTrack": "06",
+          "contentNihongo": "CD 06",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": "",
+          "correctAnswer": "A",
+          "answerSourcePdfPage": 202,
+          "exerciseTypeName": "TRY! N3 · Chương 1 · 問題4〈聴解〉"
+        }
+      ]
+    }
+  ],
+  "exerciseTypeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉",
+  "reviewLayout": {
+    "chapter": 1,
+    "title": "まとめの問題",
+    "vietnameseTitle": "Bài ôn tập",
+    "answerSource": "Phụ lục trang 12 (trang PDF 201)",
+    "sections": [
+      {
+        "number": 1,
+        "typeName": "TRY! N3 · Chương 1 · 問題1〈文法形式の判断〉",
+        "title": "文法形式の判断",
+        "vietnameseTitle": "Chọn hình thức ngữ pháp",
+        "instruction": "次の文の（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。",
+        "sourcePrintedPages": "28",
+        "questionCount": 8
+      },
+      {
+        "number": 2,
+        "typeName": "TRY! N3 · Chương 1 · 問題2〈文の組み立て〉",
+        "title": "文の組み立て",
+        "vietnameseTitle": "Sắp xếp câu",
+        "instruction": "次の文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。",
+        "sourcePrintedPages": "29",
+        "questionCount": 3
+      },
+      {
+        "number": 3,
+        "typeName": "TRY! N3 · Chương 1 · 問題3〈文章の文法〉",
+        "title": "文章の文法",
+        "vietnameseTitle": "Ngữ pháp trong đoạn văn",
+        "instruction": "次の文章を読んで、文章全体の内容を考えて、［1］～［4］の中に入る最もよいものを、1・2・3・4から一つ選びなさい。",
+        "sourcePrintedPages": "29–30",
+        "questionCount": 4,
+        "reading": "水族館でシロイルカの赤ちゃんが生まれたと聞いたので、友だちと見に行った。シロイルカは色が白いからシロイルカ ［1］ 名前がついている。でも、赤ちゃんを ［2］ 白くなかったのでびっくりした。赤ちゃんのときはグレーで、だんだん白くなるのだと、係の人が説明してくれた。とてもかわいかった。私たちのほうへ ［3］ ので、うれしかった。写真を撮ろうとしたら、フラッシュを使わない ［4］ 言われた。赤ちゃんがおどろいてしまうからだそうだ。いろいろな動物を大切に育てている係の人はとても大変だろうと思う。"
+      },
+      {
+        "number": 4,
+        "typeName": "TRY! N3 · Chương 1 · 問題4〈聴解〉",
+        "title": "聴解",
+        "vietnameseTitle": "Nghe hiểu",
+        "instruction": "1. この問題では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。",
+        "sourcePrintedPages": "30",
+        "questionCount": 3
+      }
+    ],
+    "listening": {
+      "number": 4,
+      "title": "聴解",
+      "vietnameseTitle": "Nghe hiểu",
+      "sourcePrintedPages": "30",
+      "instruction1": "この問題では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。",
+      "questions": [
+        {
+          "number": 1,
+          "track": "04",
+          "choices": [
+            "春",
+            "夏",
+            "秋",
+            "冬"
+          ]
+        },
+        {
+          "number": 2,
+          "track": "05",
+          "choices": [
+            "会議室の予約を取り直す",
+            "ほかのメンバーに連絡する",
+            "会議室の予約を確認する",
+            "部長に連絡する"
+          ]
+        }
+      ],
+      "instruction2": "この問題では、問題用紙に何も印刷されていません。まず文を聞いてください。それから、その返事を聞いて、1から3の中から、最もよいものを一つえらんでください。",
+      "track": "06"
+    }
+  }
+}

@@ -26,5 +26,7 @@ public class ExerciseKeywordDTO {
 
     private Long exerciseTypeId;
     private String exerciseTypeName;
+    private String audioUrl;
+    private com.nihongo.staff.service.BookAiSolutionService.Solution aiSolution;
 }
 

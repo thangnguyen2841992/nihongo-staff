@@ -30,8 +30,9 @@ public class PerfCollectionScheduler {
 
     @Scheduled(fixedDelayString = "${monitoring.collection.tick-ms:1000}")
     public void tick() {
-        if (!enabled || !ready) return;
-        for (Long id : assignments.findDue(PerfCollectionStore.now(), PageRequest.of(0, 4))) {
+        int available = capacity.availablePermits();
+        if (!enabled || !ready || available == 0) return;
+        for (Long id : assignments.findDue(PerfCollectionStore.now(), PageRequest.of(0, available))) {
             if (!capacity.tryAcquire()) break;
             try {
                 workers.execute(() -> {

@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ILessonsRepository extends JpaRepository<Lessons, Long> {
-    List<Lessons> findByBook_BookId(Long bookId);
+    @org.springframework.data.jpa.repository.Query("select l from Lessons l where l.book.bookId = :bookId order by l.lessonId")
+    List<Lessons> findByBook_BookId(@org.springframework.data.repository.query.Param("bookId") Long bookId);
 }

@@ -9,6 +9,7 @@ import java.util.*;
 @Service @RequiredArgsConstructor
 public class ExerciseGradingService {
  private final IExerciseKeywordRepository exercises;
+ private final BookAiSolutionService aiSolutions;
  @Transactional(readOnly=true)
  public Grade grade(Long lessonId,Map<Long,String> answers) {
   var rows=exercises.findByLessons_LessonId(lessonId);
@@ -24,8 +25,10 @@ public class ExerciseGradingService {
    if(!correctAnswers.containsKey(entry.getKey()) || entry.getValue()==null || !entry.getValue().matches("[ABCD]")) throw invalid();
    if(entry.getValue().equals(correctAnswers.get(entry.getKey()))) correct++;
   }
-  return new Grade(rows.size(),correct,rows.size()-correct,correctAnswers);
+  var solutions=new HashMap<Long,BookAiSolutionService.Solution>();
+  for(var row:rows){var solution=aiSolutions.find(row);if(solution!=null)solutions.put(row.getExerciseKeywordId(),solution);}
+  return new Grade(rows.size(),correct,rows.size()-correct,correctAnswers,solutions);
  }
  private ResponseStatusException invalid() { return new ResponseStatusException(HttpStatus.BAD_REQUEST,"Câu trả lời không hợp lệ hoặc bài tập trống"); }
- public record Grade(int totalQuestion,int correctCount,int wrongCount,Map<Long,String> correctAnswers) {}
+ public record Grade(int totalQuestion,int correctCount,int wrongCount,Map<Long,String> correctAnswers,Map<Long,BookAiSolutionService.Solution> aiSolutions) {}
 }

@@ -1,0 +1,578 @@
+{
+  "sourceKey": "try-n3-vietnamese:386895b5:chapter-9:v1",
+  "bookName": "TRY! N3 - Tiếng Việt",
+  "levelName": "N3",
+  "typeName": "Ngữ Pháp",
+  "description": "Chương 9: Ngắm hoa anh đào. Đối chiếu PDF 126–138; đáp án PDF 207–208.",
+  "sourceFile": "Try_N3_TiengViet.pdf",
+  "sourcePdfPages": [
+    126,
+    127,
+    128,
+    129,
+    130,
+    131,
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138
+  ],
+  "exerciseTypeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+  "reviewLayout": {
+    "sections": [
+      {
+        "number": 1,
+        "typeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+        "title": "文法形式の判断",
+        "vietnameseTitle": "Chọn dạng ngữ pháp",
+        "instruction": "次の文の（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          137
+        ],
+        "sourcePrintedPages": "137",
+        "questionCount": 7,
+        "choiceColumns": 2
+      },
+      {
+        "number": 2,
+        "typeName": "TRY! N3 · Chương 9 · 問題2〈文の組み立て〉",
+        "title": "文の組み立て",
+        "vietnameseTitle": "Sắp xếp câu",
+        "instruction": "次の文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          138
+        ],
+        "sourcePrintedPages": "138",
+        "questionCount": 3
+      },
+      {
+        "number": 3,
+        "typeName": "TRY! N3 · Chương 9 · 問題3〈文章の文法〉",
+        "title": "文章の文法",
+        "vietnameseTitle": "Ngữ pháp trong đoạn văn",
+        "instruction": "次の文章を読んで、文章全体の内容を考えて、［1］～［6］の中に入る最もよいものを、1・2・3・4から一つ選びなさい。",
+        "printedPages": [
+          138,
+          139
+        ],
+        "sourcePrintedPages": "138–139",
+        "questionCount": 6,
+        "reading": "子どものころ、父はぼくを子ども［1］映画や遊園地に連れていってくれたことはない。［2］、野球場へはよく連れていってくれた。ルールも知らなかったぼく［3］、野球の楽しみといえば、売店で買ってもらう食べ物だった。\n父は試合中に、自分のビールを買うときには、ぼくにも必ず何か買ってくれた。たまに、［4］味方チームの攻撃が始まり、応援しなければならなくなることもあった。ほかのものは［5］置いておけるが、アイスクリームのときは困った。あわてて食べるから、頭がキーンと痛くなった。\n今、ビールを片手に大声［6］応援するぼくの横で、今年５歳になった息子がジュースを飲んでいる。アイスクリームは買わないから心配するな。でもお前も子どものころのぼくに似てアイスクリームが大好きなんだよな。"
+      },
+      {
+        "number": 4,
+        "typeName": "TRY! N3 · Chương 9 · 問題4〈聴解〉",
+        "title": "聴解",
+        "vietnameseTitle": "Nghe hiểu",
+        "instruction": "各問題の指示に従って話を聞き、最もよい答えを一つえらんでください。",
+        "printedPages": [
+          139
+        ],
+        "sourcePrintedPages": "139",
+        "questionCount": 3
+      }
+    ]
+  },
+  "notes": [
+    "Bản dịch ví dụ được bổ sung để học, không phải nguyên văn dịch của sách.",
+    "Bài Check và các bài luyện trong từng mục được giữ ở trang scan; các câu ôn tập cuối chương được chấm tương tác."
+  ],
+  "lessons": [
+    {
+      "name": "16. Ngắm hoa anh đào (1)",
+      "description": "Trình bày suy nghĩ và cảm nhận cá nhân về một chủ đề gần gũi.",
+      "reading": "<p>毎年、桜の季節になると、いつ、だれと、どこにお花見に行くのかということは、私にとって大問題だ。</p><p>花が咲いてからでなければ意味がないから、「いつ」はもちろん最優先だ。私はまるで雪が降っているかのように落ちてくる花びらを見るのがいちばん好きだが、五分咲き、満開、散り始め、それぞれの良さがある。どちらにしても花が残っているうちに行かないと意味がない。見ごろの時期はとても短いので、いろいろと大変だ。</p><p>「だれと」と「どこに」はセットになる。「桜と言えば○○」という名所はもちろん素晴らしく、花見客向けにお茶会などの催しもあって楽しい。人によってその楽しみ方はそれぞれだが、私は数人の友人とワイワイ一緒に行くことが多い。</p>",
+      "audioTrack": "48",
+      "sourcePrintedPages": [
+        127,
+        132
+      ],
+      "grammars": [
+        {
+          "number": 79,
+          "title": "79. 花が咲いてからでなければ",
+          "sourcePrintedPage": 127,
+          "description": "<p>Cấu trúc: Vて + からでなければ／からでないと + mệnh đề phủ định</p><p>Phải làm A trước mới làm được B; vế sau thường dùng 難しい・できない và các cách phủ định.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>この会社では、３か月の研修を受けてからでなければ正社員になれません。</p>",
+              "vietnamese": "<p>Ở công ty này, phải qua ba tháng đào tạo mới trở thành nhân viên chính thức.</p>"
+            },
+            {
+              "nihongo": "<p>大切なことは、両親に相談してからでなければ決められない。</p>",
+              "vietnamese": "<p>Những việc quan trọng, tôi phải bàn với bố mẹ trước mới quyết định được.</p>"
+            },
+            {
+              "nihongo": "<p>初めてコンタクトレンズを買うときは、眼科の検査を受けてからでないと買えません。</p>",
+              "vietnamese": "<p>Lần đầu mua kính áp tròng phải khám mắt trước mới mua được.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：これ食べてもいい？Ｂ：まだだめ。もう少し焼いてからでないと…。</p>",
+              "vietnamese": "<p>A: Ăn cái này được chưa? B: Chưa. Phải nướng thêm một chút nữa…</p>"
+            }
+          ]
+        },
+        {
+          "number": 80,
+          "title": "80. 雪が降っているかのように",
+          "sourcePrintedPage": 128,
+          "description": "<p>Cấu trúc: V thể thông thường + かのようだ／かのように／かのような + N; Aな／N + であるかのように</p><p>Cảm thấy như thể một điều đang xảy ra, dù thực tế không phải vậy.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>リンさんの部屋はまるで泥棒が入ったかのように散らかっている。</p>",
+              "vietnamese": "<p>Phòng của Lin bừa bộn như thể vừa bị trộm đột nhập.</p>"
+            },
+            {
+              "nihongo": "<p>４月なのにまるで冬に戻ったかのような寒い日が続いている。</p>",
+              "vietnamese": "<p>Dù đã tháng Tư, những ngày lạnh như thể quay lại mùa đông vẫn tiếp diễn.</p>"
+            },
+            {
+              "nihongo": "<p>このあたりは紅葉の名所で、秋になると山全体が燃えているかのように赤く染まります。</p>",
+              "vietnamese": "<p>Vùng này nổi tiếng với lá đỏ; mùa thu cả ngọn núi đỏ rực như đang cháy.</p>"
+            },
+            {
+              "nihongo": "<p>犯人は警察に質問されて、事件のことを何も知らないかのように答えていた。</p>",
+              "vietnamese": "<p>Khi bị cảnh sát hỏi, thủ phạm trả lời như thể không biết gì về vụ việc.</p>"
+            },
+            {
+              "nihongo": "<p>山本さんは子犬をまるで自分の子どもであるかのようにかわいがっている。</p>",
+              "vietnamese": "<p>Yamamoto cưng chú chó con như thể con của mình.</p>"
+            }
+          ]
+        },
+        {
+          "number": 81,
+          "title": "81. 花が残っているうちに",
+          "sourcePrintedPage": 129,
+          "description": "<p>Cấu trúc: Vない／Vている／Aい／Aな + な／N + の + うちに</p><p>Làm, muốn làm hoặc khuyên làm một việc trước khi tình trạng hiện tại thay đổi.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>アイスクリームが溶けないうちに食べよう。</p>",
+              "vietnamese": "<p>Ăn kem trước khi nó chảy nhé.</p>"
+            },
+            {
+              "nihongo": "<p>銀行が開いているうちに振り込みに行かなければならない。</p>",
+              "vietnamese": "<p>Tôi phải đi chuyển khoản trong lúc ngân hàng còn mở cửa.</p>"
+            },
+            {
+              "nihongo": "<p>「鉄は熱いうちに打て」ということわざは「若いうちにきたえたほうがいい」という意味だ。</p>",
+              "vietnamese": "<p>Tục ngữ “rèn sắt khi còn nóng” nghĩa là nên rèn luyện khi còn trẻ.</p>"
+            },
+            {
+              "nihongo": "<p>子どものうちに、外国語を習わせたほうがいいという意見もある。</p>",
+              "vietnamese": "<p>Cũng có ý kiến cho rằng nên cho học ngoại ngữ từ khi còn nhỏ.</p>"
+            },
+            {
+              "nihongo": "<p>この魚はいたみやすいので、新鮮なうちに港に運ばれ、すぐ加工される。</p>",
+              "vietnamese": "<p>Loại cá này dễ hỏng nên được đưa về cảng khi còn tươi và chế biến ngay.</p>"
+            }
+          ]
+        },
+        {
+          "number": 82,
+          "title": "82. 花見客向けに",
+          "sourcePrintedPage": 129,
+          "description": "<p>Cấu trúc: N + 向けに／向けだ／向けの + N</p><p>Được làm hoặc thiết kế dành cho một người hay nhóm đối tượng cụ thể.</p><p>Plus: ～向き chỉ tính chất phù hợp vốn có. 彼女はアニメの声優向きの声をしている。→ Cô ấy có giọng hợp làm diễn viên lồng tiếng anime. この山は、道が狭くてけわしいので経験者向きです。→ Núi này đường hẹp và hiểm trở nên phù hợp người có kinh nghiệm. この服はかっこいいけれど仕事向きじゃないから買わないことにした。→ Bộ đồ này đẹp nhưng không hợp đi làm nên tôi quyết định không mua.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>これは子ども向けの映画だが、大人にも人気がある。</p>",
+              "vietnamese": "<p>Đây là phim dành cho trẻ em nhưng người lớn cũng thích.</p>"
+            },
+            {
+              "nihongo": "<p>最近の若い女性向けの雑誌はファッションやグルメの記事が多い。</p>",
+              "vietnamese": "<p>Tạp chí dành cho phụ nữ trẻ gần đây có nhiều bài về thời trang và ẩm thực.</p>"
+            },
+            {
+              "nihongo": "<p>当社では輸出向けに左ハンドルの車を生産しています。</p>",
+              "vietnamese": "<p>Công ty chúng tôi sản xuất xe tay lái trái để xuất khẩu.</p>"
+            },
+            {
+              "nihongo": "<p>最近は独身者向けのワンルームマンションがあちこちに建てられている。</p>",
+              "vietnamese": "<p>Gần đây, căn hộ một phòng dành cho người độc thân được xây ở khắp nơi.</p>"
+            }
+          ]
+        },
+        {
+          "number": 83,
+          "title": "83. 人によってその楽しみ方はそれぞれだ",
+          "sourcePrintedPage": 130,
+          "description": "<p>Cấu trúc: N + によって／による + N</p><p>Khác nhau tùy theo người, nơi chốn, thời gian hoặc điều kiện.</p><p>～によっては chỉ trường hợp đặc biệt. この薬は人によっては副作用が出ることがあります。→ Thuốc này có thể gây tác dụng phụ ở một số người. 参加者の人数によっては、会場を変更するかもしれません。→ Tùy số người tham gia, có thể đổi địa điểm. 台風の進路によっては交通機関に影響が出る場合もあります。→ Tùy đường đi của bão, phương tiện giao thông có thể bị ảnh hưởng.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>いろいろな人がいるのだから、人によって好みや考え方が違うのは当然だ。</p>",
+              "vietnamese": "<p>Có nhiều kiểu người nên việc sở thích và cách nghĩ khác nhau tùy người là đương nhiên.</p>"
+            },
+            {
+              "nihongo": "<p>スーパーでは曜日によって特売品を設定するなど、集客のための工夫をしている。</p>",
+              "vietnamese": "<p>Siêu thị tìm cách thu hút khách, chẳng hạn chọn hàng giảm giá khác nhau theo ngày trong tuần.</p>"
+            },
+            {
+              "nihongo": "<p>コンビニでは地域によってお弁当などの味つけを変えているそうだ。</p>",
+              "vietnamese": "<p>Nghe nói cửa hàng tiện lợi thay đổi cách nêm cơm hộp tùy vùng.</p>"
+            },
+            {
+              "nihongo": "<p>この調査結果を見ると、世代によるインターネットの利用目的の違いがわかります。</p>",
+              "vietnamese": "<p>Kết quả khảo sát này cho thấy mục đích sử dụng Internet khác nhau giữa các thế hệ.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": []
+    },
+    {
+      "name": "17. Ngắm hoa anh đào (2)",
+      "description": "Diễn đạt tình cảm về điều mình đặc biệt quan tâm.",
+      "reading": "<p>見ごろになると、友だちのだれかからだいたい仕事の最中に電話がかかってきて、「今日行く？」と聞かれる。やりかけの仕事が残っていても、行かずにはいられなくなって、「行く、行く」と答えてしまう。当然、帰ってきてから夜中まで仕事をすることになる。</p><p>また、毎年必ず行くお気に入りの場所がある。名所と言われるところではないが、そこは静かで、それほど人も多くなく、ゆっくり桜を楽しみたい人向きだ。そこには家族とのんびり行く。</p><p>そして、一人で買い物の途中に見る家の近くの桜もうれしい。どんなに急いでいても、桜の木の下で足を止めてちょっと見上げるこの時間は大切にしたいと思う。</p>",
+      "audioTrack": "49",
+      "sourcePrintedPages": [
+        133,
+        136
+      ],
+      "grammars": [
+        {
+          "number": 84,
+          "title": "84. 仕事の最中に",
+          "sourcePrintedPage": 133,
+          "description": "<p>Cấu trúc: Vている／N + の + 最中に／最中だ</p><p>Đúng lúc đang làm một việc thì xảy ra chuyện không ngờ; thường khi không muốn bị làm phiền.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>面接の最中におなかが鳴ってしまった。</p>",
+              "vietnamese": "<p>Đúng lúc phỏng vấn, bụng tôi lại kêu.</p>"
+            },
+            {
+              "nihongo": "<p>引っ越しの最中に飼っている犬が逃げ出して、大騒ぎになった。</p>",
+              "vietnamese": "<p>Đang chuyển nhà thì chó nuôi chạy mất, gây một phen náo loạn.</p>"
+            },
+            {
+              "nihongo": "<p>データを入力している最中に、コンピューターがフリーズしてしまった。</p>",
+              "vietnamese": "<p>Đang nhập dữ liệu thì máy tính bị treo.</p>"
+            },
+            {
+              "nihongo": "<p>この扉の向こうでは、連続殺人事件の裁判が行われている最中です。</p>",
+              "vietnamese": "<p>Phía bên kia cánh cửa này đang diễn ra phiên tòa vụ giết người hàng loạt.</p>"
+            }
+          ]
+        },
+        {
+          "number": 85,
+          "title": "85. やりかけの仕事",
+          "sourcePrintedPage": 134,
+          "description": "<p>Cấu trúc: V bỏ ます + かけだ／かけの + N／かけた／かけて</p><p>Một việc đã bắt đầu nhưng còn dang dở, chưa hoàn thành.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>弟の部屋には作りかけのプラモデルがいくつもある。</p>",
+              "vietnamese": "<p>Trong phòng em trai tôi có nhiều mô hình nhựa đang làm dở.</p>"
+            },
+            {
+              "nihongo": "<p>図書館で借りた本、まだ読みかけだったのに返却日になってしまった。</p>",
+              "vietnamese": "<p>Sách mượn thư viện vẫn đang đọc dở mà đã đến ngày trả.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：レポートできた？Ｂ：ううん。ゆうべ途中まで書きかけたんだけど…。</p>",
+              "vietnamese": "<p>A: Báo cáo xong chưa? B: Chưa. Tối qua mình mới viết được một phần…</p>"
+            },
+            {
+              "nihongo": "<p>セーターを編みかけて、途中であきらめたことが何度もある。</p>",
+              "vietnamese": "<p>Nhiều lần tôi đan áo len rồi bỏ cuộc giữa chừng.</p>"
+            }
+          ]
+        },
+        {
+          "number": 86,
+          "title": "86. 行かずにはいられなくなって",
+          "sourcePrintedPage": 135,
+          "description": "<p>Cấu trúc: V bỏ ない + ずにはいられない; する → せずにはいられない</p><p>Không thể nhịn, không thể không làm; cảm xúc hoặc thôi thúc khiến mình phải làm.</p><p>Plus: Vない + ではいられない có cùng nghĩa. 彼女は毎日ケーキを食べないではいられないらしい。→ Hình như cô ấy không thể không ăn bánh mỗi ngày. お祭りだと言われると、行かないではいられなくなってしまう。→ Hễ nghe nói có lễ hội là tôi không thể nhịn đi.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>Ａ：蚊に刺されたところ、かいちゃだめだよ。Ｂ：そう言われても、かゆくてかかずにはいられないんだよ。</p>",
+              "vietnamese": "<p>A: Chỗ muỗi đốt đừng gãi nhé. B: Cậu nói vậy nhưng ngứa quá, mình không nhịn gãi được.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：人の間違いを笑ったら失礼よ。Ｂ：でも、笑わずにはいられないよ。</p>",
+              "vietnamese": "<p>A: Cười lỗi của người khác là bất lịch sự đấy. B: Nhưng mình không nhịn cười được.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：木村さんがあんな大声を出したから、びっくりしたよ。Ｂ：友だちの悪口を言われて、怒らずにはいられなかったんだろうね。</p>",
+              "vietnamese": "<p>A: Kimura hét to làm mình giật mình. B: Chắc vì bạn mình bị nói xấu nên anh ấy không thể không nổi giận.</p>"
+            },
+            {
+              "nihongo": "<p>一流の水泳選手はみんな、毎日練習せずにはいられないらしい。</p>",
+              "vietnamese": "<p>Có vẻ các vận động viên bơi lội hàng đầu đều không thể bỏ tập ngày nào.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-1:1",
+          "sourceQuestionNumber": 1,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 137,
+          "contentNihongo": "申し訳ありませんが、部長に（　）、お答えできません。",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+          "answerA": "聞くと言えば",
+          "answerB": "聞いているうちに",
+          "answerC": "聞きかけで",
+          "answerD": "聞いてからでなければ"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-1:2",
+          "sourceQuestionNumber": 2,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 137,
+          "contentNihongo": "映画を見ている（　）携帯電話が鳴って、あせった。",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+          "answerA": "おかげで",
+          "answerB": "べきで",
+          "answerC": "最中に",
+          "answerD": "とおりに"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-1:3",
+          "sourceQuestionNumber": 3,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 137,
+          "contentNihongo": "国（　）休日が違うので、外国製のカレンダーを使うときは気をつけよう。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+          "answerA": "によって",
+          "answerB": "にとって",
+          "answerC": "にたいして",
+          "answerD": "について"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-1:4",
+          "sourceQuestionNumber": 4,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 137,
+          "contentNihongo": "弟は（　）ノートがたくさんあるのに、また新しいノートを買ってきた。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+          "answerA": "使い終わる",
+          "answerB": "使いかけの",
+          "answerC": "使うほどの",
+          "answerD": "使うかわりに"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-1:5",
+          "sourceQuestionNumber": 5,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 5,
+          "sourcePrintedPage": 137,
+          "contentNihongo": "これは初心者（　）書かれたパソコンの本です。",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+          "answerA": "にとって",
+          "answerB": "らしく",
+          "answerC": "向けに",
+          "answerD": "を通じて"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-1:6",
+          "sourceQuestionNumber": 6,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 6,
+          "sourcePrintedPage": 137,
+          "contentNihongo": "肉まん買ってきたよ。温かい（　）どうぞ。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+          "answerA": "うちに",
+          "answerB": "ために",
+          "answerC": "ように",
+          "answerD": "とおり"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-1:7",
+          "sourceQuestionNumber": 7,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 7,
+          "sourcePrintedPage": 137,
+          "contentNihongo": "私は、見る人が最後まで（　）ようなおもしろいドラマを作りたいと思っています。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題1〈文法形式の判断〉",
+          "answerA": "見るはずがない",
+          "answerB": "見ずにはいられない",
+          "answerC": "見るほどではない",
+          "answerD": "見かけない"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-2:1",
+          "sourceQuestionNumber": 8,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 138,
+          "contentNihongo": "ほかの仕事をする前に、____ ____ ★ ____ ほうがいい。",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題2〈文の組み立て〉",
+          "answerA": "しまった",
+          "answerB": "やりかけの",
+          "answerC": "終わらせて",
+          "answerD": "仕事を"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-2:2",
+          "sourceQuestionNumber": 9,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 138,
+          "contentNihongo": "学校で勉強した ____ ____ ★ ____ おきましょう。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題2〈文の組み立て〉",
+          "answerA": "うちに",
+          "answerB": "ことは",
+          "answerC": "復習して",
+          "answerD": "忘れない"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-2:3",
+          "sourceQuestionNumber": 10,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 138,
+          "contentNihongo": "日本で正月に食べる料理 ____ ____ ★ ____ があるそうだ。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題2〈文の組み立て〉",
+          "answerA": "によって",
+          "answerB": "は",
+          "answerC": "地方",
+          "answerD": "特色"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-3:1",
+          "sourceQuestionNumber": 11,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 138,
+          "contentNihongo": "［1］",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題3〈文章の文法〉",
+          "answerA": "向けの",
+          "answerB": "にとって",
+          "answerC": "といえば",
+          "answerD": "かけの"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-3:2",
+          "sourceQuestionNumber": 12,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 138,
+          "contentNihongo": "［2］",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題3〈文章の文法〉",
+          "answerA": "さらに",
+          "answerB": "それから",
+          "answerC": "そのかわり",
+          "answerD": "そのうえ"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-3:3",
+          "sourceQuestionNumber": 13,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 138,
+          "contentNihongo": "［3］",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題3〈文章の文法〉",
+          "answerA": "によって",
+          "answerB": "にとって",
+          "answerC": "のかわりに",
+          "answerD": "に対して"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-3:4",
+          "sourceQuestionNumber": 14,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 139,
+          "contentNihongo": "［4］",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題3〈文章の文法〉",
+          "answerA": "食べている最中に",
+          "answerB": "食べてからでなければ",
+          "answerC": "食べてから",
+          "answerD": "食べたばかりで"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-3:5",
+          "sourceQuestionNumber": 15,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 5,
+          "sourcePrintedPage": 139,
+          "contentNihongo": "［5］",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題3〈文章の文法〉",
+          "answerA": "食べたとたん",
+          "answerB": "食べようとして",
+          "answerC": "食べるとおり",
+          "answerD": "食べかけで"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-3:6",
+          "sourceQuestionNumber": 16,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 6,
+          "sourcePrintedPage": 139,
+          "contentNihongo": "［6］",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題3〈文章の文法〉",
+          "answerA": "で",
+          "answerB": "に",
+          "answerC": "と",
+          "answerD": "を"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-4:1",
+          "sourceQuestionNumber": 17,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 139,
+          "contentNihongo": "CD 50",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題4〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": "4"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-4:2",
+          "sourceQuestionNumber": 18,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 139,
+          "contentNihongo": "CD 51",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題4〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": "4"
+        },
+        {
+          "sourceKey": "try-n3:chapter-9:review:question-4:3",
+          "sourceQuestionNumber": 19,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 139,
+          "contentNihongo": "CD 52",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 9 · 問題4〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        }
+      ]
+    }
+  ]
+}

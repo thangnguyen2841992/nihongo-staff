@@ -19,4 +19,5 @@ public class CreateNewLessonRequest {
     private Long bookId;
 
     private String reading;
+    private String audioTrack;
 }

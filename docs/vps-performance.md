@@ -4,7 +4,7 @@
 
 Mở **Monitoring Server → Event VPS** ở sidebar (`/staff/monitoring/vps/events`), chọn VPS và metric. Màn riêng hiển thị **Cấu hình event** và **Event của metric** ngay trên trang. Có thể tạo/sửa/xóa rule, bật/tắt, chọn **một object** hoặc **tất cả object**, đặt ngưỡng `>`, `≥`, `<`, `≤`, mức độ Minor/Warning/Critical/Fatal và số mẫu liên tiếp (1–100). Mỗi metric trên một VPS hỗ trợ tối đa 100 rule. Có thể đặt nhiều ngưỡng bằng nhiều rule. Link **Event VPS** từ màn hiệu năng chuyển sang trang mới, giữ VPS/metric đang chọn; không mở popup event hay hiển thị danh sách event trong màn hiệu năng.
 
-Ví dụ CPU `≥80%`, 2 mẫu liên tiếp, phạm vi tất cả object: CPU 0 và CPU 1 có bộ đếm/trạng thái riêng; CPU phát hiện thêm về sau tự áp dụng rule. Không lấy tổng/trung bình của các object. Với MEMORY_USAGE/LOAD_1M/UPTIME, object là **Toàn VPS**; `all` cũng đánh giá chuỗi toàn VPS đó.
+Ví dụ CPU `≥80%`, 2 mẫu liên tiếp, phạm vi tất cả object: CPU 0 và CPU 1 có bộ đếm/trạng thái riêng; CPU phát hiện thêm về sau tự áp dụng rule. Không lấy tổng/trung bình của các object. Với MEMORY_USAGE/LOAD_1M/UPTIME và các metric MySQL không có object riêng, tên metric được hiển thị làm tên object; khóa `vps` và `object_id=null` vẫn được giữ để lịch sử/rule cũ tiếp tục hoạt động. `all` đánh giá chuỗi metric đó.
 
 Event có đúng 4 mức độ tăng dần: **Minor → Warning → Critical → Fatal**, phân biệt bằng màu. Bảng lịch sử có cột Mức độ riêng với trạng thái Phát sinh/Hồi phục; event hồi phục vẫn giữ cấp độ của rule.
 

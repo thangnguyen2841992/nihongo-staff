@@ -1,0 +1,587 @@
+{
+  "sourceKey": "try-n3-vietnamese:386895b5:chapter-4:v1",
+  "bookName": "TRY! N3 - Tiếng Việt",
+  "levelName": "N3",
+  "typeName": "Ngữ Pháp",
+  "description": "Chương 4: Hội thi bơi lội. Đối chiếu PDF 56–70; đáp án PDF 204.",
+  "sourceFile": "Try_N3_TiengViet.pdf",
+  "sourcePdfPages": [
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70
+  ],
+  "exerciseTypeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+  "reviewLayout": {
+    "sections": [
+      {
+        "number": 1,
+        "typeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+        "title": "文法形式の判断",
+        "vietnameseTitle": "Chọn dạng ngữ pháp",
+        "instruction": "次の文の（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          70,
+          71
+        ],
+        "sourcePrintedPages": "70–71",
+        "questionCount": 7,
+        "choiceColumns": [
+          4,
+          4,
+          4,
+          4,
+          2,
+          2,
+          2
+        ]
+      },
+      {
+        "number": 2,
+        "typeName": "TRY! N3 · Chương 4 · 問題2〈文の組み立て〉",
+        "title": "文の組み立て",
+        "vietnameseTitle": "Sắp xếp câu",
+        "instruction": "次の文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          71
+        ],
+        "sourcePrintedPages": "71",
+        "questionCount": 3
+      },
+      {
+        "number": 3,
+        "typeName": "TRY! N3 · Chương 4 · 問題3〈聴解〉",
+        "title": "聴解",
+        "vietnameseTitle": "Nghe hiểu",
+        "instruction": "まず文を聞いてください。それから、その返事を聞いて、1から3の中から、最もよいものを一つえらんでください。",
+        "printedPages": [
+          71
+        ],
+        "sourcePrintedPages": "71",
+        "questionCount": 5
+      }
+    ]
+  },
+  "notes": [
+    "Bản dịch ví dụ được bổ sung để học, không phải nguyên văn dịch của sách.",
+    "Bài Check và các bài luyện trong từng mục được giữ ở trang scan; các câu ôn tập cuối chương được chấm tương tác."
+  ],
+  "lessons": [
+    {
+      "name": "07. Hội thi bơi lội (1)",
+      "description": "Nói chuyện với bạn bè về đề tài cá nhân đồng thời xác nhận thông tin.",
+      "reading": "<p>鈴木：あー、疲れた。\n佐藤：どうして？\n鈴木：来週の日曜に水泳の大会があるから、毎日練習してるんだ。\n佐藤：え？　応援に行かなきゃ。何時に始まるの？\n鈴木：９時からだけど、バイトだろ？　来なくてもいいよ。\n佐藤：自由形に出るんだっけ。\n鈴木：うん。100メートルと200メートル。\n佐藤：がんばってね。もしかして優勝したりして？\n鈴木：ははは…。</p>",
+      "audioTrack": "17",
+      "sourcePrintedPages": [
+        57,
+        61
+      ],
+      "grammars": [
+        {
+          "number": 31,
+          "title": "31. 毎日練習してるんだ",
+          "sourcePrintedPage": 57,
+          "description": "<p>Cấu trúc: ～ている → ～てる; ～ておく → ～とく</p><p>Trong hội thoại thường rút ngắn âm và đổi dạng để nói gọn.</p><p>Bảng rút gọn: 見ている→見てる; 読んでいる→読んでる; 見ておく→見とく; 読んでおく→読んどく; 忘れてしまう→忘れちゃう; 読んでしまう→読んじゃう; 見てはいけない→見ちゃいけない; 読んではいけない→読んじゃいけない; 読まなければいけない→読まなきゃいけない; 読まなくてはいけない→読まなくちゃいけない. ～てる chia như nhóm II, ～とく và ～ちゃう chia như nhóm I.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>Ａ：あ、あそこにきれいな花が咲いてるよ。\nＢ：ほんとだ。</p>",
+              "vietnamese": "<p>A: À, đằng kia có hoa đẹp đang nở kìa.\nB: Đúng thật.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：これ、どこに置きますか。\nＢ：じゃ、あそこの机の上に置いといてください。</p>",
+              "vietnamese": "<p>A: Cái này đặt ở đâu ạ?\nB: Vậy xin cứ đặt trên bàn đằng kia.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：昼ご飯、食べた？\nＢ：うん、11時に食べちゃった。</p>",
+              "vietnamese": "<p>A: Ăn trưa chưa?\nB: Rồi, mình ăn lúc 11 giờ rồi.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：宿題、終わった？　ちゃんとしなきゃだめよ。\nＢ：はーい。</p>",
+              "vietnamese": "<p>A: Làm xong bài tập chưa? Phải làm cho đàng hoàng đấy.\nB: Vâng.</p>"
+            }
+          ]
+        },
+        {
+          "number": 32,
+          "title": "32. 応援に行かなきゃ。",
+          "sourcePrintedPage": 59,
+          "description": "<p>Cấu trúc: Lược phần cuối câu khi người nghe hiểu được</p><p>Có lúc không cần nói hết câu mà vẫn hiểu nghĩa.</p><p>Cũng có thể không kéo dài trường âm: おはよ（う）。この本、ありがと（う）。すごくおもしろかった。Chào buổi sáng. Cảm ơn vì cuốn sách; hay lắm. そんなことしてないで、早く行こ（う）。Đừng làm vậy nữa, đi nhanh thôi. じゃ、水曜日に会お（う）。Vậy thứ tư gặp nhé. さよ（う）なら。Tạm biệt.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>ねえ、ちょっと手伝って（ください）。</p>",
+              "vietnamese": "<p>Này, giúp tôi một chút (nhé).</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：これ、よくわからないなあ。\nＢ：山田さんに聞いたら（どうですか）？</p>",
+              "vietnamese": "<p>A: Cái này tôi không hiểu lắm.\nB: Hay là hỏi Yamada (thì sao)?</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：明日、来られる？\nＢ：わからない。無理かも（しれない）。</p>",
+              "vietnamese": "<p>A: Mai bạn đến được không?\nB: Không biết nữa. Có lẽ không được.</p>"
+            },
+            {
+              "nihongo": "<p>あ！　大変！　宿題しなきゃ（いけない）。</p>",
+              "vietnamese": "<p>À! Chết rồi! Phải làm bài tập.</p>"
+            }
+          ]
+        },
+        {
+          "number": 33,
+          "title": "33. 出るんだっけ",
+          "sourcePrintedPage": 60,
+          "description": "<p>Cấu trúc: Thể thông thường / thể lịch sự + っけ</p><p>Xác nhận điều không rõ hoặc đã nghe nhưng quên; thường đi cùng んだ.</p><p>Dù là chuyện hiện tại hay tương lai vẫn có thể dùng quá khứ nếu thông tin đã biết trước: 今度のテスト、来週の月曜日だったっけ。Bài kiểm tra tới là thứ hai tuần sau ấy nhỉ? 電池、どこに入れてありましたっけ。Pin được cất ở đâu ấy nhỉ?</p>",
+          "examples": [
+            {
+              "nihongo": "<p>クリーニング屋、何時までだっけ。</p>",
+              "vietnamese": "<p>Tiệm giặt là mở đến mấy giờ ấy nhỉ?</p>"
+            },
+            {
+              "nihongo": "<p>そのケーキ、どうしたの？　今日、だれかの誕生日だっけ。</p>",
+              "vietnamese": "<p>Chiếc bánh đó là sao? Hôm nay sinh nhật ai ấy nhỉ?</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：おかえりなさい。あれ、買ってきてくれた？\nＢ：え？　何か頼まれてたっけ。</p>",
+              "vietnamese": "<p>A: Mừng bạn về. Mua cái đó giúp mình chưa?\nB: Hả? Bạn có nhờ mình gì ấy nhỉ?</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：あの店、ディナーだと高いんだっけ。\nＢ：クーポン券があるから、大丈夫だよ。</p>",
+              "vietnamese": "<p>A: Ăn tối ở quán đó đắt ấy nhỉ?\nB: Có phiếu giảm giá nên không sao đâu.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：あれ？　これいつ買ったんだっけ。\nＢ：先週、私が買ってきたのよ。</p>",
+              "vietnamese": "<p>A: Ủa? Cái này mua khi nào ấy nhỉ?\nB: Mình mua tuần trước đấy.</p>"
+            },
+            {
+              "nihongo": "<p>高橋さん、昨日のパーティーにいらっしゃいましたっけ。</p>",
+              "vietnamese": "<p>Anh/chị Takahashi có đến buổi tiệc hôm qua không ấy nhỉ?</p>"
+            }
+          ]
+        },
+        {
+          "number": 34,
+          "title": "34. 優勝したりして？",
+          "sourcePrintedPage": 61,
+          "description": "<p>Cấu trúc: Thể thông thường quá khứ bỏ た + たりして</p><p>Mang nghĩa có lẽ, không chừng (～かもしれない).</p>",
+          "examples": [
+            {
+              "nihongo": "<p>Ａ：佐藤さん、まだ来ないね。\nＢ：もしかして寝てたりして…。</p>",
+              "vietnamese": "<p>A: Sato vẫn chưa đến nhỉ.\nB: Không chừng đang ngủ…</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：これいくらかな？\nＢ：すごく高かったりして…。</p>",
+              "vietnamese": "<p>A: Cái này bao nhiêu nhỉ?\nB: Không chừng đắt lắm…</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：ねえ、あのサングラスの人、かっこいいよね。\nＢ：芸能人だったりして…。</p>",
+              "vietnamese": "<p>A: Này, người đeo kính râm đó ngầu nhỉ.\nB: Không chừng là người nổi tiếng…</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": []
+    },
+    {
+      "name": "08. Hội thi bơi lội (2)",
+      "description": "Nói chuyện với bạn bè, trao đổi ý kiến và cảm tưởng về đề tài cá nhân.",
+      "reading": "<p>鈴木：がんばったって、優勝は絶対無理に決まってるよ。\n佐藤：試合なんだから、強気で行かなきゃだめじゃない。\n鈴木：そんなこと言ったって、強い選手って、小さいときからずっと泳いでいるんだよ。\n佐藤：ふうん。そうなんだ。なかなか大変みたいだね。\n鈴木：ぼくも子どものころからやっておけばよかったなあって、ときどき思うけどね…いつも遊んでばかりだったから。\n佐藤：きびしいんだね。\n鈴木：でも、おもしろいよ。少しでも速く、上手に泳ごうと思ってがんばるのは、試合があるからだし…。</p>",
+      "audioTrack": "18",
+      "sourcePrintedPages": [
+        62,
+        69
+      ],
+      "grammars": [
+        {
+          "number": 35,
+          "title": "35. がんばったって",
+          "sourcePrintedPage": 62,
+          "description": "<p>Cấu trúc: Vた / Aい bỏ い + くた / Aな・N + だ / dạng phủ định + って</p><p>Mang nghĩa nhượng bộ giống ～ても: dù… cũng…</p><p>Phủ định: Vない bỏ い + くたって; Aい + くなくたって; Aな / N + じゃなくたって.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>お金持ちだって、幸せじゃない人もいます。</p>",
+              "vietnamese": "<p>Dù giàu có vẫn có người không hạnh phúc.</p>"
+            },
+            {
+              "nihongo": "<p>病院に行ったって、すぐには治らないよ。</p>",
+              "vietnamese": "<p>Dù đến bệnh viện cũng không khỏi ngay đâu.</p>"
+            },
+            {
+              "nihongo": "<p>悲しくたって、さびしくたって、絶対泣かない。</p>",
+              "vietnamese": "<p>Dù buồn hay cô đơn, tôi tuyệt đối không khóc.</p>"
+            },
+            {
+              "nihongo": "<p>まだ若いので、一晩ぐらい寝なくたって大丈夫です。</p>",
+              "vietnamese": "<p>Vì còn trẻ nên dù không ngủ một đêm cũng không sao.</p>"
+            }
+          ]
+        },
+        {
+          "number": 36,
+          "title": "36. 無理に決まってるよ",
+          "sourcePrintedPage": 63,
+          "description": "<p>Cấu trúc: Thể thông thường + に決まっている (Aな・N bỏ だ)</p><p>Nói mạnh rằng chắc chắn, nhất định là như vậy.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>Ａ：あ、かわいい犬。チョコレートあげてもいいかな。\nＢ：え？　犬にチョコ？　だめに決まってるじゃない！</p>",
+              "vietnamese": "<p>A: À, chó dễ thương quá. Cho nó sô-cô-la được không nhỉ?\nB: Hả? Cho chó sô-cô-la ư? Đương nhiên là không được!</p>"
+            },
+            {
+              "nihongo": "<p>あのチームは今年も最下位に決まってるよ。</p>",
+              "vietnamese": "<p>Đội đó năm nay chắc chắn cũng đứng cuối.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：おばあちゃん、プレゼント、喜んでくれるかなあ？\nＢ：Ａちゃんが選んだんだから、喜ぶに決まってるよ。</p>",
+              "vietnamese": "<p>A: Không biết bà có thích món quà không nhỉ?\nB: Vì bạn đã chọn nên chắc chắn bà sẽ thích.</p>"
+            }
+          ]
+        },
+        {
+          "number": 37,
+          "title": "37. 行かなきゃだめじゃない",
+          "sourcePrintedPage": 64,
+          "description": "<p>Cấu trúc: Thể thông thường + じゃない ↘</p><p>Xác nhận điều người nghe cũng biết hoặc cùng ý kiến; có thể dùng để chê trách hoặc phát hiện, không phải phủ định.</p><p>Xuống giọng ở じゃない. Cũng dùng ～じゃん: Ａ：だめじゃん。友だちの宿題写しちゃ。自分でやらなきゃ意味ないじゃん！ Ｂ：そんなに怒らなくてもいいじゃん。A: Chép bài bạn là không được; không tự làm thì vô nghĩa! B: Đâu cần giận đến thế.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>Ａ：今度のクラス会、どこでする？\nＢ：レストランABK、広くて、交通の便もいいじゃない。あそこがいいよ。</p>",
+              "vietnamese": "<p>A: Buổi họp lớp tới tổ chức đâu?\nB: Nhà hàng ABK rộng và đi lại tiện còn gì. Chọn chỗ đó đi.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：駅前に新しいコンビニができたじゃないですか。今、おにぎりが全部50円引きなんですよ。\nＢ：へえ、そうですか。</p>",
+              "vietnamese": "<p>A: Có cửa hàng tiện lợi mới trước ga rồi đấy. Giờ mọi loại cơm nắm được giảm 50 yên.\nB: Ồ, vậy sao?</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：あ！　いけない！　電話するの忘れてた。\nＢ：だめじゃない。ちゃんと連絡しなきゃ。</p>",
+              "vietnamese": "<p>A: À! Chết rồi! Mình quên gọi điện.\nB: Thế không được đâu. Phải liên lạc cho đàng hoàng.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：Ｂさん、すごい！　歌下手だって言ってたけど、上手じゃない。\nＢ：この歌だけね。一生けんめい練習したの。</p>",
+              "vietnamese": "<p>A: B giỏi quá! Bạn nói hát kém mà hát hay đấy chứ.\nB: Chỉ bài này thôi. Mình đã luyện rất chăm.</p>"
+            }
+          ]
+        },
+        {
+          "number": 38,
+          "title": "38. 強い選手って",
+          "sourcePrintedPage": 65,
+          "description": "<p>Cấu trúc: N + って</p><p>Dùng thay cho ～は khi nêu chủ đề.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>山田さんって親切よね。</p>",
+              "vietnamese": "<p>Yamada tử tế nhỉ.</p>"
+            },
+            {
+              "nihongo": "<p>これってただでもらってもいいの？</p>",
+              "vietnamese": "<p>Cái này nhận miễn phí được không?</p>"
+            },
+            {
+              "nihongo": "<p>ディズニーランドってどこにあるか知ってる？</p>",
+              "vietnamese": "<p>Bạn biết Disneyland ở đâu không?</p>"
+            },
+            {
+              "nihongo": "<p>リンさんっていつ帰国するんだっけ。</p>",
+              "vietnamese": "<p>Linh về nước khi nào ấy nhỉ?</p>"
+            }
+          ]
+        },
+        {
+          "number": 39,
+          "title": "39. 大変みたいだね",
+          "sourcePrintedPage": 66,
+          "description": "<p>Cấu trúc: Thể thông thường + みたい（だ） (Aな・N bỏ だ)</p><p>Biểu thị suy đoán của người nói, tương tự ～よう.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>Ａ：なんか疲れてるみたいだけど、仕事忙しいの？\nＢ：そうじゃなくて、勤務地が変わって通勤が大変なの。</p>",
+              "vietnamese": "<p>A: Có vẻ bạn mệt; công việc bận à?\nB: Không phải, nơi làm việc thay đổi nên đi làm vất vả.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：新しくできた美術館、人気あるみたいだね。もう行った？\nＢ：うん、すてきな絵がたくさんあったよ。</p>",
+              "vietnamese": "<p>A: Bảo tàng mỹ thuật mới có vẻ được yêu thích nhỉ. Bạn đi chưa?\nB: Rồi, có nhiều tranh đẹp lắm.</p>"
+            },
+            {
+              "nihongo": "<p>となりのお嬢さん、今日成人式みたい。きれいな着物着て出ていったから。</p>",
+              "vietnamese": "<p>Con gái nhà bên hình như dự lễ thành nhân hôm nay, vì đã mặc kimono đẹp đi ra ngoài.</p>"
+            },
+            {
+              "nihongo": "<p>ようやく梅雨明けしたみたいだね。これから暑くなるね。</p>",
+              "vietnamese": "<p>Hình như cuối cùng mùa mưa đã hết. Từ giờ sẽ nóng lên nhỉ.</p>"
+            },
+            {
+              "nihongo": "<p>私、どこかで財布落としちゃったみたい。いくら探してもないのよ。</p>",
+              "vietnamese": "<p>Hình như tôi đã làm rơi ví ở đâu đó. Tìm thế nào cũng không thấy.</p>"
+            }
+          ]
+        },
+        {
+          "number": 40,
+          "title": "40. やっておけばよかった",
+          "sourcePrintedPage": 67,
+          "description": "<p>Cấu trúc: Vば / Aい + ければ / Aな・N + なら + よかった</p><p>Hối hận vì không làm nên gặp kết quả xấu, hoặc tiếc việc người khác đã không làm.</p><p>Phủ định: Vなければ / Aい + くなければ / Aな・N + じゃなければ + よかった.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>Ａ：わあ、富士山がとってもきれい！\nＢ：ほんと！　カメラを持ってくればよかったね。</p>",
+              "vietnamese": "<p>A: Oa, núi Phú Sĩ đẹp quá!\nB: Đúng thật! Giá mà mang máy ảnh theo.</p>"
+            },
+            {
+              "nihongo": "<p>急いでいたからタクシーに乗ったんだけど、乗らなければよかったよ。電車より時間がかかっちゃった。</p>",
+              "vietnamese": "<p>Vì vội nên tôi đi taxi nhưng giá mà không đi. Lại mất thời gian hơn tàu.</p>"
+            },
+            {
+              "nihongo": "<p>このかばん、機内持ち込みだめだって。もうちょっと小さければよかったんだけど…。</p>",
+              "vietnamese": "<p>Nghe nói túi này không được mang lên khoang máy bay. Giá mà nhỏ hơn một chút…</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：Ｂちゃんのお母さん、すてきだよね。私は子どものころ、Ｂちゃんのお母さんが私のお母さんならよかったのにって、思っていたの。\nＢ：へえ。Ａちゃん、そんなこと思ってたの。ぜんぜん知らなかった。</p>",
+              "vietnamese": "<p>A: Mẹ bạn B thật tuyệt nhỉ. Hồi nhỏ mình từng nghĩ giá mà mẹ bạn là mẹ mình.\nB: Ồ, bạn A từng nghĩ thế à? Mình hoàn toàn không biết.</p>"
+            }
+          ]
+        },
+        {
+          "number": 41,
+          "title": "41. 遊んでばかりだった",
+          "sourcePrintedPage": 68,
+          "description": "<p>Cấu trúc: N / Vて + ばかり; Vて + ばかりいる</p><p>Chỉ trích việc làm quá nhiều hoặc chỉ làm một việc gây phiền.</p><p>Cũng dùng Vる / Vている + ばかり: 彼は文句を言うばかりで、ぜんぜん働かない。Anh ấy chỉ phàn nàn mà không làm gì. コアラを見に行ったのに、寝ているばかりでぜんぜん動かないのでがっかりした。Tôi đi xem gấu koala nhưng chúng chỉ ngủ, không cử động nên thất vọng.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>最近雨ばかりで、洗濯物が乾かなくて困っています。</p>",
+              "vietnamese": "<p>Gần đây toàn mưa nên quần áo không khô, rất phiền.</p>"
+            },
+            {
+              "nihongo": "<p>ゲームばかりしていると、目が悪くなりますよ。</p>",
+              "vietnamese": "<p>Chỉ chơi game mãi thì mắt sẽ kém đấy.</p>"
+            },
+            {
+              "nihongo": "<p>逃げてばかりじゃ勝てないぞ。攻めていけ！</p>",
+              "vietnamese": "<p>Cứ né tránh mãi thì không thắng được đâu. Hãy tấn công!</p>"
+            },
+            {
+              "nihongo": "<p>あの子はいたずら好きで、みんなを困らせてばかりいる。</p>",
+              "vietnamese": "<p>Đứa trẻ đó thích nghịch ngợm và cứ làm phiền mọi người.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-1:1",
+          "sourceQuestionNumber": 1,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 70,
+          "contentNihongo": "Ａ：だめよ。新聞を火のそばに置いたら火事になっちゃう（　）。\nＢ：ごめん、ごめん。すぐ片付けるから。",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+          "answerA": "か",
+          "answerB": "なら",
+          "answerC": "っけ",
+          "answerD": "じゃない"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-1:2",
+          "sourceQuestionNumber": 2,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 70,
+          "contentNihongo": "昨日からのどが痛くて、なんだか風邪をひいた（　）なんだ。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+          "answerA": "ばかり",
+          "answerB": "みたい",
+          "answerC": "ところ",
+          "answerD": "はず"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-1:3",
+          "sourceQuestionNumber": 3,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 70,
+          "contentNihongo": "Ａ：奨学金の申し込みっていつまでだった（　）？\nＢ：来週の金曜までだよ。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+          "answerA": "んだ",
+          "answerB": "っけ",
+          "answerC": "よ",
+          "answerD": "か"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-1:4",
+          "sourceQuestionNumber": 4,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 70,
+          "contentNihongo": "Ａ：このケーキ、おいしいね。\nＢ：ほんと？　うれしい！　昨日がんばって作った（　）。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+          "answerA": "んだ",
+          "answerB": "って",
+          "answerC": "っけ",
+          "answerD": "じゃない"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-1:5",
+          "sourceQuestionNumber": 5,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 5,
+          "sourcePrintedPage": 70,
+          "contentNihongo": "Ａ：わあ！　立派な家！　どんな人が住んでるのかな？\nＢ：お金持ち（　）よ。",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+          "answerA": "ばかり",
+          "answerB": "ならよかった",
+          "answerC": "に決まってる",
+          "answerD": "じゃない"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-1:6",
+          "sourceQuestionNumber": 6,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 6,
+          "sourcePrintedPage": 70,
+          "contentNihongo": "Ａ：うー、寒い！　風邪ひきそう。コートを（　）。\nＢ：だから、「コートは！」って聞いたのに。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+          "answerA": "着てくればよかった",
+          "answerB": "着てきてよかった",
+          "answerC": "着てこないでよかった",
+          "answerD": "着てこなければよかった"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-1:7",
+          "sourceQuestionNumber": 7,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 7,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "Ａ：さっき買ったコップに、ひびが入ってたんだ。\nＢ：じゃ、取り替えて（　）？",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題1〈文法形式の判断〉",
+          "answerA": "もらえたら",
+          "answerB": "もらったら",
+          "answerC": "もらったっけ",
+          "answerD": "もらえたって"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-2:1",
+          "sourceQuestionNumber": 8,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "Ａ：明日の集合時間、６時だよ。\nＢ：そんな ____ ____ ★ ____ ないじゃない。どうしよう。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題2〈文の組み立て〉",
+          "answerA": "電車",
+          "answerB": "早い",
+          "answerC": "動いて",
+          "answerD": "時間じゃ"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-2:2",
+          "sourceQuestionNumber": 9,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "いくら ____ ____ ★ ____ 勉強しなきゃ受からないよ。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題2〈文の組み立て〉",
+          "answerA": "ように",
+          "answerB": "お祈り",
+          "answerC": "したって",
+          "answerD": "合格する"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-2:3",
+          "sourceQuestionNumber": 10,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "忙しくても、仕事 ____ ____ ★ ____ 体を壊すよ。",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題2〈文の組み立て〉",
+          "answerA": "していないで",
+          "answerB": "休まないと",
+          "answerC": "ばかり",
+          "answerD": "少しは"
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-3:1",
+          "sourceQuestionNumber": 11,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "CD 19",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題3〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-3:2",
+          "sourceQuestionNumber": 12,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "CD 20",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題3〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-3:3",
+          "sourceQuestionNumber": 13,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "CD 21",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題3〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-3:4",
+          "sourceQuestionNumber": 14,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "CD 22",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題3〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        },
+        {
+          "sourceKey": "try-n3:chapter-4:review:question-3:5",
+          "sourceQuestionNumber": 15,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 5,
+          "sourcePrintedPage": 71,
+          "contentNihongo": "CD 23",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 4 · 問題3〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        }
+      ]
+    }
+  ]
+}

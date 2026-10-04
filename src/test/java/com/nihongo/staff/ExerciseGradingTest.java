@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 class ExerciseGradingTest {
  IExerciseKeywordRepository repo=mock(IExerciseKeywordRepository.class);
- ExerciseGradingService service=new ExerciseGradingService(repo);
+ ExerciseGradingService service=new ExerciseGradingService(repo,mock(com.nihongo.staff.service.BookAiSolutionService.class));
  void setup(){when(repo.findByLessons_LessonId(1L)).thenReturn(List.of(
   ExersiceKeyword.builder().exerciseKeywordId(10L).correctAnswer("A").build(),
   ExersiceKeyword.builder().exerciseKeywordId(11L).correctAnswer("B").build()));}

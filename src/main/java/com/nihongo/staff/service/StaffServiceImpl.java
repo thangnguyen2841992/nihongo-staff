@@ -207,6 +207,7 @@ public class StaffServiceImpl implements IStaffService {
         lesson.setReading(
                 ContentHtml.clean(request.getReading())
         );
+        lesson.setAudioTrack(validAudioTrack(request.getAudioTrack()));
 
         return mapLessonToResponse(
                 lessonsRepository.save(
@@ -241,6 +242,7 @@ public class StaffServiceImpl implements IStaffService {
         lessons.setReading(
                 ContentHtml.clean(request.getReading())
         );
+        if (request.getAudioTrack() != null) lessons.setAudioTrack(validAudioTrack(request.getAudioTrack()));
 
         lessons.setDescription(
                 request.getDescription()
@@ -727,6 +729,7 @@ public class StaffServiceImpl implements IStaffService {
     ) {
 
         return ExerciseKeywordDTO.builder()
+                .audioUrl(entity.getAudioAssetId() == null ? null : "/api/staff/imported-audio/exercises/" + entity.getExerciseKeywordId())
                 .exerciseKeywordId(
                         entity.getExerciseKeywordId()
                 )
@@ -844,8 +847,17 @@ public class StaffServiceImpl implements IStaffService {
         response.setReading(
                 ContentHtml.clean(lesson.getReading())
         );
+        response.setAudioTrack(lesson.getAudioTrack());
+        response.setAudioUrl(lesson.getAudioAssetId() == null ? null : "/api/staff/imported-audio/lessons/" + lesson.getLessonId());
 
         return response;
+    }
+
+    private String validAudioTrack(String track) {
+        if (track == null || track.isBlank()) return null;
+        if (!track.matches("(?:0[1-9]|[1-5][0-9]|6[0-4])"))
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Số CD phải nằm trong 01–64.");
+        return track;
     }
 
 

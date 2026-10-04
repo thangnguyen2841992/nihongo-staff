@@ -86,7 +86,11 @@ public class MonitorEventService {
         return new Rule(r.getRuleId(), r.getName(), r.getObjectKey(), r.getOperator(), r.getThreshold(), r.getSeverity(), r.getConsecutiveSamples(), r.getEnabled(), active);
     }
     private static Event dto(MonitorEvent e, MonitorMetric metric) {
-        return new Event(e.getEventId(), e.getRuleId(), e.getRuleName(), e.getObjectKey(), e.getObjectName(), e.getKind(), e.getSeverity(), e.getOperator(), e.getThreshold(), e.getPerfValue(), e.getCollectedAt().toEpochSecond(ZoneOffset.UTC) + e.getCollectedAt().getNano() / 1_000_000_000D, e.getOpenedEventId(),
+        String objectName = e.getObjectName();
+        if (metric != null && !Boolean.TRUE.equals(metric.getObjectLevelYn()) && "vps".equals(e.getObjectKey())
+                && ("Toàn VPS".equals(objectName) || "Toàn MySQL".equals(objectName)))
+            objectName = metric.getMetricName();
+        return new Event(e.getEventId(), e.getRuleId(), e.getRuleName(), e.getObjectKey(), objectName, e.getKind(), e.getSeverity(), e.getOperator(), e.getThreshold(), e.getPerfValue(), e.getCollectedAt().toEpochSecond(ZoneOffset.UTC) + e.getCollectedAt().getNano() / 1_000_000_000D, e.getOpenedEventId(),
                 e.getMetricId(), metric == null ? "METRIC_" + e.getMetricId() : metric.getMetricCode(),
                 metric == null ? "Metric #" + e.getMetricId() : metric.getMetricName(),
                 metric == null || metric.getUnit() == null ? "" : metric.getUnit());
@@ -124,7 +128,7 @@ public class MonitorEventService {
                 || input.consecutiveSamples() < 1 || input.consecutiveSamples() > 100) throw bad("Nhập tên (1–100 ký tự), ngưỡng hợp lệ và số mẫu liên tiếp từ 1 đến 100.");
         if ("all".equals(input.objectKey())) return;
         if (!Boolean.TRUE.equals(metric.getObjectLevelYn())) {
-            if (!"vps".equals(input.objectKey())) throw bad("Metric toàn VPS chỉ nhận phạm vi Toàn VPS hoặc tất cả object.");
+            if (!"vps".equals(input.objectKey())) throw bad("Metric không có object riêng chỉ nhận chính metric hoặc tất cả object.");
             return;
         }
         Long objectId;

@@ -1,0 +1,617 @@
+{
+  "sourceKey": "try-n3-vietnamese:386895b5:chapter-3:v1",
+  "bookName": "TRY! N3 - Tiếng Việt",
+  "levelName": "N3",
+  "typeName": "Ngữ Pháp",
+  "description": "Chương 3: Tuyển người cho nông trại thành phố. Đối chiếu PDF 43–55; đáp án PDF 203–204.",
+  "sourceFile": "Try_N3_TiengViet.pdf",
+  "sourcePdfPages": [
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55
+  ],
+  "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+  "reviewLayout": {
+    "sections": [
+      {
+        "number": 1,
+        "typeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+        "title": "文法形式の判断",
+        "vietnameseTitle": "Chọn dạng ngữ pháp",
+        "instruction": "次の文の（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          54,
+          55
+        ],
+        "sourcePrintedPages": "54–55",
+        "questionCount": 9,
+        "choiceColumns": [
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
+          2
+        ]
+      },
+      {
+        "number": 2,
+        "typeName": "TRY! N3 · Chương 3 · 問題2〈文の組み立て〉",
+        "title": "文の組み立て",
+        "vietnameseTitle": "Sắp xếp câu",
+        "instruction": "次の文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          55
+        ],
+        "sourcePrintedPages": "55",
+        "questionCount": 3
+      },
+      {
+        "number": 3,
+        "typeName": "TRY! N3 · Chương 3 · 問題3〈文章の文法〉",
+        "title": "文章の文法",
+        "vietnameseTitle": "Ngữ pháp trong đoạn văn",
+        "instruction": "次の文章を読んで、文章全体の内容を考えて、［1］～［4］の中に入る最もよいものを、1・2・3・4から一つ選びなさい。",
+        "printedPages": [
+          55,
+          56
+        ],
+        "sourcePrintedPages": "55–56",
+        "questionCount": 4,
+        "reading": "バレンタインデーにチョコレートを贈る習慣［1］女性にアンケートを行ったら、「続けたい」が「やめたい」を上回った。\nいちばん好きな人には特別に手作りのチョコや、値段の高いチョコを贈るというのは予想［2］だが、それ以外の人に贈る場合はどうなのだろうか。\n働いている人は、「義理チョコ」［3］、職場の人間関係がよくなればいいと答える人が多かった。\nまた、女子高校生の回答［4］、男子に贈らないで、クラスの女の子に「友チョコ」を贈ることが多いということだった。\nチョコレートの贈り方は世代で違うようだ。"
+      },
+      {
+        "number": 4,
+        "typeName": "TRY! N3 · Chương 3 · 問題4〈聴解〉",
+        "title": "聴解",
+        "vietnameseTitle": "Nghe hiểu",
+        "instruction": "各問題の指示に従って話を聞き、最もよい答えを一つえらんでください。",
+        "printedPages": [
+          56
+        ],
+        "sourcePrintedPages": "56",
+        "questionCount": 3
+      }
+    ]
+  },
+  "notes": [
+    "Bản dịch ví dụ được bổ sung để học, không phải nguyên văn dịch của sách.",
+    "Bài Check và các bài luyện trong từng mục được giữ ở trang scan; các câu ôn tập cuối chương được chấm tương tác."
+  ],
+  "lessons": [
+    {
+      "name": "05. Tuyển người cho nông trại thành phố (1)",
+      "description": "Xem thông báo tuyển người tham gia và hiểu cách thức đăng ký.",
+      "reading": "<p>都会の真ん中で野菜作り！</p><p>本年度も市民農園の利用者の募集を開始します。ご希望の方は２月末日までにお申し込みください。インターネットによるお申し込みも受け付けます。昨年は100区画の募集に対して、約120名のご応募がありました。希望者が多いため、定員を超えた場合は初めての方を優先いたします。また、１家族につき１区画に限定させていただきます。申し込み、お問い合わせ、しめ切りなどは下記のとおりです。</p><p>皆様のご応募をお待ちしております。</p><p>募集区画：100区画\n利用料金：年１万円\nしめ切り：２月末日\n申し込み・問い合わせ：市役所生活課\n012-345-6789 内線110　FAX 012-345-6780\nshimin@abk.co.jp　http://www.abk-try/shimin-noen/</p>",
+      "audioTrack": "12",
+      "sourcePrintedPages": [
+        44,
+        48
+      ],
+      "grammars": [
+        {
+          "number": 21,
+          "title": "21. インターネットによるお申し込み",
+          "sourcePrintedPage": 45,
+          "description": "<p>Cấu trúc: N + によって / による + N</p><p>Thể hiện phương pháp, cách thức hoặc phương tiện khi làm gì đó.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>大学はアンケートによる満足度調査の結果を発表した。</p>",
+              "vietnamese": "<p>Trường đại học công bố kết quả khảo sát mức độ hài lòng bằng bảng hỏi.</p>"
+            },
+            {
+              "nihongo": "<p>経営学理論の講義は試験を行わず、レポートによる評価を行う。</p>",
+              "vietnamese": "<p>Môn lý thuyết quản trị kinh doanh không thi mà đánh giá qua báo cáo.</p>"
+            },
+            {
+              "nihongo": "<p>オリンピックの開催地はIOCの委員の投票によって決めることになっている。</p>",
+              "vietnamese": "<p>Địa điểm tổ chức Olympic được quyết định bằng bỏ phiếu của các thành viên IOC.</p>"
+            },
+            {
+              "nihongo": "<p>わが社は社内の公用語を英語にすることによって国際化を目指している。</p>",
+              "vietnamese": "<p>Công ty chúng tôi hướng đến quốc tế hóa bằng cách dùng tiếng Anh làm ngôn ngữ chung trong công ty.</p>"
+            }
+          ]
+        },
+        {
+          "number": 22,
+          "title": "22. 100区画の募集に対して",
+          "sourcePrintedPage": 45,
+          "description": "<p>Cấu trúc: N + に対して（は／も） / に対し / に対する + N</p><p>Dùng cho thái độ hoặc hành động trực tiếp hướng đến người khác; cũng dùng cho sự phản đối hay đáp lại ý kiến, vấn đề, yêu cầu.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>彼女はだれに対しても親切です。</p>",
+              "vietnamese": "<p>Cô ấy tử tế với tất cả mọi người.</p>"
+            },
+            {
+              "nihongo": "<p>目上の人に対しては敬語を使いましょう。</p>",
+              "vietnamese": "<p>Hãy dùng kính ngữ với người trên mình.</p>"
+            },
+            {
+              "nihongo": "<p>私費留学生に対する奨学金などの援助はまだ十分ではないと思う。</p>",
+              "vietnamese": "<p>Tôi nghĩ hỗ trợ như học bổng cho du học sinh tự túc vẫn chưa đầy đủ.</p>"
+            },
+            {
+              "nihongo": "<p>この病気に対する効果的な治療法はまだ見つかっていない。</p>",
+              "vietnamese": "<p>Vẫn chưa tìm ra phương pháp điều trị hiệu quả cho bệnh này.</p>"
+            }
+          ]
+        },
+        {
+          "number": 23,
+          "title": "23. 希望者が多いため",
+          "sourcePrintedPage": 46,
+          "description": "<p>Cấu trúc: Thể thông thường + ため（に）; Aな + な; N + の</p><p>Nêu nguyên nhân, lý do dẫn đến một sự việc.</p><p>Không dùng ～たい hoặc ～つもりだ ở cuối câu nêu kết quả.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>雨のためにハイキングは中止になりました。</p>",
+              "vietnamese": "<p>Chuyến đi bộ dã ngoại bị hủy vì mưa.</p>"
+            },
+            {
+              "nihongo": "<p>外国人観光客が増えたため、外国語のパンフレットを作ることになった。</p>",
+              "vietnamese": "<p>Vì khách du lịch nước ngoài tăng nên đã quyết định làm tờ giới thiệu bằng ngoại ngữ.</p>"
+            },
+            {
+              "nihongo": "<p>事故のため、電車が遅れております。</p>",
+              "vietnamese": "<p>Tàu đang bị trễ do tai nạn.</p>"
+            },
+            {
+              "nihongo": "<p>理由：ABK大学受験のため</p>",
+              "vietnamese": "<p>Lý do: để dự thi vào Đại học ABK.</p>"
+            }
+          ]
+        },
+        {
+          "number": 24,
+          "title": "24. １家族につき１区画",
+          "sourcePrintedPage": 47,
+          "description": "<p>Cấu trúc: N + につき</p><p>Biểu thị số lượng, chi phí hay thời gian ứng với mỗi đơn vị.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>当スポーツクラブ会員以外の方でも、１回につき2,000円で施設をご利用いただけます。</p>",
+              "vietnamese": "<p>Ngay cả người không phải hội viên câu lạc bộ thể thao cũng có thể sử dụng cơ sở với phí 2.000 yên mỗi lần.</p>"
+            },
+            {
+              "nihongo": "<p>今回のチャリティコンサートは、ハガキ１枚につき２名様までお申し込みいただけます。</p>",
+              "vietnamese": "<p>Buổi hòa nhạc từ thiện lần này cho phép đăng ký tối đa hai người với mỗi bưu thiếp.</p>"
+            },
+            {
+              "nihongo": "<p>ランニングマシンは予約制で、ご利用はお１人につき30分までとなっております。</p>",
+              "vietnamese": "<p>Máy chạy bộ cần đặt trước và mỗi người được dùng tối đa 30 phút.</p>"
+            }
+          ]
+        },
+        {
+          "number": 25,
+          "title": "25. 下記のとおりです",
+          "sourcePrintedPage": 47,
+          "description": "<p>Cấu trúc: Vる / Vた / Nの + とおり（に） / とおりだ</p><p>Nói sự việc giống như điều đã nói hoặc đã dự đoán.</p><p>Cũng dùng N + どおり: 今日は予定どおりに仕事が進んだ。Hôm nay công việc tiến triển đúng kế hoạch. あいちゃんと純君が結婚するそうだ。やっぱり私の予想どおりだった。Nghe nói Ai và Jun sắp kết hôn; quả đúng như tôi dự đoán.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>今日の映画は本当におもしろかった。友だちが言ったとおりだった。</p>",
+              "vietnamese": "<p>Bộ phim hôm nay thật hay. Đúng như bạn tôi đã nói.</p>"
+            },
+            {
+              "nihongo": "<p>初めて見た富士山は私が想像していたとおりにきれいだった。</p>",
+              "vietnamese": "<p>Núi Phú Sĩ tôi nhìn thấy lần đầu đẹp đúng như tôi đã tưởng tượng.</p>"
+            },
+            {
+              "nihongo": "<p>料理の本に書いてあるとおりに作ったら、おいしくできた。</p>",
+              "vietnamese": "<p>Làm đúng như sách nấu ăn viết thì món ăn rất ngon.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": []
+    },
+    {
+      "name": "06. Tuyển người cho nông trại thành phố (2)",
+      "description": "Hình dung sự kiện qua nội dung hoạt động và cảm tưởng của người đã tham gia.",
+      "reading": "<p>家族や仲間と一緒に収穫した野菜を食べるのは最高です。野菜作りを通して、自然に親しむこともできるし、バーベキューパーティーのような楽しいイベントもあります。実際に利用されている方のお話によれば、思ったより簡単にできるし、それに子どもと話す機会が増えて楽しかったということです。</p><p>農園の活動について詳しいことは、ホームページでも紹介しています。皆さん、一緒に野菜を作りましょう！\n草野指導員</p>",
+      "audioTrack": "13",
+      "sourcePrintedPages": [
+        49,
+        53
+      ],
+      "grammars": [
+        {
+          "number": 26,
+          "title": "26. 野菜作りを通して",
+          "sourcePrintedPage": 49,
+          "description": "<p>Cấu trúc: N + を通して / を通じて</p><p>Làm việc gì đó thông qua người khác, phương tiện hoặc sự việc khác.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>現在はインターネットを通して、すぐに世界中にニュースが広まる。</p>",
+              "vietnamese": "<p>Hiện nay tin tức lan ra toàn thế giới ngay qua Internet.</p>"
+            },
+            {
+              "nihongo": "<p>私たちは読書を通していろいろな人の考え方を知ることができます。</p>",
+              "vietnamese": "<p>Qua việc đọc sách, chúng ta có thể biết cách suy nghĩ của nhiều người.</p>"
+            },
+            {
+              "nihongo": "<p>取材は、弁護士を通して申し込んでください。</p>",
+              "vietnamese": "<p>Xin đăng ký phỏng vấn thông qua luật sư.</p>"
+            },
+            {
+              "nihongo": "<p>私は海外留学の経験を通じて多くのことを学んだ。</p>",
+              "vietnamese": "<p>Tôi học được nhiều điều thông qua trải nghiệm du học.</p>"
+            }
+          ]
+        },
+        {
+          "number": 27,
+          "title": "27. パーティーのような楽しいイベント",
+          "sourcePrintedPage": 50,
+          "description": "<p>Cấu trúc: N + のように / のような + N</p><p>Đưa ra một ví dụ tiêu biểu.</p><p>Trong hội thoại với bạn bè cũng dùng N + みたい: ピアノみたいに大きくて重いものがあると、引っ越しが大変だね。Có đồ to và nặng như đàn piano thì chuyển nhà vất vả nhỉ. キュウリやトマトみたいな夏野菜は育てやすいそうだ。Nghe nói rau mùa hè như dưa chuột và cà chua dễ trồng. 冬は沖縄みたいな暖かいところに旅行に行きたいなあ。Mùa đông tôi muốn du lịch nơi ấm như Okinawa.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>インフルエンザのようなほかの人にうつる病気になったら、治るまで学校へ来てはいけないことになっています。</p>",
+              "vietnamese": "<p>Nếu mắc bệnh lây cho người khác như cúm thì quy định là không được đến trường cho đến khi khỏi.</p>"
+            },
+            {
+              "nihongo": "<p>われわれのようなプロのスポーツ選手には食事も練習と同じぐらい大切です。</p>",
+              "vietnamese": "<p>Với vận động viên chuyên nghiệp như chúng tôi, ăn uống cũng quan trọng như luyện tập.</p>"
+            },
+            {
+              "nihongo": "<p>梅雨のように雨の多い季節は洗濯物が乾かなくて困ります。</p>",
+              "vietnamese": "<p>Vào mùa mưa nhiều như mùa mưa Nhật Bản, quần áo không khô nên rất phiền.</p>"
+            },
+            {
+              "nihongo": "<p>退院したばかりなので、テニスのように激しいスポーツはまだできません。</p>",
+              "vietnamese": "<p>Vì vừa xuất viện nên tôi chưa thể chơi môn thể thao mạnh như quần vợt.</p>"
+            }
+          ]
+        },
+        {
+          "number": 28,
+          "title": "28. 利用されている方のお話によれば",
+          "sourcePrintedPage": 51,
+          "description": "<p>Cấu trúc: N + によれば / によると</p><p>Nêu nguồn thông tin; cuối câu thường dùng ～そうだ hoặc ～ということだ.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>最近の調査によれば、病気ではないが不健康な人が増えているそうだ。</p>",
+              "vietnamese": "<p>Theo khảo sát gần đây, nghe nói người không mắc bệnh nhưng sức khỏe kém đang tăng.</p>"
+            },
+            {
+              "nihongo": "<p>今朝の天気予報によると、今週はずっと晴れるそうだ。</p>",
+              "vietnamese": "<p>Theo dự báo thời tiết sáng nay, nghe nói cả tuần này sẽ nắng.</p>"
+            },
+            {
+              "nihongo": "<p>観光ガイドブックによれば、この町では毎週日曜日に朝市が開かれるらしい。</p>",
+              "vietnamese": "<p>Theo sách hướng dẫn du lịch, có vẻ thị trấn này mở chợ sáng mỗi chủ nhật.</p>"
+            }
+          ]
+        },
+        {
+          "number": 29,
+          "title": "29. 楽しかったということです",
+          "sourcePrintedPage": 52,
+          "description": "<p>Cấu trúc: Thể thông thường + ということだ / とのことだ</p><p>Truyền đạt cho người khác nội dung thông tin đã nghe.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>ニュースでは、今年は水不足の心配はないということです。</p>",
+              "vietnamese": "<p>Theo tin tức, năm nay không phải lo thiếu nước.</p>"
+            },
+            {
+              "nihongo": "<p>部長の話によると、今年の新入社員の数は去年の倍だということだ。</p>",
+              "vietnamese": "<p>Theo trưởng phòng, số nhân viên mới năm nay gấp đôi năm ngoái.</p>"
+            },
+            {
+              "nihongo": "<p>高橋さんから電話がありました。またあとで電話するとのことです。</p>",
+              "vietnamese": "<p>Anh/chị Takahashi đã gọi điện. Anh/chị ấy nói sẽ gọi lại sau.</p>"
+            },
+            {
+              "nihongo": "<p>お孫さんがお生まれになったとのこと、おめでとうございます。</p>",
+              "vietnamese": "<p>Được biết cháu của ông/bà đã chào đời, xin chúc mừng.</p>"
+            }
+          ]
+        },
+        {
+          "number": 30,
+          "title": "30. 農園の活動について詳しいことは",
+          "sourcePrintedPage": 52,
+          "description": "<p>Cấu trúc: N + について（は／も） / についての + N</p><p>Nêu chủ đề, đề tài hoặc nội dung suy nghĩ, tìm hiểu.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>兄は大学院で、アジアの経済について研究しています。</p>",
+              "vietnamese": "<p>Anh trai tôi nghiên cứu kinh tế châu Á ở bậc cao học.</p>"
+            },
+            {
+              "nihongo": "<p>今年度の求人情報については、ホームページをご覧ください。</p>",
+              "vietnamese": "<p>Về thông tin tuyển dụng năm nay, xin xem trang web.</p>"
+            },
+            {
+              "nihongo": "<p>部屋を借りるときは安全面についても確認したほうがいい。</p>",
+              "vietnamese": "<p>Khi thuê phòng cũng nên kiểm tra về mặt an toàn.</p>"
+            },
+            {
+              "nihongo": "<p>この図書館には、機械工学についての本がたくさんある。</p>",
+              "vietnamese": "<p>Thư viện này có nhiều sách về kỹ thuật cơ khí.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:1",
+          "sourceQuestionNumber": 1,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 54,
+          "contentNihongo": "彼の意見（　）反対する人はだれもいなかった。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "にたいする",
+          "answerB": "にたいして",
+          "answerC": "について",
+          "answerD": "についての"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:2",
+          "sourceQuestionNumber": 2,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 54,
+          "contentNihongo": "父の店でもコンピューター（　）商品管理を行っている。",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "によると",
+          "answerB": "によれば",
+          "answerC": "による",
+          "answerD": "によったら"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:3",
+          "sourceQuestionNumber": 3,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 54,
+          "contentNihongo": "今朝のニュース（　）、昨日高速道路で大事故があったそうだ。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "によれば",
+          "answerB": "によって",
+          "answerC": "について",
+          "answerD": "をつうじて"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:4",
+          "sourceQuestionNumber": 4,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 54,
+          "contentNihongo": "部長の指示（　）仕事を進めたが、うまくいかなかった。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "どおりに",
+          "answerB": "とおりに",
+          "answerC": "にたいして",
+          "answerD": "にたいしての"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:5",
+          "sourceQuestionNumber": 5,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 5,
+          "sourcePrintedPage": 54,
+          "contentNihongo": "見学を希望する場合は、１週間前までに担当者（　）申し込んでください。",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "について",
+          "answerB": "のために",
+          "answerC": "のとおりに",
+          "answerD": "をつうじて"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:6",
+          "sourceQuestionNumber": 6,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 6,
+          "sourcePrintedPage": 54,
+          "contentNihongo": "兄は工業ロボット（　）研究している。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "についての",
+          "answerB": "について",
+          "answerC": "にたいして",
+          "answerD": "にたいしての"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:7",
+          "sourceQuestionNumber": 7,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 7,
+          "sourcePrintedPage": 54,
+          "contentNihongo": "インフルエンザが流行している（　）、お見舞いの方にもマスクをしていただくことになっています。",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "と",
+          "answerB": "ように",
+          "answerC": "という",
+          "answerD": "ため"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:8",
+          "sourceQuestionNumber": 8,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 8,
+          "sourcePrintedPage": 54,
+          "contentNihongo": "私の国は暑いので、スキー（　）冬のスポーツは一度もしたことがないんです。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "のとおりに",
+          "answerB": "のような",
+          "answerC": "について",
+          "answerD": "にたいして"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-1:9",
+          "sourceQuestionNumber": 9,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 9,
+          "sourcePrintedPage": 55,
+          "contentNihongo": "本日発売されたゲームは、たいへんな人気で、１時間ぐらいで全部売れてしまった（　）。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題1〈文法形式の判断〉",
+          "answerA": "ところです",
+          "answerB": "ということです",
+          "answerC": "ばかりです",
+          "answerD": "とたんです"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-2:1",
+          "sourceQuestionNumber": 10,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 55,
+          "contentNihongo": "昨日私の大学で、____ ____ ★ ____ 開かれた。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題2〈文の組み立て〉",
+          "answerA": "について",
+          "answerB": "考える",
+          "answerC": "アジア経済",
+          "answerD": "国際会議が"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-2:2",
+          "sourceQuestionNumber": 11,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 55,
+          "contentNihongo": "祖父は会社では厳しい社長だが、____ ____ ★ ____ 優しい。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題2〈文の組み立て〉",
+          "answerA": "に対しては",
+          "answerB": "私たち",
+          "answerC": "孫の",
+          "answerD": "とても"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-2:3",
+          "sourceQuestionNumber": 12,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 55,
+          "contentNihongo": "昨日見た映画は、____ ____ ★ ____ なった。",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題2〈文の組み立て〉",
+          "answerA": "予想した",
+          "answerB": "私が",
+          "answerC": "結末に",
+          "answerD": "とおりの"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-3:1",
+          "sourceQuestionNumber": 13,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 56,
+          "contentNihongo": "［1］",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題3〈文章の文法〉",
+          "answerA": "について",
+          "answerB": "についての",
+          "answerC": "にたいして",
+          "answerD": "にたいしての"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-3:2",
+          "sourceQuestionNumber": 14,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 56,
+          "contentNihongo": "［2］",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題3〈文章の文法〉",
+          "answerA": "とおり",
+          "answerB": "どおり",
+          "answerC": "をとおして",
+          "answerD": "をとおって"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-3:3",
+          "sourceQuestionNumber": 15,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 56,
+          "contentNihongo": "［3］",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題3〈文章の文法〉",
+          "answerA": "とおり",
+          "answerB": "どおり",
+          "answerC": "をとおして",
+          "answerD": "をとおって"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-3:4",
+          "sourceQuestionNumber": 16,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 56,
+          "contentNihongo": "［4］",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題3〈文章の文法〉",
+          "answerA": "によって",
+          "answerB": "によっての",
+          "answerC": "によると",
+          "answerD": "について"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-4:1",
+          "sourceQuestionNumber": 17,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 56,
+          "contentNihongo": "CD 14",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題4〈聴解〉",
+          "answerA": "ストレス解消ができたこと",
+          "answerB": "野菜の育て方がわかったこと",
+          "answerC": "トマトとナスがとれたこと",
+          "answerD": "体調がよくなったこと"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-4:2",
+          "sourceQuestionNumber": 18,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 56,
+          "contentNihongo": "CD 15",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題4〈聴解〉",
+          "answerA": "遅刻するので困ると思っている",
+          "answerB": "本当に迷惑だと思っている",
+          "answerC": "しかたないと思っている",
+          "answerD": "とてもよかったと思っている"
+        },
+        {
+          "sourceKey": "try-n3:chapter-3:review:question-4:3",
+          "sourceQuestionNumber": 19,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 56,
+          "contentNihongo": "CD 16",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 3 · 問題4〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        }
+      ]
+    }
+  ]
+}

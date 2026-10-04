@@ -25,6 +25,11 @@ public class Lessons {
     @Column(columnDefinition = "LONGTEXT")
     private String reading;
 
+    @Column(length = 2)
+    private String audioTrack;
+    @Column(length = 36) private String audioImportId;
+    @Column(length = 36) private String audioAssetId;
+
     @CreationTimestamp
     private LocalDateTime dateCreated;
 

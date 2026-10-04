@@ -1,0 +1,339 @@
+{
+  "schemaVersion": 1,
+  "sourceKey": "try-n3-vietnamese:386895b5:full-book:v1",
+  "bookName": "TRY! N3 - Tiếng Việt",
+  "levelName": "N3",
+  "typeName": "Ngữ Pháp",
+  "sourceSha256": "386895b5f93dd181c14a205d4828d83e2d87e2a0a768db2836cab12f7841a623",
+  "pageCount": 209,
+  "lessonCount": 21,
+  "grammarCount": 113,
+  "answerPdfPages": [
+    190,
+    191,
+    192,
+    193,
+    194,
+    195,
+    196,
+    197,
+    198,
+    199,
+    200,
+    201,
+    202,
+    203,
+    204,
+    205,
+    206,
+    207,
+    208,
+    209
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Lần đầu leo núi Phú Sĩ",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 10,
+      "sourcePdfPages": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "lessonNames": [
+        "01. Lần đầu leo núi Phú Sĩ (1)",
+        "02. Lần đầu leo núi Phú Sĩ (2)"
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Kuro, chú cún của tôi",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 10,
+      "sourcePdfPages": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "lessonNames": [
+        "03. Kuro, chú cún của tôi (1)",
+        "04. Kuro, chú cún của tôi (2)"
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Tuyển người cho nông trại thành phố",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 10,
+      "sourcePdfPages": [
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "lessonNames": [
+        "05. Tuyển người cho nông trại thành phố (1)",
+        "06. Tuyển người cho nông trại thành phố (2)"
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Hội thi bơi lội",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 11,
+      "sourcePdfPages": [
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ],
+      "lessonNames": [
+        "07. Hội thi bơi lội (1)",
+        "08. Hội thi bơi lội (2)"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Công thức tự làm món thịt nguội",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 9,
+      "sourcePdfPages": [
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84
+      ],
+      "lessonNames": [
+        "09. Công thức tự làm món thịt nguội (1)",
+        "10. Công thức tự làm món thịt nguội (2)"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Satoyama",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 11,
+      "sourcePdfPages": [
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ],
+      "lessonNames": [
+        "11. Satoyama (1)",
+        "12. Satoyama (2)"
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Ở văn phòng bất động sản",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 10,
+      "sourcePdfPages": [
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114
+      ],
+      "lessonNames": [
+        "13. Ở văn phòng bất động sản (1)",
+        "14. Ở văn phòng bất động sản (2)"
+      ]
+    },
+    {
+      "number": 8,
+      "title": "Phỏng vấn khi xin việc",
+      "reviewed": true,
+      "lessonCount": 1,
+      "grammarCount": 7,
+      "sourcePdfPages": [
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125
+      ],
+      "lessonNames": [
+        "15. Phỏng vấn khi xin việc"
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Ngắm hoa anh đào",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 8,
+      "sourcePdfPages": [
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138
+      ],
+      "lessonNames": [
+        "16. Ngắm hoa anh đào (1)",
+        "17. Ngắm hoa anh đào (2)"
+      ]
+    },
+    {
+      "number": 10,
+      "title": "Sự lựa chọn của Yuki",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 12,
+      "sourcePdfPages": [
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155
+      ],
+      "lessonNames": [
+        "18. Sự lựa chọn của Yuki (1)",
+        "19. Sự lựa chọn của Yuki (2)"
+      ]
+    },
+    {
+      "number": 11,
+      "title": "Thăm bạn bị bệnh",
+      "reviewed": true,
+      "lessonCount": 2,
+      "grammarCount": 15,
+      "sourcePdfPages": [
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176
+      ],
+      "lessonNames": [
+        "20. Thăm bạn bị bệnh (1)",
+        "21. Thăm bạn bị bệnh (2)"
+      ]
+    }
+  ]
+}

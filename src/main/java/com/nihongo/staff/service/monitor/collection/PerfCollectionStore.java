@@ -99,8 +99,7 @@ public class PerfCollectionStore {
                 MonitorPerfValue perf = new MonitorPerfValue(); perf.setVpsId(job.vpsId()); perf.setMetricId(link.getMetric().getMetricId());
                 perf.setObjectId(object == null ? null : object.getObjectId()); perf.setCollectedAt(observedAt); perf.setValue(value); values.save(perf);
                 collected.add(new MonitorEventService.Sample(perf, object == null
-                        ? ExporterType.forVps(link.getVps()) == ExporterType.MYSQL_JDBC ? "Toàn MySQL" : "Toàn VPS"
-                        : object.getObjectName()));
+                        ? link.getMetric().getMetricName() : object.getObjectName()));
             }
         }
         if (Boolean.TRUE.equals(link.getMetric().getObjectLevelYn())) {

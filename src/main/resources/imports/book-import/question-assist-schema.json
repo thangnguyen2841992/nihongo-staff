@@ -1,0 +1,12 @@
+{
+  "type":"object",
+  "properties":{
+    "groupName":{"type":"string"},"contentNihongo":{"type":"string"},
+    "answerA":{"type":"string"},"answerB":{"type":"string"},"answerC":{"type":"string"},"answerD":{"type":"string"},
+    "correctAnswer":{"type":"string","enum":["","A","B","C","D"]},
+    "basis":{"type":"string","enum":["SOURCE","REASONING","UNRESOLVED"]},
+    "explanation":{"type":"string"},"sourcePage":{"type":"integer"},"evidence":{"type":"string"},
+    "warnings":{"type":"array","items":{"type":"string"}}
+  },
+  "required":["groupName","contentNihongo","answerA","answerB","answerC","answerD","correctAnswer","basis","explanation","sourcePage","evidence","warnings"]
+}

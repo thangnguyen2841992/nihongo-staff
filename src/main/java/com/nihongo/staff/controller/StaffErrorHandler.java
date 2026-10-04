@@ -9,8 +9,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
-@RestControllerAdvice(assignableTypes = {StaffRestController.class, MonitorVpsController.class, VpsPerformanceController.class, MonitorEventController.class, VpsEventController.class, MysqlTargetController.class})
+@RestControllerAdvice(assignableTypes = {BookImportController.class, ImportedAudioController.class, StaffRestController.class, TryN3ImportController.class, TryN3BookImportController.class, MonitorVpsController.class, VpsPerformanceController.class, MonitorEventController.class, VpsEventController.class, MysqlTargetController.class})
 public class StaffErrorHandler {
+    @ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
+    public ResponseEntity<Map<String,String>> uploadSize() {
+        return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(Map.of("message","File tải lên vượt giới hạn. PDF tối đa 100 MB; mỗi file nghe tối đa 40 MB."));
+    }
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<Map<String, String>> status(ResponseStatusException exception) {
         return ResponseEntity.status(exception.getStatusCode()).body(Map.of("message",

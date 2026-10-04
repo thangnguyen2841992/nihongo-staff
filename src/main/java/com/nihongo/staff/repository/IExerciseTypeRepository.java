@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IExerciseTypeRepository extends JpaRepository<ExerciseType, Long> {
     boolean existsByName(String name);
+    java.util.Optional<ExerciseType> findByName(String name);
 }

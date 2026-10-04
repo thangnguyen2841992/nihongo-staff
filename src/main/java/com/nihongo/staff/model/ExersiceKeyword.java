@@ -29,6 +29,8 @@ public class ExersiceKeyword {
     private String answerD;
 
     private String correctAnswer;
+    @Column(length = 36) private String audioImportId;
+    @Column(length = 36) private String audioAssetId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lessons_id", nullable = false)

@@ -1,0 +1,3252 @@
+{
+  "798": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 06</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "799": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 07</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "800": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 08</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio 08: Người nói nói 'ただいま' (Tôi đã về rồi). Câu trả lời phù hợp nhất là 'お帰りなさい' (Chào mừng bạn đã về). Lựa chọn 1 là 'お帰りなさい'.",
+    "evidence": "Audio 08: 'ただいま' -> 'お帰りなさい'",
+    "source": "AI_REASONING"
+  },
+  "801": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>CD 09</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio 09: Người nói nói '風邪で、ちょっと頭が痛くて' (Vì bị cảm nên tôi hơi đau đầu). Câu trả lời phù hợp nhất là '大丈夫ですか' (Bạn có sao không?). Lựa chọn 2 là '大丈夫ですか'.",
+    "evidence": "Audio 09: '風邪で、ちょっと頭が痛くて' -> '大丈夫ですか'",
+    "source": "AI_REASONING"
+  },
+  "802": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>1 けさ ____ ____ ★ ____ 間に合いませんでした。</p>",
+    "choices": [
+      "おくれた",
+      "じゅぎょうに",
+      "ので",
+      "電車が"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (電車が); 2: A (おくれた); 3: C (ので); 4: B (じゅぎょうに). Dấu ★ ở ô thứ 3 nên chọn C (ので).",
+    "evidence": "1 けさ 電車が おくれた ので じゅぎょうに 間に合いませんでした。",
+    "source": "AI_REASONING"
+  },
+  "803": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>2 電車を おりる とき、 ____ ____ ★ ____ ください。</p>",
+    "choices": [
+      "たしかめて",
+      "忘れ物が",
+      "かどうか",
+      "ない"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (忘れ物が); 2: D (ない); 3: C (かどうか); 4: A (たしかめて). Dấu ★ ở ô thứ 3 nên chọn C (かどうか).",
+    "evidence": "2 電車を おりる とき、 忘れ物が ない かどうか たしかめて ください。",
+    "source": "AI_REASONING"
+  },
+  "804": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>3 しゅうまつ ____ ____ ★ ____ 行きませんか。</p>",
+    "choices": [
+      "時間が",
+      "映画を",
+      "見に",
+      "あったら"
+    ],
+    "explanation": "Thứ tự đúng: 1: A (時間が); 2: D (あったら); 3: B (映画を); 4: C (見に). Dấu ★ ở ô thứ 3 nên chọn B (映画を).",
+    "evidence": "3 しゅうまつ 時間が あったら 映画を 見に 行きませんか。",
+    "source": "AI_REASONING"
+  },
+  "805": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>4 今日 ____ ____ ★ ____ この びじゅつ館は 休みです。</p>",
+    "choices": [
+      "月曜日",
+      "は",
+      "ので",
+      "な"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (は); 2: A (月曜日); 3: D (な); 4: C (ので). Dấu ★ ở ô thứ 3 nên chọn D (な).",
+    "evidence": "4 今日 は 月曜日 な ので この びじゅつ館は 休みです。",
+    "source": "AI_REASONING"
+  },
+  "806": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【1】</p>",
+    "choices": [
+      "作れない",
+      "作れる",
+      "作る",
+      "作った"
+    ],
+    "explanation": "Câu 1: わたしは ケーキが 大好きだが、作れない (Tôi rất thích bánh nhưng không làm được). Phù hợp ngữ cảnh \"lần đầu làm\" và \"muốn tự làm\".",
+    "evidence": "わたしは ケーキが 大好きだが、作れない。",
+    "source": "AI_REASONING"
+  },
+  "807": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>【2】</p>",
+    "choices": [
+      "なぜなら",
+      "それに",
+      "ところが",
+      "それで"
+    ],
+    "explanation": "Câu 2: Kim-san làm bánh, tôi muốn làm thử, vì thế (それで) tôi hẹn làm cùng.",
+    "evidence": "キムさんが 作った ケーキを 食べて、わたしも 自分で 作って みたいと おもった。それで、今度 キムさんと いっしょに 作る やくそくを した。",
+    "source": "AI_REASONING"
+  },
+  "808": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>【3】</p>",
+    "choices": [
+      "作る",
+      "作らない",
+      "作れる",
+      "作れない"
+    ],
+    "explanation": "Câu 3: おいしく作れるかどうかわからない (Không biết có làm ngon được không).",
+    "evidence": "おいしく作れるかどうかわからないが",
+    "source": "AI_REASONING"
+  },
+  "809": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【4】</p>",
+    "choices": [
+      "できたら",
+      "できても",
+      "できなかったら",
+      "できて"
+    ],
+    "explanation": "できたら diễn đạt điều kiện: nếu làm bánh thành công thì muốn tặng cả bạn bè.",
+    "evidence": "上手にできたら友だちにもあげたい。",
+    "source": "AI_REASONING"
+  },
+  "810": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>CD 12</p>",
+    "choices": [
+      "かいぎを する",
+      "コピーする",
+      "女の人を よぶ",
+      "へやに 帰る"
+    ],
+    "explanation": "Audio 12: Người đàn ông hỏi \"Copy ngay được không?\", người phụ nữ trả lời \"Xin lỗi, mất chút thời gian. Tôi đang copy tài liệu để dùng cho cuộc họp\". Người đàn ông nói \"Vậy tôi sẽ đợi\". Người đàn ông sẽ làm gì? -> Copy (đang chờ copy).",
+    "evidence": "コピーする",
+    "source": "AI_REASONING"
+  },
+  "811": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>CD 13</p>",
+    "choices": [
+      "京都へ あそびに 行く",
+      "フェスティバルに 行く",
+      "フェスティバルに 行かない",
+      "まだ わからない"
+    ],
+    "explanation": "Audio 13: Người phụ nữ nói \"Chủ nhật bạn bè từ Kyoto đến chơi nên tôi chưa biết có đi lễ hội được không, tôi sẽ hỏi bạn rồi liên lạc lại\".",
+    "evidence": "まだ わからない",
+    "source": "AI_REASONING"
+  },
+  "812": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 14</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "なし"
+    ],
+    "explanation": "Audio 14: Câu hỏi \"Sao thế?\" (どうしたんですか). Câu trả lời 1: \"Răng tôi đau\" (歯が痛いんです). Phù hợp nhất.",
+    "evidence": "歯が痛いんです",
+    "source": "AI_REASONING"
+  },
+  "820": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>1 今日は ____ ____ ★ ____ まだ咲きませんね。</p>",
+    "choices": [
+      "さくらは",
+      "4月2日",
+      "公園の",
+      "なのに"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (公園の); 2: A (さくらは); 3: B (4月2日); 4: D (なのに). Dấu ★ ở ô thứ 3 nên chọn B (4月2日).",
+    "evidence": "1 今日は 公園の さくらは 4月2日 なのに まだ咲きませんね。",
+    "source": "AI_REASONING"
+  },
+  "821": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>2 夜はあぶないですから、一人で ____ ____ ★ ____ ですよ。</p>",
+    "choices": [
+      "ほうが",
+      "歩かない",
+      "いい",
+      "外を"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (外を); 2: B (歩かない); 3: A (ほうが); 4: C (いい). Dấu ★ ở ô thứ 3 nên chọn A (ほうが).",
+    "evidence": "2 夜はあぶないですから、一人で 外を 歩かない ほうが いい ですよ。",
+    "source": "AI_REASONING"
+  },
+  "822": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>3 5時に ____ ____ ★ ____ いいです。</p>",
+    "choices": [
+      "やめて",
+      "なったら",
+      "仕事を",
+      "帰っても"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (なったら); 2: C (仕事を); 3: A (やめて); 4: D (帰っても). Dấu ★ ở ô thứ 3 nên chọn A (やめて).",
+    "evidence": "3 5時に なったら 仕事を やめて 帰っても いいです。",
+    "source": "AI_REASONING"
+  },
+  "823": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>1 あれ、 ____ ____ ★ ____ いますよ。変ですね。</p>",
+    "choices": [
+      "電気が",
+      "山田さんの",
+      "ついて",
+      "部屋の"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (山田さんの); 2: D (部屋の); 3: A (電気が); 4: C (ついて). Dấu ★ ở ô thứ 3 nên chọn A (電気が).",
+    "evidence": "1 あれ、 山田さんの 部屋の 電気が ついて いますよ。変ですね。",
+    "source": "AI_REASONING"
+  },
+  "824": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>2 中国の ____ ____ ★ ____ 多いです。</p>",
+    "choices": [
+      "人口は",
+      "アメリカ",
+      "より",
+      "ずっと"
+    ],
+    "explanation": "Thứ tự đúng: 1: A (人口は); 2: B (アメリカ); 3: C (より); 4: D (ずっと). Dấu ★ ở ô thứ 3 nên chọn C (より).",
+    "evidence": "2 中国の 人口は アメリカ より ずっと 多いです。",
+    "source": "AI_REASONING"
+  },
+  "825": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>3 東京では、夏に ____ ____ ★ ____ とてもにぎやかです。</p>",
+    "choices": [
+      "なると",
+      "行われて",
+      "花火大会が",
+      "大きい"
+    ],
+    "explanation": "Thứ tự đúng: 1: A (なると); 2: D (大きい); 3: C (花火大会が); 4: B (行われて). Dấu ★ ở ô thứ 3 nên chọn C (花火大会が).",
+    "evidence": "3 東京では、夏に なると 大きい 花火大会が 行われて とてもにぎやかです。",
+    "source": "AI_REASONING"
+  },
+  "826": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>4 これは ____ ____ ★ ____ です。</p>",
+    "choices": [
+      "によって",
+      "レオナルド・ダ・ヴィンチ",
+      "かかれた",
+      "絵"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (レオナルド・ダ・ヴィンチ); 2: A (によって); 3: C (かかれた); 4: D (絵). Dấu ★ ở ô thứ 3 nên chọn C (かかれた).",
+    "evidence": "4 これは レオナルド・ダ・ヴィンチ によって かかれた 絵 です。",
+    "source": "AI_REASONING"
+  },
+  "827": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>5 この写真を ____ ____ ★ ____ おぼえていますか。</p>",
+    "choices": [
+      "のは",
+      "いつ",
+      "とった",
+      "だったか"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (とった); 2: A (のは); 3: B (いつ); 4: D (だったか). Dấu ★ ở ô thứ 3 nên chọn B (いつ).",
+    "evidence": "5 この写真を とった のは いつ だったか おぼえていますか。",
+    "source": "AI_REASONING"
+  },
+  "828": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>6 今度の ____ ____ ★ ____ と思います。</p>",
+    "choices": [
+      "かつ",
+      "試合で",
+      "大変だ",
+      "のは"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (試合で); 2: A (かつ); 3: D (のは); 4: C (大変だ). Dấu ★ ở ô thứ 3 nên chọn D (のは).",
+    "evidence": "6 今度の 試合で かつ のは 大変だ と思います。",
+    "source": "AI_REASONING"
+  },
+  "829": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>1 東京マラソン大会の申し込みはいつからですか。</p>",
+    "choices": [
+      "春",
+      "夏",
+      "秋",
+      "冬"
+    ],
+    "explanation": "Đoạn văn ghi: '東京マラソンは夏に参加の申し込みが始まります' (Đăng ký tham gia Tokyo Marathon bắt đầu vào mùa hè).",
+    "evidence": "東京マラソンは夏に参加の申し込みが始まります",
+    "source": "AI_REASONING"
+  },
+  "830": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>2 チャリティーランナーは何をしますか。</p>",
+    "choices": [
+      "ランナーからお金を集めます。",
+      "お金を払って、ランナーを助けます。",
+      "お金を払って、マラソンに参加します。",
+      "山に木を植えます。"
+    ],
+    "explanation": "Đoạn văn ghi: 以上のお金を払って参加する人もいます。チャリティーランナーと呼ばれています。 Nghĩa là họ trả tiền để tham gia.",
+    "evidence": "以上のお金を払って参加する人もいます。チャリティーランナーと呼ばれています。",
+    "source": "AI_REASONING"
+  },
+  "831": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 21</p>",
+    "choices": [
+      "しゃしんを見ている",
+      "バスにのっている",
+      "山にのぼっている",
+      "ごはんを食べている"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "832": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>CD 22</p>",
+    "choices": [
+      "いちども見たことがない",
+      "いっかい見たことがある",
+      "大学のとき、見た",
+      "なんかいも見たことがある"
+    ],
+    "explanation": "Trong audio, người nam hỏi: 前に一度見たことがあるんですが... (Tôi đã từng xem một lần trước đây).",
+    "evidence": "前に一度見たことがあるんですが、とても素敵な映画ですよ。",
+    "source": "AI_REASONING"
+  },
+  "833": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>1 今日は ____ ____ ★ ____ かもしれません。</p>",
+    "choices": [
+      "富士山が",
+      "見えない",
+      "ので",
+      "くもっている"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (くもっている); 2: C (ので); 3: A (富士山が); 4: B (見えない). Dấu ★ ở ô thứ 3 nên chọn A (富士山が).",
+    "evidence": "1 今日は くもっている ので 富士山が 見えない かもしれません。",
+    "source": "AI_REASONING"
+  },
+  "834": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>2 道が こんで いるので、空港まで ____ ____ ★ ____ です。</p>",
+    "choices": [
+      "2時間",
+      "そう",
+      "かかり",
+      "くらい"
+    ],
+    "explanation": "Thứ tự đúng: 1: A (2時間); 2: D (くらい); 3: C (かかり); 4: B (そう). Dấu ★ ở ô thứ 3 nên chọn C (かかり).",
+    "evidence": "2 道が こんで いるので、空港まで 2時間 くらい かかり そう です。",
+    "source": "AI_REASONING"
+  },
+  "835": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>3 天気が ____ ____ ★ ____ します。</p>",
+    "choices": [
+      "ちゅうし",
+      "明日の",
+      "ハイキングは",
+      "悪ければ"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (悪ければ); 2: B (明日の); 3: C (ハイキングは); 4: A (ちゅうし). Dấu ★ ở ô thứ 3 nên chọn C (ハイキングは).",
+    "evidence": "3 天気が 悪ければ 明日の ハイキングは ちゅうし します。",
+    "source": "AI_REASONING"
+  },
+  "836": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>4 明日、大切な お客さんが 来ますから、____ ____ ★ ____ ください。</p>",
+    "choices": [
+      "して",
+      "そうじ",
+      "おいて",
+      "じむしょを"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (じむしょを); 2: B (そうじ); 3: A (して); 4: C (おいて). Dấu ★ ở ô thứ 3 nên chọn A (して).",
+    "evidence": "4 明日、大切な お客さんが 来ますから、じむしょを そうじ して おいて ください。",
+    "source": "AI_REASONING"
+  },
+  "837": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>5 旅行のとき、____ ____ ★ ____ しまいました。</p>",
+    "choices": [
+      "なくして",
+      "もらった",
+      "父に",
+      "カメラを"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (父に); 2: B (もらった); 3: D (カメラを); 4: A (なくして). Dấu ★ ở ô thứ 3 nên chọn D (カメラを).",
+    "evidence": "5 旅行のとき、父に もらった カメラを なくして しまいました。",
+    "source": "AI_REASONING"
+  },
+  "838": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【1】</p>",
+    "choices": [
+      "たいへん",
+      "おもしろ",
+      "楽",
+      "かんたん"
+    ],
+    "explanation": "たいへんそう là có vẻ vất vả, phù hợp với việc ban đầu không muốn đi leo núi.",
+    "evidence": "山にのぼるのはたいへんそうだから、ほんとうは行きたくなかった。",
+    "source": "AI_REASONING"
+  },
+  "839": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>【2】</p>",
+    "choices": [
+      "のぼる",
+      "のぼって",
+      "のぼれば",
+      "のぼった"
+    ],
+    "explanation": "のぼれば diễn đạt điều kiện: nếu dùng cáp treo để lên núi thì không sao.",
+    "evidence": "ロープウェイを使ってのぼればだいじょうぶ",
+    "source": "AI_REASONING"
+  },
+  "840": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>【3】</p>",
+    "choices": [
+      "行かない",
+      "行く",
+      "行ける",
+      "行った"
+    ],
+    "explanation": "行くことにした nghĩa là đã quyết định đi; động từ thể từ điển đứng trước ことにする.",
+    "evidence": "行くことにした。",
+    "source": "AI_REASONING"
+  },
+  "841": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>【4】</p>",
+    "choices": [
+      "運動していた",
+      "運動しないことにした",
+      "運動しておいた",
+      "運動しそうだった"
+    ],
+    "explanation": "Cấu trúc: [V-te] + おく (làm sẵn việc gì trước khi đi). '運動しておいた' (đã tập thể dục sẵn).",
+    "evidence": "私も少し運動しておいたほうがいいかなあ",
+    "source": "AI_REASONING"
+  },
+  "842": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 25</p>",
+    "choices": [
+      "レストランのよやくをした",
+      "鈴木さんのうちへ行った",
+      "レストランへ行った",
+      "12時に駅へ行った"
+    ],
+    "explanation": "Trong audio, người nam nói '実はおととい予約しておいたんだ' (Thực ra tôi đã đặt chỗ từ hôm kia rồi).",
+    "evidence": "実はおととい予約しておいたんだ",
+    "source": "AI_REASONING"
+  },
+  "843": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 26</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "なし"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "844": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 27</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "なし"
+    ],
+    "explanation": "Audio nói về việc đi núi Phú Sơn ngày mai. Người trả lời nói 'うん、いい天気だといいね' (Ừ, hy vọng thời tiết tốt).",
+    "evidence": "うん、いい天気だといいね",
+    "source": "AI_REASONING"
+  },
+  "845": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 28</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "なし"
+    ],
+    "explanation": "Audio hỏi về kế hoạch nghỉ hè. Người trả lời nói '国へ帰ることにしたよ' (Tôi đã quyết định về nước).",
+    "evidence": "国へ帰ることにしたよ",
+    "source": "AI_REASONING"
+  },
+  "846": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>1 A:この電車、すずしいですね。 B:ええ。 ____ ____ ★ ____ ね。</p>",
+    "choices": [
+      "ようです",
+      "エアコンが",
+      "いる",
+      "ついて"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (エアコンが); 2: D (ついて); 3: C (いる); 4: A (ようです). Dấu ★ ở ô thứ 3 nên chọn C (いる).",
+    "evidence": "1 A:この電車、すずしいですね。 B:ええ。 エアコンが ついて いる ようです ね。",
+    "source": "AI_REASONING"
+  },
+  "847": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>2 A:かぜ、なおった？明日の試合、だいじょうぶ？ B:うん。たとえ ____ ____ ★ ____ しんぱいしないで。</p>",
+    "choices": [
+      "下がらなくても",
+      "試合には",
+      "出るから",
+      "ねつが"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (ねつが); 2: A (下がらなくても); 3: B (試合には); 4: C (出るから). Dấu ★ ở ô thứ 3 nên chọn B (試合には).",
+    "evidence": "2 A:かぜ、なおった？明日の試合、だいじょうぶ？ B:うん。たとえ ねつが 下がらなくても 試合には 出るから しんぱいしないで。",
+    "source": "AI_REASONING"
+  },
+  "848": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>3 きのうカラオケで ____ ____ ★ ____ です。</p>",
+    "choices": [
+      "のどが",
+      "すぎて",
+      "歌い",
+      "いたい"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (歌い); 2: B (すぎて); 3: A (のどが); 4: D (いたい). Dấu ★ ở ô thứ 3 nên chọn A (のどが).",
+    "evidence": "3 きのうカラオケで 歌い すぎて のどが いたい です。",
+    "source": "AI_REASONING"
+  },
+  "849": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>4 箱根へ ____ ____ ★ ____ しました。</p>",
+    "choices": [
+      "富士山が",
+      "行ったのに",
+      "がっかり",
+      "見えなくて"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (行ったのに); 2: A (富士山が); 3: D (見えなくて); 4: C (がっかり). Dấu ★ ở ô thứ 3 nên chọn D (見えなくて).",
+    "evidence": "4 箱根へ 行ったのに 富士山が 見えなくて がっかり しました。",
+    "source": "AI_REASONING"
+  },
+  "850": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>5 ホームから ____ ____ ★ ____ つけることにしました。</p>",
+    "choices": [
+      "ホームゲートを",
+      "ように",
+      "おちない",
+      "人が"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (人が); 2: C (おちない); 3: B (ように); 4: A (ホームゲートを). Dấu ★ ở ô thứ 3 nên chọn B (ように).",
+    "evidence": "5 ホームから 人が おちない ように ホームゲートを つけることにしました。",
+    "source": "AI_REASONING"
+  },
+  "851": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>6 台風が来るから、今日は ____ ____ ★ ____ ですか。</p>",
+    "choices": [
+      "いい",
+      "んじゃない",
+      "ほうが",
+      "出かけない"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (出かけない); 2: C (ほうが); 3: A (いい); 4: B (んじゃない). Dấu ★ ở ô thứ 3 nên chọn A (いい).",
+    "evidence": "6 台風が来るから、今日は 出かけない ほうが いい んじゃない ですか。",
+    "source": "AI_REASONING"
+  },
+  "852": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>【1】</p>",
+    "choices": [
+      "なっていたら",
+      "なっていたも",
+      "なっていると",
+      "なっていて"
+    ],
+    "explanation": "Dùng thể 'て' để nối các trạng thái: '手が赤くなっていて' (tay bị đỏ lên).",
+    "evidence": "手が赤く なっていて おどろいた",
+    "source": "AI_REASONING"
+  },
+  "853": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>【2】</p>",
+    "choices": [
+      "かんだ",
+      "かんで",
+      "かまれた",
+      "かませた"
+    ],
+    "explanation": "Dùng thể bị động 'かまれた' vì bị mèo cắn.",
+    "evidence": "子ねこに かまれた らしい",
+    "source": "AI_REASONING"
+  },
+  "854": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【3】</p>",
+    "choices": [
+      "やさしすぎる",
+      "やさしすぎて",
+      "やさしそうだ",
+      "やさしいそうだ"
+    ],
+    "explanation": "Trang gốc có から sau ô số 3. やさしすぎるから nghĩa là vì quá tốt bụng nên người kể lo lắng.",
+    "evidence": "鈴木くんはやさしすぎるから、とてもしんぱいだ。",
+    "source": "AI_REASONING"
+  },
+  "855": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【4】</p>",
+    "choices": [
+      "ように",
+      "のに",
+      "ので",
+      "から"
+    ],
+    "explanation": "Vないように言う dùng khi khuyên hoặc dặn ai đừng làm gì.",
+    "evidence": "むりをしないように言ったけど…。",
+    "source": "AI_REASONING"
+  },
+  "856": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 31</p>",
+    "choices": [
+      "道をまちがえられたこと",
+      "お金が足りなくなったこと",
+      "カードではらったこと",
+      "その国のことばが話せなかったこと"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "857": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 32</p>",
+    "choices": [
+      "女の人にかえす",
+      "女の人にかす",
+      "ほかの友だちにかす",
+      "ほかの人にかりる"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "858": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 33</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "859": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 34</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "860": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 35</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "861": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>1 試験にごうかくする ____ ____ ★ ____ です。</p>",
+    "choices": [
+      "うけてみる",
+      "わかりませんが",
+      "かどうか",
+      "つもり"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (かどうか); 2: B (わかりませんが); 3: A (うけてみる); 4: D (つもり). Dấu ★ ở ô thứ 3 nên chọn A (うけてみる).",
+    "evidence": "1 試験にごうかくする かどうか わかりませんが うけてみる つもり です。",
+    "source": "AI_REASONING"
+  },
+  "862": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>2 けんこうの ____ ____ ★ ____ と思います。</p>",
+    "choices": [
+      "ほうがいい",
+      "野菜を",
+      "たくさん食べた",
+      "ために"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (ために); 2: B (野菜を); 3: C (たくさん食べた); 4: A (ほうがいい). Dấu ★ ở ô thứ 3 nên chọn C (たくさん食べた).",
+    "evidence": "2 けんこうの ために 野菜を たくさん食べた ほうがいい と思います。",
+    "source": "AI_REASONING"
+  },
+  "863": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>3 夏休みは山に ____ ____ ★ ____ と思っています。</p>",
+    "choices": [
+      "海で",
+      "のぼったり",
+      "しよう",
+      "およだいり"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (のぼったり); 2: A (海で); 3: D (およだいり); 4: C (しよう). Dấu ★ ở ô thứ 3 nên chọn D (およだいり).",
+    "evidence": "3 夏休みは山に のぼったり 海で およだいり しよう と思っています。",
+    "source": "AI_REASONING"
+  },
+  "864": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>4 来年、せんもん学校に ____ ____ ★ ____ と思っています。</p>",
+    "choices": [
+      "デザインの",
+      "入って",
+      "しよう",
+      "勉強を"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (入って); 2: A (デザインの); 3: D (勉強を); 4: C (しよう). Dấu ★ ở ô thứ 3 nên chọn D (勉強を).",
+    "evidence": "4 来年、せんもん学校に 入って デザインの 勉強を しよう と思っています。",
+    "source": "AI_REASONING"
+  },
+  "865": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>5 きいろのしんごうは、すぐ ____ ____ ★ ____ という意味です。</p>",
+    "choices": [
+      "なる",
+      "ちゅういしろ",
+      "赤に",
+      "から"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (赤に); 2: A (なる); 3: D (から); 4: B (ちゅういしろ). Dấu ★ ở ô thứ 3 nên chọn D (から).",
+    "evidence": "5 きいろのしんごうは、すぐ 赤に なる から ちゅういしろ という意味です。",
+    "source": "AI_REASONING"
+  },
+  "866": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>わたしは子どものとき、父に毎日ピアノを 【1】 と言われて、たいへんだった。 【1】</p>",
+    "choices": [
+      "練習する",
+      "練習しろ",
+      "練習した",
+      "練習される"
+    ],
+    "explanation": "Câu trích dẫn mệnh lệnh: [Động từ thể mệnh lệnh] + と言われて. Ở đây: 父に毎日ピアノを練習しろと言われて (Bị bố bảo là hãy luyện tập piano mỗi ngày).",
+    "evidence": "父に毎日ピアノを練習しろと言われて",
+    "source": "AI_REASONING"
+  },
+  "867": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>でも今はむずかしいきょくもひけて、ピアノの楽しさもわかる 【2】 。 【2】</p>",
+    "choices": [
+      "ようになる",
+      "ようになった",
+      "ようにした",
+      "ようにする"
+    ],
+    "explanation": "Cấu trúc: [Động từ thể từ điển] + ようになった (đã trở nên có thể làm gì đó). Ở đây: ピアノの楽しさもわかるようになった (đã trở nên hiểu được niềm vui của piano).",
+    "evidence": "ピアノの楽しさもわかるようになった",
+    "source": "AI_REASONING"
+  },
+  "868": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>山田さんは子どもにピアノを 【3】 と言っていた。わたしも自分の子どもにピアノを 【3】 。 【3】</p>",
+    "choices": [
+      "習おう",
+      "習いたい",
+      "習われたい",
+      "習わせたい"
+    ],
+    "explanation": "Cấu trúc: [Động từ thể sai khiến] + たい (muốn bắt ai làm gì). Ở đây: 自分の子どもにピアノを習わせたい (muốn cho con mình học piano).",
+    "evidence": "自分の子どもにピアノを習わせたい",
+    "source": "AI_REASONING"
+  },
+  "869": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>たんじょう日に子どもがわたしの 【4】 ピアノをひいてくれたら、とてもうれしいと思う。 【4】</p>",
+    "choices": [
+      "ために",
+      "ほうが",
+      "なのに",
+      "より"
+    ],
+    "explanation": "Cấu trúc: [Danh từ] + のために (vì/cho). Ở đây: わたしのために (cho tôi).",
+    "evidence": "たんじょう日に子どもがわたしのためにピアノをひいてくれたら",
+    "source": "AI_REASONING"
+  },
+  "870": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>1 花子さんができないことは何ですか。</p>",
+    "choices": [
+      "朝のあいさつをすること",
+      "ご飯を作ること",
+      "ていねいな言葉で話すこと",
+      "言葉を覚えること"
+    ],
+    "explanation": "Đoạn văn nói: \"そんな失礼な言い方をしてはいけません\" (Không được nói cách nói thất lễ như vậy). Suy ra Hanako chưa biết cách nói lịch sự.",
+    "evidence": "そんな失礼な言い方をしてはいけません。",
+    "source": "AI_REASONING"
+  },
+  "871": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>2 花子さんは「顔を洗え」という言葉をどうやって覚えましたか。</p>",
+    "choices": [
+      "たろうさんの言葉を聞いて覚えました。",
+      "たろうさんといっしょに勉強して覚えました。",
+      "たろうさんに話し方を教えてもらって覚えました。",
+      "日本語学校で勉強して覚えました。"
+    ],
+    "explanation": "Đoạn văn nói: \"私が話すのを聞いて、言葉を覚えま\" (Nghe tôi nói và học từ).",
+    "evidence": "私が話すのを聞いて、言葉を覚えます。",
+    "source": "AI_REASONING"
+  },
+  "872": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>3 たろうさんはこれから花子さんに何をさせたいと思っていますか。</p>",
+    "choices": [
+      "たろうさんの言葉を覚えさせたいと思っています。",
+      "日本語学校で勉強させたいと思っています。",
+      "日本語学校で働かせたいと思っています。",
+      "日本語のソフトを作らせたいと思っています。"
+    ],
+    "explanation": "Đoạn văn nói: \"私は花子を、日本語学校に通わせようと思っています\" (Tôi định cho Hanako đi học ở trường tiếng Nhật).",
+    "evidence": "私は花子を、日本語学校に通わせようと思っています。",
+    "source": "AI_REASONING"
+  },
+  "873": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>CD 38</p>",
+    "choices": [
+      "じてんしゃで学校へ来たから",
+      "入口の前にじてんしゃをとめたから",
+      "学校のよこにじてんしゃをとめたから",
+      "じてんしゃおきばにじてんしゃをとめたから"
+    ],
+    "explanation": "Audio 38: Người đàn ông bảo người phụ nữ không được để xe ở trước lối vào, hãy để ở bãi đỗ xe (じてんしゃおきば).",
+    "evidence": "学校のよこにじてんしゃをとめたから (Sai), じてんしゃおきばにじてんしゃをとめたから (Đúng).",
+    "source": "AI_REASONING"
+  },
+  "892": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>1 鈴木さんの話では ____ ____ ★ ____ そうです。</p>",
+    "choices": [
+      "料理は",
+      "しょくどうの",
+      "おいしい",
+      "安くて"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (しょくどうの); 2: A (料理は); 3: D (安くて); 4: C (おいしい). Dấu ★ ở ô thứ 3 nên chọn D (安くて).",
+    "evidence": "1 鈴木さんの話では しょくどうの 料理は 安くて おいしい そうです。",
+    "source": "AI_REASONING"
+  },
+  "893": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>2 かちょうが ____ ____ ★ ____ のを知っていますか。</p>",
+    "choices": [
+      "入院",
+      "なさった",
+      "じこで",
+      "自動車の"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (自動車の); 2: C (じこで); 3: A (入院); 4: B (なさった). Dấu ★ ở ô thứ 3 nên chọn A (入院).",
+    "evidence": "2 かちょうが 自動車の じこで 入院 なさった のを知っていますか。",
+    "source": "AI_REASONING"
+  },
+  "894": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>3 西川さんは ____ ____ ★ ____ ことになりました。</p>",
+    "choices": [
+      "病気の",
+      "ために",
+      "会社を",
+      "おやめになる"
+    ],
+    "explanation": "Thứ tự đúng: 1: A (病気の); 2: B (ために); 3: C (会社を); 4: D (おやめになる). Dấu ★ ở ô thứ 3 nên chọn C (会社を).",
+    "evidence": "3 西川さんは 病気の ために 会社を おやめになる ことになりました。",
+    "source": "AI_REASONING"
+  },
+  "895": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>4 田中さんは ____ ____ ★ ____ います。</p>",
+    "choices": [
+      "おへやで",
+      "ホテルの",
+      "になって",
+      "お休み"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (ホテルの); 2: A (おへやで); 3: D (お休み); 4: C (になって). Dấu ★ ở ô thứ 3 nên chọn D (お休み).",
+    "evidence": "4 田中さんは ホテルの おへやで お休み になって います。",
+    "source": "AI_REASONING"
+  },
+  "896": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>5 図書館の本は ____ ____ ★ ____ なっています。</p>",
+    "choices": [
+      "以内に",
+      "ことに",
+      "2週間",
+      "返す"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (2週間); 2: A (以内に); 3: D (返す); 4: B (ことに). Dấu ★ ở ô thứ 3 nên chọn D (返す).",
+    "evidence": "5 図書館の本は 2週間 以内に 返す ことに なっています。",
+    "source": "AI_REASONING"
+  },
+  "897": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>6 この ____ ____ ★ ____ いたします。</p>",
+    "choices": [
+      "ごらんになって",
+      "しょるいを",
+      "サインを",
+      "おねがい"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (しょるいを); 2: A (ごらんになって); 3: C (サインを); 4: D (おねがい). Dấu ★ ở ô thứ 3 nên chọn C (サインを).",
+    "evidence": "6 この しょるいを ごらんになって サインを おねがい いたします。",
+    "source": "AI_REASONING"
+  },
+  "898": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>7 今度の ____ ____ ★ ____ 教えてください。</p>",
+    "choices": [
+      "いちばん",
+      "楽しかった",
+      "旅行で",
+      "ことを"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (旅行で); 2: A (いちばん); 3: B (楽しかった); 4: D (ことを). Dấu ★ ở ô thứ 3 nên chọn B (楽しかった).",
+    "evidence": "7 今度の 旅行で いちばん 楽しかった ことを 教えてください。",
+    "source": "AI_REASONING"
+  },
+  "899": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>1 じゅんばんに お名前を ____ ____ ★ ____ ください。</p>",
+    "choices": [
+      "おまち",
+      "およびします",
+      "こちらで",
+      "ので"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (およびします); 2: D (ので); 3: C (こちらで); 4: A (おまち). Dấu ★ ở ô thứ 3 nên chọn C (こちらで).",
+    "evidence": "1 じゅんばんに お名前を およびします ので こちらで おまち ください。",
+    "source": "AI_REASONING"
+  },
+  "900": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>2 帰国する ____ ____ ★ ____ と思っています。</p>",
+    "choices": [
+      "かかりたい",
+      "山田先生に",
+      "お目に",
+      "前に"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (前に); 2: B (山田先生に); 3: C (お目に); 4: A (かかりたい). Dấu ★ ở ô thứ 3 nên chọn C (お目に).",
+    "evidence": "2 帰国する 前に 山田先生に お目に かかりたい と思っています。",
+    "source": "AI_REASONING"
+  },
+  "901": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>3 すみませんが、この ____ ____ ★ ____ か。</p>",
+    "choices": [
+      "よろしい",
+      "でしょう",
+      "いただいても",
+      "カタログを"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (カタログを); 2: C (いただいても); 3: A (よろしい); 4: B (でしょう). Dấu ★ ở ô thứ 3 nên chọn A (よろしい).",
+    "evidence": "3 すみませんが、この カタログを いただいても よろしい でしょう か。",
+    "source": "AI_REASONING"
+  },
+  "902": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>4 日本語 ____ ____ ★ ____ タイ語はわかりますん。</p>",
+    "choices": [
+      "なら",
+      "けど、",
+      "教えられます",
+      "少し"
+    ],
+    "explanation": "Thứ tự đúng: 1: A (なら); 2: C (教えられます); 3: B (けど、); 4: D (少し). Dấu ★ ở ô thứ 3 nên chọn B (けど、).",
+    "evidence": "4 日本語 なら 教えられます けど、 少し タイ語はわかりますん。",
+    "source": "AI_REASONING"
+  },
+  "903": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>5 田中さん、 ____ ____ ★ ____ んですが、時間がありますか。</p>",
+    "choices": [
+      "ほしい",
+      "仕事を",
+      "この",
+      "てつだって"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (この); 2: B (仕事を); 3: D (てつだって); 4: A (ほしい). Dấu ★ ở ô thứ 3 nên chọn D (てつだって).",
+    "evidence": "5 田中さん、 この 仕事を てつだって ほしい んですが、時間がありますか。",
+    "source": "AI_REASONING"
+  },
+  "904": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>【1】</p>",
+    "choices": [
+      "のに",
+      "でも",
+      "なら",
+      "ので"
+    ],
+    "explanation": "Câu 1: '英語を教える仕事【1】と思ったので' -> '英語を教える仕事なら' (Nếu là công việc dạy tiếng Anh).",
+    "evidence": "英語を教える仕事ならと思ったので",
+    "source": "AI_REASONING"
+  },
+  "905": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【2】</p>",
+    "choices": [
+      "使うようにした",
+      "使えるようになった",
+      "使うことになった",
+      "使ってしまった"
+    ],
+    "explanation": "使うようにした diễn đạt cố gắng sử dụng tiếng Nhật lịch sự trong buổi phỏng vấn; không phải đã đạt được khả năng mới hay được quyết định hộ.",
+    "evidence": "いっしょうけんめいていねいな日本語を使うようにしたが…",
+    "source": "AI_REASONING"
+  },
+  "906": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>【3】</p>",
+    "choices": [
+      "と",
+      "のに",
+      "が",
+      "から"
+    ],
+    "explanation": "から nêu lý do tự tin: đã từng dạy lớp TOEFL ở Mỹ nên có lẽ sẽ ổn.",
+    "evidence": "アメリカでTOEFLのクラスを教えたこともあるからだいじょうぶだろう。",
+    "source": "AI_REASONING"
+  },
+  "907": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>【4】</p>",
+    "choices": [
+      "教えたい",
+      "教えてほしい",
+      "教えてしまう",
+      "教えてみる"
+    ],
+    "explanation": "Câu 4: '月曜日と水曜日に【4】と言われたが' -> '教えてほしい' (được yêu cầu dạy vào thứ 2 và thứ 4).",
+    "evidence": "月曜日と水曜日に教えてほしいと言われたが",
+    "source": "AI_REASONING"
+  },
+  "908": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 55</p>",
+    "choices": [
+      "めんせつをする",
+      "せつめいをする",
+      "じゅぎょうをする",
+      "おしえるれんしゅうをする"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "909": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>CD 56</p>",
+    "choices": [
+      "花火をすること",
+      "よる、大きなこえで話すこと",
+      "ごみをすてること",
+      "そうじすること"
+    ],
+    "explanation": "Audio 56: Cảnh báo không được nói to vào ban đêm (夜、大きなこえで話すこと).",
+    "evidence": "夜、大きなこえで話さないようにしてください",
+    "source": "AI_REASONING"
+  },
+  "910": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 57</p>",
+    "choices": [
+      "へやのじゅんびをする",
+      "ここでまつ",
+      "コーヒーを飲む",
+      "スポーツ新聞を持ってくる"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "911": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 58</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "912": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>1) 買い物は全部( ) 1,500円でした。</p>",
+    "choices": [
+      "に",
+      "が",
+      "で",
+      "ずつ"
+    ],
+    "explanation": "Trợ từ 'で' dùng để chỉ tổng số tiền hoặc số lượng khi kết thúc một hành động (mua sắm).",
+    "evidence": "買い物は全部で1,500円でした。",
+    "source": "AI_REASONING"
+  },
+  "913": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>2) A: すみませんが、だれ( ) 手伝っていただけませんか。 B: あ、いいですよ。</p>",
+    "choices": [
+      "は",
+      "が",
+      "か",
+      "に"
+    ],
+    "explanation": "Trợ từ 'か' dùng để hỏi về một đối tượng không xác định (ai đó).",
+    "evidence": "だれか手伝っていただけませんか。",
+    "source": "AI_REASONING"
+  },
+  "914": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>3) ほら、鳥が空( ) とんでいますよ。</p>",
+    "choices": [
+      "を",
+      "で",
+      "に",
+      "が"
+    ],
+    "explanation": "Trợ từ 'を' dùng với các động từ di chuyển (bay, đi, chạy) để chỉ không gian mà hành động đó diễn ra.",
+    "evidence": "鳥が空をとんでいますよ。",
+    "source": "AI_REASONING"
+  },
+  "915": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>4) A: 映画を見に行きましょう。いつがいいですか。 B: 休の日なら、いつ( ) いいですよ。</p>",
+    "choices": [
+      "から",
+      "が",
+      "でも",
+      "も"
+    ],
+    "explanation": "Cấu trúc 'いつ + でも' mang nghĩa 'lúc nào cũng được'.",
+    "evidence": "いつでもいいですよ。",
+    "source": "AI_REASONING"
+  },
+  "916": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>5) 雨( ) 川の水がふえましたから、気をつけてください。</p>",
+    "choices": [
+      "を",
+      "で",
+      "に",
+      "が"
+    ],
+    "explanation": "Trợ từ 'で' chỉ nguyên nhân (do mưa nên nước sông tăng).",
+    "evidence": "雨で川の水がふえましたから",
+    "source": "AI_REASONING"
+  },
+  "917": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>6) A: 私は毎日12時間くらい寝ます。 B: え？12時間( ) 寝るんですか。</p>",
+    "choices": [
+      "に",
+      "しか",
+      "も",
+      "だけ"
+    ],
+    "explanation": "Trợ từ 'も' dùng để nhấn mạnh số lượng nhiều (tận 12 tiếng).",
+    "evidence": "12時間も寝るんですか。",
+    "source": "AI_REASONING"
+  },
+  "918": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>7) A: ちょっとお金を貸してください。 B: すみません。私も1,000円( ) 持っていないんです。</p>",
+    "choices": [
+      "だけ",
+      "しか",
+      "から",
+      "くらい"
+    ],
+    "explanation": "Cấu trúc '～しか + phủ định' mang nghĩa 'chỉ có...'.",
+    "evidence": "私も1,000円しか持っていないんです。",
+    "source": "AI_REASONING"
+  },
+  "919": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>8) きのうの夜、30分( ) 勉強しました。</p>",
+    "choices": [
+      "だけ",
+      "しか",
+      "から",
+      "まで"
+    ],
+    "explanation": "Trợ từ 'だけ' dùng để giới hạn số lượng (chỉ 30 phút).",
+    "evidence": "30分だけ勉強しました。",
+    "source": "AI_REASONING"
+  },
+  "920": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>9) 今からミカンをくばります。1人3つ( ) 取ってください。</p>",
+    "choices": [
+      "ずつ",
+      "しか",
+      "が",
+      "で"
+    ],
+    "explanation": "Trợ từ 'ずつ' dùng để chỉ sự phân chia đều (mỗi người 3 cái).",
+    "evidence": "1人3つずつ取ってください。",
+    "source": "AI_REASONING"
+  },
+  "921": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>1) 道を ____ ____ ★ ____ つけてください。</p>",
+    "choices": [
+      "気を",
+      "わたる",
+      "車に",
+      "ときは"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (わたる); 2: D (ときは); 3: C (車に); 4: A (気を). Dấu ★ ở ô thứ 3 nên chọn C (車に).",
+    "evidence": "1) 道を わたる ときは 車に 気を つけてください。",
+    "source": "AI_REASONING"
+  },
+  "922": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>2) 鈴木さんはピアノは ____ ____ ★ ____ ありません。</p>",
+    "choices": [
+      "あまり",
+      "上手ですが",
+      "上手じゃ",
+      "歌は"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (上手ですが); 2: D (歌は); 3: A (あまり); 4: C (上手じゃ). Dấu ★ ở ô thứ 3 nên chọn A (あまり).",
+    "evidence": "2) 鈴木さんはピアノは 上手ですが 歌は あまり 上手じゃ ありません。",
+    "source": "AI_REASONING"
+  },
+  "923": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>3) 今日は8時 ____ ____ ★ ____ じゅんびをしなければなりません。</p>",
+    "choices": [
+      "会社へ",
+      "会議の",
+      "行って",
+      "までに"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (までに); 2: A (会社へ); 3: C (行って); 4: B (会議の). Dấu ★ ở ô thứ 3 nên chọn C (行って).",
+    "evidence": "3) 今日は8時 までに 会社へ 行って 会議の じゅんびをしなければなりません。",
+    "source": "AI_REASONING"
+  },
+  "924": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>4) 私は ____ ____ ★ ____ そうじをしています。</p>",
+    "choices": [
+      "1回",
+      "部屋の",
+      "に",
+      "1週間"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (1週間); 2: C (に); 3: A (1回); 4: B (部屋の). Dấu ★ ở ô thứ 3 nên chọn A (1回).",
+    "evidence": "4) 私は 1週間 に 1回 部屋の そうじをしています。",
+    "source": "AI_REASONING"
+  },
+  "925": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>5) まだ ____ ____ ★ ____ しませんか。</p>",
+    "choices": [
+      "公園でも",
+      "時間が",
+      "散歩",
+      "あるから"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (時間が); 2: D (あるから); 3: A (公園でも); 4: C (散歩). Dấu ★ ở ô thứ 3 nên chọn A (公園でも).",
+    "evidence": "5) まだ 時間が あるから 公園でも 散歩 しませんか。",
+    "source": "AI_REASONING"
+  },
+  "926": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>1) A: ( ) 出張のレポートを書きましたか。 B: はい。きのう部長に出しました。</p>",
+    "choices": [
+      "ちょっと",
+      "だんだん",
+      "よく",
+      "もう"
+    ],
+    "explanation": "Phó từ 'もう' dùng để hỏi về việc đã hoàn thành chưa.",
+    "evidence": "もう出張のレポートを書きましたか。",
+    "source": "AI_REASONING"
+  },
+  "927": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>2) 難しい問題でも先生に説明してもらえば、( ) わかりますよ。</p>",
+    "choices": [
+      "もう",
+      "まだ",
+      "あまり",
+      "よく"
+    ],
+    "explanation": "Phó từ 'よく' (rõ ràng, kỹ càng) đi với 'わかります'.",
+    "evidence": "よくわかりますよ。",
+    "source": "AI_REASONING"
+  },
+  "928": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>3) A: 寒いですね。 B: そうですね。でもこれから( ) 寒くなりますよ。</p>",
+    "choices": [
+      "もっと",
+      "よく",
+      "はじめて",
+      "あまり"
+    ],
+    "explanation": "Phó từ 'もっと' dùng để chỉ mức độ tăng thêm (lạnh hơn nữa).",
+    "evidence": "これからもっと寒くなりますよ。",
+    "source": "AI_REASONING"
+  },
+  "929": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>4) リンさんは( ) 冬休みは国へ帰らないでしょう。</p>",
+    "choices": [
+      "よく",
+      "だんだん",
+      "たぶん",
+      "はじめて"
+    ],
+    "explanation": "Phó từ 'たぶん' dùng để dự đoán (có lẽ).",
+    "evidence": "リンさんはたぶん冬休みは国へ帰らないでしょう。",
+    "source": "AI_REASONING"
+  },
+  "930": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>5) 10年前に( ) パソコンを買ったときは、メールもできませんでした。</p>",
+    "choices": [
+      "まだ",
+      "はじめて",
+      "あまり",
+      "いつも"
+    ],
+    "explanation": "Phó từ 'はじめて' dùng để chỉ lần đầu tiên.",
+    "evidence": "10年前にはじめてパソコンを買ったときは",
+    "source": "AI_REASONING"
+  },
+  "931": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>6) はじめはピアノがきらいでしたが、( ) おもしろくなりました。</p>",
+    "choices": [
+      "だんだん",
+      "たぶん",
+      "よく",
+      "まだ"
+    ],
+    "explanation": "Phó từ 'だんだん' dùng để chỉ sự thay đổi dần dần.",
+    "evidence": "だんだんおもしろくなりました。",
+    "source": "AI_REASONING"
+  },
+  "932": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>7) A: 佐藤さんは( ) 教室にいますか。 B: いいえ。さっき帰りましたよ。</p>",
+    "choices": [
+      "もう",
+      "まだ",
+      "ちょっと",
+      "もっと"
+    ],
+    "explanation": "Phó từ 'まだ' dùng để hỏi xem đối tượng còn ở đó không.",
+    "evidence": "佐藤さんはまだ教室にいますか。",
+    "source": "AI_REASONING"
+  },
+  "933": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>1) A: 雨が降ったら(どんな・どんなに・どう) したらいいですか。 B: 雨なら中止ですが、わからなかったら電話してください。</p>",
+    "choices": [
+      "どんな",
+      "どんなに",
+      "どう",
+      ""
+    ],
+    "explanation": "Từ chỉ thị 'どう' dùng để hỏi về cách thực hiện hành động.",
+    "evidence": "雨が降ったらどうしたらいいですか。",
+    "source": "AI_REASONING"
+  },
+  "934": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>2) A: (どんな・どんなに・どう) 映画が好きですか。 B: こわい映画が好きです。</p>",
+    "choices": [
+      "どんな",
+      "どんなに",
+      "どう",
+      ""
+    ],
+    "explanation": "Từ chỉ thị 'どんな' dùng để hỏi về tính chất/loại của danh từ.",
+    "evidence": "どんな映画が好きですか。",
+    "source": "AI_REASONING"
+  },
+  "935": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>3) 毎日(こんな・こんなに・こう) いっしょうけんめい勉強しているのに、テストでなかなか100点がとれない。</p>",
+    "choices": [
+      "こんな",
+      "こんなに",
+      "こう",
+      ""
+    ],
+    "explanation": "Từ chỉ thị 'こんなに' dùng để chỉ mức độ của hành động (cố gắng đến mức này).",
+    "evidence": "毎日こんなにいっしょうけんめい勉強しているのに",
+    "source": "AI_REASONING"
+  },
+  "936": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>例) この服は(よごれて・よごして) います。</p>",
+    "choices": [
+      "よごれて",
+      "よごして",
+      "",
+      ""
+    ],
+    "explanation": "Đây là câu ví dụ đã được sách khoanh đáp án, cần tách khỏi câu chấm điểm.",
+    "evidence": "Trang 169: 例) よごれて",
+    "source": "AI_REASONING"
+  },
+  "937": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>1) A: まどが(開いて・開けて) いますよ。 B: (開いて・開けて) おいてください。今からそうじをしますから。</p>",
+    "choices": [
+      "開いて",
+      "開けて",
+      "",
+      ""
+    ],
+    "explanation": "Câu gốc có hai ô với hai đáp án khác nhau: 開いて và 開けて. Dữ liệu hiện tại chỉ cho chọn một đáp án nên cần tách hai ô trước khi chấm.",
+    "evidence": "まどが開いていますよ。開けておいてください。",
+    "source": "AI_REASONING"
+  },
+  "938": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>2) ドアにかぎが(かかって・かけて) いますから、部屋に(入る・入れる) ことができません。</p>",
+    "choices": [
+      "かかって",
+      "かけて",
+      "入る",
+      "入れる"
+    ],
+    "explanation": "Câu gốc có hai ô: かかって và 入る. Cần tách hai ô trước khi chấm để tránh gộp sai lựa chọn.",
+    "evidence": "ドアにかぎがかかっていますから、部屋に入ることができません。",
+    "source": "AI_REASONING"
+  },
+  "939": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>3) A: あ、さいふが(おちて・おとして) いますよ。だれのかな？ B: すみません、私のです。</p>",
+    "choices": [
+      "おちて",
+      "おとして",
+      "",
+      ""
+    ],
+    "explanation": "Tự động từ 'おちて' (đang rơi/nằm ở dưới đất).",
+    "evidence": "さいふがおちていますよ。",
+    "source": "AI_REASONING"
+  },
+  "940": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>4) すみません、シャワーのお湯が(出ない・出さない) ので、見ていただけませんか。</p>",
+    "choices": [
+      "出ない",
+      "出さない",
+      "",
+      ""
+    ],
+    "explanation": "Tự động từ '出ない' (không ra - nước không chảy ra).",
+    "evidence": "シャワーのお湯が出ないので",
+    "source": "AI_REASONING"
+  },
+  "941": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>5) 今日はパーティーですから、テーブルの上にお皿やコップなどが(並んで・並べて) あります。</p>",
+    "choices": [
+      "並んで",
+      "並べて",
+      "",
+      ""
+    ],
+    "explanation": "てあります diễn đạt trạng thái sau một hành động có chủ ý, dùng tha động từ 並べる.",
+    "evidence": "テーブルの上にお皿やコップなどが並べてあります。",
+    "source": "AI_REASONING"
+  },
+  "942": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>1 もうすぐ 春ですね。</p>",
+    "choices": [
+      "1 なつ",
+      "2 はる",
+      "3 ふゆ",
+      "4 あき"
+    ],
+    "explanation": "Chữ 春 có cách đọc là はる (mùa xuân).",
+    "evidence": "春 (はる)",
+    "source": "AI_REASONING"
+  },
+  "943": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>2 おととい 火事が ありました。</p>",
+    "choices": [
+      "1 ひじ",
+      "2 かじ",
+      "3 ほし",
+      "4 ひし"
+    ],
+    "explanation": "Chữ 火事 có cách đọc là かじ (hỏa hoạn).",
+    "evidence": "火事 (かじ)",
+    "source": "AI_REASONING"
+  },
+  "944": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>3 うちの ちかくに 工場が できました。</p>",
+    "choices": [
+      "1 こんば",
+      "2 こうこう",
+      "3 こうじょう",
+      "4 こうぎょう"
+    ],
+    "explanation": "Chữ 工場 có cách đọc là こうじょう (nhà máy).",
+    "evidence": "工場 (こうじょう)",
+    "source": "AI_REASONING"
+  },
+  "945": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>4 たなかさんは 親切な ひとです。</p>",
+    "choices": [
+      "1 しずか",
+      "2 あんぜん",
+      "3 ねっしん",
+      "4 しんせつ"
+    ],
+    "explanation": "Chữ 親切 có cách đọc là しんせつ (tốt bụng).",
+    "evidence": "親切 (しんせつ)",
+    "source": "AI_REASONING"
+  },
+  "946": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>5 あしたの 試験は 9時から です。</p>",
+    "choices": [
+      "1 じけん",
+      "2 しけん",
+      "3 しいけん",
+      "4 じっけん"
+    ],
+    "explanation": "Chữ 試験 có cách đọc là しけん (kỳ thi).",
+    "evidence": "試験 (しけん)",
+    "source": "AI_REASONING"
+  },
+  "947": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>6 このスープは へんな 味が します。</p>",
+    "choices": [
+      "1 におい",
+      "2 おに",
+      "3 あじ",
+      "4 みい"
+    ],
+    "explanation": "Chữ 味 có cách đọc là あじ (vị).",
+    "evidence": "味 (あじ)",
+    "source": "AI_REASONING"
+  },
+  "948": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>7 せんせいの 説明を 聞きます。</p>",
+    "choices": [
+      "1 せつみん",
+      "2 せっみん",
+      "3 せつめい",
+      "4 せっめい"
+    ],
+    "explanation": "Chữ 説明 có cách đọc là せつめい (giải thích).",
+    "evidence": "説明 (せつめい)",
+    "source": "AI_REASONING"
+  },
+  "949": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>8 森の なかを さんぽします。</p>",
+    "choices": [
+      "1 はたけ",
+      "2 やま",
+      "3 もり",
+      "4 はやし"
+    ],
+    "explanation": "Chữ 森 có cách đọc là もり (rừng).",
+    "evidence": "森 (もり)",
+    "source": "AI_REASONING"
+  },
+  "950": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>9 レストランで 食事を します。</p>",
+    "choices": [
+      "1 しょっじ",
+      "2 しょくじ",
+      "3 そうじ",
+      "4 そくじ"
+    ],
+    "explanation": "Chữ 食事 có cách đọc là しょくじ (bữa ăn).",
+    "evidence": "食事 (しょくじ)",
+    "source": "AI_REASONING"
+  },
+  "951": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>10 きょうは てんきが いいので、きのうより あついです。</p>",
+    "choices": [
+      "1 青い",
+      "2 熱い",
+      "3 厚い",
+      "4 暑い"
+    ],
+    "explanation": "Từ あつい trong ngữ cảnh thời tiết nóng là 暑い.",
+    "evidence": "あつい (暑い)",
+    "source": "AI_REASONING"
+  },
+  "952": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>11 わたしは こどもに ピアノを おしえて います。</p>",
+    "choices": [
+      "1 教えて",
+      "2 教えて",
+      "3 教えて",
+      "4 教えて"
+    ],
+    "explanation": "Các lựa chọn OCR bị trùng nhau; cần đối chiếu nét chữ của bốn lựa chọn trên trang 173 trước khi chấm.",
+    "evidence": "Trang 173, câu 11: おしえて",
+    "source": "AI_REASONING"
+  },
+  "953": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>12 きれいな けしきが 見えます。</p>",
+    "choices": [
+      "1 景色",
+      "2 風色",
+      "3 風景",
+      "4 気色"
+    ],
+    "explanation": "Chữ Hán của từ けしき (phong cảnh) là 景色.",
+    "evidence": "けしき (景色)",
+    "source": "AI_REASONING"
+  },
+  "954": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>13 ここは、こうつうが べんりです。</p>",
+    "choices": [
+      "1 校通",
+      "2 交通",
+      "3 校道",
+      "4 交道"
+    ],
+    "explanation": "Chữ Hán của từ こうつう (giao thông) là 交通.",
+    "evidence": "こうつう (交通)",
+    "source": "AI_REASONING"
+  },
+  "955": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>14 ねこが はこの なかで ないています。</p>",
+    "choices": [
+      "1 里",
+      "2 間",
+      "3 中",
+      "4 内"
+    ],
+    "explanation": "Chữ Hán của từ なか (bên trong) là 中.",
+    "evidence": "なか (中)",
+    "source": "AI_REASONING"
+  },
+  "956": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>15 けがを していて、ちからが でません。</p>",
+    "choices": [
+      "1 力",
+      "2 刀",
+      "3 刃",
+      "4 ガ"
+    ],
+    "explanation": "ちから viết bằng chữ Hán 力 (sức lực), không phải 刀 hoặc 刃. Đã sửa lựa chọn A từ nhận dạng nhầm カ sang 力 theo trang gốc.",
+    "evidence": "けがをしていて、力がでません。",
+    "source": "AI_REASONING"
+  },
+  "957": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>16 ホテルの まどから ( ) やまが みえます。</p>",
+    "choices": [
+      "1 あたたかい",
+      "2 うつくしい",
+      "3 せまい",
+      "4 おいしい"
+    ],
+    "explanation": "Nhìn từ cửa sổ khách sạn có thể thấy ngọn núi đẹp (うつくしい).",
+    "evidence": "まどから (うつくしい) やまが みえます",
+    "source": "AI_REASONING"
+  },
+  "958": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>17 ( ) は どちらですか。</p>",
+    "choices": [
+      "1 おたく",
+      "2 おれい",
+      "3 おかげ",
+      "4 おいのり"
+    ],
+    "explanation": "おたく (nhà bạn) là cách hỏi lịch sự về nơi ở.",
+    "evidence": "(おたく) は どちらですか",
+    "source": "AI_REASONING"
+  },
+  "959": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>18 まどの ガラスが ( ) います。</p>",
+    "choices": [
+      "1 こわれて",
+      "2 きれて",
+      "3 われて",
+      "4 やぶれて"
+    ],
+    "explanation": "Kính cửa sổ bị vỡ (われて).",
+    "evidence": "ガラスが (われて) います",
+    "source": "AI_REASONING"
+  },
+  "960": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>19 やまださんは あの ( ) を きている ひとです。</p>",
+    "choices": [
+      "1 カラー",
+      "2 スーツ",
+      "3 スキー",
+      "4 カーテン"
+    ],
+    "explanation": "Anh Yamada là người đang mặc bộ vest (スーツ).",
+    "evidence": "あの (スーツ) を きている ひと",
+    "source": "AI_REASONING"
+  },
+  "961": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>20 わたしは ( ) ダンスの せんせいに なりたいです。</p>",
+    "choices": [
+      "1 しゅみ",
+      "2 けいけん",
+      "3 しょうらい",
+      "4 ゆめ"
+    ],
+    "explanation": "しょうらい nghĩa là trong tương lai, phù hợp với mong muốn trở thành giáo viên dạy nhảy.",
+    "evidence": "わたしはしょうらいダンスのせんせいになりたいです。",
+    "source": "AI_REASONING"
+  },
+  "962": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>21 わたしは この ホテルに ( ) ことが あります。</p>",
+    "choices": [
+      "1 とめた",
+      "2 すいた",
+      "3 すんだ",
+      "4 とまった"
+    ],
+    "explanation": "Tôi đã từng ở (とまった) khách sạn này.",
+    "evidence": "ホテルに (とまった) ことが あります",
+    "source": "AI_REASONING"
+  },
+  "963": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>22 あした にもつが ( ) よていです。</p>",
+    "choices": [
+      "1 とどく",
+      "2 おくる",
+      "3 だす",
+      "4 つける"
+    ],
+    "explanation": "Hành lý dự định sẽ đến (とどく) vào ngày mai.",
+    "evidence": "にもつが (とどく) よてい",
+    "source": "AI_REASONING"
+  },
+  "964": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>23 わたしは ( ) プールへ およぎに いきます。</p>",
+    "choices": [
+      "1 たいへん",
+      "2 たまに",
+      "3 だいじに",
+      "4 あんぜんに"
+    ],
+    "explanation": "Tôi thỉnh thoảng (たまに) đi bơi ở hồ bơi.",
+    "evidence": "(たまに) プールへ およぎに いきます",
+    "source": "AI_REASONING"
+  },
+  "965": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>24 おきゃくさんが たくさん きたので スリッパが ( )。</p>",
+    "choices": [
+      "1 かりません",
+      "2 たりません",
+      "3 なりません",
+      "4 かいません"
+    ],
+    "explanation": "Vì khách đến nhiều nên dép không đủ (たりません).",
+    "evidence": "スリッパが (たりません)",
+    "source": "AI_REASONING"
+  },
+  "966": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>25 わたしは びっくりしました。</p>",
+    "choices": [
+      "1 わたしは おこりました。",
+      "2 わたしは しんぱいしました。",
+      "3 わたしは なきました。",
+      "4 わたしは おどろきました。"
+    ],
+    "explanation": "びっくりしました (ngạc nhiên) tương đương với おどろきました.",
+    "evidence": "びっくりしました = おどろきました",
+    "source": "AI_REASONING"
+  },
+  "967": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>26 リンさんの さくぶんは いつも すばらしいです。</p>",
+    "choices": [
+      "1 リンさんは さくぶんが とても へたです。",
+      "2 リンさんは さくぶんが とても きれいです。",
+      "3 リンさんは さくぶんが とても じょうずです。",
+      "4 リンさんは さくぶんが とても すきです。"
+    ],
+    "explanation": "すばらしい (tuyệt vời) tương đương với じょうず (giỏi) trong ngữ cảnh bài văn.",
+    "evidence": "すばらしい = じょうず",
+    "source": "AI_REASONING"
+  },
+  "968": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>27 わたしの にほんごの せんせいは はは です。</p>",
+    "choices": [
+      "1 わたしは ははに にほんごを ならって います。",
+      "2 ははは わたしと にほんごを まなんで います。",
+      "3 ははは たしの にほんごの がくせいです。",
+      "4 わたしは ははと にほんごを おしえて います。"
+    ],
+    "explanation": "Giáo viên tiếng Nhật của tôi là mẹ, nghĩa là tôi đang học tiếng Nhật từ mẹ.",
+    "evidence": "せんせいは はは です = ははに にほんごを ならって います",
+    "source": "AI_REASONING"
+  },
+  "969": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>28 けさ じゅぎょうに まにあいませんでした。</p>",
+    "choices": [
+      "1 けさ じゅぎょうを やすみました。",
+      "2 けさ じゅぎょうに いきませんでした。",
+      "3 けさ じゅぎょうに おくれました。",
+      "4 けさ じゅぎょうを まちませんでした。"
+    ],
+    "explanation": "まにあいませんでした (không kịp) tương đương với おくれました (trễ).",
+    "evidence": "まにあいませんでした = おくれました",
+    "source": "AI_REASONING"
+  },
+  "970": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>29 くるまに ちゅういして みちを わたります。</p>",
+    "choices": [
+      "1 くるまを はっけんして みちを わたります。",
+      "2 くるまに きが ついて みちを わたります。",
+      "3 くるまに のらないで みちを わたります。",
+      "4 くるまに きを つけて みちを わたります。"
+    ],
+    "explanation": "ちゅういして (chú ý) tương đương với きを つけて (cẩn thận).",
+    "evidence": "ちゅういして = きを つけて",
+    "source": "AI_REASONING"
+  },
+  "971": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>30 じゃま</p>",
+    "choices": [
+      "1 あには じゃまなので びょういんへ いきました。",
+      "2 このごろ からだが じゃまな ひとが おおく なりました。",
+      "3 ともだちの うちは じゃまでした。",
+      "4 この はこは じゃまなので あそこへ はこんで ください。"
+    ],
+    "explanation": "じゃま (vướng víu) dùng cho đồ vật cản trở lối đi.",
+    "evidence": "この はこは じゃまなので",
+    "source": "AI_REASONING"
+  },
+  "972": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>31 こわい</p>",
+    "choices": [
+      "1 この やさいは からだに とても こわいです。",
+      "2 いもうとは こわい はなしが すきです。",
+      "3 きのう こわい カメラを かいました。",
+      "4 エアコンが すこし こわいので けして ください。"
+    ],
+    "explanation": "こわい (đáng sợ) dùng cho câu chuyện.",
+    "evidence": "こわい はなし",
+    "source": "AI_REASONING"
+  },
+  "973": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>32 ようじ</p>",
+    "choices": [
+      "1 きょうは ようじが あるので はやく かえります。",
+      "2 しんせつな ともだちが ようじして くれました。",
+      "3 ようじが ありましたから けいさつに とどけました。",
+      "4 ようじしますから きょうは さんかできません。"
+    ],
+    "explanation": "ようじ (việc bận) dùng khi có việc cần giải quyết.",
+    "evidence": "ようじが あるので",
+    "source": "AI_REASONING"
+  },
+  "974": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>33 うえる</p>",
+    "choices": [
+      "1 たなに ほんが きれいに うえて あります。",
+      "2 じが ちいさいので もう すこし うえて ください。",
+      "3 にわに きれいな はなが うえて あります。",
+      "4 ドアを あけたら うえて しまいました。"
+    ],
+    "explanation": "うえる (trồng) dùng cho cây cối, hoa.",
+    "evidence": "はなが うえて あります",
+    "source": "AI_REASONING"
+  },
+  "975": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>34 わかす</p>",
+    "choices": [
+      "1 まず おゆを わかして ください。",
+      "2 こいびとを わかして しまいました。",
+      "3 すみませんが、100えん わかして ください。",
+      "4 1じかん わかして おいしい スープを つくります。"
+    ],
+    "explanation": "わかす (đun sôi) dùng cho nước.",
+    "evidence": "おゆを わかして",
+    "source": "AI_REASONING"
+  },
+  "976": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>1 この道 ( ) 歩いていくと、右に 富士山が 見えますよ。</p>",
+    "choices": [
+      "1 を",
+      "2 に",
+      "3 で",
+      "4 が"
+    ],
+    "explanation": "Trợ từ 'o' (を) dùng để chỉ địa điểm mà hành động di chuyển đi qua: 'この道を歩いていく' (đi bộ dọc theo con đường này).",
+    "evidence": "この道 (を) 歩いていくと",
+    "source": "AI_REASONING"
+  },
+  "977": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>2 A:「日曜日、どこ ( ) 行きましたか。」<br>B:「いいえ。ずっと うちに いました。」</p>",
+    "choices": [
+      "1 を",
+      "2 へ",
+      "3 が",
+      "4 か"
+    ],
+    "explanation": "Câu hỏi 'どこか行きましたか' (Bạn có đi đâu không?) dùng trợ từ 'ka' (か) để hỏi về một địa điểm không xác định.",
+    "evidence": "どこ (か) 行きましたか",
+    "source": "AI_REASONING"
+  },
+  "978": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>3 黒 ( ) 青の ボールペンで 書いて ください。</p>",
+    "choices": [
+      "1 で",
+      "2 も",
+      "3 に",
+      "4 か"
+    ],
+    "explanation": "Trợ từ 'ka' (か) dùng để liệt kê các lựa chọn: '黒か青' (màu đen hoặc màu xanh).",
+    "evidence": "黒 (か) 青の ボールペン",
+    "source": "AI_REASONING"
+  },
+  "979": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>4 祖母は 歯が 弱くなったので、やわらかい 物 ( ) 食べられません。</p>",
+    "choices": [
+      "1 だけ",
+      "2 とか",
+      "3 しか",
+      "4 ずつ"
+    ],
+    "explanation": "Cấu trúc 'V-nai + しか + V-nai' (chỉ có thể làm gì đó): 'やわらかい物しか食べられません' (chỉ có thể ăn đồ mềm).",
+    "evidence": "やわらかい 物 (しか) 食べられません",
+    "source": "AI_REASONING"
+  },
+  "980": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>5 A「うちは いつも 晩ごはんが 8時ごろに なって しまうんです。」<br>B「そうですか。私の うち ( ) 6時ごろ 食べますよ。」</p>",
+    "choices": [
+      "1 では",
+      "2 には",
+      "3 へは",
+      "4 とは"
+    ],
+    "explanation": "Trợ từ 'dewa' (では) dùng để chỉ địa điểm xảy ra hành động: '私のうちでは' (ở nhà tôi thì...).",
+    "evidence": "私の うち (では) 6時ごろ 食べますよ",
+    "source": "AI_REASONING"
+  },
+  "981": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>6 A「旅行の 申し込み、まだ できますか。」<br>B「ええ。今週の 金曜日 ( ) 申し込んで ください。」</p>",
+    "choices": [
+      "1 からは",
+      "2 からも",
+      "3 までは",
+      "4 までに"
+    ],
+    "explanation": "Trợ từ 'made ni' (までに) chỉ thời hạn cuối cùng để thực hiện hành động: '金曜日までに申し込んでください' (hãy đăng ký trước thứ Sáu).",
+    "evidence": "今週の 金曜日 (までに) 申し込んで ください",
+    "source": "AI_REASONING"
+  },
+  "982": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>7 A「うちから 学校まで ( ) かかりますか。」<br>B「40分くらいです。」</p>",
+    "choices": [
+      "1 どんな",
+      "2 どうやって",
+      "3 どう",
+      "4 どのくらい"
+    ],
+    "explanation": "Để hỏi về thời gian hoặc khoảng cách, ta dùng 'どのくらい' (bao lâu/bao xa).",
+    "evidence": "うちから 学校まで (どのくらい) かかりますか",
+    "source": "AI_REASONING"
+  },
+  "983": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>8 明日は ( ) 雨が 降ると 思います。</p>",
+    "choices": [
+      "1 あまり",
+      "2 たぶん",
+      "3 まだ",
+      "4 だんだん"
+    ],
+    "explanation": "'たぶん' (có lẽ) thường đi kèm với '～と思います' (tôi nghĩ là...).",
+    "evidence": "明日は (たぶん) 雨が 降ると 思います",
+    "source": "AI_REASONING"
+  },
+  "984": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>9 A「先月 貸した 本、もう 読んだ？」<br>B「ごめん。今 読んでいる ( ) だから、もう ちょっと 待って。」</p>",
+    "choices": [
+      "1 ところ",
+      "2 つもり",
+      "3 そう",
+      "4 こと"
+    ],
+    "explanation": "Cấu trúc 'V-te iru tokoro' (đang trong lúc làm gì đó): '今 読んでいるところだから' (vì tôi đang trong lúc đọc).",
+    "evidence": "今 読んでいる (ところ) だから",
+    "source": "AI_REASONING"
+  },
+  "985": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>10 A「どうしたの？」<br>B「電車に かばんを ( ) しまったんだ。」</p>",
+    "choices": [
+      "1 わすれた",
+      "2 わすれて",
+      "3 わすれ",
+      "4 わすれる"
+    ],
+    "explanation": "Cấu trúc 'V-te shimau' diễn tả sự hối tiếc hoặc hoàn tất một việc ngoài ý muốn: 'わすれてしまった' (đã lỡ quên).",
+    "evidence": "電車に かばんを (わすれて) しまったんだ",
+    "source": "AI_REASONING"
+  },
+  "986": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>11 A「京都へ ( ) ことが ありますか。」<br>B「ええ、去年 友だちと 行きました。」</p>",
+    "choices": [
+      "1 行く",
+      "2 行った",
+      "3 行って",
+      "4 行っている"
+    ],
+    "explanation": "Cấu trúc 'V-ta koto ga arimasu ka' (đã từng làm gì đó chưa): '京都へ行ったことがありますか'.",
+    "evidence": "京都へ (行った) ことが ありますか",
+    "source": "AI_REASONING"
+  },
+  "987": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>12 A「ちょっと 暗いですね。電気を ( ) か。」<br>B「ええ、そうですね。」</p>",
+    "choices": [
+      "1 つけましょう",
+      "2 つけています",
+      "3 つけました",
+      "4 つけません"
+    ],
+    "explanation": "Cấu trúc 'V-mashou ka' dùng để đề nghị giúp đỡ: '電気をつけましょうか' (Tôi bật điện giúp bạn nhé?).",
+    "evidence": "電気を (つけましょう) か",
+    "source": "AI_REASONING"
+  },
+  "988": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>13 A「すみません。ゲームの よやくを ( )。」<br>B「じゃ、この 申込書に 書いて 出して ください。」</p>",
+    "choices": [
+      "1 したんですが…",
+      "2 したいんですが…",
+      "3 したほうがいいですよ",
+      "4 しましょうか"
+    ],
+    "explanation": "Cấu trúc 'V-tai n desu ga' dùng để đưa ra yêu cầu hoặc nhờ vả một cách lịch sự.",
+    "evidence": "ゲームの よやくを (したいんですが…)",
+    "source": "AI_REASONING"
+  },
+  "989": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>14 先生の 研究室に ( )、本を たくさん お借りしました。</p>",
+    "choices": [
+      "1 いらっしゃって",
+      "2 うかがって",
+      "3 おいでになって",
+      "4 こられて"
+    ],
+    "explanation": "Khi nói về việc đến thăm thầy giáo, dùng khiêm nhường ngữ 'うかがって' (đến thăm/hỏi).",
+    "evidence": "先生の 研究室に (うかがって)、本を たくさん お借りしました",
+    "source": "AI_REASONING"
+  },
+  "990": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>15 毎日 一生けんめい 勉強して、漢字が 少し ( ) なりました。</p>",
+    "choices": [
+      "1 読むことに",
+      "2 読めるように",
+      "3 読むために",
+      "4 読めるのに"
+    ],
+    "explanation": "Cấu trúc 'V-ru you ni narimashita' diễn tả sự thay đổi khả năng: '読めるようになりました' (đã trở nên có thể đọc được).",
+    "evidence": "漢字が 少し (読めるように) なりました",
+    "source": "AI_REASONING"
+  },
+  "991": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>16 私は 外国へ 行って、食べた ( ) ( ) (★) ( ) 食べるのが 好きです。</p>",
+    "choices": [
+      "1 ことが",
+      "2 ものを",
+      "3 ない",
+      "4 めずらしい"
+    ],
+    "explanation": "Thứ tự đúng: 1: A (ことが); 2: C (ない); 3: D (めずらしい); 4: B (ものを). Dấu ★ ở ô thứ 3 nên chọn D (めずらしい).",
+    "evidence": "16 私は 外国へ 行って、食べた ことが ない めずらしい ものを 食べるのが 好きです。",
+    "source": "AI_REASONING"
+  },
+  "992": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>17 週末、北海道へ 行く 予定でしたが、飛行機の ( ) ( ) (★) ( ) まだ わからないんです。</p>",
+    "choices": [
+      "1 かどうか",
+      "2 とれなくて",
+      "3 行ける",
+      "4 チケットが"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (チケットが); 2: B (とれなくて); 3: C (行ける); 4: A (かどうか). Dấu ★ ở ô thứ 3 nên chọn C (行ける).",
+    "evidence": "17 週末、北海道へ 行く 予定でしたが、飛行機の チケットが とれなくて 行ける かどうか まだ わからないんです。",
+    "source": "AI_REASONING"
+  },
+  "993": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>18 A「出かけるの？」<br>B「うん。本屋で ( ) ( ) (★) ( ) さそわれたから、行ってくる。」</p>",
+    "choices": [
+      "1 友だちに",
+      "2 アルバイト",
+      "3 コンサートに",
+      "4 している"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (アルバイト); 2: D (している); 3: A (友だちに); 4: C (コンサートに). Dấu ★ ở ô thứ 3 nên chọn A (友だちに).",
+    "evidence": "18 A「出かけるの？」\nB「うん。本屋で アルバイト している 友だちに コンサートに さそわれたから、行ってくる。」",
+    "source": "AI_REASONING"
+  },
+  "994": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>19 来年の ( ) ( ) (★) ( ) います。</p>",
+    "choices": [
+      "1 思って",
+      "2 すごそうと",
+      "3 日本で",
+      "4 お正月は"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (お正月は); 2: C (日本で); 3: B (すごそうと); 4: A (思って). Dấu ★ ở ô thứ 3 nên chọn B (すごそうと).",
+    "evidence": "19 来年の お正月は 日本で すごそうと 思って います。",
+    "source": "AI_REASONING"
+  },
+  "995": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>20 A「この 新しい パソコンに ついて、知って いますか。」<br>B「わたしも 知りません。電気屋で ( ) ( ) (★) ( ) と 思いますよ。」</p>",
+    "choices": [
+      "1 わかる",
+      "2 カタログを",
+      "3 読めば",
+      "4 もらって"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (カタログを); 2: D (もらって); 3: C (読めば); 4: A (わかる). Dấu ★ ở ô thứ 3 nên chọn C (読めば).",
+    "evidence": "20 A「この 新しい パソコンに ついて、知って いますか。」\nB「わたしも 知りません。電気屋で カタログを もらって 読めば わかる と 思いますよ。」",
+    "source": "AI_REASONING"
+  },
+  "996": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>21</p>",
+    "choices": [
+      "と",
+      "も",
+      "が",
+      "に"
+    ],
+    "explanation": "Trợ từ 'mo' (も) dùng để liệt kê: '田中さんも石田さんも' (cả anh Tanaka và anh Ishida).",
+    "evidence": "田中さん (も) 石田さんが",
+    "source": "AI_REASONING"
+  },
+  "997": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>22</p>",
+    "choices": [
+      "それでは",
+      "それで",
+      "しかし",
+      "たとえば"
+    ],
+    "explanation": "'Sorede' (Vì vậy/Nhờ đó) nối tiếp kết quả của hành động trước.",
+    "evidence": "(それで) まよわないで 帰ることが できました",
+    "source": "AI_REASONING"
+  },
+  "998": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>23</p>",
+    "choices": [
+      "し",
+      "から",
+      "と",
+      "のに"
+    ],
+    "explanation": "のに diễn đạt trái với dự đoán: đã đến nhà Suzuki nhiều lần nhưng vẫn chưa nhớ đường về.",
+    "evidence": "もう何回も鈴木さんのうちに行っているのに、まだ帰り道が覚えられません。",
+    "source": "AI_REASONING"
+  },
+  "999": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>24</p>",
+    "choices": [
+      "歩くように",
+      "歩けるから",
+      "歩いたら",
+      "歩くのに"
+    ],
+    "explanation": "Cấu trúc 'V-tara' (nếu/khi): '一度歩いたら' (khi đã đi bộ một lần).",
+    "evidence": "一度 (歩いたら)、ぜったいに 忘れない",
+    "source": "AI_REASONING"
+  },
+  "1000": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>25</p>",
+    "choices": [
+      "呼んでいます",
+      "呼びましょう",
+      "呼びます",
+      "呼んでください"
+    ],
+    "explanation": "Cấu trúc 'V-te kudasai' (hãy làm gì đó) dùng để đưa ra lời mời/yêu cầu.",
+    "evidence": "ぜひ (呼んでください) ね",
+    "source": "AI_REASONING"
+  },
+  "1001": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>26 してもいいことは何ですか。</p>",
+    "choices": [
+      "エアコンの温度を変えること",
+      "電源のボタンを押すこと",
+      "エアコンを使いながら、窓から外の空気を入れること",
+      "先に窓を開けてから、エアコンをつけること"
+    ],
+    "explanation": "Văn bản yêu cầu không chạm vào bất cứ thứ gì ngoại trừ nút nguồn (電源のボタン以外にはさわらないでください), nghĩa là việc nhấn nút nguồn là được phép.",
+    "evidence": "電源のボタン以外にはさわらないでください",
+    "source": "AI_REASONING"
+  },
+  "1002": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>27 このメモをもらった人は、17時50分に仕事が終わりました。ここから駅まで20分かかります。このあと、どうしたらいいですか。</p>",
+    "choices": [
+      "すぐ自分で食事の店に行きます。",
+      "駅前で山川さんを待ちます。",
+      "山川さんか森下さんに電話をかけます。",
+      "山川さんから電話が来るのを待ちます。"
+    ],
+    "explanation": "Người này kết thúc công việc lúc 17:50 và mất 20 phút để đến ga, tức là đến nơi lúc 18:10. Vì trễ so với giờ hẹn 18:00, họ cần gọi điện cho Yamakawa-san hoặc Morishita-san theo hướng dẫn.",
+    "evidence": "18時に駅前の大きい時計のところで待っています。遅れそうだったら、私か森下さんに電話をください。",
+    "source": "AI_REASONING"
+  },
+  "1003": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>28 上山先生がタンさんにお願いしたいことは何ですか。</p>",
+    "choices": [
+      "次のレポートを書くこと",
+      "トミーさんの部屋へ行ってみること",
+      "旅行をすること",
+      "授業をすること"
+    ],
+    "explanation": "Thầy Kamiyama nhờ Tan-san kiểm tra xem Tommy-san có ở trong phòng không để nhắn tin liên lạc.",
+    "evidence": "トミーさんが部屋にいたら、私に連絡をするように伝えてください。",
+    "source": "AI_REASONING"
+  },
+  "1004": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>29 「ああ、パンは生き物だなあ」と思うのはどうしてですか。</p>",
+    "choices": [
+      "作るのに長い時間が必要だから",
+      "空気と水が必要だから",
+      "おいしいものができるから",
+      "いつも同じではないから"
+    ],
+    "explanation": "Tác giả nói bánh mì là sinh vật vì mỗi ngày điều kiện khác nhau (nhiệt độ, độ ẩm) nên kết quả không bao giờ giống hệt nhau.",
+    "evidence": "うまくできることもあるし、まあまあなこともあります。そんなとき、「ああ、パンは生き物だなあ」と思います。",
+    "source": "AI_REASONING"
+  },
+  "1005": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>30 この川はどんな川ですか。</p>",
+    "choices": [
+      "昔も今もきれいな川",
+      "昔はきれいだったが、今は汚い川",
+      "昔は汚かったが、今はきれいな川",
+      "昔も今も汚い川"
+    ],
+    "explanation": "Đoạn văn nói con sông đã sạch từ xưa và công ty giữ lời trả nước sạch về sông, nên trước đây và hiện nay đều sạch.",
+    "evidence": "昔から水のきれいな川でした。…会社は約束を守りました。",
+    "source": "AI_REASONING"
+  },
+  "1006": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>31 ①心配した人はどうして心配しましたか。</p>",
+    "choices": [
+      "働くところが少ないから",
+      "この川が汚くなったから",
+      "いろいろなところで川が汚くなっていたから",
+      "会社の人が説明したから"
+    ],
+    "explanation": "Người dân lo lắng vì thời điểm đó ở nhiều nơi trên Nhật Bản đã xảy ra vấn đề tương tự (sông bị ô nhiễm).",
+    "evidence": "ちょうどそのころ、日本中のいろいろなところでそのような問題が起きていて",
+    "source": "AI_REASONING"
+  },
+  "1007": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>32 会社の人はどんな約束をしましたか。</p>",
+    "choices": [
+      "工場を作る約束",
+      "働くところを作る約束",
+      "川の水をたくさん使う約束",
+      "川の水をきれいにして戻す約束"
+    ],
+    "explanation": "Công ty hứa sẽ làm sạch nước trước khi xả lại vào sông.",
+    "evidence": "使ったあと、はじめの川よりきれいにしてから川に戻します",
+    "source": "AI_REASONING"
+  },
+  "1008": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>33 ②できると思っているのはどんなことですか。</p>",
+    "choices": [
+      "工場で使った水をきれいにすること",
+      "会社が約束を守ること",
+      "川を汚くしないこと",
+      "同じ考えの人を増やすこと"
+    ],
+    "explanation": "Tác giả muốn để lại con sông sạch cho thế hệ tương lai, và tin rằng có thể làm được điều đó (không làm bẩn sông).",
+    "evidence": "きれいな川を、将来の子どもたちにも残したいです。…きっと②できると思っています。",
+    "source": "AI_REASONING"
+  },
+  "1009": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>34 青川中学校でバスケットボールをします。ボールのお金と体育館用のくつは必要ですか。</p>",
+    "choices": [
+      "ボールのお金も、体育館用のくつも必要です。",
+      "ボールのお金は必要ですが、体育館用のくつは必要ありません。",
+      "ボールのお金は必要ありませんが、体育館用のくつは必要です。",
+      "ボールのお金も、体育館用のくつも必要ありません。"
+    ],
+    "explanation": "Bóng rổ diễn ra tại nhà thi đấu (体育館), nên cần giày thể thao (体育館用のくつ). Tiền mua bóng chỉ áp dụng cho bóng bàn (卓球), không áp dụng cho bóng rổ.",
+    "evidence": "体育館を使う場合は、体育館用のくつを必ず持ってきてください。卓球（ピンポン）のボールが必要な人は、1つ100円で買ってください。",
+    "source": "AI_REASONING"
+  },
+  "1010": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>35 水曜日にテニスをしたいです。どうすればいいですか。</p>",
+    "choices": [
+      "市役所のスポーツ係に電話で申し込みます。",
+      "市役所のスポーツ係に行って申し込みます。",
+      "赤山中学校に18時に行きます。",
+      "青川中学校に15時に行きます。"
+    ],
+    "explanation": "Dựa vào bảng A: 'わからないことがあれば、市役所のスポーツ係（電話：13-946-2171）にお聞きください' (Nếu có gì không rõ, hãy hỏi bộ phận thể thao của tòa thị chính).",
+    "evidence": "わからないことがあれば、市役所のスポーツ係（電話：13-946-2171）にお聞きください",
+    "source": "AI_REASONING"
+  },
+  "1011": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 60</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Trong đoạn hội thoại, người nữ đề xuất: '今年は教室でしましょうよ。料理はスーパーで買って' (Năm nay hãy làm ở lớp học đi. Đồ ăn thì mua ở siêu thị). Người nam đồng ý và hỏi lại, sau đó người nữ chốt: 'じゃ、自分たちで作りましょう' (Vậy thì chúng ta hãy tự làm đi). Tuy nhiên, người nam nói '僕、料理できないよ' (Tôi không biết nấu ăn), nên người nữ bảo 'じゃ、タンさんは飲み物お願いね' (Vậy thì anh Tan, anh lo phần đồ uống nhé). Vậy người nam sẽ lo phần đồ uống.",
+    "evidence": "AudioTrack 60: 'じゃ、タンさんは飲み物お願いね'",
+    "source": "AI_REASONING"
+  },
+  "1012": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 61</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Người nam hỏi về việc làm thẻ ngân hàng, người nữ hướng dẫn: 'この番号の紙を持って、おまちください' (Hãy cầm tờ giấy có số này và chờ). Sau đó người nữ nói thêm: 'その前に、まずこちらにお名前をお願いします' (Trước đó, đầu tiên hãy viết tên vào đây). Vậy việc cần làm ngay sau đó là viết tên.",
+    "evidence": "AudioTrack 61: 'その前に、まずこちらにお名前をお願いします'",
+    "source": "AI_REASONING"
+  },
+  "1013": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>CD 62</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Người nữ muốn mua giày leo núi có hình con chim, nhưng người nam nói chỉ còn loại màu đen. Người nữ hỏi: 'この鳥ので、黒いのありませんか？' (Có loại hình con chim này mà màu đen không?). Người nam trả lời: '星がついていて、黒いのもあるんですが' (Có loại hình ngôi sao màu đen). Người nữ đồng ý: 'じゃ、これでいいです' (Vậy cái này được). Hình 4 là giày màu đen có hình ngôi sao.",
+    "evidence": "AudioTrack 62: '星がついていて、黒いのもあるんですが' -> 'じゃ、これでいいです'",
+    "source": "AI_REASONING"
+  },
+  "1014": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 63</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Người nam hỏi về việc làm thêm dạy tiếng Anh cho học sinh tiểu học. Người nữ hỏi: '場所は？' (Địa điểm ở đâu?). Người nam trả lời: '駅前のさくらビルの5階' (Tầng 5 tòa nhà Sakura trước nhà ga). Người nữ nói: 'まずは見てこようかな' (Để tôi đi xem thử trước đã). Vậy người nữ sẽ đi xem địa điểm trước.",
+    "evidence": "AudioTrack 63: 'まずは見てこようかな'",
+    "source": "AI_REASONING"
+  },
+  "1015": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 64</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1016": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 65</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Người nam nói: '僕、背が高いから、真ん中だと後ろの人が見えないと思うんだよね' (Tôi cao nên nếu ngồi ở giữa thì người phía sau sẽ không thấy). Người nữ đề xuất: 'じゃ、ここ？' (Vậy chỗ này?). Người nam đồng ý: 'いいよ' (Được). Vị trí số 3 là vị trí ở giữa nhưng lệch sang bên phải, không chắn tầm nhìn trực tiếp của người phía sau như vị trí trung tâm.",
+    "evidence": "AudioTrack 65: 'じゃ、ここ？' -> 'いいよ'",
+    "source": "AI_REASONING"
+  },
+  "1017": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 66</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1018": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 67</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1019": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>CD 68</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Giáo viên nói '皆さんは絶対に一人になってはいけません' (Các em tuyệt đối không được đi một mình), 'グループの友達と一緒に見学してください' (Hãy đi tham quan cùng bạn trong nhóm). Đáp án 4 là '友だちと いっしょに 見学する こと' (Đi tham quan cùng bạn).",
+    "evidence": "Audio: 'グループの友達と一緒に見学してください' (Hãy đi tham quan cùng bạn trong nhóm). Choices D: '友だちと いっしょに 見学する こと'.",
+    "source": "AI_REASONING"
+  },
+  "1020": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 69</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Người phụ nữ nói '今度学校の授業で教えなければならないのよ' (Lần tới tôi phải dạy trong tiết học ở trường). Đáp án 3 là '学校で ダンスを おしえるから' (Vì dạy nhảy ở trường).",
+    "evidence": "Audio: '今度学校の授業で教えなければならないのよ' (Lần tới tôi phải dạy trong tiết học ở trường). Choices C: '学校で ダンスを おしえるから'.",
+    "source": "AI_REASONING"
+  },
+  "1021": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 70</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1022": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>CD 71</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Thông báo nói '11時と14時の回はまだ少し空きがございます' (Suất 11 giờ và 14 giờ vẫn còn chỗ trống). Người đàn ông nói 'じゃ、すぐ予約しよう' (Vậy thì đặt ngay thôi). Đáp án 2 là '午前11時から' (Từ 11 giờ sáng).",
+    "evidence": "Audio: '11時と14時の回はまだ少し空きがございます' (Suất 11 giờ và 14 giờ vẫn còn chỗ trống). Choices B: '午前 11時から'.",
+    "source": "AI_REASONING"
+  },
+  "1023": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 72</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1024": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 73</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1025": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 74</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "explanation": "Trong audio, người đàn ông giải thích lý do không ăn trứng là vì bác sĩ đã khuyên không nên ăn nhiều trứng do tình trạng sức khỏe không tốt. Câu 3 'この人の体に良くないから' (Vì không tốt cho cơ thể người này) khớp với nội dung này.",
+    "evidence": "Audio: '病院で、卵はあまり食べないでって言われて... だから' (Ở bệnh viện, tôi được bảo là không nên ăn nhiều trứng... vì vậy). Lựa chọn 3: 'この人の体に良くないから'.",
+    "source": "AI_REASONING"
+  },
+  "1026": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 75</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1027": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>CD 76</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Trong audio, người đàn ông đang bận rộn với công việc và người kia hỏi '何か手伝いましょうか' (Tôi có thể giúp gì không?). Đây là câu trả lời lịch sự khi thấy người khác đang bận.",
+    "evidence": "Audio: '何か手伝いましょうか' (Tôi có thể giúp gì không?). Lựa chọn 2: '何か手伝いましょうか'.",
+    "source": "AI_REASONING"
+  },
+  "1028": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 77</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Trong audio, người nói đến thăm bạn bị ốm và nói '早く良くなるといいですね' (Hy vọng bạn sớm khỏe lại). Đây là câu chúc phù hợp khi thăm người ốm.",
+    "evidence": "Audio: '早く良くなるといいですね' (Hy vọng bạn sớm khỏe lại). Lựa chọn 3: '早く良くなるといいですね'.",
+    "source": "AI_REASONING"
+  },
+  "1029": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 78</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Trong audio, người đàn ông muốn đặt bàn tại nhà hàng qua điện thoại và nói '予約していただけますか' (Bạn có thể đặt giúp tôi không?).",
+    "evidence": "Audio: '予約していただけますか' (Bạn có thể đặt giúp tôi không?). Lựa chọn 3: '予約していただけますか'.",
+    "source": "AI_REASONING"
+  },
+  "1030": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 79</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Trong audio, người nói muốn xem ảnh bạn mình có và nói 'その写真見せてくれる' (Bạn cho tôi xem bức ảnh đó được không?).",
+    "evidence": "Audio: 'その写真見せてくれる' (Bạn cho tôi xem bức ảnh đó được không?). Lựa chọn 3: 'その写真見せてくれる'.",
+    "source": "AI_REASONING"
+  },
+  "1031": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 80</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Trong audio, người nói mời ăn bánh và người kia đáp 'はい、いただきます' (Vâng, xin mời/tôi xin phép ăn). Đây là cách đáp lại lịch sự khi được mời ăn.",
+    "evidence": "Audio: 'はい、いただきます' (Vâng, xin mời/tôi xin phép ăn). Lựa chọn 3: 'はい、いただきます'.",
+    "source": "AI_REASONING"
+  },
+  "1032": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 81</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1033": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 82</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio: 'ごめん、ちょっとそれ取ってくれる?' (Xin lỗi, lấy giúp tôi cái đó được không?). Câu 3: 'うん、取ってくれる' (Ừ, lấy giúp cho) là phản hồi phù hợp.",
+    "evidence": "Audio: 'ごめん、ちょっとそれ取ってくれる?' -> 'うん、取ってくれる'",
+    "source": "AI_REASONING"
+  },
+  "1034": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 83</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio: '傘、持っていったほうがいいよ' (Nên mang theo ô đi). Câu 3: 'うん、持っていってよ' (Ừ, mang theo đi) là phản hồi phù hợp.",
+    "evidence": "Audio: '傘、持っていったほうがいいよ' -> 'うん、持っていってよ'",
+    "source": "AI_REASONING"
+  },
+  "1035": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 84</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio: 'すみません、ちょっとよろしいでしょうか' (Xin lỗi, tôi có thể làm phiền một chút được không?). Câu 3: 'はい、いいですね' (Vâng, được chứ) là phản hồi phù hợp.",
+    "evidence": "Audio: 'すみません、ちょっとよろしいでしょうか' -> 'はい、いいですね'",
+    "source": "AI_REASONING"
+  },
+  "1036": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 85</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio: 'はい、どうぞお入りください' (Vâng, mời vào). Câu 1: 'お入りします' (Tôi xin phép vào) là phản hồi phù hợp.",
+    "evidence": "Audio: 'はい、どうぞお入りください' -> 'お入りします'",
+    "source": "AI_REASONING"
+  },
+  "1037": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 86</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio: '元気になってよかったですね' (Khỏe lại rồi, tốt quá nhỉ). Câu 1: 'それはよかったですね' (Đúng là tốt thật) là phản hồi phù hợp.",
+    "evidence": "Audio: '元気になってよかったですね' -> 'それはよかったですね'",
+    "source": "AI_REASONING"
+  },
+  "1038": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>CD 87</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio: '佐藤さん、新しい生活はどう?' (Anh Sato, cuộc sống mới thế nào?). Câu 2: 'ええ、とても楽しいです' (Vâng, rất vui ạ) là phản hồi phù hợp.",
+    "evidence": "Audio: '佐藤さん、新しい生活はどう?' -> 'ええ、とても楽しいです'",
+    "source": "AI_REASONING"
+  },
+  "1039": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>4 今から図書館へ ____ ____ ★ ____ なりません。</p>",
+    "choices": [
+      "返しに",
+      "この",
+      "行かなければ",
+      "本を"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (この); 2: D (本を); 3: A (返しに); 4: C (行かなければ). Dấu ★ ở ô thứ 3 nên chọn A (返しに).",
+    "evidence": "4 今から図書館へ この 本を 返しに 行かなければ なりません。",
+    "source": "AI_REASONING"
+  },
+  "1040": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>5 この ____ ____ ★ ____ です。</p>",
+    "choices": [
+      "いい",
+      "手紙には",
+      "切手を",
+      "はらなくても"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (手紙には); 2: C (切手を); 3: D (はらなくても); 4: A (いい). Dấu ★ ở ô thứ 3 nên chọn D (はらなくても).",
+    "evidence": "5 この 手紙には 切手を はらなくても いい です。",
+    "source": "AI_REASONING"
+  },
+  "1041": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>6 けっこんしきのパーティーに ____ ____ ★ ____ しました。</p>",
+    "choices": [
+      "行く",
+      "ことに",
+      "着て",
+      "着物を"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (着物を); 2: C (着て); 3: A (行く); 4: B (ことに). Dấu ★ ở ô thứ 3 nên chọn A (行く).",
+    "evidence": "6 けっこんしきのパーティーに 着物を 着て 行く ことに しました。",
+    "source": "AI_REASONING"
+  },
+  "1042": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>7 このマーク ____ ____ ★ ____ 意味です。</p>",
+    "choices": [
+      "という",
+      "洗えない",
+      "は",
+      "せんたくきで"
+    ],
+    "explanation": "Thứ tự đúng: 1: C (は); 2: D (せんたくきで); 3: B (洗えない); 4: A (という). Dấu ★ ở ô thứ 3 nên chọn B (洗えない).",
+    "evidence": "7 このマーク は せんたくきで 洗えない という 意味です。",
+    "source": "AI_REASONING"
+  },
+  "1043": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>【1】</p>",
+    "choices": [
+      "来なければなりません",
+      "来なくてもいいです",
+      "来てもかまいません",
+      "来たほうがいいです"
+    ],
+    "explanation": "だれが来てもかまいません nghĩa là ai đến cũng được. Trang gốc nói chỗ ngồi không được ấn định.",
+    "evidence": "ベトナムではけっこんしきにだれが来てもかまいません。",
+    "source": "AI_REASONING"
+  },
+  "1044": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【2】</p>",
+    "choices": [
+      "すわってもいいです",
+      "すわりましょう",
+      "すわったらいいですか",
+      "すわれます"
+    ],
+    "explanation": "Câu 2: 'どこにすわってもいいです' (Ngồi đâu cũng được). Phù hợp với vế trước 'せきもきまっていましたから' (vì chỗ ngồi đã được quyết định - câu này có vẻ mâu thuẫn với đề bài, nhưng xét các lựa chọn thì 'すわってもいいです' là hợp lý nhất về ngữ pháp).",
+    "evidence": "どこにすわってもいいです。",
+    "source": "AI_REASONING"
+  },
+  "1045": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【3】</p>",
+    "choices": [
+      "なければなりません",
+      "なくてもいいです",
+      "てもかまいません",
+      "てもいいです"
+    ],
+    "explanation": "Câu 3: 'すわる席をきめなければなりません' (Phải quyết định chỗ ngồi).",
+    "evidence": "すわる席をきめなければなりません。",
+    "source": "AI_REASONING"
+  },
+  "1046": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【4】</p>",
+    "choices": [
+      "行ったほうがいいです",
+      "行かないほうがいいです",
+      "行くことにしました",
+      "行かないことにしました"
+    ],
+    "explanation": "Câu 4: '日本では早く行ったほうがいいです' (Ở Nhật, nên đi sớm).",
+    "evidence": "日本では早く行ったほうがいいです。",
+    "source": "AI_REASONING"
+  },
+  "1047": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 17</p>",
+    "choices": [
+      "あいさつする",
+      "じゅんびをする",
+      "プレゼントをとりに行く",
+      "休む"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1048": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 18</p>",
+    "choices": [
+      "男の人がまだテキストを買っていないから",
+      "男の人が今日バイトのきゅうりょうが出るから",
+      "男の人が中国語のじゅぎょうをうけたいから",
+      "男の人にケーキをもらったから"
+    ],
+    "explanation": "Audio 18: Người phụ nữ hỏi tại sao tặng sách, người đàn ông trả lời '私、同じ時間の中国語の授業を受けたいから' (Vì tôi muốn học lớp tiếng Trung cùng giờ đó).",
+    "evidence": "私、同じ時間の中国語の授業を受けたいから。",
+    "source": "AI_REASONING"
+  },
+  "1049": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 39</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "Không có"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1050": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 40</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "Không có"
+    ],
+    "explanation": "Audio 40: Người đàn ông nói lần sau nhất định sẽ thắng. Chọn 3.",
+    "evidence": "でも次は絶対勝つかどうかだよ。",
+    "source": "AI_REASONING"
+  },
+  "1051": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>CD 41</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "Không có"
+    ],
+    "explanation": "Audio 41: Người đàn ông nói cửa hàng nổi tiếng, người phụ nữ nói có vẻ sẽ vào được. Chọn 3.",
+    "evidence": "ちょっと入りそう（入りそう）だね。",
+    "source": "AI_REASONING"
+  },
+  "1052": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>1 A:晩ご飯、何を食べましょうか。 B:今日は ____ ____ ★ ____ にしませんか。</p>",
+    "choices": [
+      "寒い",
+      "あたたかい",
+      "料理",
+      "ので"
+    ],
+    "explanation": "Thứ tự đúng: 1: A (寒い); 2: D (ので); 3: B (あたたかい); 4: C (料理). Dấu ★ ở ô thứ 3 nên chọn B (あたたかい).",
+    "evidence": "1 A:晩ご飯、何を食べましょうか。 B:今日は 寒い ので あたたかい 料理 にしませんか。",
+    "source": "AI_REASONING"
+  },
+  "1053": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>2 このテキストは ____ ____ ★ ____ です。</p>",
+    "choices": [
+      "わかりやすい",
+      "文法の",
+      "ありますから",
+      "説明が"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (文法の); 2: D (説明が); 3: C (ありますから); 4: A (わかりやすい). Dấu ★ ở ô thứ 3 nên chọn C (ありますから).",
+    "evidence": "2 このテキストは 文法の 説明が ありますから わかりやすい です。",
+    "source": "AI_REASONING"
+  },
+  "1054": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>3 先週 ____ ____ ★ ____ から、アドレスを教えてください。</p>",
+    "choices": [
+      "とった",
+      "京都で",
+      "しゃしんを",
+      "お送りします"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (京都で); 2: C (しゃしんを); 3: A (とった); 4: D (お送りします). Dấu ★ ở ô thứ 3 nên chọn A (とった).",
+    "evidence": "3 先週 京都で しゃしんを とった お送りします から、アドレスを教えてください。",
+    "source": "AI_REASONING"
+  },
+  "1055": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>4 この ____ ____ ★ ____ です。</p>",
+    "choices": [
+      "大きくて",
+      "運転",
+      "しにくい",
+      "車は"
+    ],
+    "explanation": "Thứ tự đúng: 1: D (車は); 2: A (大きくて); 3: B (運転); 4: C (しにくい). Dấu ★ ở ô thứ 3 nên chọn B (運転).",
+    "evidence": "4 この 車は 大きくて 運転 しにくい です。",
+    "source": "AI_REASONING"
+  },
+  "1056": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>5 渋谷駅へ ____ ____ ★ ____ いいでしょうか。</p>",
+    "choices": [
+      "乗ったら",
+      "行きたいんですが、",
+      "電車に",
+      "どの"
+    ],
+    "explanation": "Thứ tự đúng: 1: B (行きたいんですが、); 2: D (どの); 3: C (電車に); 4: A (乗ったら). Dấu ★ ở ô thứ 3 nên chọn C (電車に).",
+    "evidence": "5 渋谷駅へ 行きたいんですが、 どの 電車に 乗ったら いいでしょうか。",
+    "source": "AI_REASONING"
+  },
+  "1057": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>今度、母と旅行に行く。それで、今日旅館のよやくをした。旅館の名前は山下旅館【1】。旅館にとまるのははじめてだ。母といっしょなので、へやはわしつ【2】した。わしつ【3】ひろいらしいから、ちょうどよかった。【4】場所だったらこまるとおもったが、旅館の人が駅まで車でむかえに来ると言ってくれた。母もいっしょだから、そのほうが安心だ。</p>",
+    "choices": [
+      "です",
+      "だ",
+      "にする",
+      "でございます"
+    ],
+    "explanation": "Người kể đang viết theo văn thể lịch sự thông thường: tên nhà nghỉ là Yamashita. です kết thúc câu giới thiệu tên; でございます quá trang trọng so với phần còn lại.",
+    "evidence": "旅館の名前は山下旅館です。",
+    "source": "AI_REASONING"
+  },
+  "1058": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>わしつ【2】した。【2】</p>",
+    "choices": [
+      "を",
+      "が",
+      "に",
+      "で"
+    ],
+    "explanation": "Đoạn văn: へやはわしつ【2】した。 (Tôi đã chọn phòng kiểu Nhật). Cấu trúc: [Danh từ] + にする (Chọn cái gì đó). Ở đây là 'わしつにする' (chọn phòng kiểu Nhật).",
+    "evidence": "へやはわしつにした。",
+    "source": "AI_REASONING"
+  },
+  "1059": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>わしつ【3】ひろいらしいから【3】</p>",
+    "choices": [
+      "のほうが",
+      "とどちらが",
+      "より",
+      "から"
+    ],
+    "explanation": "Đoạn văn: わしつ【3】ひろいらしいから (Vì phòng kiểu Nhật có vẻ rộng). Cấu trúc: [Danh từ] + のほうが (So với cái khác thì cái này...). Ở đây là 'わしつのほうがひろいらしい' (Phòng kiểu Nhật có vẻ rộng hơn).",
+    "evidence": "わしつのほうがひろいらしいから",
+    "source": "AI_REASONING"
+  },
+  "1060": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【4】場所だったらこまるとおもったが【4】</p>",
+    "choices": [
+      "わかりにくい",
+      "わかった",
+      "わかりやすい",
+      "わからなかった"
+    ],
+    "explanation": "Đoạn văn: 【4】場所だったらこまるとおもったが (Tôi đã nghĩ nếu là địa điểm khó tìm thì sẽ rắc rối). 'わかりにくい' (khó hiểu/khó tìm) là tính từ phù hợp nhất để mô tả địa điểm gây rắc rối.",
+    "evidence": "わかりにくい場所だったらこまるとおもったが",
+    "source": "AI_REASONING"
+  },
+  "1061": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>CD 44</p>",
+    "choices": [
+      "学校を休む",
+      "大木先生に電話をする",
+      "大阪へ行く",
+      "大木先生にメールをする"
+    ],
+    "explanation": "Audio 44: Người đàn ông hỏi về việc liên lạc với thầy Ooki. Người phụ nữ nói thầy Ooki đi công tác ở Osaka. Người đàn ông hỏi có nên gọi điện không, người phụ nữ khuyên nên gửi email. Đáp án là gửi email cho thầy Ooki.",
+    "evidence": "男: 論文のことで電話してもいいと思いますか。 女: 電話よりメールの方がいいと思いますよ。 (Nam: Tôi có nên gọi điện về luận văn không? Nữ: Tôi nghĩ gửi email tốt hơn gọi điện.)",
+    "source": "AI_REASONING"
+  },
+  "1062": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 45</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio 45: Người phụ nữ nói 'おきゃくさま、でぐちはこちらでございます' (Quý khách, lối ra ở đây ạ). Người đàn ông trả lời 'じゃあ、それにします' (Vậy thì tôi chọn cái đó). Câu hỏi là chọn lối ra. Hình 1 là lối ra.",
+    "evidence": "おきゃくさま、でぐちはこちらでございます。 (Quý khách, lối ra ở đây ạ.)",
+    "source": "AI_REASONING"
+  },
+  "1063": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>CD 46</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio 46: Người đàn ông hỏi chọn cà phê nóng hay đá. Người phụ nữ trả lời 'ホットおねがいします' (Cho tôi cà phê nóng). Hình 2 là cà phê nóng.",
+    "evidence": "ホットおねがいします (Cho tôi cà phê nóng)",
+    "source": "AI_REASONING"
+  },
+  "1064": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>CD 47</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Audio 47: Người đàn ông hỏi '重そうですね。お持ちしましょうか' (Trông nặng nhỉ. Tôi cầm giúp nhé?). Người phụ nữ trả lời 'いいえ、大丈夫です' (Không, không sao đâu). Hình 1 là người phụ nữ từ chối.",
+    "evidence": "いいえ、大丈夫です (Không, không sao đâu)",
+    "source": "AI_REASONING"
+  },
+  "1065": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 48</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      ""
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1066": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>【1】</p>",
+    "choices": [
+      "ごしょうかいさせます",
+      "ごしょうかいされます",
+      "ごしょうかいします",
+      "ごしょうかいなさいます"
+    ],
+    "explanation": "Câu 1: Giới thiệu người mới. Cần dùng kính ngữ khiêm nhường 'ごしょうかいします' (Tôi xin phép giới thiệu).",
+    "evidence": "みなさん、新しいコーチをごしょうかいします。",
+    "source": "AI_REASONING"
+  },
+  "1067": {
+    "correctAnswer": "B",
+    "contentNihongo": "<p>【2】</p>",
+    "choices": [
+      "ことになられました",
+      "ことになりました",
+      "ことがありました",
+      "ことがございます"
+    ],
+    "explanation": "Câu 2: Cấu trúc '～ことになりました' dùng để diễn tả một quyết định hoặc sự thay đổi đã được xác định.",
+    "evidence": "来月からはこのチームのコーチになっていただくことになりました。",
+    "source": "AI_REASONING"
+  },
+  "1068": {
+    "correctAnswer": "D",
+    "contentNihongo": "<p>【3】</p>",
+    "choices": [
+      "できました",
+      "させました",
+      "いたしました",
+      "なさいました"
+    ],
+    "explanation": "Đang nói kính trọng về hành động của huấn luyện viên, nên dùng なさいました. いたしました là khiêm nhường ngữ cho hành động của mình.",
+    "evidence": "大川コーチは…たくさんの世界のチームと試合をなさいました。",
+    "source": "AI_REASONING"
+  },
+  "1069": {
+    "correctAnswer": "A",
+    "contentNihongo": "<p>【4】</p>",
+    "choices": [
+      "作ることだ",
+      "作ったことだ",
+      "作れ",
+      "作り"
+    ],
+    "explanation": "Danh từ hóa ước mơ bằng Vること: 夢は世界一のチームを作ることだ. だそうです truyền đạt điều được nghe.",
+    "evidence": "大川コーチのゆめは世界一のチームを作ることだそうです。",
+    "source": "AI_REASONING"
+  },
+  "1070": {
+    "correctAnswer": "C",
+    "contentNihongo": "<p>大川選手へ 優勝おめでとうございます。テレビで最後の試合を見ました。すばらしかったです。選手生活20年の間にはけをして、試合に出られなかったときもありましたね。でもどんなときも大川選手は笑顔でした。私は選手の中で大川選手がいちばん好きでした。練習でも試合でも一生懸命ボールを追いかけているのを見て、私もがんばろうと思いました。大川選手、お疲れさまでした。コーチをされると聞きましたが、これからもずっと応援しています。ファンより</p>",
+    "choices": [
+      "大川選手は20年間、けをして試合に出られなかったからです。",
+      "大川選手は優勝して笑っていたからです。",
+      "大川選手がいつもがんばっていたからです。",
+      "大川選手はコーチになるからです。"
+    ],
+    "explanation": "Đoạn văn viết: '練習でも試合でも一生懸命ボールを追いかけているのを見て、私もがんばろうと思いました' (Nhìn thấy anh ấy nỗ lực đuổi theo bóng, tôi cũng nghĩ mình phải cố gắng).",
+    "evidence": "練習でも試合でも一生懸命ボールを追いかけているのを見て、私もがんばろうと思いました。",
+    "source": "AI_REASONING"
+  },
+  "1071": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 51</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "なし"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  },
+  "1072": {
+    "correctAnswer": "",
+    "contentNihongo": "<p>CD 52</p>",
+    "choices": [
+      "1",
+      "2",
+      "3",
+      "なし"
+    ],
+    "explanation": "Các lượt AI chưa thống nhất hoặc chưa đủ dữ liệu để chọn đáp án chắc chắn.",
+    "evidence": "",
+    "source": "AI_REASONING"
+  }
+}

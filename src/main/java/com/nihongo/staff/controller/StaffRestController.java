@@ -20,6 +20,7 @@ import java.util.List;
 public class StaffRestController {
     private final IStaffService staffService;
     private final com.nihongo.staff.service.ExerciseGradingService grading;
+    private final com.nihongo.staff.service.BookAiSolutionService aiSolutions;
     private final com.nihongo.staff.security.ContentAccess contentAccess;
     @PreAuthorize("@contentAccess.lesson(#id,authentication)")
     @PostMapping("/lessons/{id}/grade")
@@ -179,6 +180,7 @@ public class StaffRestController {
     @GetMapping("/getAllExcercisesKeywordOfLesson/{lessonId}")
     public ResponseEntity<List<ExerciseKeywordDTO>> getAllExercisesKeywordOfLesson(@PathVariable Long lessonId, org.springframework.security.core.Authentication authentication) {
         var rows = this.staffService.getAllExcercisesKeywordOfLesson(lessonId);
+        aiSolutions.attachForReading(rows, contentAccess.manager(authentication));
         if (!contentAccess.manager(authentication)) rows.forEach(row -> row.setCorrectAnswer(null));
         return ResponseEntity.ok(rows);
     }

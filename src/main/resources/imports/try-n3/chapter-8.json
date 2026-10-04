@@ -1,0 +1,440 @@
+{
+  "sourceKey": "try-n3-vietnamese:386895b5:chapter-8:v1",
+  "bookName": "TRY! N3 - Tiếng Việt",
+  "levelName": "N3",
+  "typeName": "Ngữ Pháp",
+  "description": "Chương 8: Phỏng vấn khi xin việc. Đối chiếu PDF 115–125; đáp án PDF 206–207.",
+  "sourceFile": "Try_N3_TiengViet.pdf",
+  "sourcePdfPages": [
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125
+  ],
+  "exerciseTypeName": "TRY! N3 · Chương 8 · 問題1〈文法形式の判断〉",
+  "reviewLayout": {
+    "sections": [
+      {
+        "number": 1,
+        "typeName": "TRY! N3 · Chương 8 · 問題1〈文法形式の判断〉",
+        "title": "文法形式の判断",
+        "vietnameseTitle": "Chọn dạng ngữ pháp",
+        "instruction": "次の文の（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          124
+        ],
+        "sourcePrintedPages": "124",
+        "questionCount": 5,
+        "choiceColumns": 2
+      },
+      {
+        "number": 2,
+        "typeName": "TRY! N3 · Chương 8 · 問題2〈文の組み立て〉",
+        "title": "文の組み立て",
+        "vietnameseTitle": "Sắp xếp câu",
+        "instruction": "次の文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          125
+        ],
+        "sourcePrintedPages": "125",
+        "questionCount": 3
+      },
+      {
+        "number": 3,
+        "typeName": "TRY! N3 · Chương 8 · 問題3〈読解〉",
+        "title": "読解",
+        "vietnameseTitle": "Đọc hiểu",
+        "instruction": "次の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。",
+        "printedPages": [
+          125
+        ],
+        "sourcePrintedPages": "125",
+        "questionCount": 1,
+        "reading": "日ごろは、当社の携帯電話をご利用いただき、誠にありがとうございます。お客様の携帯電話からのメールサービスは本年７月よりご利用いただけなくなりますので、６月末日までに、新しい機種に変更していただきますようお願いいたします。お客様にはたいへんご不便・ご迷惑をおかけいたしますこと、深くおわび申し上げます。\n皆様のご理解とご協力をお願いいたします。"
+      },
+      {
+        "number": 4,
+        "typeName": "TRY! N3 · Chương 8 · 問題4〈聴解〉",
+        "title": "聴解",
+        "vietnameseTitle": "Nghe hiểu",
+        "instruction": "まず文を聞いてください。それから、その返事を聞いて、1から3の中から、最もよいものを一つえらんでください。",
+        "printedPages": [
+          126
+        ],
+        "sourcePrintedPages": "126",
+        "questionCount": 3
+      }
+    ]
+  },
+  "notes": [
+    "Bản dịch ví dụ được bổ sung để học, không phải nguyên văn dịch của sách.",
+    "Bài Check và các bài luyện trong từng mục được giữ ở trang scan; các câu ôn tập cuối chương được chấm tương tác."
+  ],
+  "lessons": [
+    {
+      "name": "15. Phỏng vấn khi xin việc",
+      "description": "Dùng cách nói thể hiện sự kính trọng để chào hỏi và ứng đáp với người mới gặp.",
+      "reading": "<p>リー：初めまして。中田先生からご紹介いただきましたリーと申します。本日は面接のチャンスをいただき、ありがとうございます。</p><p>山下：お待ちしてました。どうぞ。</p><p>リー：こちらのデザイン事務所は来日前から存じ上げており、ずっとあこがれておりました。本日はお目にかかることができて、たいへんうれしいです。</p><p>山下：メールで経歴などはお知らせいただきましたが、今日は、作品はお持ちですか。</p><p>リー：はい、持ってまいりました。ご覧いただけますでしょうか。まだ勉強不足ですが、専門家でいらっしゃる先生にいろいろアドバイスいただければと思っております。</p><p>山下：それでは、このデザインについて、５分程度でプレゼンテーションをお願いします。</p><p>リー：はい。では、始めさせていただきます。よろしくお願いいたします。</p>",
+      "audioTrack": "44",
+      "sourcePrintedPages": [
+        116,
+        123
+      ],
+      "grammars": [
+        {
+          "number": 72,
+          "title": "72. ご紹介いただきました",
+          "sourcePrintedPage": 117,
+          "description": "<p>Cấu trúc: お + V bỏ ます／ご + N + いただく／くださる</p><p>Cách lịch sự của ～てもらう và ～てくれる, dùng khi nhận hành động từ người cần kính trọng.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>本日はお忙しい中、お集まりいただき、たいへん感謝しております。</p>",
+              "vietnamese": "<p>Xin chân thành cảm ơn quý vị đã tập trung tại đây dù rất bận rộn.</p>"
+            },
+            {
+              "nihongo": "<p>最後までお聞きくださいまして、ありがとうございました。</p>",
+              "vietnamese": "<p>Xin cảm ơn quý vị đã lắng nghe đến cuối.</p>"
+            },
+            {
+              "nihongo": "<p>先生が先日ご紹介くださった本はたいへん参考になりました。</p>",
+              "vietnamese": "<p>Cuốn sách thầy giới thiệu hôm trước rất hữu ích.</p>"
+            },
+            {
+              "nihongo": "<p>お手元にチケットをご用意いただき、こちらに並んでお待ちください。</p>",
+              "vietnamese": "<p>Xin chuẩn bị vé trong tay và xếp hàng chờ tại đây.</p>"
+            }
+          ]
+        },
+        {
+          "number": 73,
+          "title": "73. お待ちしてました",
+          "sourcePrintedPage": 117,
+          "description": "<p>Cấu trúc: ～ています → ～てます; ～ておきます → ～ときます; ～てしまいます → ～ちゃいます</p><p>Các dạng rút gọn cũng được dùng khi nói lịch sự trong hội thoại.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>Ａ：田中さんどこにいるか知ってる？Ｂ：今、会議に出てますよ。</p>",
+              "vietnamese": "<p>A: Bạn biết Tanaka đang ở đâu không? B: Bây giờ anh ấy đang họp.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：おいしそうなお弁当だね。自分で作るの？Ｂ：はい、毎日作ってます。</p>",
+              "vietnamese": "<p>A: Cơm hộp trông ngon nhỉ. Bạn tự làm à? B: Vâng, tôi làm mỗi ngày.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：この箱、どうしましょうか。Ｂ：じゃ、そこに置いといていただけますか。</p>",
+              "vietnamese": "<p>A: Chiếc hộp này xử lý thế nào ạ? B: Vậy bạn để giúp ở đó được không?</p>"
+            },
+            {
+              "nihongo": "<p>銀行に行かなきゃいけませんので、これで失礼します。</p>",
+              "vietnamese": "<p>Tôi phải đi ngân hàng nên xin phép về đây.</p>"
+            },
+            {
+              "nihongo": "<p>これ、もう使いませんよね。捨てちゃいますよ。</p>",
+              "vietnamese": "<p>Cái này không dùng nữa phải không? Tôi bỏ đi nhé.</p>"
+            }
+          ]
+        },
+        {
+          "number": 74,
+          "title": "74. 来日前から存じ上げており",
+          "sourcePrintedPage": 118,
+          "description": "<p>Cấu trúc: Khiêm nhường ngữ đặc biệt: 会う → お目にかかる; 見せる → お目にかける; もらう → ちょうだいする; 知る → 存じ上げる</p><p>Nói hành động của mình bằng từ đặc biệt để thể hiện kính trọng đối phương.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>久しぶりにお目にかかるのを楽しみにしています。</p>",
+              "vietnamese": "<p>Tôi mong được gặp lại anh/chị sau thời gian dài.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：うちの営業部の田中をご存知ですか。Ｂ：はい、よく存じ上げています。</p>",
+              "vietnamese": "<p>A: Anh/chị có biết Tanaka ở phòng kinh doanh của chúng tôi không? B: Vâng, tôi biết rõ anh ấy.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：まあ、一杯。Ｂ：はい、ちょうだいします。</p>",
+              "vietnamese": "<p>A: Nào, mời một ly. B: Vâng, tôi xin nhận.</p>"
+            }
+          ]
+        },
+        {
+          "number": 75,
+          "title": "75. 作品はお持ちですか",
+          "sourcePrintedPage": 119,
+          "description": "<p>Cấu trúc: お + V bỏ ます／ご + N + です</p><p>Dạng kính ngữ chỉ trạng thái ～ている của người được kính trọng. Dùng với 待つ・持つ và 滞在・専攻・研究・担当・活躍; không dùng với động từ có thân ます một âm như 見ます・寝ます.</p><p>お + V bỏ ます còn có thể dùng như danh từ. ロープウェイをお待ちのお客様はこちらにお並びください。→ Quý khách chờ cáp treo vui lòng xếp hàng ở đây. お降りの際は足元にご注意ください。→ Khi xuống xe, quý khách vui lòng chú ý dưới chân.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>お呼び出しいたします。鈴木一郎君のお母様、一郎君が迷子センターでお待ちです。</p>",
+              "vietnamese": "<p>Xin thông báo: mẹ của bé Suzuki Ichiro, bé đang chờ ở trung tâm hỗ trợ trẻ lạc.</p>"
+            },
+            {
+              "nihongo": "<p>山川さん、保険証をお持ちですか。</p>",
+              "vietnamese": "<p>Anh/chị Yamakawa có mang thẻ bảo hiểm không?</p>"
+            },
+            {
+              "nihongo": "<p>当ホテルには何日間ご滞在ですか。</p>",
+              "vietnamese": "<p>Quý khách sẽ lưu trú tại khách sạn chúng tôi mấy ngày?</p>"
+            },
+            {
+              "nihongo": "<p>作家の上野先生は新聞、テレビなどでもご活躍です。</p>",
+              "vietnamese": "<p>Nhà văn Ueno còn hoạt động tích cực trên báo chí và truyền hình.</p>"
+            }
+          ]
+        },
+        {
+          "number": 76,
+          "title": "76. ご覧いただけますでしょうか",
+          "sourcePrintedPage": 120,
+          "description": "<p>Cấu trúc: Thể lịch sự／thể thông thường + でしょうか; Aな／N bỏ だ; ～です → ～でしょうか</p><p>Hỏi hoặc nhờ vả một cách lịch sự. Không ghép ですでしょうか.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>山に登るとき、何か気をつけることがありますでしょうか。</p>",
+              "vietnamese": "<p>Khi leo núi, có điều gì cần lưu ý không ạ?</p>"
+            },
+            {
+              "nihongo": "<p>何かアドバイスをお願いできませんでしょうか。</p>",
+              "vietnamese": "<p>Tôi có thể xin anh/chị một vài lời khuyên được không ạ?</p>"
+            },
+            {
+              "nihongo": "<p>部長、先日提出した報告書、ミスはなかったでしょうか。</p>",
+              "vietnamese": "<p>Thưa trưởng phòng, báo cáo tôi nộp hôm trước có lỗi nào không ạ?</p>"
+            },
+            {
+              "nihongo": "<p>次回の打ち合わせは来週の火曜日でしたでしょうか。</p>",
+              "vietnamese": "<p>Buổi trao đổi lần tới là thứ Ba tuần sau phải không ạ?</p>"
+            },
+            {
+              "nihongo": "<p>申し込みには何が必要でしょうか。</p>",
+              "vietnamese": "<p>Để đăng ký cần những gì ạ?</p>"
+            }
+          ]
+        },
+        {
+          "number": 77,
+          "title": "77. 専門家でいらっしゃる",
+          "sourcePrintedPage": 121,
+          "description": "<p>Cấu trúc: Vて／Aな + で／N + で + いらっしゃる</p><p>Kính ngữ của trạng thái ～ている; đôi khi dùng thay cho です.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>外国に住んでいらっしゃる方にアンケートをお願いしました。</p>",
+              "vietnamese": "<p>Tôi đã nhờ những người đang sống ở nước ngoài trả lời khảo sát.</p>"
+            },
+            {
+              "nihongo": "<p>先生がどう思っていらっしゃるか、よくわかりません。</p>",
+              "vietnamese": "<p>Tôi không biết rõ thầy đang nghĩ như thế nào.</p>"
+            },
+            {
+              "nihongo": "<p>奥様は音楽の先生でいらっしゃいます。</p>",
+              "vietnamese": "<p>Vợ của ông là giáo viên âm nhạc.</p>"
+            },
+            {
+              "nihongo": "<p>お客様があちらでお待ちでいらっしゃいます。</p>",
+              "vietnamese": "<p>Khách đang đợi ở đằng kia.</p>"
+            },
+            {
+              "nihongo": "<p>伊藤先生はご専門分野だけでなく、多方面でご活躍でいらっしゃいます。</p>",
+              "vietnamese": "<p>Thầy Ito hoạt động tích cực không chỉ trong lĩnh vực chuyên môn mà còn ở nhiều lĩnh vực khác.</p>"
+            }
+          ]
+        },
+        {
+          "number": 78,
+          "title": "78. 始めさせていただきます",
+          "sourcePrintedPage": 122,
+          "description": "<p>Cấu trúc: V thể sai khiến て + いただく／くださる</p><p>Cách lịch sự của ～させてもらう và ～させてくれる: được cho phép làm một việc.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>出張に会社の車を使わせていただいてもかまいませんか。</p>",
+              "vietnamese": "<p>Tôi được phép dùng xe công ty đi công tác không ạ?</p>"
+            },
+            {
+              "nihongo": "<p>明日、もう一度お電話させていただきます。</p>",
+              "vietnamese": "<p>Ngày mai tôi xin phép gọi điện lại một lần nữa.</p>"
+            },
+            {
+              "nihongo": "<p>以上で私の説明を終わらせていただきます。</p>",
+              "vietnamese": "<p>Tôi xin kết thúc phần giải thích của mình tại đây.</p>"
+            },
+            {
+              "nihongo": "<p>そのお年寄りは昔の話をいろいろ聞かせてくださいました。</p>",
+              "vietnamese": "<p>Cụ ấy đã cho tôi nghe nhiều chuyện ngày xưa.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-1:1",
+          "sourceQuestionNumber": 1,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 124,
+          "contentNihongo": "先ほど商品が届きました。すぐに（　）、ありがとうございました。",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題1〈文法形式の判断〉",
+          "answerA": "送らせてさしあげ",
+          "answerB": "送らせていただき",
+          "answerC": "送ってさしあげ",
+          "answerD": "お送りいただき"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-1:2",
+          "sourceQuestionNumber": 2,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 124,
+          "contentNihongo": "皆様は日本の歌舞伎を（　）ことがありますでしょうか。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題1〈文法形式の判断〉",
+          "answerA": "ご覧になった",
+          "answerB": "お目にかけた",
+          "answerC": "お目にかかった",
+          "answerD": "拝見した"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-1:3",
+          "sourceQuestionNumber": 3,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 124,
+          "contentNihongo": "こちらで具体的な方法を（　）いただき、後日ご連絡いたします。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題1〈文法形式の判断〉",
+          "answerA": "検討して",
+          "answerB": "検討させて",
+          "answerC": "ご検討",
+          "answerD": "ご検討になって"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-1:4",
+          "sourceQuestionNumber": 4,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 124,
+          "contentNihongo": "Ａ：失礼ですが、大山様（　）か。\nＢ：はい。大山です。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題1〈文法形式の判断〉",
+          "answerA": "でいらっしゃいます",
+          "answerB": "でございます",
+          "answerC": "になります",
+          "answerD": "がまいります"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-1:5",
+          "sourceQuestionNumber": 5,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 5,
+          "sourcePrintedPage": 124,
+          "contentNihongo": "ファンの皆様に、この場をお借りして厚く御礼（　）。",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題1〈文法形式の判断〉",
+          "answerA": "おっしゃいます",
+          "answerB": "おっしゃっております",
+          "answerC": "申しております",
+          "answerD": "申し上げます"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-2:1",
+          "sourceQuestionNumber": 6,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 125,
+          "contentNihongo": "申し訳ありませんが、調査の ____ ____ ★ ____ でしょうか。",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題2〈文の組み立て〉",
+          "answerA": "ちょうだい",
+          "answerB": "ための",
+          "answerC": "できます",
+          "answerD": "お時間を"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-2:2",
+          "sourceQuestionNumber": 7,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 125,
+          "contentNihongo": "今回の ____ ____ ★ ____ くださった皆様に感謝いたします。",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題2〈文の組み立て〉",
+          "answerA": "協力",
+          "answerB": "ご",
+          "answerC": "アンケート調査",
+          "answerD": "に"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-2:3",
+          "sourceQuestionNumber": 8,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 125,
+          "contentNihongo": "山田部長、____ ____ ★ ____ いらっしゃってください。",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題2〈文の組み立て〉",
+          "answerA": "応接室へ",
+          "answerB": "お客様が",
+          "answerC": "ですので",
+          "answerD": "お待ち"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-3:1",
+          "sourceQuestionNumber": 9,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 125,
+          "contentNihongo": "このお知らせでいちばん伝えたいことは何ですか。",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題3〈読解〉",
+          "answerA": "携帯電話の利用者に対する感謝の気持ち",
+          "answerB": "６月までメールが使えること",
+          "answerC": "新しい携帯電話に買い替えてほしいこと",
+          "answerD": "迷惑をかけたことに対するおわびの気持ち"
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-4:1",
+          "sourceQuestionNumber": 10,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 126,
+          "contentNihongo": "CD 45",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題4〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-4:2",
+          "sourceQuestionNumber": 11,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 126,
+          "contentNihongo": "CD 46",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題4〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        },
+        {
+          "sourceKey": "try-n3:chapter-8:review:question-4:3",
+          "sourceQuestionNumber": 12,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 126,
+          "contentNihongo": "CD 47",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 8 · 問題4〈聴解〉",
+          "answerA": "1",
+          "answerB": "2",
+          "answerC": "3",
+          "answerD": ""
+        }
+      ]
+    }
+  ]
+}

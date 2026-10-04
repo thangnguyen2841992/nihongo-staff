@@ -42,6 +42,40 @@ class MonitorEventTest {
     void memory(double value, int seconds) {
         store.complete(claim("MEMORY_USAGE"), List.of(new NodeMetricSource.Reading("VPS", "vps", Map.of(), value, null, null)), time.plusSeconds(seconds));
     }
+    @Test void scalarMetricIsDisplayedAsItsOwnObjectIncludingOlderEvents() {
+        String metricName = link("MEMORY_USAGE").getMetric().getMetricName();
+        events.save(vpsId, "MEMORY_USAGE", null, input("vps", MonitorEventRule.Operator.GTE, 80, 1, true));
+        memory(90, 0);
+
+        var series = performance.read(vpsId, "MEMORY_USAGE", null, null).objects().get(0);
+        assertEquals("vps", series.objectKey());
+        assertEquals(metricName, series.objectName());
+        assertEquals(metricName, events.events(vpsId, "MEMORY_USAGE", null).get(0).objectName());
+
+        entityManager.flush();
+        entityManager.createNativeQuery("update monitor_event set object_name = 'Toàn VPS' where vps_id = :id")
+                .setParameter("id", vpsId).executeUpdate();
+        entityManager.clear();
+        assertEquals(metricName, events.events(vpsId, "MEMORY_USAGE", null).get(0).objectName());
+    }
+    @Test void mysqlScalarMetricUsesItsMetricNameAsObject() {
+        var mysql = new MonitorVps();
+        mysql.setHostname("mysql-event-test"); mysql.setIpAddress("127.0.0.2");
+        mysql.setAgentPort(3306); mysql.setExporterType(ExporterType.MYSQL_JDBC);
+        servers.save(mysql); catalog.bindDefaults(mysql); vpsId = mysql.getVpsId();
+        String metricName = link("MYSQL_THREADS_CONNECTED").getMetric().getMetricName();
+        events.save(vpsId, "MYSQL_THREADS_CONNECTED", null, input("all", MonitorEventRule.Operator.GTE, 10, 1, true));
+        store.complete(claim("MYSQL_THREADS_CONNECTED"),
+                List.of(new NodeMetricSource.Reading("VPS", "vps", Map.of(), 12D, null, null)), time);
+
+        assertEquals(metricName, performance.read(vpsId, "MYSQL_THREADS_CONNECTED", null, null).objects().get(0).objectName());
+        assertEquals(metricName, events.events(vpsId, "MYSQL_THREADS_CONNECTED", null).get(0).objectName());
+        entityManager.flush();
+        entityManager.createNativeQuery("update monitor_event set object_name = 'Toàn MySQL' where vps_id = :id")
+                .setParameter("id", vpsId).executeUpdate();
+        entityManager.clear();
+        assertEquals(metricName, events.events(vpsId, "MYSQL_THREADS_CONNECTED", null).get(0).objectName());
+    }
     NodeMetricSource.Reading disk(String mount, double value) {
         return new NodeMetricSource.Reading("FILESYSTEM", mount, Map.of("device", "/dev/sda", "mountpoint", mount), value, null, null);
     }

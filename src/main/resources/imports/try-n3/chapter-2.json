@@ -1,0 +1,598 @@
+{
+  "sourceKey": "try-n3-vietnamese:386895b5:chapter-2:v1",
+  "bookName": "TRY! N3 - Tiếng Việt",
+  "levelName": "N3",
+  "typeName": "Ngữ Pháp",
+  "description": "Chương 2: Kuro, chú cún của tôi. Nội dung chữ đối chiếu PDF 30–42; đáp án đối chiếu phụ lục PDF 202–203.",
+  "sourceFile": "Try_N3_TiengViet.pdf",
+  "sourcePdfPages": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42
+  ],
+  "notes": [
+    "Bản dịch ví dụ được bổ sung để học, không phải nguyên văn dịch của sách.",
+    "Bài Check và các bài luyện trong từng mục được giữ ở trang scan; 18 câu ôn tập cuối chương được chấm tương tác."
+  ],
+  "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉",
+  "reviewLayout": {
+    "sections": [
+      {
+        "number": 1,
+        "typeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉",
+        "title": "文法形式の判断",
+        "instruction": "次の文の（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          41,
+          42
+        ],
+        "choiceColumns": [
+          2,
+          2,
+          2,
+          2,
+          4,
+          2,
+          4,
+          4
+        ],
+        "vietnameseTitle": "Chọn dạng ngữ pháp",
+        "questionCount": 8,
+        "sourcePrintedPages": "41–42"
+      },
+      {
+        "number": 2,
+        "typeName": "TRY! N3 · Chương 2 · 問題2〈文の組み立て〉",
+        "title": "文の組み立て",
+        "instruction": "次の文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。",
+        "printedPages": [
+          42
+        ],
+        "vietnameseTitle": "Sắp xếp câu",
+        "questionCount": 3,
+        "sourcePrintedPages": "42"
+      },
+      {
+        "number": 3,
+        "typeName": "TRY! N3 · Chương 2 · 問題3〈文章の文法〉",
+        "title": "文章の文法",
+        "instruction": "次の文章を読んで、文章全体の内容を考えて、［1］～［4］の中に入る最もよいものを、1・2・3・4から一つ選びなさい。",
+        "printedPages": [
+          42,
+          43
+        ],
+        "reading": "うちの子は遊園地が大好きだ。今週も［1］から、連れていくことにした。「連れていって！」と［2］と、なかなかいやとは言えない。\n遊園地に入った［3］、娘はうれしそうに好きな乗り物に向かって走り出した。その後も次々といろいろなものに乗りたがるので大変だった。ぼくは疲れてしまってメリーゴーランドには一人で乗ってもらおうとしたが、結局、一緒に［4］。\nでも、娘のうれしそうな様子を見ていたら、ぼくも何だかうれしくなって、来てよかったと思った。",
+        "vietnameseTitle": "Ngữ pháp trong đoạn văn",
+        "questionCount": 4,
+        "sourcePrintedPages": "42–43"
+      },
+      {
+        "number": 4,
+        "typeName": "TRY! N3 · Chương 2 · 問題4〈聴解〉",
+        "title": "聴解",
+        "instruction": "この問題では、まず質問を聞いてください。そのあと、問題用紙を見てください。読む時間があります。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。",
+        "printedPages": [
+          43
+        ],
+        "vietnameseTitle": "Nghe hiểu",
+        "questionCount": 3,
+        "sourcePrintedPages": "43"
+      }
+    ]
+  },
+  "lessons": [
+    {
+      "name": "03. Kuro, chú cún của tôi (1)",
+      "description": "Giới thiệu về gia đình hoặc thú cưng một cách đơn giản, và giải thích mối quan hệ giữa họ và bạn.",
+      "reading": "<p>ぼくはいつも夜、クロを散歩に連れていく。クロを飼い始めたのは３年前だ。色が黒いから、クロって名前をつけた。</p><p>最初、両親は犬を飼うことに反対だったが、何度も頼んで、やっと飼わせてもらった。そのかわり、雨の日も風の日も毎日必ず散歩すると約束させられた。だからクロの散歩はぼくの日課だ。</p><p>ぼくがうちに帰ると、クロは早く散歩に行きたがって「クーンクーン」と鳴く。ぼくがひもを持つと、ぼくのところへ来て、うれしそうにしっぽをふる。そして、ひもをつけて、玄関を出たとたん、クロは全速力で走り出す。</p>",
+      "audioTrack": "07",
+      "sourcePrintedPages": [
+        31,
+        36
+      ],
+      "grammars": [
+        {
+          "number": 11,
+          "title": "11. クロって名前",
+          "sourcePrintedPage": 31,
+          "description": "<p>Cấu trúc: N1 + って + N2</p><p>～って sử dụng thay cho ～という để nói tên của người hoặc vật, sự việc nào đó.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>さっき、上田さんって人が訪ねてきましたよ。お知り合いですか。</p>",
+              "vietnamese": "<p>Vừa rồi có người tên Ueda đến tìm đấy. Anh/chị có quen người đó không?</p>"
+            },
+            {
+              "nihongo": "<p>花粉症って病気、アレルギーが原因なんだよね。</p>",
+              "vietnamese": "<p>Căn bệnh gọi là dị ứng phấn hoa là do dị ứng gây ra nhỉ.</p>"
+            },
+            {
+              "nihongo": "<p>Ａ：長野県の戸隠ってところ、知ってる？\nＢ：うん。最近人気だって聞いたよ。</p>",
+              "vietnamese": "<p>A: Bạn có biết nơi gọi là Togakushi ở tỉnh Nagano không?\nB: Có. Mình nghe nói gần đây nơi đó được nhiều người yêu thích.</p>"
+            }
+          ]
+        },
+        {
+          "number": 12,
+          "title": "12. 飼わせてもらった",
+          "sourcePrintedPage": 32,
+          "description": "<p>Cấu trúc: V thể sai khiến + て + もらう / くれる</p><p>～させてもらう sử dụng khi xin phép người khác cho mình làm gì đó. Cũng sử dụng khi cảm ơn người đã cho phép mình. Thể ～させてくれる cũng thường được sử dụng.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>この会社は自分の意見を自由に言わせてくれる。</p>",
+              "vietnamese": "<p>Công ty này cho phép tôi tự do nói lên ý kiến của mình.</p>"
+            },
+            {
+              "nihongo": "<p>高校生のとき、アルバイトをしたいと父に言ったが、させてもらえなかった。</p>",
+              "vietnamese": "<p>Khi còn học cấp ba, tôi nói với bố rằng muốn đi làm thêm nhưng không được cho phép.</p>"
+            },
+            {
+              "nihongo": "<p>上司は何事も経験だと言って、私を海外研修に行かせてくれた。</p>",
+              "vietnamese": "<p>Cấp trên nói việc gì cũng là kinh nghiệm và cho tôi đi đào tạo ở nước ngoài.</p>"
+            },
+            {
+              "nihongo": "<p>ここに荷物を置かせてもらってもいいですか。</p>",
+              "vietnamese": "<p>Tôi có thể xin phép để hành lý ở đây không?</p>"
+            }
+          ]
+        },
+        {
+          "number": 13,
+          "title": "13. 約束させられた",
+          "sourcePrintedPage": 32,
+          "description": "<p>Cấu trúc: V thể bị sai khiến (使役受身)</p><p>～させられる sử dụng khi bị người khác bảo mình làm việc mình không muốn nhưng phải làm.</p><p>Nhóm I: 飲む → 飲ませる → 飲まされる／飲ませられる; 話す → 話させる → 話させられる. Nhóm II: 食べる → 食べさせる → 食べさせられる. Nhóm III: 来る → 来させる → 来させられる; する → させる → させられる.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>子どものときテストの成績が悪いと、父にトイレそうじをさせられた。</p>",
+              "vietnamese": "<p>Hồi nhỏ, hễ điểm kiểm tra kém là tôi bị bố bắt dọn nhà vệ sinh.</p>"
+            },
+            {
+              "nihongo": "<p>中学生のとき、先生にグラウンドを何周も走らされた。</p>",
+              "vietnamese": "<p>Khi học cấp hai, tôi bị thầy/cô bắt chạy nhiều vòng quanh sân.</p>"
+            },
+            {
+              "nihongo": "<p>学生のとき、いつも先輩に飲み物を買いに行かされた。</p>",
+              "vietnamese": "<p>Thời còn là học sinh/sinh viên, tôi luôn bị các anh chị khóa trên sai đi mua đồ uống.</p>"
+            }
+          ]
+        },
+        {
+          "number": 14,
+          "title": "14. 散歩に行きたがって",
+          "sourcePrintedPage": 33,
+          "description": "<p>Cấu trúc: Tính từ い bỏ い / tính từ な + がる; V bỏ ます + たがる</p><p>～がる sử dụng khi cảm xúc của người đó được thể hiện qua bộ dạng hoặc lời nói. Thông thường không sử dụng khi nói về cảm xúc của chính mình.</p><p>～がり (暑がり, 寒がり, こわがり…) trở thành danh từ chỉ người thường có cảm giác như vậy. 私は寒がりだから、冬が苦手だ。Vì tôi là người sợ lạnh nên không thích mùa đông.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>彼は試合に負けてくやしがっている。</p>",
+              "vietnamese": "<p>Anh ấy tỏ ra tiếc nuối vì thua trận.</p>"
+            },
+            {
+              "nihongo": "<p>わからない言葉があったら、面倒がらないですぐに調べなさい。</p>",
+              "vietnamese": "<p>Nếu có từ không hiểu, đừng ngại phiền mà hãy tra ngay.</p>"
+            },
+            {
+              "nihongo": "<p>妹は車をほしがっているが、父は絶対許さないと言っている。</p>",
+              "vietnamese": "<p>Em gái tôi muốn có ô tô nhưng bố nói tuyệt đối không cho phép.</p>"
+            },
+            {
+              "nihongo": "<p>田中さんは人気スターのファッションを何でも真似したがる。</p>",
+              "vietnamese": "<p>Anh/chị Tanaka muốn bắt chước mọi kiểu thời trang của các ngôi sao nổi tiếng.</p>"
+            },
+            {
+              "nihongo": "<p>寒い日は猫も外へ出たがらない。</p>",
+              "vietnamese": "<p>Những ngày lạnh, ngay cả mèo cũng không muốn ra ngoài.</p>"
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "title": "15. 玄関を出たとたん",
+          "sourcePrintedPage": 34,
+          "description": "<p>Cấu trúc: Vた + とたん（に）</p><p>～たとたん… sử dụng để giải thích tình huống rằng … xảy ra ngay sau ～.</p><p>Không dùng nếu phần … là dự định của người nói sẽ làm trong tương lai.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>立ち上がったとたん、目の前が暗くなった。</p>",
+              "vietnamese": "<p>Ngay khi đứng dậy, trước mắt tôi tối sầm lại.</p>"
+            },
+            {
+              "nihongo": "<p>彼女はさっきまで元気がなかったのに、ご飯を食べたとたん元気になった。</p>",
+              "vietnamese": "<p>Vừa nãy cô ấy còn mệt mỏi, vậy mà ngay khi ăn cơm xong đã khỏe khoắn trở lại.</p>"
+            },
+            {
+              "nihongo": "<p>彼は、相手が社長だと知ったとたん、急にていねいに話し始めた。</p>",
+              "vietnamese": "<p>Ngay khi biết người đối diện là giám đốc, anh ấy đột nhiên bắt đầu nói chuyện lịch sự.</p>"
+            }
+          ]
+        },
+        {
+          "number": 16,
+          "title": "16. 全速力で走り出す",
+          "sourcePrintedPage": 35,
+          "description": "<p>Cấu trúc: V bỏ ます + 出す</p><p>～出す sử dụng khi một việc đột nhiên xảy ra hoặc bắt đầu một cách bất thình lình.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>さっきまで笑っていた赤ちゃんが急に泣き出した。</p>",
+              "vietnamese": "<p>Em bé vừa mới còn cười bỗng bật khóc.</p>"
+            },
+            {
+              "nihongo": "<p>突然大雨が降り出し、人々はあわてて建物の中に入った。</p>",
+              "vietnamese": "<p>Mưa lớn bất ngờ đổ xuống, mọi người vội vàng chạy vào trong tòa nhà.</p>"
+            },
+            {
+              "nihongo": "<p>彼は短気で急に怒り出すから、付き合いにくい。</p>",
+              "vietnamese": "<p>Anh ấy nóng tính, hay đột nhiên nổi giận nên khó giao thiệp.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": []
+    },
+    {
+      "name": "04. Kuro, chú cún của tôi (2)",
+      "description": "Giải thích về cuộc sống của bạn cùng với gia đình hoặc thú cưng, cũng như mối liên hệ của bạn với họ.",
+      "reading": "<p>近くの公園を１周するのが、いつもの散歩コースだ。帰ろうとするといやがって動こうとしない。そんなときのために、いつもぼくのズボンのポケットには、クロが好きなクッキーが入れてある。クッキーを取り出すと、クロは喜んでぼくのところへ来る。</p><p>ときどき、帰りにコンビニに寄ることもある。クロをコンビニの前で待たせておいて、買い物する。戻ってくると、クロは大喜びだ。ぼくは顔中なめられてしまう。なめられるとくすぐったいが、クロは本当にかわいい。</p>",
+      "audioTrack": "08",
+      "sourcePrintedPages": [
+        37,
+        40
+      ],
+      "grammars": [
+        {
+          "number": 17,
+          "title": "17. 帰ろうとする",
+          "sourcePrintedPage": 37,
+          "description": "<p>Cấu trúc: V thể ý chí + とする</p><p>～ようとする sử dụng khi muốn nói rằng đang cố gắng hết sức làm gì đó hoặc bây giờ định làm. ～ようとしない biểu lộ cảm xúc chỉ trích ai đó không chịu làm gì đó.</p><p>Cũng dùng khi điều gì đó không ngờ xảy ra ngay trước một hành động: 出かけようとしたら雨が降ってきた。Khi tôi định ra ngoài thì trời bắt đầu mưa.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>小さい子どもが道を渡ろうとしているよ。一人でどこへ行くのかな。</p>",
+              "vietnamese": "<p>Có một đứa trẻ nhỏ đang định băng qua đường đấy. Không biết em ấy đi đâu một mình nhỉ.</p>"
+            },
+            {
+              "nihongo": "<p>生まれたばかりの馬の赤ちゃんが、一生けんめい立とうとしている。</p>",
+              "vietnamese": "<p>Chú ngựa con mới sinh đang cố gắng hết sức để đứng dậy.</p>"
+            },
+            {
+              "nihongo": "<p>昔の友だちの名前を思い出そうとしたが、どうしても思い出せない。</p>",
+              "vietnamese": "<p>Tôi cố nhớ tên người bạn ngày xưa nhưng dù thế nào cũng không nhớ ra.</p>"
+            },
+            {
+              "nihongo": "<p>リンさんは試験が近いのに、ぜんぜん勉強しようとしない。</p>",
+              "vietnamese": "<p>Kỳ thi đã gần đến mà Linh vẫn hoàn toàn không chịu học.</p>"
+            }
+          ]
+        },
+        {
+          "number": 18,
+          "title": "18. コンビニに寄ることもある",
+          "sourcePrintedPage": 38,
+          "description": "<p>Cấu trúc: Vる / Vない + ことがある / こともある</p><p>～ことがある sử dụng khi nói rằng thỉnh thoảng, đôi khi làm chuyện gì đó.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>この地方では４月でも雪が降ることがある。</p>",
+              "vietnamese": "<p>Ở vùng này, có khi ngay cả tháng tư vẫn có tuyết rơi.</p>"
+            },
+            {
+              "nihongo": "<p>私の大学は横浜にもキャンパスがあって、ときどきそちらに行かなければならないことがあるんです。</p>",
+              "vietnamese": "<p>Trường đại học của tôi cũng có cơ sở ở Yokohama, thỉnh thoảng tôi phải đến đó.</p>"
+            },
+            {
+              "nihongo": "<p>ふだんはよく寝られるんですが、ストレスがたまって眠れないこともあります。</p>",
+              "vietnamese": "<p>Bình thường tôi ngủ tốt, nhưng cũng có khi căng thẳng tích tụ khiến tôi không ngủ được.</p>"
+            },
+            {
+              "nihongo": "<p>あの店の営業時間は５時までですが、昼過ぎに全部売れてしまうこともあります。</p>",
+              "vietnamese": "<p>Cửa hàng đó mở đến năm giờ, nhưng cũng có khi vừa quá trưa đã bán hết hàng.</p>"
+            }
+          ]
+        },
+        {
+          "number": 19,
+          "title": "19. 待たせておいて",
+          "sourcePrintedPage": 39,
+          "description": "<p>Cấu trúc: V thể sai khiến + て + おく</p><p>～させておく chỉ thị ai đó cứ tiếp tục hành động ～. Cũng dùng để nói cứ để nguyên như thế, không làm thay đổi hoặc buộc phải dừng hành động. Thường dùng cho động vật hoặc người dưới mình.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>夏に車の中で子どもを待たせておくのは危険ですよ。</p>",
+              "vietnamese": "<p>Để trẻ chờ trong ô tô vào mùa hè rất nguy hiểm đấy.</p>"
+            },
+            {
+              "nihongo": "<p>家事をしている間、子どもをおもちゃで遊ばせておく。</p>",
+              "vietnamese": "<p>Trong lúc làm việc nhà, tôi để con chơi đồ chơi.</p>"
+            },
+            {
+              "nihongo": "<p>息子は何を言っても聞かないので、自分のしたいことを勝手にさせておくことにした。</p>",
+              "vietnamese": "<p>Nói gì con trai cũng không nghe nên tôi quyết định cứ để nó tự làm điều mình muốn.</p>"
+            }
+          ]
+        },
+        {
+          "number": 20,
+          "title": "20. 顔中なめられてしまう",
+          "sourcePrintedPage": 39,
+          "description": "<p>Cấu trúc: V thể bị động + て + しまう</p><p>～られてしまう sử dụng khi bạn cảm thấy việc người khác làm thật khó chịu hoặc đáng tiếc.</p>",
+          "examples": [
+            {
+              "nihongo": "<p>片思いの彼を映画に誘ったが、断られてしまった。</p>",
+              "vietnamese": "<p>Tôi rủ người mình yêu đơn phương đi xem phim nhưng đã bị từ chối.</p>"
+            },
+            {
+              "nihongo": "<p>あとで食べようと思っていたケーキを妹に食べられてしまった。</p>",
+              "vietnamese": "<p>Chiếc bánh tôi định để ăn sau đã bị em gái ăn mất.</p>"
+            },
+            {
+              "nihongo": "<p>ハイキングをしていたら、はちに刺されてしまった。</p>",
+              "vietnamese": "<p>Khi đang đi bộ dã ngoại, tôi bị ong đốt.</p>"
+            },
+            {
+              "nihongo": "<p>言葉が足りないと、誤解されてしまうことがある。</p>",
+              "vietnamese": "<p>Nếu nói không đủ ý thì đôi khi sẽ bị hiểu lầm.</p>"
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-1:1",
+          "sourceQuestionNumber": 1,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 41,
+          "contentNihongo": "このバスは安全のため急停車（　）のでご注意ください。",
+          "answerA": "しようとします",
+          "answerB": "することがあります",
+          "answerC": "していることがあります",
+          "answerD": "させてもらいます",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-1:2",
+          "sourceQuestionNumber": 2,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 41,
+          "contentNihongo": "Ａ：かわいいウサギですね。写真を（　）いいですか。\nＢ：ええ、どうぞ。名前はピョンちゃんって言うんです。",
+          "answerA": "撮らせてくれても",
+          "answerB": "撮らせてもらっても",
+          "answerC": "撮られても",
+          "answerD": "撮られてしまっても",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-1:3",
+          "sourceQuestionNumber": 3,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 41,
+          "contentNihongo": "仕事が終わってうちへ（　）、部長に新しい仕事を頼まれた。",
+          "answerA": "帰ろうとしたら",
+          "answerB": "帰りたがったら",
+          "answerC": "帰らせたら",
+          "answerD": "帰ったとたん",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-1:4",
+          "sourceQuestionNumber": 4,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 41,
+          "contentNihongo": "空港でだれかにスーツケースを（　）しまって、困ったことがある。",
+          "answerA": "間違えて",
+          "answerB": "間違えさせて",
+          "answerC": "間違えられて",
+          "answerD": "間違えさせられて",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-1:5",
+          "sourceQuestionNumber": 5,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 5,
+          "sourcePrintedPage": 41,
+          "contentNihongo": "私は（　）なので、いつもくつ下を２枚はいています。",
+          "answerA": "暑がり",
+          "answerB": "寒がり",
+          "answerC": "痛がり",
+          "answerD": "こわがり",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-1:6",
+          "sourceQuestionNumber": 6,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 6,
+          "sourcePrintedPage": 41,
+          "contentNihongo": "家族で食事しているときでも携帯メールを（　）子どもが増えているそうです。",
+          "answerA": "しようとしない",
+          "answerB": "させておく",
+          "answerC": "やめさせない",
+          "answerD": "やめようとしない",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-1:7",
+          "sourceQuestionNumber": 7,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 7,
+          "sourcePrintedPage": 42,
+          "contentNihongo": "サッカーの練習のときにコーチに毎回ランニングを（　）、大変でしたが、だんだん慣れて速く走れるようになりました。",
+          "answerA": "させられて",
+          "answerB": "されて",
+          "answerC": "させて",
+          "answerD": "させようとして",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-1:8",
+          "sourceQuestionNumber": 8,
+          "sourceSectionNumber": 1,
+          "sourceItemNumber": 8,
+          "sourcePrintedPage": 42,
+          "contentNihongo": "散歩から帰ってきた（　）、大つぶの雨が降り始めた。",
+          "answerA": "ように",
+          "answerB": "なら",
+          "answerC": "とたん",
+          "answerD": "ほど",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題1〈文法形式の判断〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-2:1",
+          "sourceQuestionNumber": 9,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 42,
+          "contentNihongo": "パックの牛乳は横を強く ____ ____ ★ ____ ので気をつけてください。",
+          "answerA": "ことがある",
+          "answerB": "持つと",
+          "answerC": "こぼれる",
+          "answerD": "中身が",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題2〈文の組み立て〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-2:2",
+          "sourceQuestionNumber": 10,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 42,
+          "contentNihongo": "仕事中に頭痛が ____ ____ ★ ____ 、病院へ行った。",
+          "answerA": "もらって",
+          "answerB": "早退させて",
+          "answerC": "ので",
+          "answerD": "ひどくなった",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題2〈文の組み立て〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-2:3",
+          "sourceQuestionNumber": 11,
+          "sourceSectionNumber": 2,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 42,
+          "contentNihongo": "友だちが ____ ____ ★ ____ から、びっくりした。",
+          "answerA": "見た",
+          "answerB": "メールを",
+          "answerC": "とたん",
+          "answerD": "泣き出した",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題2〈文の組み立て〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-3:1",
+          "sourceQuestionNumber": 12,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 43,
+          "contentNihongo": "［1］",
+          "answerA": "行った",
+          "answerB": "行きたかった",
+          "answerC": "行ったばかりだった",
+          "answerD": "行きたがった",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題3〈文章の文法〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-3:2",
+          "sourceQuestionNumber": 13,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 43,
+          "contentNihongo": "［2］",
+          "answerA": "頼まれてもらう",
+          "answerB": "頼まれてしまう",
+          "answerC": "頼んでしまう",
+          "answerD": "頼んでもらう",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題3〈文章の文法〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-3:3",
+          "sourceQuestionNumber": 14,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 43,
+          "contentNihongo": "［3］",
+          "answerA": "ばかりで",
+          "answerB": "そうで",
+          "answerC": "とたん",
+          "answerD": "らしい",
+          "correctAnswer": "C",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題3〈文章の文法〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-3:4",
+          "sourceQuestionNumber": 15,
+          "sourceSectionNumber": 3,
+          "sourceItemNumber": 4,
+          "sourcePrintedPage": 43,
+          "contentNihongo": "［4］",
+          "answerA": "乗らされた",
+          "answerB": "乗らせてもらった",
+          "answerC": "乗られた",
+          "answerD": "乗らせてしまった",
+          "correctAnswer": "A",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題3〈文章の文法〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-4:1",
+          "sourceQuestionNumber": 16,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 1,
+          "sourcePrintedPage": 43,
+          "contentNihongo": "CD 09",
+          "answerA": "卵を持っていたから",
+          "answerB": "卵を買いに行きたかったから",
+          "answerC": "卵を２つ買ってきたから",
+          "answerD": "卵を買ってくるように頼まれたから",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題4〈聴解〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-4:2",
+          "sourceQuestionNumber": 17,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 2,
+          "sourcePrintedPage": 43,
+          "contentNihongo": "CD 10",
+          "answerA": "課長に注意されたから",
+          "answerB": "課長の話を聞かなければならなかったから",
+          "answerC": "課長にお酒をたくさん飲まされたから",
+          "answerD": "お酒が高かったから",
+          "correctAnswer": "B",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題4〈聴解〉"
+        },
+        {
+          "sourceKey": "try-n3:chapter-2:review:question-4:3",
+          "sourceQuestionNumber": 18,
+          "sourceSectionNumber": 4,
+          "sourceItemNumber": 3,
+          "sourcePrintedPage": 43,
+          "contentNihongo": "CD 11",
+          "answerA": "ピアノ",
+          "answerB": "バレエ",
+          "answerC": "お茶",
+          "answerD": "水泳",
+          "correctAnswer": "D",
+          "exerciseTypeName": "TRY! N3 · Chương 2 · 問題4〈聴解〉"
+        }
+      ]
+    }
+  ]
+}

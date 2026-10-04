@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "lessons": { "type": "array", "items": {
+      "type": "object", "properties": {
+        "name": { "type": "string" }, "description": { "type": "string" },
+        "firstPage": { "type": "integer" }, "lastPage": { "type": "integer" },
+        "reading": { "type": "string" }, "audioTrack": { "type": "string" },
+        "grammars": { "type": "array", "items": { "type": "object", "properties": {
+          "title": { "type": "string" }, "description": { "type": "string" },
+          "examples": { "type": "array", "items": { "type": "object", "properties": { "nihongo": { "type": "string" }, "vietnamese": { "type": "string" } }, "required": ["nihongo", "vietnamese"] } }
+        }, "required": ["title", "description", "examples"] } },
+        "exercises": { "type": "array", "items": { "type": "object", "properties": {
+          "groupName": { "type": "string" }, "contentNihongo": { "type": "string" },
+          "answerA": { "type": "string" }, "answerB": { "type": "string" }, "answerC": { "type": "string" }, "answerD": { "type": "string" },
+          "correctAnswer": { "type": "string", "enum": ["", "A", "B", "C", "D"] }, "audioTrack": { "type": "string" },
+          "answerPage": { "type": "integer" }, "answerEvidence": { "type": "string" }
+        }, "required": ["groupName", "contentNihongo", "answerA", "answerB", "answerC", "answerD", "correctAnswer", "audioTrack", "answerPage", "answerEvidence"] } }
+      }, "required": ["name", "description", "firstPage", "lastPage", "reading", "audioTrack", "grammars", "exercises"]
+    } },
+    "answers": { "type": "array", "items": { "type": "object", "properties": {
+      "questionId": { "type": "string" }, "correctAnswer": { "type": "string", "enum": ["A", "B", "C", "D"] }, "sourcePage": { "type": "integer" }, "evidence": { "type": "string" }
+    }, "required": ["questionId", "correctAnswer", "sourcePage", "evidence"] } },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  }, "required": ["lessons", "answers", "warnings"]
+}
