@@ -99,7 +99,7 @@ public class BookImportProcessor {
         }
     }
     private String quote(Path path) { return path.toAbsolutePath().toString().replace("'","''"); }
-    private void progress(String id) { int completed=(int)pages.findBySessionIdOrderByPageNumberAsc(id).stream().filter(p->!"OCR_PENDING".equals(p.getMethod())).count();state(id,null,null,completed); }
+    private void progress(String id) { int completed=Math.toIntExact(pages.countBySessionIdAndMethodNot(id,"OCR_PENDING"));state(id,null,null,completed); }
     private void state(String id,String state,String message,Integer processed) { tx.executeWithoutResult(t->sessions.lock(id).ifPresent(s->{if(state!=null)s.setState(state);if(message!=null)s.setMessage(message);if(processed!=null)s.setProcessedPages(processed);sessions.save(s);})); }
     public void retry(String id) {
         tx.executeWithoutResult(t->{var s=sessions.lock(id).orElseThrow();

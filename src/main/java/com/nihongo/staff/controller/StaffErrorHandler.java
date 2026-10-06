@@ -9,7 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
-@RestControllerAdvice(assignableTypes = {BookImportController.class, ImportedAudioController.class, StaffRestController.class, TryN3ImportController.class, TryN3BookImportController.class, MonitorVpsController.class, VpsPerformanceController.class, MonitorEventController.class, VpsEventController.class, MysqlTargetController.class})
+@RestControllerAdvice(assignableTypes = {BookImportController.class, ImportedAudioController.class, ExampleSpeechController.class, StaffRestController.class, TryN3ImportController.class, TryN3BookImportController.class, MonitorVpsController.class, VpsPerformanceController.class, MonitorEventController.class, VpsEventController.class, MysqlTargetController.class})
 public class StaffErrorHandler {
     @ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
     public ResponseEntity<Map<String,String>> uploadSize() {

@@ -48,7 +48,11 @@ public class MonitorEventService {
         var link = assignment(vpsId, code);
         var found = rules.findByVpsIdAndMetricIdOrderByRuleIdAsc(vpsId, link.getMetric().getMetricId());
         var active = found.isEmpty() ? List.<MonitorEventState>of() : states.findByRuleIdIn(found.stream().map(MonitorEventRule::getRuleId).toList());
-        return found.stream().map(r -> dto(r, active.stream().filter(s -> s.getRuleId().equals(r.getRuleId()) && s.isActive()).count())).toList();
+        Map<Long, Long> activeByRule = new HashMap<>();
+        for (var state : active) {
+            if (state.isActive()) activeByRule.merge(state.getRuleId(), 1L, Long::sum);
+        }
+        return found.stream().map(r -> dto(r, activeByRule.getOrDefault(r.getRuleId(), 0L))).toList();
     }
     public List<Event> events(long vpsId, String code, Long beforeId) {
         if (beforeId != null && beforeId < 1) throw bad("Mốc event không hợp lệ.");

@@ -59,6 +59,12 @@ public class StaffRestController {
         return ResponseEntity.ok(this.staffService.getBookDetail(bookId));
     }
 
+    @PreAuthorize("@contentAccess.book(#bookId,authentication)")
+    @GetMapping("/books/{bookId}/location")
+    public ContentLocationResponse getBookLocation(@PathVariable Long bookId) {
+        return staffService.getBookLocation(bookId);
+    }
+
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @GetMapping("/getBooksByLevelAndType")
@@ -115,6 +121,12 @@ public class StaffRestController {
         return ResponseEntity.ok(this.staffService.getLessonByIdAPI(id));
     }
 
+    @PreAuthorize("@contentAccess.lesson(#id,authentication)")
+    @GetMapping("/lessons/{id}/location")
+    public ContentLocationResponse getLessonLocation(@PathVariable Long id) {
+        return staffService.getLessonLocation(id);
+    }
+
     @PreAuthorize("@contentAccess.book(#bookId,authentication)")
     @GetMapping("/getLessonsByBook")
     public ResponseEntity<List<LessonResponse>> getLessonsByBook(@RequestParam Long bookId) {
@@ -162,6 +174,12 @@ public class StaffRestController {
     @GetMapping("/getAllExampleByGrammar")
     public ResponseEntity<List<ExampleResponse>> getAllExampleByGrammar(@RequestParam Long grammarId) {
         return ResponseEntity.ok(this.staffService.findAllExampleOfGrammar(grammarId));
+    }
+
+    @PreAuthorize("@contentAccess.lesson(#lessonId,authentication)")
+    @GetMapping("/lessons/{lessonId}/examples")
+    public ResponseEntity<List<ExampleResponse>> getAllExamplesOfLesson(@PathVariable Long lessonId) {
+        return ResponseEntity.ok(this.staffService.findAllExamplesOfLesson(lessonId));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")

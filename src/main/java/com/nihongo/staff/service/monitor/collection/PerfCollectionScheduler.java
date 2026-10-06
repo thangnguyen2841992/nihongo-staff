@@ -21,6 +21,7 @@ public class PerfCollectionScheduler {
     private final PlatformTransactionManager transactionManager;
     @Value("${monitoring.collection.enabled:true}") private boolean enabled;
     @Value("${monitoring.collection.retention-days:0}") private int retentionDays;
+    @Value("${monitoring.collection.cleanup-max-batches:20}") private int cleanupMaxBatches;
     private final ExecutorService workers = Executors.newFixedThreadPool(4);
     private final Semaphore capacity = new Semaphore(4);
     private volatile boolean ready;
@@ -44,7 +45,14 @@ public class PerfCollectionScheduler {
     @Scheduled(fixedDelay = 3600000, initialDelay = 3600000)
     public void cleanup() {
         if (!enabled || !ready || retentionDays < 1) return;
-        new TransactionTemplate(transactionManager).executeWithoutResult(status -> values.deleteExpired(PerfCollectionStore.now().minusDays(retentionDays)));
+        var cutoff = PerfCollectionStore.now().minusDays(retentionDays);
+        var transaction = new TransactionTemplate(transactionManager);
+        int batches = Math.max(1, cleanupMaxBatches);
+        for (int i = 0; i < batches; i++) {
+            Integer deleted = transaction.execute(status -> values.deleteExpired(cutoff));
+            if (deleted == null || deleted < 10000) return;
+        }
+        log.info("Perf retention cleanup reached {} batches; remaining data will be processed next hour", batches);
     }
     @PreDestroy public void shutdown() { workers.shutdownNow(); }
 }

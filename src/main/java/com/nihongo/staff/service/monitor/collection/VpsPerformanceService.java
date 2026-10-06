@@ -26,9 +26,10 @@ public class VpsPerformanceService {
     private final MonitorEventService monitoringEvents;
 
     private MonitorVpsMetric assignment(long vpsId, String code) {
+        var assignment = assignments.findByVps_VpsIdAndMetric_MetricCode(vpsId, code);
+        if (assignment.isPresent()) return assignment.get();
         if (!servers.existsById(vpsId)) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "VPS không tồn tại.");
-        return assignments.findByVps_VpsIdAndMetric_MetricCode(vpsId, code)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Metric chưa được gán cho VPS này."));
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Metric chưa được gán cho VPS này.");
     }
     public Performance read(long vpsId, String code, Integer hours, String objectKey) {
         return read(vpsId, code, hours, objectKey, null);

@@ -459,6 +459,27 @@ public class StaffServiceImpl implements IStaffService {
                 .toList();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public ContentLocationResponse getBookLocation(Long bookId) {
+        return bookRepository.findLocationById(bookId)
+                .orElseThrow(() -> new ResourceNotFoundException("Book not found with id: " + bookId));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public ContentLocationResponse getLessonLocation(Long lessonId) {
+        return lessonsRepository.findLocationById(lessonId)
+                .orElseThrow(() -> new ResourceNotFoundException("Lesson not found with id: " + lessonId));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ExampleResponse> findAllExamplesOfLesson(Long lessonId) {
+        return exampleRepository.findByLessonIdWithGrammar(lessonId)
+                .stream().map(this::mapExampleToDTO).toList();
+    }
+
 
     /* =========================================================
                          EXERCISE

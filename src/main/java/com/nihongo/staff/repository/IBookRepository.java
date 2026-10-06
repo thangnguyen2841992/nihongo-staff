@@ -12,6 +12,8 @@ import java.util.List;
 
 @Repository
 public interface IBookRepository extends JpaRepository<Books, Long> {
+    @Query("select new com.nihongo.staff.model.dto.ContentLocationResponse(b.bookId, b.level.levelId, b.bookName) from Books b where b.bookId = :bookId")
+    java.util.Optional<com.nihongo.staff.model.dto.ContentLocationResponse> findLocationById(Long bookId);
     List<Books> findByLevel_LevelIdAndTypes_TypeId(
             Long levelId,
             Long typeId

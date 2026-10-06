@@ -44,3 +44,7 @@ monitoring:
 
 jwt:
   secret: ${JWT_SECRET}
+
+voicevox:
+  url: ${VOICEVOX_URL:http://127.0.0.1:50021}
+  cache-dir: ${VOICEVOX_CACHE_DIR:${user.home}/.nihongo/voicevox-cache}

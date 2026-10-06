@@ -18,11 +18,11 @@ public class ContentAccess {
  }
  public boolean book(Long id,Authentication auth) {
   if(manager(auth)) return true;
-  return id!=null && books.findById(id).map(b->level(b.getLevel().getLevelId(),auth)).orElse(false);
+  return id!=null && books.findLocationById(id).map(b->level(b.levelId(),auth)).orElse(false);
  }
  public boolean lesson(Long id,Authentication auth) {
   if(manager(auth)) return true;
-  return id!=null && lessons.findById(id).map(l->level(l.getBook().getLevel().getLevelId(),auth)).orElse(false);
+  return id!=null && lessons.findLocationById(id).map(l->level(l.levelId(),auth)).orElse(false);
  }
  public boolean grammar(Long id,Authentication auth) {
   if(manager(auth)) return true;

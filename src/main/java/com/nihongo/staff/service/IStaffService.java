@@ -9,6 +9,8 @@ public interface IStaffService {
     BookResponse createNewBook(CreateNewBookRequest newBookRequest);
     BookResponse updateBook(UpdateBookRequest bookRequest);
     BookResponse   getBookDetail(Long bookId);
+    ContentLocationResponse getBookLocation(Long bookId);
+    ContentLocationResponse getLessonLocation(Long lessonId);
     List<Types> getTypes();
     List<Levels> getLevels();
     List<ExerciseType> getExerciseTypes();
@@ -29,6 +31,7 @@ public interface IStaffService {
     ExampleResponse createNewExample(ExampleRequest request);
     ExampleResponse updateExample(ExampleRequest request);
     List<ExampleResponse> findAllExampleOfGrammar(Long grammarId);
+    List<ExampleResponse> findAllExamplesOfLesson(Long lessonId);
     ExerciseKeywordDTO createNewExcercise(ExerciseKeywordDTO exerciseKeywordDTO);
     ExerciseKeywordDTO updateExcercise(ExerciseKeywordDTO exerciseKeywordDTO);
     List<ExerciseKeywordDTO> getAllExcercisesKeywordOfLesson(Long lessonId);

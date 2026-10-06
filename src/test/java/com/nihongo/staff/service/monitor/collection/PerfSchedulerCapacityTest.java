@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,26 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 class PerfSchedulerCapacityTest {
+    @Test
+    void cleanupContinuesInBoundedTransactionsUntilExpiredRowsAreDrained() {
+        var values = mock(MonitorPerfValueRepository.class);
+        var transactionManager = mock(PlatformTransactionManager.class);
+        when(transactionManager.getTransaction(any())).thenReturn(mock(TransactionStatus.class));
+        when(values.deleteExpired(any())).thenReturn(10000, 10000, 5);
+        var scheduler = new PerfCollectionScheduler(mock(MonitorVpsMetricRepository.class), values,
+                mock(MetricCollector.class), transactionManager);
+        ReflectionTestUtils.setField(scheduler, "enabled", true);
+        ReflectionTestUtils.setField(scheduler, "retentionDays", 30);
+        ReflectionTestUtils.setField(scheduler, "cleanupMaxBatches", 20);
+        scheduler.ready();
+
+        scheduler.cleanup();
+
+        verify(values, times(3)).deleteExpired(any());
+        verify(transactionManager, times(3)).commit(any());
+        scheduler.shutdown();
+    }
+
     @Test
     void busyWorkersDoNotKeepPollingTheDatabase() throws Exception {
         var assignments = mock(MonitorVpsMetricRepository.class);
