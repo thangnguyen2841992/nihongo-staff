@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.*;
+import java.util.stream.Collectors;
 
 @Component
 public class NodeMetricSource {
@@ -15,6 +16,7 @@ public class NodeMetricSource {
     public record Reading(String type, String key, Map<String, String> labels, Double value, Double counter, Double auxiliary) {}
     private static final Pattern LINE = Pattern.compile("^((?:node|windows)_[a-zA-Z0-9_]+)(?:\\{(.*)\\})?\\s+([^\\s]+)(?:\\s+.*)?$");
     private static final Pattern LABEL = Pattern.compile("([a-zA-Z_][a-zA-Z0-9_]*)=\"((?:\\\\.|[^\"\\\\])*)\"");
+    private static final Pattern LINE_BREAK = Pattern.compile("\\R");
     private final HttpClient client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).followRedirects(HttpClient.Redirect.NEVER).build();
 
     public List<Sample> fetch(String host, int port, int timeoutMs) {
@@ -52,7 +54,8 @@ public class NodeMetricSource {
 
     static List<Sample> parse(String text) {
         List<Sample> result = new ArrayList<>();
-        for (String line : text.split("\\R")) {
+        for (Iterator<String> lines = LINE_BREAK.splitAsStream(text).iterator(); lines.hasNext();) {
+            String line = lines.next();
             Matcher matcher = LINE.matcher(line.trim());
             if (!matcher.matches()) continue;
             Map<String, String> labels = new TreeMap<>();
@@ -103,12 +106,16 @@ public class NodeMetricSource {
             }
             totals.forEach((cpu, total) -> { if (idle.containsKey(cpu)) result.add(new Reading("CPU", cpu, Map.of("cpu", cpu), null, total, idle.get(cpu))); });
         } else if (code.equals("DISK_USAGE")) {
+            Map<Map<String, String>, Sample> availableByLabels = new HashMap<>();
+            for (Sample sample : samples) if (sample.metric().equals("node_filesystem_avail_bytes"))
+                availableByLabels.putIfAbsent(sample.labels(), sample);
             for (Sample size : samples) if (size.metric().equals("node_filesystem_size_bytes") && size.value() > 0 &&
                     !Set.of("tmpfs", "devtmpfs", "overlay", "squashfs").contains(size.labels().getOrDefault("fstype", ""))) {
-                samples.stream().filter(s -> s.metric().equals("node_filesystem_avail_bytes") && s.labels().equals(size.labels())).findFirst().ifPresent(avail -> {
+                Sample avail = availableByLabels.get(size.labels());
+                if (avail != null) {
                     Map<String, String> labels = new TreeMap<>(); labels.put("device", size.labels().getOrDefault("device", "?")); labels.put("mountpoint", size.labels().getOrDefault("mountpoint", "?"));
                     result.add(new Reading("FILESYSTEM", key(labels), labels, 100 * (1 - avail.value() / size.value()), null, null));
-                });
+                }
             }
         } else if (code.equals("NETWORK_RECEIVE") || code.equals("NETWORK_TRANSMIT")) {
             String name = code.equals("NETWORK_RECEIVE") ? "node_network_receive_bytes_total" : "node_network_transmit_bytes_total";
@@ -177,7 +184,8 @@ public class NodeMetricSource {
     private static Double scalar(List<Sample> samples, String name) { return samples.stream().filter(s -> s.metric().equals(name)).map(Sample::value).findFirst().orElse(null); }
     static String key(Map<String, String> labels) {
         // Length-prefixed components preserve identity even when labels contain delimiters.
-        String key = labels.entrySet().stream().sorted(Map.Entry.comparingByKey()).map(e -> e.getKey() + ":" + e.getValue().length() + ":" + e.getValue()).reduce((a,b) -> a + "|" + b).orElse("vps");
+        String key = labels.isEmpty() ? "vps" : labels.entrySet().stream().sorted(Map.Entry.comparingByKey())
+                .map(e -> e.getKey() + ":" + e.getValue().length() + ":" + e.getValue()).collect(Collectors.joining("|"));
         if (key.length() <= 255) return key;
         try { return "sha256:" + java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(key.getBytes(java.nio.charset.StandardCharsets.UTF_8))); }
         catch (java.security.NoSuchAlgorithmException e) { throw new IllegalStateException(e); }

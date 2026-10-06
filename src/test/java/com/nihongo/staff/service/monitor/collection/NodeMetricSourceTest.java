@@ -6,6 +6,10 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class NodeMetricSourceTest {
+    @Test void parsesUnicodeLineSeparatorsWithoutDroppingMetrics() {
+        var samples = NodeMetricSource.parse("node_load1 1\u2028node_time_seconds 2\u0085node_boot_time_seconds 0\r\n");
+        assertEquals(3, samples.size());
+    }
     @Test void parsesCrlfEscapedLabelsAndIgnoresNonFiniteValues() {
         var samples = NodeMetricSource.parse("# HELP ignored\r\nnode_network_receive_bytes_total{device=\"eth\\\"0\"} 10\r\nnode_load1 NaN\r\nnode_unrelated +Inf\n");
         assertEquals(1, samples.size()); assertEquals("eth\"0", samples.get(0).labels().get("device"));
@@ -18,6 +22,17 @@ class NodeMetricSourceTest {
         var samples = NodeMetricSource.parse("node_filesystem_size_bytes{device=\"/dev/vda1\",mountpoint=\"/\",fstype=\"ext4\"} 100\nnode_filesystem_avail_bytes{device=\"/dev/vda1\",mountpoint=\"/\",fstype=\"ext4\"} 40\nnode_filesystem_size_bytes{device=\"/dev/vda1\",mountpoint=\"/data\",fstype=\"ext4\"} 100\nnode_filesystem_avail_bytes{device=\"/dev/vda1\",mountpoint=\"/data\",fstype=\"ext4\"} 80\n");
         var readings = NodeMetricSource.readings("DISK_USAGE", samples);
         assertEquals(2, readings.size()); assertNotEquals(readings.get(0).key(), readings.get(1).key()); assertEquals(60D, readings.get(0).value());
+    }
+    @Test void filesystemLookupKeepsFirstSampleAndRequiresAllLabelsToMatch() {
+        var labels = Map.of("device", "/dev/vda1", "mountpoint", "/", "fstype", "ext4");
+        var samples = List.of(
+                new NodeMetricSource.Sample("node_filesystem_size_bytes", labels, 100),
+                new NodeMetricSource.Sample("node_filesystem_size_bytes", Map.of("device", "/dev/vda1", "mountpoint", "/other", "fstype", "ext4"), 100),
+                new NodeMetricSource.Sample("node_filesystem_avail_bytes", labels, 40),
+                new NodeMetricSource.Sample("node_filesystem_avail_bytes", labels, 80));
+        var readings = NodeMetricSource.readings("DISK_USAGE", samples);
+        assertEquals(1, readings.size());
+        assertEquals(60D, readings.get(0).value());
     }
     @Test void networkCountersRemainSeparatePerDevice() {
         var readings = NodeMetricSource.readings("NETWORK_RECEIVE", NodeMetricSource.parse("node_network_receive_bytes_total{device=\"lo\"} 999\nnode_network_receive_bytes_total{device=\"eth0\"} 120\nnode_network_receive_bytes_total{device=\"eth1\"} 240\n"));
