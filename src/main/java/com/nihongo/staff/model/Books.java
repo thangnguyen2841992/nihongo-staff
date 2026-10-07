@@ -24,6 +24,10 @@ public class Books {
     private String bookName;
 
     private String description;
+    // Null represents books created before the publication workflow and keeps them available.
+    @Enumerated(EnumType.STRING)
+    @Column(length = 16)
+    private PublicationStatus publicationStatus;
 
     @CreationTimestamp
     private LocalDateTime dateCreated;

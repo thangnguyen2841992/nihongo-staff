@@ -74,8 +74,12 @@ public class StaffRestController {
 
     @PreAuthorize("@contentAccess.level(#levelId,authentication)")
     @GetMapping("/getBooksByLevel")
-    public ResponseEntity<List<BookResponse>> getBooksByLevel(@RequestParam("levelId") Long levelId) {
-        return ResponseEntity.ok(this.staffService.getBooksByLevel(levelId));
+    public ResponseEntity<List<BookResponse>> getBooksByLevel(@RequestParam("levelId") Long levelId,
+            org.springframework.security.core.Authentication authentication) {
+        var rows = this.staffService.getBooksByLevel(levelId);
+        if (!contentAccess.manager(authentication)) rows = rows.stream()
+                .filter(book -> "PUBLISHED".equals(book.getPublicationStatus())).toList();
+        return ResponseEntity.ok(rows);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")

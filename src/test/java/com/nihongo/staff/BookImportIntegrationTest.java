@@ -124,6 +124,12 @@ class BookImportIntegrationTest {
   when(subscriptions.hasAccess(levelId)).thenReturn(false);
   mvc.perform(get(audio).header("Authorization",auth("USER"))).andExpect(status().isForbidden());
   when(subscriptions.hasAccess(levelId)).thenReturn(true);
+  mvc.perform(get(audio).header("Authorization",auth("USER"))).andExpect(status().isForbidden());
+  String publicationPath="/api/staff/books/"+result.summary().bookId()+"/publication";
+  mvc.perform(get(publicationPath).header("Authorization",auth("USER"))).andExpect(status().isForbidden());
+  mvc.perform(post(publicationPath+"/submit").header("Authorization",auth("STAFF"))).andExpect(status().isOk());
+  mvc.perform(post(publicationPath+"/publish").header("Authorization",auth("STAFF"))).andExpect(status().isForbidden());
+  mvc.perform(post(publicationPath+"/publish").header("Authorization",auth("ADMIN"))).andExpect(status().isOk());
   mvc.perform(get(audio).header("Authorization",auth("USER"))).andExpect(status().isOk()).andExpect(content().contentType("audio/wav"));
   mvc.perform(get("/api/staff/imported-audio/exercises/"+q.getExerciseKeywordId()).header("Authorization",auth("USER"))).andExpect(status().isOk());
   mvc.perform(get("/api/staff/book-imports/"+id+"/audio/"+d.content().audio().get(0).id()).header("Authorization",auth("USER"))).andExpect(status().isForbidden());

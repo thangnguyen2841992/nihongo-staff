@@ -81,6 +81,8 @@ public class TryN3BookImportService {
             imports.saveAndFlush(marker); root = Optional.of(marker);
         }
         var book = root.get().getBook();
+        if (book.getPublicationStatus() != PublicationStatus.DRAFT)
+            throw conflict("Hãy chuyển sách về bản nháp trước khi nhập thêm chương.");
         if (imports.existsById(chapterKey(number))) return preview();
         for (var earlier : data.book().chapters()) {
             if (earlier.number() >= number) break;

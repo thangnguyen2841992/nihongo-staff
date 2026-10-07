@@ -18,11 +18,13 @@ public class ContentAccess {
  }
  public boolean book(Long id,Authentication auth) {
   if(manager(auth)) return true;
-  return id!=null && books.findLocationById(id).map(b->level(b.levelId(),auth)).orElse(false);
+  return id!=null && books.findById(id).map(b ->
+          (b.getPublicationStatus()==null || b.getPublicationStatus()==com.nihongo.staff.model.PublicationStatus.PUBLISHED)
+          && level(b.getLevel().getLevelId(),auth)).orElse(false);
  }
  public boolean lesson(Long id,Authentication auth) {
   if(manager(auth)) return true;
-  return id!=null && lessons.findLocationById(id).map(l->level(l.levelId(),auth)).orElse(false);
+  return id!=null && lessons.findLocationById(id).map(l->book(l.bookId(),auth)).orElse(false);
  }
  public boolean grammar(Long id,Authentication auth) {
   if(manager(auth)) return true;

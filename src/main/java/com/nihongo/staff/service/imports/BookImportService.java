@@ -141,7 +141,7 @@ public class BookImportService {
         var s=lock(id);if(s.getImportedBookId()!=null) return get(id);
         version(s,request.version());if(!"READY".equals(s.getState())) throw conflict("Hãy duyệt nội dung và đáp án trước khi nhập sách.");
         var c=content(s);validate(c,s.getPageCount(),true);catalogue(c.levelId(),c.typeId());
-        var book=new Books();book.setBookName(c.bookName().trim());book.setDescription(c.description());
+        var book=new Books();book.setBookName(c.bookName().trim());book.setDescription(c.description());book.setPublicationStatus(PublicationStatus.DRAFT);
         book.setLevel(levels.findById(c.levelId()).orElseThrow());book.setTypes(types.findById(c.typeId()).orElseThrow());books.save(book);
         for(var part:c.lessons()) {
             var lesson=new Lessons();lesson.setBook(book);lesson.setName(part.name().trim());lesson.setDescription(part.description());

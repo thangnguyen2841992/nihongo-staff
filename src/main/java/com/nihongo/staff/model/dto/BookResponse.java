@@ -25,4 +25,5 @@ public class BookResponse {
     private String typeName;
 
     private String levelName;
+    private String publicationStatus;
 }

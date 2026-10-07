@@ -38,10 +38,12 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @CacheEvict(value = "books", allEntries = true)
+    @Transactional
     public BookResponse createNewBook(CreateNewBookRequest request) {
 
         Books book = new Books();
         book.setBookName(request.getBookName().trim());
+        book.setPublicationStatus(PublicationStatus.DRAFT);
         book.setLevel(getLevelById(request.getLevelId()));
         book.setTypes(getTypeById(request.getTypeId()));
         Books savedBook = bookRepository.save(book);
@@ -52,9 +54,11 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @CacheEvict(value = "books", allEntries = true)
+    @Transactional
     public BookResponse updateBook(UpdateBookRequest request) {
 
         Books book = getBookById(request.getBookId());
+        ensureDraft(book);
         book.setBookName(request.getBookName().trim());
         book.setLevel(getLevelById(request.getLevelId()));
         book.setTypes(getTypeById(request.getTypeId()));
@@ -107,6 +111,7 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @CacheEvict(value = "books", allEntries = true)
+    @Transactional
     public List<ImageDTO>
     updateImagesOfBooks(
             UpdateImageOfBookRequest request
@@ -116,6 +121,7 @@ public class StaffServiceImpl implements IStaffService {
                 getBookById(
                         request.getBookId()
                 );
+        ensureDraft(book);
 
         if (request.getListDeleteImg() != null && !request.getListDeleteImg().isEmpty()) {
             Set<Long> ownedIds = imageRepository.findByBooks_BookId(book.getBookId()).stream()
@@ -198,11 +204,9 @@ public class StaffServiceImpl implements IStaffService {
                 request.getDescription()
         );
 
-        lesson.setBook(
-                getBookById(
-                        request.getBookId()
-                )
-        );
+        Books book = getBookById(request.getBookId());
+        ensureDraft(book);
+        lesson.setBook(book);
 
         lesson.setReading(
                 ContentHtml.clean(request.getReading())
@@ -234,6 +238,7 @@ public class StaffServiceImpl implements IStaffService {
                                                 "Lessons not found"
                                         )
                         );
+        ensureDraft(lessons.getBook());
 
         lessons.setName(
                 request.getName().trim()
@@ -280,6 +285,7 @@ public class StaffServiceImpl implements IStaffService {
                                                 "Lessons not found"
                                         )
                         );
+        ensureDraft(lessons.getBook());
 
         this.lessonsRepository.deleteById(
                 lessons.getLessonId()
@@ -292,6 +298,7 @@ public class StaffServiceImpl implements IStaffService {
        ========================================================= */
 
     @Override
+    @Transactional
     public GrammarResponse createNewGrammar(
             GrammarRequest request
     ) {
@@ -307,11 +314,9 @@ public class StaffServiceImpl implements IStaffService {
                 request.getDescription()
         );
 
-        grammar.setLessons(
-                getLessonById(
-                        request.getLessonId()
-                )
-        );
+        Lessons lesson = getLessonById(request.getLessonId());
+        ensureDraft(lesson.getBook());
+        grammar.setLessons(lesson);
 
         grammar.setImageUrl(
                 request.getImageUrl().trim()
@@ -326,6 +331,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @Transactional
     public GrammarResponse updateGrammar(
             GrammarRequest request
     ) {
@@ -334,6 +340,7 @@ public class StaffServiceImpl implements IStaffService {
                 getGrammarById(
                         request.getGrammarId()
                 );
+        ensureDraft(grammar.getLessons().getBook());
 
         grammar.setTitle(
                 request.getTitle().trim()
@@ -354,13 +361,14 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @Transactional
     public void deleteGrammar(
             Long grammarId
     ) {
 
-        grammarRepository.delete(
-                getGrammarById(grammarId)
-        );
+        Grammar grammar = getGrammarById(grammarId);
+        ensureDraft(grammar.getLessons().getBook());
+        grammarRepository.delete(grammar);
     }
 
 
@@ -384,6 +392,7 @@ public class StaffServiceImpl implements IStaffService {
        ========================================================= */
 
     @Override
+    @Transactional
     public ExampleResponse createNewExample(
             ExampleRequest request
     ) {
@@ -399,11 +408,9 @@ public class StaffServiceImpl implements IStaffService {
                 ContentHtml.clean(request.getVietnamese().trim())
         );
 
-        example.setGrammar(
-                getGrammarById(
-                        request.getGrammarId()
-                )
-        );
+        Grammar grammar = getGrammarById(request.getGrammarId());
+        ensureDraft(grammar.getLessons().getBook());
+        example.setGrammar(grammar);
 
         return mapExampleToDTO(
                 exampleRepository.save(
@@ -430,6 +437,7 @@ public class StaffServiceImpl implements IStaffService {
                                                 "Example not found"
                                         )
                         );
+        ensureDraft(example.getGrammar().getLessons().getBook());
 
         example.setNihongo(
                 ContentHtml.clean(request.getNihongo())
@@ -495,6 +503,7 @@ public class StaffServiceImpl implements IStaffService {
                 getLessonById(
                         dto.getLessonId()
                 );
+        ensureDraft(lesson.getBook());
 
         ExerciseType exerciseType =
                 getExerciseTypeById(
@@ -530,6 +539,8 @@ public class StaffServiceImpl implements IStaffService {
                                                 "Exercise not found"
                                         )
                         );
+        ensureDraft(entity.getLessons().getBook());
+        ensureDraft(getLessonById(dto.getLessonId()).getBook());
 
         ExersiceKeyword updated =
                 mapToEntity(
@@ -825,6 +836,7 @@ public class StaffServiceImpl implements IStaffService {
         response.setBookName(
                 book.getBookName()
         );
+        response.setPublicationStatus(book.getPublicationStatus() == null ? "PUBLISHED" : book.getPublicationStatus().name());
 
         response.setLevelName(
                 book.getLevel().getLevelName()
@@ -964,6 +976,13 @@ public class StaffServiceImpl implements IStaffService {
     /* =========================================================
                          PRIVATE METHODS
        ========================================================= */
+
+    private void ensureDraft(Books book) {
+        if (book.getPublicationStatus() != PublicationStatus.DRAFT)
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.CONFLICT,
+                    "Chỉ được sửa sách ở trạng thái bản nháp. Hãy chuyển về bản nháp trước.");
+    }
 
     private Books getBookById(
             Long bookId

@@ -44,6 +44,7 @@ public class TryN3ImportService {
         marker.setSourceKey(chapter.sourceKey());
         imports.saveAndFlush(marker);
         var book = new Books();
+        book.setPublicationStatus(PublicationStatus.DRAFT);
         book.setBookName(chapter.bookName()); book.setDescription(chapter.description());
         book.setLevel(level); book.setTypes(type);
         books.save(book);
