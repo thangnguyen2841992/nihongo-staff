@@ -1,0 +1,16 @@
+# Opt-in SQL tracing. Bind/extract values remain disabled because they can contain secrets.
+SQL_LOG_LEVEL: DEBUG
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.SQL_SLOW: INFO
+    org.hibernate.orm.jdbc.bind: "OFF"
+    org.hibernate.orm.jdbc.extract: "OFF"
+    org.hibernate.type.descriptor.sql.BasicBinder: "OFF"
+spring:
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        log_slow_query: 1000

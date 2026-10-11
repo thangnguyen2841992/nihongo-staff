@@ -16,9 +16,10 @@ import java.util.concurrent.*;
 public class PerformanceWebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private final PerformanceSocketAuthorization authorization;
     private final String[] origins;
+    private final com.nihongo.security.SocketSessionRegistry sessions;
     public PerformanceWebSocketConfig(PerformanceSocketAuthorization authorization,
-            @Value("${monitoring.websocket.allowed-origins:http://localhost:5173}") String[] origins) {
-        this.authorization = authorization; this.origins = origins;
+            @Value("${monitoring.websocket.allowed-origins:http://localhost:5173}") String[] origins,com.nihongo.security.SocketSessionRegistry sessions) {
+        this.authorization = authorization; this.origins = origins;this.sessions=sessions;
     }
     @Bean public ThreadPoolTaskScheduler performanceSocketScheduler() {
         var scheduler = new ThreadPoolTaskScheduler(); scheduler.setPoolSize(2);
@@ -32,7 +33,9 @@ public class PerformanceWebSocketConfig implements WebSocketMessageBrokerConfigu
         registry.setPreservePublishOrder(true);
     }
     @Override public void configureClientInboundChannel(ChannelRegistration registration) { registration.interceptors(authorization); }
+    @Override public void configureClientOutboundChannel(ChannelRegistration registration){registration.interceptors(sessions.outboundGuard());}
     @Override public void configureWebSocketTransport(WebSocketTransportRegistration registry) {
+        registry.addDecoratorFactory(sessions::decorate);
         registry.setMessageSizeLimit(8192).setSendBufferSizeLimit(1024 * 1024).setSendTimeLimit(10000);
         registry.addDecoratorFactory(handler -> new WebSocketHandlerDecorator(handler) {
             private final Map<String, ScheduledFuture<?>> expiry = new ConcurrentHashMap<>();

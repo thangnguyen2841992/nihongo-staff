@@ -32,6 +32,7 @@ public class StaffServiceImpl implements IStaffService {
     private final IExampleRepository exampleRepository;
     private final IExerciseKeywordRepository excersiceKeywordRepository;
     private final IExerciseTypeRepository exerciseTypeRepository;
+    private final ContentRevisionService revisions;
     /* =========================================================
                             BOOK
        ========================================================= */
@@ -59,6 +60,7 @@ public class StaffServiceImpl implements IStaffService {
 
         Books book = getBookById(request.getBookId());
         ensureDraft(book);
+        revisions.checkpoint("BOOK",book.getBookId());
         book.setBookName(request.getBookName().trim());
         book.setLevel(getLevelById(request.getLevelId()));
         book.setTypes(getTypeById(request.getTypeId()));
@@ -240,6 +242,8 @@ public class StaffServiceImpl implements IStaffService {
                         );
         ensureDraft(lessons.getBook());
 
+        revisions.checkpoint("LESSON",lessons.getLessonId());
+
         lessons.setName(
                 request.getName().trim()
         );
@@ -342,6 +346,8 @@ public class StaffServiceImpl implements IStaffService {
                 );
         ensureDraft(grammar.getLessons().getBook());
 
+        revisions.checkpoint("GRAMMAR",grammar.getGrammarId());
+
         grammar.setTitle(
                 request.getTitle().trim()
         );
@@ -438,6 +444,7 @@ public class StaffServiceImpl implements IStaffService {
                                         )
                         );
         ensureDraft(example.getGrammar().getLessons().getBook());
+        revisions.checkpoint("EXAMPLE",example.getExampleId());
 
         example.setNihongo(
                 ContentHtml.clean(request.getNihongo())
@@ -541,6 +548,7 @@ public class StaffServiceImpl implements IStaffService {
                         );
         ensureDraft(entity.getLessons().getBook());
         ensureDraft(getLessonById(dto.getLessonId()).getBook());
+        revisions.checkpoint("EXERCISE",entity.getExerciseKeywordId());
 
         ExersiceKeyword updated =
                 mapToEntity(

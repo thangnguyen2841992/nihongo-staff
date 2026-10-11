@@ -24,7 +24,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, com.nihongo.security.RemoteSessionVerifier verifier, com.nihongo.security.BrowserOriginPolicy origins, com.nihongo.security.InternalCredentials credentials, org.springframework.core.env.Environment env)
             throws Exception {
 
         http
@@ -69,6 +69,8 @@ public class SecurityConfig {
 
                 .formLogin(AbstractHttpConfigurer::disable);
 
+        http.addFilterBefore(new com.nihongo.security.BrowserOriginServletFilter(origins,credentials,env.getProperty("security.origin-check.enabled",Boolean.class,true)),org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class);
+        http.addFilterAfter(new com.nihongo.security.ServletSessionValidationFilter(verifier,env.getProperty("security.session-validation.enabled",Boolean.class,true)),org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter.class);
         return http.build();
     }
 }

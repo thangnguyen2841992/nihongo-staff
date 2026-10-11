@@ -50,24 +50,47 @@ public class VpsPerformanceService {
         if (!Boolean.TRUE.equals(link.getEnabled()) || !Boolean.TRUE.equals(metric.getEnabled())) state = "PAUSED";
         List<Series> result = new ArrayList<>();
         if (!Boolean.TRUE.equals(metric.getObjectLevelYn())) {
-            if (objectKey == null || objectKey.equals("vps")) result.add(series(link, null, windowSeconds, now));
+            if (objectKey == null || objectKey.equals("vps")) {
+                MonitorPerfValue latest = windowSeconds == null
+                        ? values.findFirstByVpsIdAndMetricIdAndObjectIdOrderByCollectedAtDesc(vpsId, metric.getMetricId(), null).orElse(null)
+                        : null;
+                result.add(series(link, null, windowSeconds, now, latest));
+            }
         } else {
-            for (MonitorObject object : objects.findByVps_VpsIdAndObjectType(vpsId, metric.getObjectType()))
-                if (objectKey == null || objectKey.equals(object.getObjectId().toString())) result.add(series(link, object, windowSeconds, now));
+            List<MonitorObject> selected = selectedObjects(vpsId, metric.getObjectType(), objectKey);
+            Map<Long, MonitorPerfValue> latest = new HashMap<>();
+            if (windowSeconds == null) {
+                List<Long> ids = selected.stream().map(MonitorObject::getObjectId).toList();
+                for (int start = 0; start < ids.size(); start += 500) {
+                    values.findLatestForObjects(vpsId, metric.getMetricId(), ids.subList(start, Math.min(ids.size(), start + 500)))
+                            .forEach(value -> latest.put(value.getObjectId(), value));
+                }
+            }
+            for (MonitorObject object : selected)
+                result.add(series(link, object, windowSeconds, now, latest.get(object.getObjectId())));
         }
         result.sort(Comparator.comparing(Series::objectName));
         return new Performance(vpsId, code, state, link.getLastError(), result, PerfCollectionStore.interval(link),
                 windowSeconds == null ? monitoringEvents.recent(vpsId, metric.getMetricId(), null) : List.of());
     }
-    private Series series(MonitorVpsMetric link, MonitorObject object, Integer windowSeconds, LocalDateTime now) {
+    private List<MonitorObject> selectedObjects(long vpsId, String type, String key) {
+        if (key == null) return objects.findByVps_VpsIdAndObjectType(vpsId, type);
+        try {
+            Long id = Long.valueOf(key);
+            if (!id.toString().equals(key)) return List.of();
+            return objects.findByObjectIdAndVps_VpsIdAndObjectType(id, vpsId, type).stream().toList();
+        } catch (NumberFormatException ignored) {
+            return List.of();
+        }
+    }
+    private Series series(MonitorVpsMetric link, MonitorObject object, Integer windowSeconds, LocalDateTime now, MonitorPerfValue latest) {
         Long objectId = object == null ? null : object.getObjectId();
         List<Point> points = new ArrayList<>();
         boolean stale = true;
         if (windowSeconds == null) {
-            Optional<MonitorPerfValue> latest = values.findFirstByVpsIdAndMetricIdAndObjectIdOrderByCollectedAtDesc(link.getVps().getVpsId(), link.getMetric().getMetricId(), objectId);
-            if (latest.isPresent()) {
-                var value = latest.get(); points.add(new Point(value.getCollectedAt().toEpochSecond(ZoneOffset.UTC), value.getValue()));
-                stale = value.getCollectedAt().isBefore(now.minusSeconds(PerfCollectionStore.interval(link) * 2L + 10)) || link.getLastError() != null;
+            if (latest != null) {
+                points.add(new Point(latest.getCollectedAt().toEpochSecond(ZoneOffset.UTC), latest.getValue()));
+                stale = latest.getCollectedAt().isBefore(now.minusSeconds(PerfCollectionStore.interval(link) * 2L + 10)) || link.getLastError() != null;
             }
         } else {
             int step = Math.max(5, (int) Math.ceil(windowSeconds / 1000D));

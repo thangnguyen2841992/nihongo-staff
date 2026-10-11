@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Component @RequiredArgsConstructor @Slf4j
 public class PerformanceSocketPublisher {
+    private static final org.slf4j.Logger events = org.slf4j.LoggerFactory.getLogger("nihongo.socket.performance");
     public record Update(long sequence, VpsPerformanceService.Performance performance) {}
     private final VpsPerformanceService performance;
     private final SimpMessagingTemplate messaging;
@@ -22,9 +23,10 @@ public class PerformanceSocketPublisher {
         try {
             var snapshot = performance.read(event.vpsId(), event.metricCode(), null, null);
             messaging.convertAndSend(destination(event.vpsId(), event.metricCode()), new Update(sequence.incrementAndGet(), snapshot));
+            events.debug("event=published vpsId={} metric={} sequence={}", event.vpsId(), event.metricCode(), sequence.get());
         } catch (Exception e) {
             // A disconnected broker must never turn a committed collection into a failure.
-            log.warn("Cannot publish VPS performance: vps={}, metric={}, reason={}", event.vpsId(), event.metricCode(), e.getClass().getSimpleName());
+            events.warn("event=publish-failed vpsId={} metric={} failure={}", event.vpsId(), event.metricCode(), e.getClass().getSimpleName());
         }
     }
     public static String destination(long vpsId, String code) { return "/topic/vps-performance/" + vpsId + "/" + code; }

@@ -1,12 +1,13 @@
 server:
+  address: ${SERVICE_BIND_ADDRESS:127.0.0.1}
   port: 8085
 spring:
+  profiles:
+    default: local
   servlet:
     multipart:
       max-file-size: 100MB
       max-request-size: 320MB
-  config:
-    import: "optional:file:./.local/shared.properties,optional:file:../.local/shared.properties,optional:file:./.local/gemini.properties,optional:file:../.local/gemini.properties"
   application:
     name: staff-service
   datasource:
@@ -23,6 +24,7 @@ spring:
       connection-timeout: 30000
       validation-timeout: 5000
   jpa:
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
@@ -32,6 +34,7 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
+    ip-address: ${SERVICE_ADVERTISED_ADDRESS:127.0.0.1}
   client:
     register-with-eureka: true
     fetch-registry: true
@@ -43,7 +46,7 @@ monitoring:
   prometheus-windows-targets-file: ${PROMETHEUS_WINDOWS_TARGETS_FILE:${user.home}/Downloads/prometheus-3.15.0.windows-amd64/targets/windows_targets.json}
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: ${JWT_SECRET:}
 
 voicevox:
   url: ${VOICEVOX_URL:http://127.0.0.1:50021}

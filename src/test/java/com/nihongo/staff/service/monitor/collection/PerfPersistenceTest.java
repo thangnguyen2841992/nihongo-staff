@@ -42,6 +42,7 @@ class PerfPersistenceTest {
     @Autowired PrometheusTargetService prometheus;
     @Autowired MonitorVpsService registration;
     @Autowired NodeMetricSource source;
+    @Autowired jakarta.persistence.EntityManager entityManager;
     MonitorVps vps;
     @BeforeEach void setup() {
         catalog.initialize();
@@ -145,6 +146,50 @@ class PerfPersistenceTest {
         store.complete(claim("NETWORK_RECEIVE"), List.of(new NodeMetricSource.Reading("NETWORK", "eth0", Map.of("device", "eth0"), null, 300D, null), new NodeMetricSource.Reading("NETWORK", "eth1", Map.of("device", "eth1"), null, 900D, null)), t.plusSeconds(10));
         var result = performance.read(vps.getVpsId(), "NETWORK_RECEIVE", null, null);
         assertEquals(2, result.objects().size()); assertEquals(20D, result.objects().get(0).points().get(0).value()); assertEquals(40D, result.objects().get(1).points().get(0).value());
+    }
+    @Test void currentReadUsesOneBatchForManyObjectsAndKeepsLatestOfflineAndEmptySeries() {
+        var network = link("NETWORK_RECEIVE");
+        var time = PerfCollectionStore.now();
+        network.setLastSuccessAt(time);
+        List<Long> ids = new ArrayList<>();
+        for (int i = 0; i < 32; i++) {
+            var object = new MonitorObject(); object.setVps(vps); object.setObjectType("NETWORK");
+            object.setObjectKey("eth" + i); object.setObjectName(String.format("Interface %02d", i));
+            object.setFirstSeenAt(time); object.setLastSeenAt(time); object.setLabelsJson("{\"device\":\"eth" + i + "\"}");
+            object.setStatus(i == 0 ? ObjectStatus.OFFLINE : ObjectStatus.ACTIVE); objects.save(object); ids.add(object.getObjectId());
+            if (i == 31) continue;
+            sample(network, object.getObjectId(), time, (double) i);
+            sample(network, object.getObjectId(), time, 100D + i);
+            // A delayed older observation must not win just because its database ID is higher.
+            sample(network, object.getObjectId(), time.minusMinutes(2), 999D);
+            sample(link("NETWORK_TRANSMIT"), object.getObjectId(), time.plusSeconds(1), 888D);
+        }
+        entityManager.flush(); entityManager.clear();
+        var statistics = entityManager.getEntityManagerFactory().unwrap(org.hibernate.SessionFactory.class).getStatistics();
+        statistics.setStatisticsEnabled(true); statistics.clear();
+        try {
+            var result = performance.read(vps.getVpsId(), "NETWORK_RECEIVE", null, null);
+            assertEquals(4, statistics.getPrepareStatementCount(), "Assignment, objects, latest batch, and recent events only");
+            assertEquals(32, result.objects().size());
+            for (int i = 0; i < 31; i++) {
+                var series = result.objects().get(i);
+                assertEquals(ids.get(i).toString(), series.objectKey());
+                assertEquals("eth" + i, series.labels().get("device"));
+                assertEquals(100D + i, series.points().get(0).value());
+                assertEquals(i == 0, series.stale());
+            }
+            assertEquals("OFFLINE", result.objects().get(0).status());
+            assertTrue(result.objects().get(31).stale()); assertTrue(result.objects().get(31).points().isEmpty());
+            statistics.clear(); entityManager.clear();
+            var selected = performance.read(vps.getVpsId(), "NETWORK_RECEIVE", null, ids.get(12).toString());
+            assertEquals(1, selected.objects().size()); assertEquals(112D, selected.objects().get(0).points().get(0).value());
+            assertEquals(1, statistics.getEntityStatistics(MonitorObject.class.getName()).getLoadCount(), "Selected-object reads must not load every interface");
+            assertTrue(performance.read(vps.getVpsId(), "NETWORK_RECEIVE", null, "0" + ids.get(12)).objects().isEmpty());
+        } finally { statistics.setStatisticsEnabled(false); }
+    }
+    private void sample(MonitorVpsMetric metric, Long objectId, LocalDateTime at, double value) {
+        var sample = new MonitorPerfValue(); sample.setVpsId(vps.getVpsId()); sample.setMetricId(metric.getMetric().getMetricId());
+        sample.setObjectId(objectId); sample.setCollectedAt(at); sample.setValue(value); values.save(sample);
     }
     @Test void leaseRejectsDuplicateWorkAndScheduleCanInheritDefault() {
         var job = claim("CPU_USAGE"); assertNotNull(job); assertNull(store.claim(job.id()));

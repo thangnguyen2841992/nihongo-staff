@@ -34,3 +34,5 @@ build/
 
 # Local credentials imported by application.yml
 /.local/
+
+/logs/

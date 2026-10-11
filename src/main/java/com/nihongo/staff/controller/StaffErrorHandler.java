@@ -9,8 +9,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
-@RestControllerAdvice(assignableTypes = {BookImportController.class, ImportedAudioController.class, ExampleSpeechController.class, StaffRestController.class, TryN3ImportController.class, TryN3BookImportController.class, MonitorVpsController.class, VpsPerformanceController.class, MonitorEventController.class, VpsEventController.class, MysqlTargetController.class})
+@RestControllerAdvice(assignableTypes = {ContentOperationsController.class, BookPublicationController.class, BookImportController.class, ImportedAudioController.class, ExampleSpeechController.class, StaffRestController.class, TryN3ImportController.class, TryN3BookImportController.class, MonitorVpsController.class, VpsPerformanceController.class, MonitorEventController.class, VpsEventController.class, MysqlTargetController.class})
 public class StaffErrorHandler {
+    @ExceptionHandler(feign.FeignException.class)
+    public ResponseEntity<Map<String,String>> upstream(feign.FeignException ex){return ResponseEntity.status(ex.status()==403?403:503).body(Map.of("message","Không kiểm tra được người được giao. Hãy thử lại."));}
+    @ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String,String>> validation(org.springframework.web.bind.MethodArgumentNotValidException ex){return ResponseEntity.badRequest().body(Map.of("message","Thông tin không hợp lệ. Kiểm tra trường bắt buộc và độ dài nội dung."));}
     @ExceptionHandler(org.springframework.web.multipart.MaxUploadSizeExceededException.class)
     public ResponseEntity<Map<String,String>> uploadSize() {
         return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(Map.of("message","File tải lên vượt giới hạn. PDF tối đa 100 MB; mỗi file nghe tối đa 40 MB."));

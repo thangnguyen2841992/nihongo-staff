@@ -18,6 +18,8 @@ public interface MonitorObjectRepository
             String objectType
     );
 
+    Optional<MonitorObject> findByObjectIdAndVps_VpsIdAndObjectType(Long objectId, Long vpsId, String objectType);
+
 
 
     // Current reads are required after the VPS mutex under MySQL REPEATABLE READ.
