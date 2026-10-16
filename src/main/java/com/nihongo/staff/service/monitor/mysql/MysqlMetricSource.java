@@ -105,6 +105,8 @@ public class MysqlMetricSource {
     }
 
     static String failureMessage(SQLException error) {
+        if (error.getMessage() != null && error.getMessage().contains("No suitable driver"))
+            return "Thiếu MySQL Connector/J trong staff-service; hãy bổ sung mysql-connector-j và khởi động lại service.";
         String state = error.getSQLState();
         if (state != null && state.startsWith("28"))
             return "MySQL từ chối tài khoản giám sát; kiểm tra tên đăng nhập, mật khẩu và quyền truy cập từ máy chạy staff-service.";

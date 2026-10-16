@@ -15,7 +15,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.mockito.Mockito.*;
-@WebMvcTest(value=ContentOperationsController.class,properties="spring.config.import=") @Import({SecurityConfig.class,CommonSecurityConfig.class})
+@WebMvcTest(value=ContentOperationsController.class,properties={"spring.config.import=","security.session-validation.enabled=false","security.origin-check.enabled=false"}) @Import({SecurityConfig.class,CommonSecurityConfig.class})
 class ContentOperationsAuthorizationTest {
  @Autowired MockMvc mvc;@MockitoBean JwtDecoder decoder;@MockitoBean ContentOperationsService operations;@MockitoBean ContentRevisionService revisions;
  @Test void userCannotReadBankReportsOfOthersOrVersions() throws Exception {

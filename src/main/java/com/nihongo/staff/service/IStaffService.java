@@ -28,6 +28,7 @@ public interface IStaffService {
     GrammarResponse updateGrammar(GrammarRequest request);
     void deleteGrammar(Long grammarId);
     List<GrammarResponse> getAllGrammarByLesson(Long lessonId);
+    LessonGrammarContentResponse getLessonGrammarContent(Long lessonId);
     ExampleResponse createNewExample(ExampleRequest request);
     ExampleResponse updateExample(ExampleRequest request);
     List<ExampleResponse> findAllExampleOfGrammar(Long grammarId);

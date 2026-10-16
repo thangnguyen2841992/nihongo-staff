@@ -149,6 +149,12 @@ public class StaffRestController {
         return ResponseEntity.ok(this.staffService.getAllGrammarByLesson(lessonId));
     }
 
+    @PreAuthorize("@contentAccess.lesson(#lessonId,authentication)")
+    @GetMapping("/lessons/{lessonId}/grammar-content")
+    public LessonGrammarContentResponse getLessonGrammarContent(@PathVariable Long lessonId) {
+        return staffService.getLessonGrammarContent(lessonId);
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
     @PutMapping("/grammars")
     public ResponseEntity<GrammarResponse> updateGrammar(@RequestBody GrammarRequest grammarRequest) {

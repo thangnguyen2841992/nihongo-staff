@@ -29,4 +29,9 @@ class MysqlMetricSourceTest {
         var auth = new SQLException("Access denied", "28000");
         assertTrue(MysqlMetricSource.failureMessage(auth).contains("tài khoản"));
     }
+
+    @Test void explainsMissingMysqlDriver() {
+        var error = new SQLException("No suitable driver found for jdbc:mysql://db:3306", "08001");
+        assertTrue(MysqlMetricSource.failureMessage(error).contains("MySQL Connector/J"));
+    }
 }

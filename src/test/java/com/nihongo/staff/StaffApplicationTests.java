@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
         "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect",
         "spring.jpa.hibernate.ddl-auto=create-drop",
         "eureka.client.enabled=false", "spring.cloud.discovery.enabled=false",
+        "security.session-validation.enabled=false", "security.origin-check.enabled=false",
+        "security.jwt.mode=legacy", "security.jwt.allow-legacy-hmac=true", "security.jwt.validate-claims=false",
         "monitoring.collection.enabled=false",
         "monitoring.prometheus-targets-file=target/prometheus-test/node_targets.json",
         "monitoring.prometheus-windows-targets-file=target/prometheus-test/windows_targets.json",

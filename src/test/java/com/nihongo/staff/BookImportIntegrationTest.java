@@ -28,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  "spring.datasource.driver-class-name=org.h2.Driver","spring.datasource.username=sa","spring.datasource.password=",
  "spring.jpa.database-platform=org.hibernate.dialect.H2Dialect","spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect",
  "spring.jpa.hibernate.ddl-auto=create-drop","eureka.client.enabled=false","spring.cloud.discovery.enabled=false",
+ "security.session-validation.enabled=false","security.origin-check.enabled=false",
+ "security.jwt.mode=legacy","security.jwt.allow-legacy-hmac=true","security.jwt.validate-claims=false",
  "monitoring.collection.enabled=false","monitoring.prometheus-targets-file=target/generic-test/node.json",
  "monitoring.prometheus-windows-targets-file=target/generic-test/windows.json","book-import.processing-enabled=false",
  "book-import.storage-directory=target/generic-test/files","jwt.secret=MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTIzNDU2Nzg5MDEyMzQ1Njc4OTA="})

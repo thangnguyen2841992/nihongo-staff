@@ -136,7 +136,7 @@ public class BookImportService {
         s.setMessage(request.reviewed()?"Đã duyệt nội dung và đáp án. Sẵn sàng nhập.":"Bản nháp đã được lưu; chưa đưa vào bài học.");
         sessions.saveAndFlush(s);return get(id);
     }
-    @Transactional @CacheEvict(value={"books","exerciseTypes"},allEntries=true)
+    @Transactional @CacheEvict(value={"books","exerciseTypes","lessonsByBook","grammarsByLesson","examplesByLesson","lessonGrammarContent"},allEntries=true)
     public Detail publish(String id,Publish request) {
         var s=lock(id);if(s.getImportedBookId()!=null) return get(id);
         version(s,request.version());if(!"READY".equals(s.getState())) throw conflict("Hãy duyệt nội dung và đáp án trước khi nhập sách.");

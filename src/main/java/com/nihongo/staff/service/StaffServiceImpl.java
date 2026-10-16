@@ -165,6 +165,7 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "lessonsByBook", key = "#bookId")
     public List<LessonResponse>
     getAllLessonByBook(
             Long bookId
@@ -190,6 +191,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent"}, allEntries = true)
     @Transactional
     public LessonResponse createNewLesson(
             CreateNewLessonRequest request
@@ -224,6 +226,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent"}, allEntries = true)
     @Transactional
     public LessonResponse updateLesson(
             CreateNewLessonRequest request
@@ -275,6 +278,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent"}, allEntries = true)
     @Transactional
     public void deleteLesson(
             Long lessonId
@@ -302,6 +306,7 @@ public class StaffServiceImpl implements IStaffService {
        ========================================================= */
 
     @Override
+    @CacheEvict(value = {"grammarsByLesson", "lessonGrammarContent"}, allEntries = true)
     @Transactional
     public GrammarResponse createNewGrammar(
             GrammarRequest request
@@ -335,6 +340,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = {"grammarsByLesson", "lessonGrammarContent"}, allEntries = true)
     @Transactional
     public GrammarResponse updateGrammar(
             GrammarRequest request
@@ -367,6 +373,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = {"grammarsByLesson", "examplesByLesson", "lessonGrammarContent"}, allEntries = true)
     @Transactional
     public void deleteGrammar(
             Long grammarId
@@ -380,6 +387,7 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "grammarsByLesson", key = "#lessonId")
     public List<GrammarResponse>
     getAllGrammarByLesson(
             Long lessonId
@@ -392,12 +400,30 @@ public class StaffServiceImpl implements IStaffService {
                 .toList();
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    @Cacheable(value = "lessonGrammarContent", key = "#lessonId")
+    public LessonGrammarContentResponse getLessonGrammarContent(Long lessonId) {
+        List<GrammarResponse> grammars = grammarRepository
+                .findByLessons_LessonId(lessonId)
+                .stream()
+                .map(this::mapGrammarToResponse)
+                .toList();
+        List<ExampleResponse> examples = exampleRepository
+                .findByLessonIdWithGrammar(lessonId)
+                .stream()
+                .map(this::mapExampleToDTO)
+                .toList();
+        return new LessonGrammarContentResponse(grammars, examples);
+    }
+
 
     /* =========================================================
                             EXAMPLE
        ========================================================= */
 
     @Override
+    @CacheEvict(value = {"examplesByLesson", "lessonGrammarContent"}, allEntries = true)
     @Transactional
     public ExampleResponse createNewExample(
             ExampleRequest request
@@ -427,6 +453,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = {"examplesByLesson", "lessonGrammarContent"}, allEntries = true)
     @Transactional
     public ExampleResponse updateExample(
             ExampleRequest request
@@ -490,6 +517,7 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "examplesByLesson", key = "#lessonId")
     public List<ExampleResponse> findAllExamplesOfLesson(Long lessonId) {
         return exampleRepository.findByLessonIdWithGrammar(lessonId)
                 .stream().map(this::mapExampleToDTO).toList();

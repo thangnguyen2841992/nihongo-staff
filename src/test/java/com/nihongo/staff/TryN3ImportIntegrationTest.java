@@ -25,6 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         "spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect",
         "spring.jpa.hibernate.ddl-auto=create-drop",
         "eureka.client.enabled=false", "spring.cloud.discovery.enabled=false",
+        "security.session-validation.enabled=false", "security.origin-check.enabled=false",
+        "security.jwt.mode=legacy", "security.jwt.allow-legacy-hmac=true", "security.jwt.validate-claims=false",
         "monitoring.collection.enabled=false",
         "monitoring.prometheus-targets-file=target/try-n3-test/node_targets.json",
         "monitoring.prometheus-windows-targets-file=target/try-n3-test/windows_targets.json",

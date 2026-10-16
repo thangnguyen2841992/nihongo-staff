@@ -1,6 +1,9 @@
 server:
   address: ${SERVICE_BIND_ADDRESS:127.0.0.1}
   port: 8085
+  compression:
+    enabled: true
+    min-response-size: 1024
 spring:
   profiles:
     default: local
@@ -17,19 +20,28 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
 
     hikari:
-      maximum-pool-size: 10
-      minimum-idle: 2
-      max-lifetime: 45000
-      idle-timeout: 30000
-      connection-timeout: 30000
+      maximum-pool-size: ${DB_POOL_MAX_SIZE:10}
+      minimum-idle: ${DB_POOL_MIN_IDLE:2}
+      max-lifetime: ${DB_CONNECTION_MAX_LIFETIME:900000}
+      keepalive-time: ${DB_CONNECTION_KEEPALIVE:60000}
+      idle-timeout: ${DB_CONNECTION_IDLE_TIMEOUT:300000}
+      connection-timeout: ${DB_CONNECTION_TIMEOUT:10000}
       validation-timeout: 5000
   jpa:
+    open-in-view: false
     show-sql: false
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MariaDBDialect
+        default_batch_fetch_size: 50
+        jdbc:
+          fetch_size: 100
+
+content-cache:
+  maximum-size: ${CONTENT_CACHE_MAX_SIZE:2000}
+  expire-after-write: ${CONTENT_CACHE_TTL:PT5M}
 
 eureka:
   instance:
