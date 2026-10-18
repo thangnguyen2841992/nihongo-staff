@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = PerfPersistenceTest.Config.class)
 class PerfPersistenceTest {
     @Configuration @EntityScan("com.nihongo.staff.model") @EnableJpaRepositories("com.nihongo.staff.repository")
-    @Import({MetricCatalog.class, PerfCollectionStore.class, VpsPerformanceService.class, VpsMetricConfigService.class, MonitorVpsService.class, PrometheusTargetService.class, com.nihongo.staff.service.monitor.event.MonitorEventService.class})
+    @Import({MetricCatalog.class, PerfCollectionStore.class, PerfValueBatchWriter.class, VpsPerformanceService.class, VpsMetricConfigService.class, MonitorVpsService.class, PrometheusTargetService.class, com.nihongo.staff.service.monitor.event.MonitorEventService.class})
     static class Config {
         @Bean ObjectMapper mapper() { return new ObjectMapper(); }
         @Bean NodeMetricSource source() { return mock(NodeMetricSource.class); }
@@ -146,6 +146,31 @@ class PerfPersistenceTest {
         store.complete(claim("NETWORK_RECEIVE"), List.of(new NodeMetricSource.Reading("NETWORK", "eth0", Map.of("device", "eth0"), null, 300D, null), new NodeMetricSource.Reading("NETWORK", "eth1", Map.of("device", "eth1"), null, 900D, null)), t.plusSeconds(10));
         var result = performance.read(vps.getVpsId(), "NETWORK_RECEIVE", null, null);
         assertEquals(2, result.objects().size()); assertEquals(20D, result.objects().get(0).points().get(0).value()); assertEquals(40D, result.objects().get(1).points().get(0).value());
+    }
+    @org.junit.jupiter.params.ParameterizedTest
+    @org.junit.jupiter.params.provider.ValueSource(ints = {32, 520})
+    void warmCollectionReadsObjectsAndBaselinesInBatches(int objectCount) {
+        var time = PerfCollectionStore.now().minusSeconds(30).withNano(0);
+        List<NodeMetricSource.Reading> first = new ArrayList<>(), next = new ArrayList<>();
+        for (int i = 0; i < objectCount; i++) {
+            first.add(new NodeMetricSource.Reading("NETWORK", "eth" + i, Map.of("device", "eth" + i), null, 100D + i, null));
+            next.add(new NodeMetricSource.Reading("NETWORK", "eth" + i, Map.of("device", "eth" + i), null, 400D + i, null));
+        }
+        store.complete(claim("NETWORK_RECEIVE"), first, time);
+        var job = claim("NETWORK_RECEIVE");
+        entityManager.flush(); entityManager.clear();
+        var statistics = entityManager.getEntityManagerFactory().unwrap(org.hibernate.SessionFactory.class).getStatistics();
+        statistics.setStatisticsEnabled(true); statistics.clear();
+        long reads;
+        try {
+            store.complete(job, next, time.plusSeconds(30));
+            entityManager.flush();
+            reads = statistics.getQueryExecutionCount();
+        } finally { statistics.setStatisticsEnabled(false); }
+        System.out.println("Monitoring warm collection, " + objectCount + " interfaces: " + reads + " repository queries");
+        assertEquals(objectCount, values.count());
+        assertTrue(values.findAll().stream().allMatch(value -> value.getValue() == 10D));
+        assertTrue(reads <= 8, "Object/baseline reads must not grow per interface; actual=" + reads);
     }
     @Test void currentReadUsesOneBatchForManyObjectsAndKeepsLatestOfflineAndEmptySeries() {
         var network = link("NETWORK_RECEIVE");

@@ -28,7 +28,7 @@ public class MonitorVps extends BaseEntity {
     @Column(name = "hostname", length = 255)
     private String hostname;
 
-    @Column(name = "ip_address", nullable = false, length = 45)
+    @Column(name = "ip_address", nullable = false, length = 255)
     private String ipAddress;
 
     @Column(name = "agent_port")

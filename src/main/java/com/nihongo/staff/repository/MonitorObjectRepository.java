@@ -31,4 +31,8 @@ public interface MonitorObjectRepository
     @org.springframework.data.jpa.repository.Query("select o from MonitorObject o where o.vps.vpsId = :vpsId and o.objectType = :type")
     List<MonitorObject> findTypeForUpdate(Long vpsId, String type);
 
+    @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @org.springframework.data.jpa.repository.Query("select o from MonitorObject o where o.vps.vpsId = :vpsId and o.objectType in :types")
+    List<MonitorObject> findTypesForUpdate(Long vpsId, java.util.Collection<String> types);
+
 }

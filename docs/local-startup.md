@@ -2,7 +2,7 @@
 
 Ở profile local, các backend service cùng đọc file `.local/shared.properties` ở thư mục workspace. Không đưa file thật lên Git. Staff-service dùng `SPRING_DATASOURCE_PASSWORD`, public key RSA và credential kiểm tra phiên nội bộ; không cần mật khẩu SSH để ghi target Prometheus local. Cấu hình hiện hành và cách tạo khóa: [gateway-security-hardening.md](../../docs/gateway-security-hardening.md).
 
-Để đăng ký target MySQL qua JDBC, staff-service còn cần `MONITORING_ENCRYPTION_KEY` trong cùng file local. Giữ nguyên khóa này trên mọi máy chạy với cùng DB; xem [hướng dẫn giám sát MySQL](mysql-monitoring.md).
+Để đăng ký target MySQL qua JDBC hoặc Kafka dùng SASL, staff-service còn cần `MONITORING_ENCRYPTION_KEY` trong cùng file local. Giữ nguyên khóa này trên mọi máy chạy với cùng DB; xem [hướng dẫn giám sát MySQL](mysql-monitoring.md) và [hướng dẫn giám sát Kafka](kafka-monitoring.md).
 
 Trong IntelliJ, đặt Working directory là thư mục workspace hoặc `staff`, rồi chạy `StaffApplication`. Xóa các biến cùng tên từng nhập trong Run Configuration để chúng không ghi đè file chung. Sau khi sửa file, khởi động lại service.
 

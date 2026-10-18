@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
@@ -22,13 +24,13 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class MonitorVpsService implements IMonitorVpsService {
     private final MonitorVpsRepository servers;
     private final NodeMetricSource source;
     private final MetricCatalog catalog;
     private final PerfCollectionStore store;
     private final PrometheusTargetService targets;
+    private final PlatformTransactionManager transactionManager;
 
     @Override
     @Transactional(readOnly = true)
@@ -37,7 +39,6 @@ public class MonitorVpsService implements IMonitorVpsService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public NodeExporterDiscoveryResult discover(MonitorVpsRequest request) {
         String host = address(request.getIpAddress());
         int port = port(request.getAgentPort());
@@ -59,10 +60,7 @@ public class MonitorVpsService implements IMonitorVpsService {
     public MonitorVps registerVps(RegisterMonitorVpsRequest request) {
         String host = address(request.getIpAddress());
         int port = port(request.getAgentPort());
-        if (servers.existsByIpAddressAndAgentPort(host, port)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    "Địa chỉ IP và cổng này đã được đăng ký. Vui lòng kiểm tra danh sách máy chủ.");
-        }
+        requireAvailableEndpoint(host, port);
         List<NodeMetricSource.Sample> samples;
         try {
             samples = source.fetch(host, port, 5000);
@@ -73,6 +71,12 @@ public class MonitorVpsService implements IMonitorVpsService {
         // Re-read exporter metadata on registration instead of trusting an old UI discovery.
         var details = details(samples, request.getHostname(), request.getOsType(),
                 request.getOsVersion(), request.getArchitecture());
+        // Network discovery must finish before borrowing a database connection or starting writes.
+        return new TransactionTemplate(transactionManager).execute(status -> persist(host, port, details, samples));
+    }
+
+    private MonitorVps persist(String host, int port, Details details, List<NodeMetricSource.Sample> samples) {
+        requireAvailableEndpoint(host, port);
         String hostname = details.hostname();
         if (hostname != null && servers.existsByHostname(hostname)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
@@ -93,6 +97,13 @@ public class MonitorVpsService implements IMonitorVpsService {
         store.discover(vps, samples);
         targets.registerTarget(vps.getVpsId());
         return vps;
+    }
+
+    private void requireAvailableEndpoint(String host, int port) {
+        if (servers.existsByIpAddressAndAgentPort(host, port)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Địa chỉ IP và cổng này đã được đăng ký. Vui lòng kiểm tra danh sách máy chủ.");
+        }
     }
 
     private record Details(ExporterType type, String hostname, String osType,

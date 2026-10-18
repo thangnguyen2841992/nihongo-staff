@@ -3,6 +3,7 @@ package com.nihongo.staff.service.monitor.mysql;
 import com.nihongo.staff.model.monitoring.MonitorMysqlTarget;
 import com.nihongo.staff.repository.MonitorMysqlTargetRepository;
 import com.nihongo.staff.service.monitor.collection.NodeMetricSource;
+import com.nihongo.staff.service.monitor.collection.MetricSnapshotCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,14 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.net.ssl.SSLException;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @RequiredArgsConstructor
@@ -28,14 +26,10 @@ public class MysqlMetricSource {
             + "('Uptime','Threads_connected','Threads_running','Queries','Slow_queries',"
             + "'Connections','Bytes_received','Bytes_sent')";
     private static final Set<String> SSL_MODES = Set.of("VERIFY_IDENTITY", "DISABLED");
-    private static final Duration CACHE_AGE = Duration.ofSeconds(3);
 
     private final MonitorMysqlTargetRepository targets;
     private final MysqlCredentialCipher cipher;
-    private final ConcurrentHashMap<Long, CachedStatus> cache = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<Long, Object> locks = new ConcurrentHashMap<>();
-
-    private record CachedStatus(Instant fetchedAt, Map<String, Double> values) {}
+    private final MetricSnapshotCache<Long, Map<String, Double>> cache = new MetricSnapshotCache<>();
     public record Probe(String version, Map<String, Double> values) {}
 
     public Probe probe(String host, int port, String username, String password, String sslMode, int timeoutMs) {
@@ -43,28 +37,17 @@ public class MysqlMetricSource {
     }
 
     public void invalidate(long vpsId) {
-        cache.remove(vpsId);
+        cache.invalidate(vpsId);
     }
 
     public List<NodeMetricSource.Reading> readings(long vpsId, String host, int port, String code, int timeoutMs) {
-        CachedStatus current = cache.get(vpsId);
-        if (fresh(current)) return map(code, current.values());
-        synchronized (locks.computeIfAbsent(vpsId, ignored -> new Object())) {
-            current = cache.get(vpsId);
-            if (!fresh(current)) {
-                MonitorMysqlTarget target = targets.findById(vpsId)
-                        .orElseThrow(() -> new IllegalStateException("Thiếu cấu hình kết nối target MySQL."));
-                Map<String, Double> values = fetch(host, port, target.getUsername(),
-                        cipher.decrypt(target.getPasswordEncrypted()), target.getSslMode(), timeoutMs, false).values();
-                current = new CachedStatus(Instant.now(), values);
-                cache.put(vpsId, current);
-            }
-        }
-        return map(code, current.values());
-    }
-
-    private boolean fresh(CachedStatus entry) {
-        return entry != null && Duration.between(entry.fetchedAt(), Instant.now()).compareTo(CACHE_AGE) < 0;
+        var status = cache.get(vpsId, ignored -> {
+            MonitorMysqlTarget target = targets.findById(vpsId)
+                    .orElseThrow(() -> new IllegalStateException("Thiếu cấu hình kết nối target MySQL."));
+            return fetch(host, port, target.getUsername(), cipher.decrypt(target.getPasswordEncrypted()),
+                    target.getSslMode(), timeoutMs, false).values();
+        });
+        return map(code, status);
     }
 
     private Probe fetch(String host, int port, String username, String password, String sslMode,

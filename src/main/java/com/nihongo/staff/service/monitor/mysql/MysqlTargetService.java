@@ -12,7 +12,6 @@ import com.nihongo.staff.repository.MonitorVpsRepository;
 import com.nihongo.staff.service.monitor.collection.MetricCatalog;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -36,8 +35,7 @@ public class MysqlTargetService {
     private final PlatformTransactionManager transactionManager;
 
     public List<MonitorVpsResponse> list() {
-        return servers.findAll(Sort.by("vpsId").descending()).stream()
-                .filter(server -> ExporterType.forVps(server) == ExporterType.MYSQL_JDBC)
+        return servers.findAllByExporterTypeOrderByVpsIdDesc(ExporterType.MYSQL_JDBC).stream()
                 .map(MonitorVpsResponse::from).toList();
     }
 

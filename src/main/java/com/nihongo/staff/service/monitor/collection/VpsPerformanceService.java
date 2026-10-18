@@ -90,7 +90,10 @@ public class VpsPerformanceService {
         if (windowSeconds == null) {
             if (latest != null) {
                 points.add(new Point(latest.getCollectedAt().toEpochSecond(ZoneOffset.UTC), latest.getValue()));
-                stale = latest.getCollectedAt().isBefore(now.minusSeconds(PerfCollectionStore.interval(link) * 2L + 10)) || link.getLastError() != null;
+                boolean measuredCheck = ("PORT_CHECK".equals(link.getMetric().getCollectorType()) || "WEB_CHECK".equals(link.getMetric().getCollectorType()))
+                        && link.getConsecutiveFailures() == 0;
+                stale = latest.getCollectedAt().isBefore(now.minusSeconds(PerfCollectionStore.interval(link) * 2L + 10))
+                        || (link.getLastError() != null && !measuredCheck);
             }
         } else {
             int step = Math.max(5, (int) Math.ceil(windowSeconds / 1000D));

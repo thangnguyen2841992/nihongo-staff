@@ -34,7 +34,7 @@ public class MysqlCredentialCipher {
         } catch (IllegalStateException e) {
             throw e;
         } catch (Exception e) {
-            throw new IllegalStateException("Không thể mã hóa mật khẩu MySQL.", e);
+            throw new IllegalStateException("Không thể mã hóa thông tin xác thực monitoring.", e);
         }
     }
 
@@ -48,13 +48,13 @@ public class MysqlCredentialCipher {
         } catch (IllegalStateException e) {
             throw e;
         } catch (Exception e) {
-            throw new IllegalStateException("Không thể giải mã mật khẩu MySQL; khôi phục MONITORING_ENCRYPTION_KEY cũ hoặc nhập lại mật khẩu tại Đăng ký MySQL.", e);
+            throw new IllegalStateException("Không thể giải mã thông tin xác thực monitoring; khôi phục MONITORING_ENCRYPTION_KEY cũ hoặc cập nhật lại thông tin đăng nhập target.", e);
         }
     }
 
     private SecretKeySpec key() {
         if (configuredKey == null || configuredKey.isBlank())
-            throw new IllegalStateException("Thiếu MONITORING_ENCRYPTION_KEY trong file cấu hình local.");
+            throw new IllegalStateException("Thiếu MONITORING_ENCRYPTION_KEY trong biến môi trường hoặc cấu hình service.");
         byte[] decoded;
         try { decoded = Base64.getDecoder().decode(configuredKey.trim()); }
         catch (IllegalArgumentException e) { throw new IllegalStateException("MONITORING_ENCRYPTION_KEY không hợp lệ.", e); }

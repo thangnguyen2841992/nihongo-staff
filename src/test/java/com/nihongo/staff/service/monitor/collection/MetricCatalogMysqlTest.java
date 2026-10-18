@@ -33,6 +33,24 @@ class MetricCatalogMysqlTest {
         assertEquals("MYSQL_THREADS_CONNECTED", saved.getValue().getMetric().getMetricCode());
     }
 
+    @Test void assignsOnlyKafkaMetricsToKafkaTarget() {
+        var metrics = mock(MonitorMetricRepository.class);
+        var links = mock(MonitorVpsMetricRepository.class);
+        var catalog = new MetricCatalog(metrics, links, mock(MonitorVpsRepository.class));
+        when(metrics.findAll()).thenReturn(List.of(metric(1, "CPU_USAGE", "NODE_EXPORTER"),
+                metric(2, "MYSQL_THREADS_CONNECTED", "MYSQL_JDBC"),
+                metric(3, "KAFKA_BROKER_COUNT", "KAFKA_ADMIN")));
+        var target = new MonitorVps();
+        target.setVpsId(8L);
+        target.setExporterType(ExporterType.KAFKA_ADMIN);
+
+        catalog.bindDefaults(target);
+
+        var saved = ArgumentCaptor.forClass(MonitorVpsMetric.class);
+        verify(links).save(saved.capture());
+        assertEquals("KAFKA_BROKER_COUNT", saved.getValue().getMetric().getMetricCode());
+    }
+
     private static MonitorMetric metric(long id, String code, String collector) {
         var metric = new MonitorMetric();
         metric.setMetricId(id);
