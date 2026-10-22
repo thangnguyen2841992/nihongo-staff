@@ -628,6 +628,8 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    // Read-only: the class-level default is a read-write transaction.
+    @Transactional(readOnly = true)
     public List<ExerciseKeywordDTO>
     getAllExcercisesKeywordOfLesson(
             Long lessonId

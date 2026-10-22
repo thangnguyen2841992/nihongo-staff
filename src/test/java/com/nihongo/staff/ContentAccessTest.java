@@ -38,4 +38,14 @@ class ContentAccessTest {
   when(subscriptions.hasAccess(3L)).thenThrow(new IllegalStateException("offline"));
   assertThrows(IllegalStateException.class,()->access.level(3L,auth("USER")));
  }
+ @Test void grantedLevelIsReusedButDenialIsRecheckedAndUsersAreSeparate(){
+  when(subscriptions.hasAccess(3L)).thenReturn(false,true);
+  assertFalse(access.level(3L,auth("USER")));
+  assertTrue(access.level(3L,auth("USER")));
+  assertTrue(access.level(3L,auth("USER")));
+  verify(subscriptions,times(2)).hasAccess(3L);
+  var other=new UsernamePasswordAuthenticationToken("other","",List.of(new SimpleGrantedAuthority("ROLE_USER")));
+  when(subscriptions.hasAccess(3L)).thenReturn(false);
+  assertFalse(access.level(3L,other));
+ }
 }

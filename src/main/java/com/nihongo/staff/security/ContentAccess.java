@@ -10,11 +10,19 @@ public class ContentAccess {
  private final ILessonsRepository lessons;
  private final IGrammarRepository grammars;
  private final SubscriptionClient subscriptions;
+ // Positive entitlement answers are reused briefly: one learner page load otherwise asks nihongo-user several times.
+ // Denials and failures are never cached, so a new purchase works immediately; revocation applies within the TTL.
+ private final com.github.benmanes.caffeine.cache.Cache<String,Boolean> granted=com.github.benmanes.caffeine.cache.Caffeine.newBuilder()
+   .maximumSize(20_000).expireAfterWrite(java.time.Duration.ofSeconds(30)).build();
  public boolean manager(Authentication auth) { return auth!=null && auth.isAuthenticated() && auth.getAuthorities().stream().anyMatch(a->a.getAuthority().equals("ROLE_ADMIN")||a.getAuthority().equals("ROLE_STAFF")); }
  public boolean level(Long id,Authentication auth) {
   if(manager(auth)) return true;
   if(id==null || auth==null || !auth.isAuthenticated()) return false;
-  return Boolean.TRUE.equals(subscriptions.hasAccess(id));
+  String key=auth.getName()+":"+id;
+  if(granted.getIfPresent(key)!=null) return true;
+  boolean allowed=Boolean.TRUE.equals(subscriptions.hasAccess(id));
+  if(allowed) granted.put(key,Boolean.TRUE);
+  return allowed;
  }
  public boolean book(Long id,Authentication auth) {
   if(manager(auth)) return true;
