@@ -36,6 +36,29 @@ public class MonitorEventService {
     private final MonitorEventRepository history;
     private final MonitorMetricRepository metrics;
     private final ApplicationEventPublisher publisher;
+    // Enabled rules per (VPS, metric), read on every collection. Most assignments have none, so the empty list is
+    // cached too. Local edits invalidate immediately (and again after commit); other instances see edits within 30s.
+    private record RuleKey(long vpsId, long metricId) {}
+    record ActiveRule(long ruleId, long vpsId, long metricId, String name, String objectKey, MonitorEventRule.Operator operator,
+                      double threshold, MonitorEventRule.Severity severity, int consecutiveSamples) {
+        static ActiveRule of(MonitorEventRule r) {
+            return new ActiveRule(r.getRuleId(), r.getVpsId(), r.getMetricId(), r.getName(), r.getObjectKey(), r.getOperator(),
+                    r.getThreshold(), r.getSeverity(), r.getConsecutiveSamples());
+        }
+    }
+    private final com.github.benmanes.caffeine.cache.Cache<RuleKey, List<ActiveRule>> activeRules =
+            com.github.benmanes.caffeine.cache.Caffeine.newBuilder().maximumSize(10_000)
+                    .expireAfterWrite(java.time.Duration.ofSeconds(30)).build();
+
+    private void rulesChanged(long vpsId, long metricId) {
+        var key = new RuleKey(vpsId, metricId);
+        activeRules.invalidate(key);
+        if (org.springframework.transaction.support.TransactionSynchronizationManager.isSynchronizationActive())
+            org.springframework.transaction.support.TransactionSynchronizationManager.registerSynchronization(
+                    new org.springframework.transaction.support.TransactionSynchronization() {
+                        @Override public void afterCompletion(int status) { activeRules.invalidate(key); }
+                    });
+    }
 
     private MonitorVpsMetric assignment(long vpsId, String code) {
         return assignments.findByVps_VpsIdAndMetric_MetricCode(vpsId, code)
@@ -111,6 +134,7 @@ public class MonitorEventService {
         rule.setSeverity(input.severity()); rule.setConsecutiveSamples(input.consecutiveSamples()); rule.setEnabled(input.enabled());
         if (ruleId != null) states.deleteByRuleId(ruleId);
         rules.save(rule);
+        rulesChanged(vpsId, metric.getMetricId());
         publisher.publishEvent(new PerformanceChanged(vpsId, code));
         return dto(rule, 0);
     }
@@ -119,6 +143,7 @@ public class MonitorEventService {
         lockVps(vpsId);
         var rule = owned(vpsId, assignment(vpsId, code).getMetric().getMetricId(), ruleId);
         states.deleteByRuleId(ruleId); rules.delete(rule);
+        rulesChanged(vpsId, rule.getMetricId());
         publisher.publishEvent(new PerformanceChanged(vpsId, code));
     }
     private MonitorEventRule owned(long vpsId, long metricId, long id) {
@@ -147,9 +172,10 @@ public class MonitorEventService {
     // Caller holds the VPS mutex. Rules, states, events and perf commit atomically.
     @Transactional(propagation = Propagation.MANDATORY)
     public void evaluate(MonitorVpsMetric link, List<Sample> samples) {
-        var enabled = rules.findByVpsIdAndMetricIdAndEnabledTrue(link.getVps().getVpsId(), link.getMetric().getMetricId());
+        var enabled = activeRules.get(new RuleKey(link.getVps().getVpsId(), link.getMetric().getMetricId()),
+                key -> rules.findByVpsIdAndMetricIdAndEnabledTrue(key.vpsId(), key.metricId()).stream().map(ActiveRule::of).toList());
         if (enabled.isEmpty()) return;
-        var persisted = states.findByRuleIdIn(enabled.stream().map(MonitorEventRule::getRuleId).toList());
+        var persisted = states.findByRuleIdIn(enabled.stream().map(ActiveRule::ruleId).toList());
         Map<String, MonitorEventState> byKey = new HashMap<>();
         for (var s : persisted) byKey.put(s.getRuleId() + ":" + s.getObjectKey(), s);
         Set<String> observed = new HashSet<>();
@@ -157,21 +183,21 @@ public class MonitorEventService {
         for (var rule : enabled) for (var sample : samples) {
             var perf = sample.perf();
             String objectKey = perf.getObjectId() == null ? "vps" : perf.getObjectId().toString();
-            if (!"all".equals(rule.getObjectKey()) && !rule.getObjectKey().equals(objectKey)) continue;
-            String key = rule.getRuleId() + ":" + objectKey;
+            if (!"all".equals(rule.objectKey()) && !rule.objectKey().equals(objectKey)) continue;
+            String key = rule.ruleId() + ":" + objectKey;
             observed.add(key);
             var state = byKey.computeIfAbsent(key, k -> {
-                var s = new MonitorEventState(); s.setRuleId(rule.getRuleId()); s.setObjectKey(objectKey); return s;
+                var s = new MonitorEventState(); s.setRuleId(rule.ruleId()); s.setObjectKey(objectKey); return s;
             });
             if (state.getLastObservedAt() != null) {
                 if (!perf.getCollectedAt().isAfter(state.getLastObservedAt())) continue;
                 if (perf.getCollectedAt().isAfter(state.getLastObservedAt().plusSeconds(PerfCollectionStore.interval(link) * 2L + 10))) state.setBreaches(0);
             }
             state.setLastObservedAt(perf.getCollectedAt());
-            if (rule.getOperator().matches(perf.getValue(), rule.getThreshold())) {
-                state.setBreaches(Math.min(rule.getConsecutiveSamples(), state.getBreaches() + 1));
+            if (rule.operator().matches(perf.getValue(), rule.threshold())) {
+                state.setBreaches(Math.min(rule.consecutiveSamples(), state.getBreaches() + 1));
                 // Each accepted collection can produce a new alert once the streak qualifies.
-                if (state.getBreaches() >= rule.getConsecutiveSamples()) {
+                if (state.getBreaches() >= rule.consecutiveSamples()) {
                     state.setActive(true);
                     var event = emit(rule, sample, objectKey, MonitorEvent.Kind.ALERT, null);
                     state.setOpenedEventId(event.getEventId()); created.add(event.getEventId());
@@ -189,12 +215,12 @@ public class MonitorEventService {
         for (var state : persisted) if (!observed.contains(state.getRuleId() + ":" + state.getObjectKey())) state.setBreaches(0);
         if (!created.isEmpty()) publisher.publishEvent(new MonitorEventsChanged(link.getVps().getVpsId(), List.copyOf(created)));
     }
-    private MonitorEvent emit(MonitorEventRule rule, Sample sample, String key, MonitorEvent.Kind kind, Long openedId) {
+    private MonitorEvent emit(ActiveRule rule, Sample sample, String key, MonitorEvent.Kind kind, Long openedId) {
         var event = new MonitorEvent();
-        event.setRuleId(rule.getRuleId()); event.setVpsId(rule.getVpsId()); event.setMetricId(rule.getMetricId());
-        event.setRuleName(rule.getName()); event.setObjectKey(key); event.setObjectName(sample.objectName());
-        event.setKind(kind); event.setSeverity(rule.getSeverity()); event.setOperator(rule.getOperator());
-        event.setThreshold(rule.getThreshold()); event.setPerfValue(sample.perf().getValue()); event.setCollectedAt(sample.perf().getCollectedAt());
+        event.setRuleId(rule.ruleId()); event.setVpsId(rule.vpsId()); event.setMetricId(rule.metricId());
+        event.setRuleName(rule.name()); event.setObjectKey(key); event.setObjectName(sample.objectName());
+        event.setKind(kind); event.setSeverity(rule.severity()); event.setOperator(rule.operator());
+        event.setThreshold(rule.threshold()); event.setPerfValue(sample.perf().getValue()); event.setCollectedAt(sample.perf().getCollectedAt());
         event.setOpenedEventId(openedId);
         return history.save(event);
     }

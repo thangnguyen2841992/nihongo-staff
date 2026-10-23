@@ -44,7 +44,7 @@ public class BookPublicationService {
     }
 
     @Transactional
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     public Review submit(Long id) {
         Books book = locked(id);
         if (status(book) != PublicationStatus.DRAFT) throw conflict("Chỉ bản nháp mới được gửi duyệt.");
@@ -56,7 +56,7 @@ public class BookPublicationService {
     }
 
     @Transactional
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     public Review publish(Long id) {
         Books book = locked(id);
         if (status(book) != PublicationStatus.IN_REVIEW) throw conflict("Sách chưa được gửi duyệt.");
@@ -68,7 +68,7 @@ public class BookPublicationService {
     }
 
     @Transactional
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     public Review returnToDraft(Long id) {
         Books book = locked(id);
         book.setPublicationStatus(PublicationStatus.DRAFT);

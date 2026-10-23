@@ -29,14 +29,10 @@ class CheckAuthorizationTest {
     @Autowired MockMvc mvc;
     @MockitoBean CheckTargetService service;
     @Test @WithMockUser(roles = "USER") void learnerCannotListProbeOrRegisterTargets() throws Exception {
-        mvc.perform(get("/api/staff/check-targets")).andExpect(status().isForbidden());
         mvc.perform(get("/api/staff/check-targets/page").param("type", "PORT_CHECK")).andExpect(status().isForbidden());
         for (String path : new String[]{"/api/staff/check-targets/probe", "/api/staff/check-targets"})
             mvc.perform(post(path).contentType("application/json").content("{\"name\":\"x\",\"type\":\"PORT_CHECK\",\"host\":\"localhost\",\"port\":80}")).andExpect(status().isForbidden());
         verifyNoInteractions(service);
-    }
-    @Test @WithMockUser(roles = "STAFF") void staffCanListChecks() throws Exception {
-        mvc.perform(get("/api/staff/check-targets")).andExpect(status().isOk()); verify(service).list();
     }
     @Test @WithMockUser(roles = "STAFF") void staffCanRequestAPageAndOverloadReturns503() throws Exception {
         mvc.perform(get("/api/staff/check-targets/page").param("type", "WEB_CHECK").param("page", "1"))
@@ -48,6 +44,7 @@ class CheckAuthorizationTest {
                 .andExpect(status().isServiceUnavailable());
     }
     @Test @WithMockUser(roles = "ADMIN") void adminCanListChecks() throws Exception {
-        mvc.perform(get("/api/staff/check-targets")).andExpect(status().isOk()); verify(service).list();
+        mvc.perform(get("/api/staff/check-targets/page").param("type", "PORT_CHECK")).andExpect(status().isOk());
+        verify(service).page("PORT_CHECK", 0, 20);
     }
 }

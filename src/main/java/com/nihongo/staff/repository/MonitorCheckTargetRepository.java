@@ -13,8 +13,6 @@ public interface MonitorCheckTargetRepository extends JpaRepository<MonitorCheck
             + "s.status as status, s.lastSeenAt as lastSeenAt from MonitorCheckTarget t join MonitorVps s on s.vpsId = t.vpsId";
     @org.springframework.data.jpa.repository.Query(CONNECTION + " where t.vpsId = :id")
     java.util.Optional<Connection> connection(long id);
-    @org.springframework.data.jpa.repository.Query(CONNECTION + " order by t.vpsId desc")
-    java.util.List<Connection> connections();
     @org.springframework.data.jpa.repository.Query(CONNECTION + " where s.exporterType = :type order by t.vpsId desc")
     org.springframework.data.domain.Slice<Connection> page(com.nihongo.staff.model.monitoring.ExporterType type,
                                                           org.springframework.data.domain.Pageable pageable);

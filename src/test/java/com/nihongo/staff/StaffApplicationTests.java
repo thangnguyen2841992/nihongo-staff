@@ -97,6 +97,15 @@ class StaffApplicationTests {
 
     @org.springframework.test.context.bean.override.mockito.MockitoBean
     org.springframework.messaging.simp.SimpMessagingTemplate messaging;
+    @org.springframework.test.context.bean.override.mockito.MockitoBean
+    com.nihongo.staff.service.monitor.realtime.RealtimeSubscriptions subscriptions;
+    @Autowired com.nihongo.staff.service.monitor.realtime.PerformanceSocketPublisher performanceSocket;
+    @Autowired com.nihongo.staff.service.monitor.realtime.MonitorEventSocketPublisher eventSocket;
+    @org.junit.jupiter.api.BeforeEach void staffIsWatchingEveryTopic() {
+        org.mockito.Mockito.when(subscriptions.hasSubscribers(org.mockito.ArgumentMatchers.anyString())).thenReturn(true);
+    }
+    // Frames are sent by the publishers' flush; flushing explicitly also drains anything queued by earlier steps.
+    void flushSockets() { performanceSocket.flush(); eventSocket.flush(); }
     @Autowired org.springframework.transaction.PlatformTransactionManager transactions;
     @Autowired com.nihongo.staff.repository.MonitorVpsRepository servers;
     @Autowired com.nihongo.staff.repository.MonitorVpsMetricRepository assignments;
@@ -123,14 +132,16 @@ class StaffApplicationTests {
     @Test void socketReceivesPersistedSnapshotOnlyAfterCommit() {
         long id = assignment();
         long vpsId = eventRule(id);
-        org.mockito.Mockito.clearInvocations(messaging);
+        flushSockets(); org.mockito.Mockito.clearInvocations(messaging);
         new org.springframework.transaction.support.TransactionTemplate(transactions).executeWithoutResult(status -> {
             var job = store.claim(id);
             store.complete(job, java.util.List.of(new com.nihongo.staff.service.monitor.collection.NodeMetricSource.Reading("VPS", "vps", java.util.Map.of(), 25D, null, null)), java.time.LocalDateTime.now(java.time.ZoneOffset.UTC));
             org.mockito.Mockito.verifyNoInteractions(messaging);
         });
+        flushSockets();
         var frame = org.mockito.ArgumentCaptor.forClass(com.nihongo.staff.service.monitor.realtime.PerformanceSocketPublisher.Update.class);
-        org.mockito.Mockito.verify(messaging).convertAndSend(org.mockito.ArgumentMatchers.startsWith("/topic/vps-performance/"), frame.capture());
+        org.mockito.Mockito.verify(messaging).convertAndSend(org.mockito.ArgumentMatchers.eq(
+                com.nihongo.staff.service.monitor.realtime.PerformanceSocketPublisher.destination(vpsId, "MEMORY_USAGE")), frame.capture());
         assertEquals(25D, frame.getValue().performance().objects().get(0).points().get(0).value());
         assertEquals("UP", frame.getValue().performance().state());
         assertEquals(1, frame.getValue().performance().events().size());
@@ -161,11 +172,12 @@ class StaffApplicationTests {
     @Test void rolledBackCollectionDoesNotSendSocketData() {
         long id = assignment();
         long vpsId = eventRule(id);
-        org.mockito.Mockito.clearInvocations(messaging);
+        flushSockets(); org.mockito.Mockito.clearInvocations(messaging);
         new org.springframework.transaction.support.TransactionTemplate(transactions).executeWithoutResult(status -> {
             store.complete(store.claim(id), java.util.List.of(new com.nihongo.staff.service.monitor.collection.NodeMetricSource.Reading("VPS", "vps", java.util.Map.of(), 40D, null, null)), java.time.LocalDateTime.now(java.time.ZoneOffset.UTC));
             status.setRollbackOnly();
         });
+        flushSockets();
         org.mockito.Mockito.verifyNoInteractions(messaging);
         assertTrue(eventRules.events(vpsId, "MEMORY_USAGE", null).isEmpty());
     }
@@ -179,10 +191,11 @@ class StaffApplicationTests {
             new org.springframework.transaction.support.TransactionTemplate(transactions).executeWithoutResult(status -> {
                 assignments.findById(id).orElseThrow().setNextCollectionAt(at.minusSeconds(1));
             });
-            org.mockito.Mockito.clearInvocations(messaging);
+            flushSockets(); org.mockito.Mockito.clearInvocations(messaging);
             double value = 25D + cycle;
             store.complete(store.claim(id), java.util.List.of(new com.nihongo.staff.service.monitor.collection.NodeMetricSource.Reading(
                     "VPS", "vps", java.util.Map.of(), value, null, null)), at.plusSeconds(cycle * 60L));
+            flushSockets();
             var frame = org.mockito.ArgumentCaptor.forClass(com.nihongo.staff.service.monitor.realtime.MonitorEventSocketPublisher.Update.class);
             org.mockito.Mockito.verify(messaging).convertAndSend(org.mockito.ArgumentMatchers.eq("/topic/vps-events/" + vpsId), frame.capture());
             assertEquals(1, frame.getValue().events().size());
@@ -193,11 +206,12 @@ class StaffApplicationTests {
         assertEquals(3, new java.util.HashSet<>(ids).size());
         var history = eventRules.events(vpsId, "MEMORY_USAGE", null);
         assertEquals(java.util.List.of(27D, 26D, 25D), history.stream().map(com.nihongo.staff.service.monitor.event.MonitorEventService.Event::value).toList());
-        org.mockito.Mockito.clearInvocations(messaging);
+        flushSockets(); org.mockito.Mockito.clearInvocations(messaging);
         new org.springframework.transaction.support.TransactionTemplate(transactions).executeWithoutResult(status -> {
             assignments.findById(id).orElseThrow().setNextCollectionAt(at.minusSeconds(1));
         });
         store.fail(store.claim(id), "Node Exporter timeout");
+        flushSockets();
         org.mockito.Mockito.verify(messaging, org.mockito.Mockito.never()).convertAndSend(
                 org.mockito.ArgumentMatchers.eq("/topic/vps-events/" + vpsId), org.mockito.ArgumentMatchers.any(Object.class));
         assertEquals(3, eventRules.events(vpsId, "MEMORY_USAGE", null).size());

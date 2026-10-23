@@ -48,4 +48,25 @@ class ContentAccessTest {
   when(subscriptions.hasAccess(3L)).thenReturn(false);
   assertFalse(access.level(3L,other));
  }
+ @Test void contentStructureIsCachedButMissingContentAndEvictionsAreRespected(){
+  var caches=new org.springframework.cache.caffeine.CaffeineCacheManager(com.nihongo.staff.config.ContentCacheConfig.LEARNER_CACHES.toArray(String[]::new));
+  access.setCacheManager(caches);
+  var book=new Books();var level=new Levels();level.setLevelId(3L);book.setLevel(level);
+  book.setPublicationStatus(PublicationStatus.PUBLISHED);
+  when(books.findById(1L)).thenReturn(Optional.of(book));
+  when(lessons.findLocationById(2L)).thenReturn(Optional.of(new ContentLocationResponse(1L,3L,"Lesson")));
+  when(subscriptions.hasAccess(3L)).thenReturn(true);
+  assertTrue(access.lesson(2L,auth("USER")));
+  assertTrue(access.lesson(2L,auth("USER")));
+  verify(lessons,times(1)).findLocationById(2L);
+  verify(books,times(1)).findById(1L);
+  // Unpublishing is a content write: it evicts the learner caches, so the next check sees the draft.
+  book.setPublicationStatus(PublicationStatus.DRAFT);
+  caches.getCache("bookAccess").clear();
+  assertFalse(access.lesson(2L,auth("USER")));
+  // A missing lesson is looked up again rather than remembered as missing.
+  assertFalse(access.lesson(9L,auth("USER")));
+  assertFalse(access.lesson(9L,auth("USER")));
+  verify(lessons,times(2)).findLocationById(9L);
+ }
 }

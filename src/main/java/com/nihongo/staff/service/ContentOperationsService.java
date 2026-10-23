@@ -53,7 +53,7 @@ public class ContentOperationsService {
   var rows=books.findByPublicationStatusOrderByBookIdDesc(state,page(page));Map<Long,String> assignments=new HashMap<>();tasks.findAllById(rows.map(Books::getBookId).toList()).forEach(t->assignments.put(t.getBookId(),t.getAssignee()));
   return rows.map(b->new ReviewBook(b.getBookId(),b.getBookName(),publication.status(b),assignments.get(b.getBookId())));
  }
- @Transactional @CacheEvict(value="books",allEntries=true)
+ @Transactional @CacheEvict(value = {"books", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
  public BookPublicationService.Review review(String actor,boolean admin,Long id,ReviewAction input){
   var b=em.find(Books.class,id,LockModeType.PESSIMISTIC_WRITE);if(b==null)throw missing();
   if(!publication.status(b).name().equals(input.expectedStatus()))throw conflict("Trạng thái sách đã thay đổi; hãy tải lại");

@@ -33,6 +33,9 @@ Nhập tên, URL HTTP/HTTPS và khoảng mã phản hồi mong đợi, mặc đ�
 - Kết quả DOWN là mẫu đo hợp lệ: vẫn lưu khả dụng bằng 0 và thời gian kiểm tra, đưa trạng thái về DOWN cùng lý do. Khi hoạt động lại, trạng thái trở về UP.
 - Để cảnh báo mất kết nối, tạo rule cho `PORT_AVAILABLE`/`WEB_AVAILABLE`, điều kiện **LT 1**, chọn số mẫu liên tiếp theo nhu cầu. Rule phát ALERT/RECOVERY theo cơ chế hiện có; không tự tạo rule cho target mới.
 - Các metric cùng target/timeout dùng chung probe trong tối đa 3 giây để tránh gọi lặp. Probe lỗi cấu hình nội bộ dùng cơ chế lỗi/backoff, khác với kết quả mới xác nhận dịch vụ DOWN.
+- Cấu hình target dùng cho probe theo lịch được cache 5 phút trong staff-service (không đọc DB mỗi chu kỳ). Target không sửa được qua API; nếu sửa trực tiếp trong DB, thay đổi có hiệu lực trong tối đa 5 phút.
+- Web Check chỉ dùng HTTP/1.1 và đóng body ngay sau khi nhận status: mỗi lần đo là một kết nối mới (gồm cả bắt tay TLS với HTTPS), nên thời gian phản hồi so sánh được giữa các site và giữa các lần đo.
+- **Không dùng Port Check cho cổng MySQL/MariaDB.** Probe chỉ mở rồi đóng TCP, không bắt tay giao thức MySQL; server tính đó là lỗi kết nối và sau `max_connect_errors` lần có thể chặn host của staff-service. Hãy dùng giám sát MySQL.
 - Danh sách đăng ký tải 20 target mỗi trang theo Type, tự làm mới mỗi 30 giây khi tab đang hiển thị. Giữ nguyên hàng hiện có trong lúc cập nhật, gộp các yêu cầu trùng và hủy yêu cầu khi rời màn hình. Chuyển Type vẫn giữ bản nháp riêng.
 - DNS hết chỗ hoặc yêu cầu hết hạn khi đang đợi trong queue là lỗi bộ kiểm tra, không ghi mẫu khả dụng bằng 0. Probe tức thời trả 503; scheduler dùng lỗi/backoff. Lookup đã hết hạn được gỡ khỏi queue. TCP chia thời gian còn lại cho các địa chỉ dự phòng.
 
@@ -40,7 +43,6 @@ DNS chạy trong pool riêng giới hạn hai luồng, queue 16, caller đợi t
 
 ## API
 
-- `GET /api/staff/check-targets`: danh sách cấu hình Port/Web.
 - `GET /api/staff/check-targets/page?type=PORT_CHECK&page=0&size=20`: trang theo Type, trả `{content,number,hasNext}`. `type` chỉ nhận PORT_CHECK/WEB_CHECK; `page >= 0`, `size` từ 1 đến 100. Dùng Slice, không chạy COUNT; một scalar join query cho mỗi trang. Đọc cấu hình collector cũng chỉ dùng một join query.
 - `POST /api/staff/check-targets/probe`: kiểm tra tức thời, trả `healthy`, `responseMs`, `statusCode`, `message`. Mất kết nối là kết quả DOWN; dữ liệu yêu cầu sai trả 400.
 - `POST /api/staff/check-targets`: đăng ký; tên hoặc địa chỉ trùng trả 409. Không kết nối mạng trong giao dịch đăng ký.

@@ -21,4 +21,12 @@ public interface MonitorEventRepository extends JpaRepository<MonitorEvent, Long
             """, nativeQuery = true)
     List<MonitorEvent> search(Long vpsId, Long metricId, LocalDateTime fromTime, LocalDateTime toTime,
                               String severity, LocalDateTime beforeTime, Long beforeId, Pageable page);
+    // Alerts that are still open stay so their later recovery can reference them.
+    @org.springframework.data.jpa.repository.Modifying
+    @Query(value = """
+            delete from monitor_event where collected_at < :cutoff
+            and event_id not in (select s.opened_event_id from monitor_event_state s where s.opened_event_id is not null)
+            limit 10000
+            """, nativeQuery = true)
+    int deleteExpired(LocalDateTime cutoff);
 }

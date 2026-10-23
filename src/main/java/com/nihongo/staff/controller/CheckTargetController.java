@@ -1,7 +1,6 @@
 package com.nihongo.staff.controller;
 import com.nihongo.staff.model.monitoring.dto.CheckTargetRequest;
 import com.nihongo.staff.service.monitor.check.*;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @PreAuthorize("hasAnyRole('ADMIN','STAFF')")
 public class CheckTargetController {
     private final CheckTargetService service;
-    @GetMapping public List<CheckTargetService.Target> list() { return service.list(); }
     @GetMapping("/page") public CheckTargetService.Page page(@RequestParam String type, @RequestParam(defaultValue = "0") int page,
                                                             @RequestParam(defaultValue = "20") int size) {
         return service.page(type, page, size);

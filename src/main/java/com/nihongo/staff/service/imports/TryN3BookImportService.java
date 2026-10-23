@@ -60,7 +60,7 @@ public class TryN3BookImportService {
         return preview();
     }
     @Transactional
-    @CacheEvict(value = {"books", "exerciseTypes"}, allEntries = true)
+    @CacheEvict(value = {"books", "exerciseTypes", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     public Preview importChapter(int number) throws Exception {
         data.chapter(number);
         // Resolve and validate before any write. Unreviewed OCR cannot become a graded lesson.

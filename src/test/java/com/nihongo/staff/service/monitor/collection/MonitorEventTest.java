@@ -286,4 +286,25 @@ class MonitorEventTest {
         var other = new MonitorVps(); other.setHostname("cursor-other"); other.setIpAddress("127.0.0.2"); other.setAgentPort(9100); servers.save(other);
         assertThrows(ResponseStatusException.class, () -> events.search(other.getVpsId(), null, null, null, null, row.getEventId()));
     }
+    @Test void ruleCreatedAfterAnEmptyEvaluationIsUsedImmediately() {
+        memory(90, 0); // evaluates (and caches) "no rules" for this VPS/metric
+        events.save(vpsId, "MEMORY_USAGE", null, input("vps", MonitorEventRule.Operator.GTE, 80, 1, true));
+        memory(90, 30);
+        assertEquals(1, events.events(vpsId, "MEMORY_USAGE", null).size());
+        var rule = events.rules(vpsId, "MEMORY_USAGE").get(0);
+        events.save(vpsId, "MEMORY_USAGE", rule.ruleId(), input("vps", MonitorEventRule.Operator.GTE, 80, 1, false));
+        memory(95, 60);
+        assertEquals(1, events.events(vpsId, "MEMORY_USAGE", null).size());
+    }
+    @Test void eventRetentionKeepsAlertsThatAreStillOpen() {
+        events.save(vpsId, "MEMORY_USAGE", null, input("vps", MonitorEventRule.Operator.GTE, 80, 1, true));
+        memory(90, 0); memory(90, 30); memory(50, 60); memory(95, 90);
+        var all = events.events(vpsId, "MEMORY_USAGE", null);
+        assertEquals(4, all.size());
+        long stillOpen = all.get(0).eventId();
+        entityManager.flush();
+        assertEquals(3, history.deleteExpired(time.plusDays(1)));
+        entityManager.clear();
+        assertEquals(List.of(stillOpen), events.events(vpsId, "MEMORY_USAGE", null).stream().map(MonitorEventService.Event::eventId).toList());
+    }
 }

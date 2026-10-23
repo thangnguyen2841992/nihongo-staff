@@ -18,9 +18,22 @@ public class CheckMetricSource {
     private record CacheKey(long vpsId, int timeout) {}
     private final MonitorCheckTargetRepository targets;
     private final MetricSnapshotCache<CacheKey, Probe> snapshots = new MetricSnapshotCache<>();
-    private final ThreadPoolExecutor dns = new ThreadPoolExecutor(2, 2, 0, TimeUnit.MILLISECONDS,
-            new ArrayBlockingQueue<>(16), work -> { var thread = new Thread(work, "monitor-check-dns"); thread.setDaemon(true); return thread; });
-    private final HttpClient http = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10))
+    // Manual probes from the registration form and scheduled collection use separate DNS pools, so a burst of staff
+    // probes cannot turn due checks into "busy" failures (and the reverse). Scheduled collection runs at most 4 at once.
+    private final ThreadPoolExecutor dns = dnsPool("monitor-check-dns", 2, 16);
+    private final ThreadPoolExecutor scheduledDns = dnsPool("monitor-check-dns-scheduled", 4, 64);
+    private static ThreadPoolExecutor dnsPool(String name, int threads, int queue) {
+        return new ThreadPoolExecutor(threads, threads, 0, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(queue),
+                work -> { var thread = new Thread(work, name); thread.setDaemon(true); return thread; });
+    }
+    // Target settings cannot be edited after registration, so a collection does not need to re-read them from the
+    // app database each cycle; entries expire so manual database changes still apply within a few minutes.
+    private final com.github.benmanes.caffeine.cache.Cache<Long, CheckTargetService.Configuration> configurations =
+            com.github.benmanes.caffeine.cache.Caffeine.newBuilder().maximumSize(4096)
+                    .expireAfterWrite(Duration.ofMinutes(5)).build();
+    // HTTP/1.1 only: no h2c upgrade headers on http:// and no HTTP/2 connection reuse on https://, so every probe
+    // measures the same thing (a fresh connection) on every site.
+    private final HttpClient http = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).connectTimeout(Duration.ofSeconds(10))
             .followRedirects(HttpClient.Redirect.NEVER).proxy(new ProxySelector() {
                 @Override public List<Proxy> select(URI uri) { return List.of(Proxy.NO_PROXY); }
                 @Override public void connectFailed(URI uri, SocketAddress address, IOException error) { }
@@ -32,15 +45,19 @@ public class CheckMetricSource {
         this.targets = targets;
     }
     public Probe collect(long vpsId, int timeout) {
-        return snapshots.get(new CacheKey(vpsId, timeout), ignored -> {
-            var target = targets.connection(vpsId).orElseThrow(() -> new IllegalStateException("Thiếu cấu hình kiểm tra kết nối."));
-            var type = target.getType();
-            if (type != ExporterType.PORT_CHECK && type != ExporterType.WEB_CHECK) throw new IllegalStateException("Type target không phải Port/Web Check.");
-            return probe(new CheckTargetService.Configuration(target.getName(), type, target.getHost(), target.getPort(),
-                    target.getUrl(), target.getStatusMin(), target.getStatusMax()), timeout);
-        });
+        return snapshots.get(new CacheKey(vpsId, timeout), ignored -> probe(configurations.get(vpsId, this::configuration), timeout, scheduledDns));
+    }
+    private CheckTargetService.Configuration configuration(long vpsId) {
+        var target = targets.connection(vpsId).orElseThrow(() -> new IllegalStateException("Thiếu cấu hình kiểm tra kết nối."));
+        var type = target.getType();
+        if (type != ExporterType.PORT_CHECK && type != ExporterType.WEB_CHECK) throw new IllegalStateException("Type target không phải Port/Web Check.");
+        return new CheckTargetService.Configuration(target.getName(), type, target.getHost(), target.getPort(),
+                target.getUrl(), target.getStatusMin(), target.getStatusMax());
     }
     public Probe probe(CheckTargetService.Configuration config, int timeoutMs) {
+        return probe(config, timeoutMs, dns);
+    }
+    private Probe probe(CheckTargetService.Configuration config, int timeoutMs, ThreadPoolExecutor dns) {
         long started = System.nanoTime();
         int timeout = Math.max(1000, Math.min(30000, timeoutMs));
         try {
@@ -106,7 +123,7 @@ public class CheckMetricSource {
         return false;
     }
     protected InetAddress[] resolveHost(String host) throws UnknownHostException { return addresses(host); }
-    @jakarta.annotation.PreDestroy public void close() { dns.shutdownNow(); }
+    @jakarta.annotation.PreDestroy public void close() { dns.shutdownNow(); scheduledDns.shutdownNow(); }
     private static Probe result(long started, boolean healthy, Integer status, String message) {
         return new Probe(healthy, (System.nanoTime() - started) / 1_000_000D, status, message);
     }

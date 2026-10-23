@@ -8,4 +8,8 @@ public interface MonitorPerfBaselineRepository extends JpaRepository<MonitorPerf
     @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
     @org.springframework.data.jpa.repository.Query("select b from MonitorPerfBaseline b where b.vpsMetricId = :metricId and b.objectKey in :keys")
     java.util.List<MonitorPerfBaseline> findKeysForUpdate(Long metricId, java.util.Collection<String> keys);
+
+    @org.springframework.data.jpa.repository.Lock(jakarta.persistence.LockModeType.PESSIMISTIC_WRITE)
+    @org.springframework.data.jpa.repository.Query("select b from MonitorPerfBaseline b where b.vpsMetricId in :metricIds")
+    java.util.List<MonitorPerfBaseline> findAllForUpdate(java.util.Collection<Long> metricIds);
 }

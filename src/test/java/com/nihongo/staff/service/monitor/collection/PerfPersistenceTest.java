@@ -300,4 +300,21 @@ class PerfPersistenceTest {
         assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> performance.read(vps.getVpsId(), "MEMORY_USAGE", null, "vps", 0));
         assertThrows(org.springframework.web.server.ResponseStatusException.class, () -> performance.read(vps.getVpsId(), "MEMORY_USAGE", 1, "vps", 10));
     }
+    @Test void dueMetricsOfOneTargetAreClaimedAndSavedTogether() {
+        var jobs = store.claimGroup(link("MEMORY_USAGE").getVpsMetricId());
+        assertEquals(7, jobs.size());
+        assertTrue(store.claimGroup(link("UPTIME").getVpsMetricId()).isEmpty(), "a claimed target is not claimed twice");
+        var memory = jobs.stream().filter(job -> job.code().equals("MEMORY_USAGE")).findFirst().orElseThrow();
+        var uptime = jobs.stream().filter(job -> job.code().equals("UPTIME")).findFirst().orElseThrow();
+        var at = PerfCollectionStore.now();
+        var changed = store.finish(List.of(
+                PerfCollectionStore.Outcome.completed(memory, List.of(new NodeMetricSource.Reading("VPS", "vps", Map.of(), 70D, null, null)), at),
+                PerfCollectionStore.Outcome.failed(uptime, "Exporter timeout")));
+        assertEquals(java.util.Set.of(uptime.id()), changed);
+        assertEquals(at, link("MEMORY_USAGE").getLastSuccessAt());
+        assertNull(link("MEMORY_USAGE").getLeaseToken());
+        assertEquals("Exporter timeout", link("UPTIME").getLastError());
+        assertEquals(1, link("UPTIME").getConsecutiveFailures());
+        assertEquals(1, values.count());
+    }
 }

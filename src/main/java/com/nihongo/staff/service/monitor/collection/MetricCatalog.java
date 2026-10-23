@@ -49,6 +49,7 @@ public class MetricCatalog {
     private final MonitorMetricRepository metrics;
     private final MonitorVpsMetricRepository assignments;
     private final MonitorVpsRepository servers;
+    private final org.springframework.context.ApplicationEventPublisher events;
 
     @EventListener(ApplicationReadyEvent.class)
     @org.springframework.core.annotation.Order(0)
@@ -97,8 +98,12 @@ public class MetricCatalog {
 
     @Transactional
     public void bindDefaults(MonitorVps vps) {
+        // One query for existing links instead of one exists-check per catalog metric.
+        var bound = new java.util.HashSet<Long>();
+        for (MonitorVpsMetric existing : assignments.findByVps_VpsIdOrderByMetric_MetricNameAsc(vps.getVpsId()))
+            bound.add(existing.getMetric().getMetricId());
         for (MonitorMetric metric : metrics.findAll()) {
-            if (!Boolean.TRUE.equals(metric.getDefaultMetric()) || assignments.existsByVps_VpsIdAndMetric_MetricId(vps.getVpsId(), metric.getMetricId())) continue;
+            if (!Boolean.TRUE.equals(metric.getDefaultMetric()) || bound.contains(metric.getMetricId())) continue;
             String collector = switch (ExporterType.forVps(vps)) {
                 case MYSQL_JDBC -> "MYSQL_JDBC";
                 case KAFKA_ADMIN -> "KAFKA_ADMIN";
@@ -111,5 +116,6 @@ public class MetricCatalog {
             MonitorVpsMetric link = new MonitorVpsMetric(); link.setVps(vps); link.setMetric(metric);
             link.setNextCollectionAt(LocalDateTime.now(ZoneOffset.UTC)); assignments.save(link);
         }
+        events.publishEvent(new CollectionScheduleChanged());
     }
 }

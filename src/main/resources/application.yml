@@ -36,8 +36,11 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MariaDBDialect
         default_batch_fetch_size: 50
+        # Grouped monitor saves update several assignment rows per transaction; send them as one batch.
+        order_updates: true
         jdbc:
           fetch_size: 100
+          batch_size: 50
 
 content-cache:
   maximum-size: ${CONTENT_CACHE_MAX_SIZE:2000}

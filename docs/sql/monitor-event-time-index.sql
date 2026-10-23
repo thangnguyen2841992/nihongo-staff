@@ -10,3 +10,15 @@ SET @event_index_ddl = IF(
 PREPARE event_index_statement FROM @event_index_ddl;
 EXECUTE event_index_statement;
 DEALLOCATE PREPARE event_index_statement;
+
+-- Retention cleanup deletes monitor_event by collected_at alone.
+SET @event_retention_index_ddl = IF(
+    EXISTS (SELECT 1 FROM information_schema.statistics
+            WHERE table_schema = DATABASE() AND table_name = 'monitor_event'
+              AND index_name = 'idx_monitor_event_collected'),
+    'SELECT 1',
+    'CREATE INDEX idx_monitor_event_collected ON monitor_event (collected_at)'
+);
+PREPARE event_retention_index_statement FROM @event_retention_index_ddl;
+EXECUTE event_retention_index_statement;
+DEALLOCATE PREPARE event_retention_index_statement;

@@ -127,4 +127,21 @@ class CheckMetricSourceTest {
             verify(dual).connectAddress(eq(second), eq(80), intThat(budget -> budget > 0));
         } finally { dual.close(); }
     }
+    @Test void busyManualProbesDoNotBlockScheduledChecks() throws Exception {
+        String url = start("/health", 200);
+        var configurations = mock(MonitorCheckTargetRepository.class);
+        var target = mock(MonitorCheckTargetRepository.Connection.class);
+        when(target.getName()).thenReturn("web"); when(target.getHost()).thenReturn("127.0.0.1");
+        when(target.getPort()).thenReturn(server.getAddress().getPort()); when(target.getUrl()).thenReturn(url);
+        when(target.getType()).thenReturn(ExporterType.WEB_CHECK); when(target.getStatusMin()).thenReturn(200); when(target.getStatusMax()).thenReturn(399);
+        when(configurations.connection(1L)).thenReturn(Optional.of(target));
+        var checks = new CheckMetricSource(configurations);
+        var manual = (ThreadPoolExecutor) org.springframework.test.util.ReflectionTestUtils.getField(checks, "dns");
+        var release = new CountDownLatch(1);
+        Runnable block = () -> { try { release.await(); } catch (InterruptedException error) { Thread.currentThread().interrupt(); } };
+        try {
+            for (int index = 0; index < 2 + 16; index++) manual.execute(block);
+            assertTrue(checks.collect(1, 2000).healthy());
+        } finally { release.countDown(); checks.close(); }
+    }
 }

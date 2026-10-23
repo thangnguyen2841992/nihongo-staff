@@ -69,7 +69,7 @@ class CheckPersistenceTest {
         var port = service.register(new CheckTargetRequest("tcp", "PORT_CHECK", "localhost", 80, null, null, null));
         var first = service.register(new CheckTargetRequest("web", "WEB_CHECK", null, null, "http://localhost/a", 200, 299));
         service.register(new CheckTargetRequest("web-b", "WEB_CHECK", null, null, "http://localhost/b", 200, 399));
-        assertEquals("UNKNOWN", first.status()); assertEquals(3, service.list().size());
+        assertEquals("UNKNOWN", first.status()); assertEquals(3, targets.count());
         assertEquals(2, links.findByVps_VpsIdOrderByMetric_MetricNameAsc(port.vpsId()).size());
         assertEquals(3, links.findByVps_VpsIdOrderByMetric_MetricNameAsc(first.vpsId()).size());
         assertThrows(ResponseStatusException.class, () -> service.register(new CheckTargetRequest("duplicate", "WEB_CHECK", null, null, "http://LOCALHOST:80/a", null, null)));

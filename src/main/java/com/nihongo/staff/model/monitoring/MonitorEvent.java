@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 @Entity @Getter @Setter
 @Table(name = "monitor_event", indexes = {
         @Index(name = "idx_monitor_event_history", columnList = "vps_id,metric_id,event_id"),
-        @Index(name = "idx_monitor_event_time", columnList = "vps_id,collected_at,event_id")})
+        @Index(name = "idx_monitor_event_time", columnList = "vps_id,collected_at,event_id"),
+        @Index(name = "idx_monitor_event_collected", columnList = "collected_at")})
 public class MonitorEvent {
     public enum Kind { ALERT, RECOVERY }
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "event_id") private Long eventId;

@@ -45,7 +45,7 @@ public class ContentRevisionService {
   var auth=SecurityContextHolder.getContext().getAuthentication();r.setActor(auth!=null&&auth.getPrincipal() instanceof Jwt jwt?jwt.getSubject():"system");revisions.save(r);return e;
  }
  @Transactional(readOnly=true) public History history(String kind,Long id,int page){if(page<0)throw bad("Trang không hợp lệ");String current=snapshot(resource(kind,id));return new History(current,token(current),revisions.findByKindAndResourceIdOrderByCreatedAtDescIdDesc(kind,id,PageRequest.of(page,20)));}
-    @Transactional @CacheEvict(value={"books","lessonsByBook","grammarsByLesson","examplesByLesson","lessonGrammarContent"},allEntries=true)
+    @Transactional @CacheEvict(value = {"books", "lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
  public void restore(String kind,Long id,Long revisionId,String expectedToken){
   var r=revisions.findById(revisionId).orElseThrow(()->bad("Không tìm thấy phiên bản"));
   if(!r.getKind().equals(kind)||!r.getResourceId().equals(id))throw bad("Phiên bản không thuộc nội dung này");

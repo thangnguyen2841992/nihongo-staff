@@ -31,7 +31,7 @@ public class TryN3ImportService {
     }
 
     @Transactional
-    @CacheEvict(value = {"books", "exerciseTypes"}, allEntries = true)
+    @CacheEvict(value = {"books", "exerciseTypes", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     public Result importChapter() {
         var chapter = data.chapter();
         var existing = imports.findById(chapter.sourceKey());

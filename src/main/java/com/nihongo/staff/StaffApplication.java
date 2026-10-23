@@ -12,7 +12,9 @@ import org.springframework.context.annotation.Import;
 @EnableDiscoveryClient
 @EnableFeignClients
 @Import(CommonSecurityConfig.class)
-@EnableCaching
+// Cache advice runs outside the transaction advice (both default to the lowest precedence, which leaves their order
+// to registration order), so a cache hit never borrows a database connection. Method security stays outermost.
+@EnableCaching(order = org.springframework.core.Ordered.LOWEST_PRECEDENCE - 1)
 public class StaffApplication {
 
     public static void main(String[] args) {

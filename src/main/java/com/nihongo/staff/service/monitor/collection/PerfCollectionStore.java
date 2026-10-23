@@ -26,17 +26,63 @@ public class PerfCollectionStore {
         Integer seconds = link.getScheduleSeconds() != null ? link.getScheduleSeconds() : link.getMetric().getScheduleSeconds();
         return Math.max(5, seconds == null ? 60 : seconds);
     }
+    /**
+     * Next collection slot after {@code now} on a fixed grid per VPS. Slots do not drift with processing time, and
+     * every metric of one VPS shares the same phase, so metrics with equal (or multiple) intervals come due together
+     * and reuse one exporter/JDBC/Kafka snapshot. The phase differs per VPS to spread targets over time.
+     */
+    static LocalDateTime nextSlot(long vpsId, int intervalSeconds, LocalDateTime now) {
+        long interval = Math.max(1, intervalSeconds);
+        long epoch = now.toEpochSecond(ZoneOffset.UTC);
+        long phase = Math.floorMod(vpsId * 2_654_435_761L, 86_400L);
+        return LocalDateTime.ofEpochSecond(epoch + interval - Math.floorMod(epoch - phase, interval), 0, ZoneOffset.UTC);
+    }
+    /** Result of reading one claimed assignment: readings to store, or the failure message. */
+    public record Outcome(Job job, List<NodeMetricSource.Reading> readings, LocalDateTime observedAt,
+                          String checkError, boolean check, String failure) {
+        public static Outcome completed(Job job, List<NodeMetricSource.Reading> readings, LocalDateTime observedAt) {
+            return new Outcome(job, readings, observedAt, null, false, null);
+        }
+        public static Outcome checked(Job job, List<NodeMetricSource.Reading> readings, LocalDateTime observedAt, String checkError) {
+            return new Outcome(job, readings, observedAt, checkError, true, null);
+        }
+        public static Outcome failed(Job job, String message) {
+            return new Outcome(job, List.of(), null, null, false, message);
+        }
+    }
+
     @Transactional
     public Job claim(long id) {
         MonitorVpsMetric link = assignments.lockById(id).orElse(null);
+        return link == null ? null : claim(link, now());
+    }
+
+    /**
+     * Claims every due assignment of the target that owns {@code id} in one transaction. Metrics of a target share
+     * one schedule grid and one exporter/JDBC/Kafka/probe read, so they are also saved together by {@link #finish}.
+     */
+    @Transactional(isolation = org.springframework.transaction.annotation.Isolation.READ_COMMITTED)
+    public List<Job> claimGroup(long id) {
+        Long vpsId = assignments.findVpsId(id).orElse(null);
+        if (vpsId == null) return List.of();
         LocalDateTime now = now();
-        if (link == null || !Boolean.TRUE.equals(link.getEnabled()) || !Boolean.TRUE.equals(link.getMetric().getEnabled()) ||
+        List<Job> jobs = new ArrayList<>();
+        for (MonitorVpsMetric link : assignments.lockDueForVps(vpsId, now)) {
+            Job job = claim(link, now);
+            if (job != null) jobs.add(job);
+        }
+        return jobs;
+    }
+
+    private Job claim(MonitorVpsMetric link, LocalDateTime now) {
+        long id = link.getVpsMetricId();
+        if (!Boolean.TRUE.equals(link.getEnabled()) || !Boolean.TRUE.equals(link.getMetric().getEnabled()) ||
                 (link.getNextCollectionAt() != null && link.getNextCollectionAt().isAfter(now)) ||
                 (link.getLeaseUntil() != null && link.getLeaseUntil().isAfter(now))) return null;
         int timeout = Math.max(1000, Math.min(30000, Optional.ofNullable(link.getMetric().getTimeoutMs()).orElse(5000)));
         String token = UUID.randomUUID().toString();
         link.setLeaseToken(token); link.setLeaseUntil(now.plusSeconds(timeout / 1000 + 30));
-        link.setLastAttemptAt(now); link.setNextCollectionAt(now.plusSeconds(interval(link)));
+        link.setLastAttemptAt(now); link.setNextCollectionAt(nextSlot(link.getVps().getVpsId(), interval(link), now));
         String collector = link.getMetric().getCollectorType();
         if ("NODE_EXPORTER".equals(collector) && ExporterType.forVps(link.getVps()) == ExporterType.WINDOWS_EXPORTER)
             collector = ExporterType.WINDOWS_EXPORTER.name();
@@ -107,12 +153,63 @@ public class PerfCollectionStore {
 
     private void persist(Job job, List<NodeMetricSource.Reading> readings, LocalDateTime observedAt, String checkError, boolean check) {
         MonitorVpsMetric link = assignments.lockById(job.id()).orElseThrow();
-        if (!job.token().equals(link.getLeaseToken())) return;
-        if (!Boolean.TRUE.equals(link.getEnabled()) || !Boolean.TRUE.equals(link.getMetric().getEnabled())) { release(link); return; }
+        if (!accept(job, link)) return;
         servers.lockById(job.vpsId()).orElseThrow();
+        List<MonitorPerfValue> values = new ArrayList<>();
+        record(job, link, readings, observedAt, checkError, check, loadBaselines(job.id(), readings), values);
+        valueWriter.write(values);
+    }
+
+    /**
+     * Saves the outcomes of one {@link #claimGroup} in a single transaction: assignment rows are locked with one query,
+     * the VPS once, counter baselines with one query and all values in one JDBC batch. Returns the assignment ids
+     * whose stored failure message changed (the caller logs only those).
+     */
+    @Transactional(isolation = org.springframework.transaction.annotation.Isolation.READ_COMMITTED)
+    public Set<Long> finish(List<Outcome> outcomes) {
+        if (outcomes.isEmpty()) return Set.of();
+        long vpsId = outcomes.get(0).job().vpsId();
+        if (outcomes.stream().anyMatch(o -> o.job().vpsId() != vpsId))
+            throw new IllegalArgumentException("A collection group must belong to one target");
+        Map<Long, MonitorVpsMetric> links = new HashMap<>();
+        for (var link : assignments.lockAllById(outcomes.stream().map(o -> o.job().id()).sorted().toList()))
+            links.put(link.getVpsMetricId(), link);
+        servers.lockById(vpsId).orElseThrow();
+        var counterIds = outcomes.stream().filter(o -> o.failure() == null
+                && o.readings().stream().anyMatch(r -> r.counter() != null)).map(o -> o.job().id()).toList();
+        Map<Long, Map<String, MonitorPerfBaseline>> baselinesByLink = new HashMap<>();
+        if (!counterIds.isEmpty()) for (var baseline : baselines.findAllForUpdate(counterIds))
+            baselinesByLink.computeIfAbsent(baseline.getVpsMetricId(), ignored -> new HashMap<>()).put(baseline.getObjectKey(), baseline);
+        List<MonitorPerfValue> values = new ArrayList<>();
+        Set<Long> changedFailures = new HashSet<>();
+        for (Outcome outcome : outcomes) {
+            Job job = outcome.job();
+            MonitorVpsMetric link = links.get(job.id());
+            if (link == null) continue;
+            if (outcome.failure() != null) {
+                if (job.token().equals(link.getLeaseToken()) && failLocked(job, link, outcome.failure())) changedFailures.add(job.id());
+            } else if (accept(job, link)) {
+                record(job, link, outcome.readings(), outcome.observedAt(), outcome.checkError(), outcome.check(),
+                        baselinesByLink.computeIfAbsent(job.id(), ignored -> new HashMap<>()), values);
+            }
+        }
+        valueWriter.write(values);
+        return changedFailures;
+    }
+
+    // A lease taken over by another worker is ignored; a disabled assignment is only released.
+    private boolean accept(Job job, MonitorVpsMetric link) {
+        if (!job.token().equals(link.getLeaseToken())) return false;
+        if (!Boolean.TRUE.equals(link.getEnabled()) || !Boolean.TRUE.equals(link.getMetric().getEnabled())) { release(link); return false; }
+        return true;
+    }
+
+    // Caller holds the assignment and VPS locks; values are collected into {@code values} for one batch write.
+    private void record(Job job, MonitorVpsMetric link, List<NodeMetricSource.Reading> readings, LocalDateTime observedAt,
+                        String checkError, boolean check, Map<String, MonitorPerfBaseline> knownBaselines,
+                        List<MonitorPerfValue> values) {
         var knownObjects = loadObjects(job.vpsId(), readings,
                 Boolean.TRUE.equals(link.getMetric().getObjectLevelYn()) ? link.getMetric().getObjectType() : null);
-        var knownBaselines = loadBaselines(job.id(), readings);
         Set<String> seen = new HashSet<>();
         List<MonitorEventService.Sample> collected = new ArrayList<>();
         for (NodeMetricSource.Reading reading : readings) {
@@ -147,7 +244,7 @@ public class PerfCollectionStore {
                 if (Objects.equals(object.getObjectType(), link.getMetric().getObjectType()) && !seen.contains(object.getObjectKey()))
                     object.setStatus(ObjectStatus.OFFLINE);
         }
-        valueWriter.write(collected.stream().map(MonitorEventService.Sample::perf).toList());
+        values.addAll(collected.stream().map(MonitorEventService.Sample::perf).toList());
         link.setLastSuccessAt(observedAt); link.setLastError(readings.isEmpty()
                 ? ("MYSQL_JDBC".equals(job.collector()) ? "MySQL chưa cung cấp metric này."
                 : "KAFKA_ADMIN".equals(job.collector()) ? "Kafka chưa cung cấp metric này hoặc tài khoản thiếu quyền đọc."
@@ -166,6 +263,10 @@ public class PerfCollectionStore {
         MonitorVpsMetric link = assignments.lockById(job.id()).orElseThrow();
         if (!job.token().equals(link.getLeaseToken())) return false;
         servers.lockById(job.vpsId()).orElseThrow();
+        return failLocked(job, link, message);
+    }
+
+    private boolean failLocked(Job job, MonitorVpsMetric link, String message) {
         eventRules.evaluate(link, List.of());
         String storedMessage = message.length() > 500 ? message.substring(0, 500) : message;
         boolean changed = !java.util.Objects.equals(link.getLastError(), storedMessage);
@@ -180,6 +281,10 @@ public class PerfCollectionStore {
         return Math.max(interval, Math.min(900L, Math.max(60L, interval) * (1L << Math.min(4, Math.max(0, failures - 1)))));
     }
     private void release(MonitorVpsMetric link) {
-        link.setLeaseToken(null); link.setLeaseUntil(null); link.setNextCollectionAt(now().plusSeconds(interval(link)));
+        link.setLeaseToken(null); link.setLeaseUntil(null);
+        // Keep the slot chosen at claim time; only move on if it already passed (slow run, or schedule changed meanwhile).
+        LocalDateTime now = now();
+        if (link.getNextCollectionAt() == null || !link.getNextCollectionAt().isAfter(now))
+            link.setNextCollectionAt(nextSlot(link.getVps().getVpsId(), interval(link), now));
     }
 }

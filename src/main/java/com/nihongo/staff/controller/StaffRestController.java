@@ -207,10 +207,17 @@ public class StaffRestController {
     @PreAuthorize("@contentAccess.lesson(#lessonId,authentication)")
     @GetMapping("/getAllExcercisesKeywordOfLesson/{lessonId}")
     public ResponseEntity<List<ExerciseKeywordDTO>> getAllExercisesKeywordOfLesson(@PathVariable Long lessonId, org.springframework.security.core.Authentication authentication) {
-        var rows = this.staffService.getAllExcercisesKeywordOfLesson(lessonId);
+        // The service list is cached and shared; hide answers and attach explanations on per-request copies only.
+        var rows = this.staffService.getAllExcercisesKeywordOfLesson(lessonId).stream().map(StaffRestController::copy).toList();
         aiSolutions.attachForReading(rows, contentAccess.manager(authentication));
         if (!contentAccess.manager(authentication)) rows.forEach(row -> row.setCorrectAnswer(null));
         return ResponseEntity.ok(rows);
     }
 
+    static ExerciseKeywordDTO copy(ExerciseKeywordDTO row) {
+        return ExerciseKeywordDTO.builder().exerciseKeywordId(row.getExerciseKeywordId()).contentNihongo(row.getContentNihongo())
+                .answerA(row.getAnswerA()).answerB(row.getAnswerB()).answerC(row.getAnswerC()).answerD(row.getAnswerD())
+                .correctAnswer(row.getCorrectAnswer()).lessonId(row.getLessonId()).exerciseTypeId(row.getExerciseTypeId())
+                .exerciseTypeName(row.getExerciseTypeName()).audioUrl(row.getAudioUrl()).aiSolution(row.getAiSolution()).build();
+    }
 }

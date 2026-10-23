@@ -27,10 +27,6 @@ public class CheckTargetService {
     public record Page(List<Target> content, int number, boolean hasNext) {}
 
     @Transactional(readOnly = true)
-    public List<Target> list() {
-        return targets.connections().stream().map(CheckTargetService::response).toList();
-    }
-    @Transactional(readOnly = true)
     public Page page(String type, int page, int size) {
         ExporterType kind;
         try { kind = ExporterType.valueOf(trim(type).toUpperCase(Locale.ROOT)); }

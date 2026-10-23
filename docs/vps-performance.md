@@ -17,7 +17,7 @@ Dữ liệu `INFO` cũ được `EventSeverityConverter` đọc thành `MINOR` c
 - Trạng thái và cảnh báo được giữ qua restart. Rollback lưu perf đồng thời rollback event/state; socket chỉ gửi sau commit. Snapshot/socket hiện có thêm `events` (50 event mới nhất của VPS/metric). History perf không tải lại event. Không cần topic/socket mới; quyền vẫn STAFF/ADMIN.
 - Bên dưới phần cấu hình trên màn **Event VPS** là danh sách event với object, giá trị thực tế, điều kiện, mức độ, thời gian và liên kết hồi phục; **Xem event cũ hơn** tải tiếp bằng cursor ID. Màn mới dùng socket hiện có để nhận event; reconnect tải lại snapshot và event từ DB. Đổi VPS/metric hủy request và subscription cũ, bỏ qua response/frame đến muộn. Trong lúc lưu rule, khóa bộ chọn và chuyển trang để tránh mất kết quả thao tác.
 - Sửa/tắt/xóa rule reset trạng thái/bộ đếm, giữ lịch sử có snapshot tên rule, ngưỡng, object và giá trị cũ. Đây là thay đổi cấu hình, không tạo `RECOVERY` giả; áp dụng cho mẫu hợp lệ tiếp theo, không đánh giá lại perf lịch sử. Không có gửi email hay thông báo ra ngoài.
-- Event được giữ độc lập với retention perf; hiện chưa tự xóa lịch sử event. Giới hạn simple broker nhiều instance đã nêu bên dưới vẫn áp dụng.
+- Event có retention riêng (`monitoring.events.retention-days`, mặc định 180 ngày, `0` = giữ toàn bộ). Cleanup mỗi giờ xóa event cũ theo lô 10000, **không xóa cảnh báo đang mở** (được `monitor_event_state.opened_event_id` tham chiếu) để event hồi phục sau này vẫn trỏ đúng. Rule đang bật của mỗi VPS/metric được cache 30 giây; sửa/xóa rule trên cùng instance có hiệu lực ngay, instance khác tối đa 30 giây. Giới hạn simple broker nhiều instance đã nêu bên dưới vẫn áp dụng.
 
 Restart staff-service sau cập nhật để tạo 3 bảng mới bằng `ddl-auto=update`. Môi trường dùng migration có script thêm bảng ở [sql/monitor-events.sql](sql/monitor-events.sql). Script chưa được chạy trên DB thật; kiểm thử dùng H2/MySQL mode, cần kiểm tra migration trên MySQL của môi trường trước triển khai. Các bảng/perf/schedule cũ không bị xóa hoặc chuyển đổi.
 
@@ -92,14 +92,15 @@ flowchart LR
 | `MonitorVpsService` / `IMonitorVpsService` | Kiểm tra trùng, nhận diện Node/Windows Exporter, lưu máy chủ + assignment + object + target trong transaction đăng ký. Metadata ưu tiên dữ liệu vừa đọc từ exporter. |
 | `PrometheusTargetService` | Lưu target `node`, ghi file SD local khi service khởi động và sau commit. Không thực hiện thu thập perf. |
 | `MetricCatalog` | Tạo các metric mặc định còn thiếu, gán các metric mặc định cho VPS. |
-| `PerfCollectionScheduler` | Tìm assignment đến hạn, giới hạn 4 worker và chạy retention. |
+| `PerfCollectionScheduler` | Tìm assignment đến hạn, giới hạn 4 worker, ngủ đến lần thu thập gần nhất khi không có việc và chạy retention perf/event. |
 | `MetricCollector` | Claim một assignment, gọi HTTP ngoài transaction ghi, chuyển kết quả/lỗi sang store. |
 | `NodeMetricSource` | Bộ đọc/parser Node/Windows Exporter dùng chung cho discovery, registration và collection. |
 | `PerfCollectionStore` | Lease, token, khóa DB, object, baseline, rate, perf, backoff và event thay đổi. |
 | `VpsMetricConfigService` | Danh mục, cấu hình lịch mặc định/riêng, validate và phát event đổi cấu hình. Chỉ query assignment của metric liên quan khi đổi lịch mặc định. |
 | `VpsPerformanceService` | Chỉ đọc snapshot/history từ DB, tính state/stale và khoảng gián đoạn. |
 | `VpsPerformanceController` | Giữ nguyên URL perf/catalog/config cho frontend. |
-| `PerformanceSocketPublisher` | Sau commit, đọc snapshot trong transaction mới và gửi đến topic của VPS/metric. |
+| `PerformanceSocketPublisher` | Sau commit chỉ đánh dấu VPS/metric thay đổi nếu topic đang có người subscribe; mỗi giây đọc 1 snapshot cho mỗi topic đã thay đổi và gửi. Worker thu thập không chờ publisher. |
+| `MonitorEventSocketPublisher` / `RealtimeSubscriptions` | Tương tự cho `/topic/vps-events/{vpsId}`; `RealtimeSubscriptions` tra `SimpUserRegistry` để biết topic có người nghe. |
 | `PerformanceWebSocketConfig` / `PerformanceSocketAuthorization` | Endpoint STOMP, heartbeat, origin, quyền subscribe và thời hạn JWT. |
 | `RegisterVps.vue` / `monitorVpsService.ts` | Form discovery/register, popup danh sách và HTTP tương ứng. |
 | `VpsPerformance.vue` / `vpsPerformanceService.ts` | Snapshot + history 10 phút, chọn object và đồ thị; hủy request cũ, giữ/gộp mẫu socket khi history đang tải. |
@@ -114,6 +115,14 @@ Các bảng và dữ liệu monitoring hiện có được giữ nguyên; refact
 
 4 worker, tối đa 4 tác vụ đang chờ/chạy; HTTP không nằm trong transaction ghi dữ liệu. Mỗi assignment được claim dưới khóa DB với lease/token. Tác vụ cũ không được ghi sau khi token đã thay đổi. Cấu hình mới áp dụng cho lần thu thập tiếp theo; baseline được lưu để giữ chuỗi counter sau restart.
 
+Gom theo target: scheduler chỉ giao mỗi target cho một worker. Worker nhận (claim) **mọi** assignment đến hạn của target đó trong một transaction (`claimGroup`), đọc target một lần, rồi ghi toàn bộ kết quả trong một transaction (`finish`): khóa các assignment bằng một truy vấn, khóa VPS một lần, đọc baseline counter bằng một truy vấn và ghi giá trị trong một JDBC batch; cập nhật lịch các assignment được gửi theo batch (`hibernate.jdbc.batch_size`). Nếu ghi gộp lỗi, từng metric được ghi riêng như trước nên một metric hỏng không làm mất kết quả của metric khác.
+
+Lịch không trôi: lần thu thập tiếp theo nằm trên lưới cố định `phase(VPS) + k × chu kỳ` (UTC), không phải `thời điểm xong + chu kỳ`. Mọi metric của một VPS dùng chung phase nên metric cùng chu kỳ (hoặc chu kỳ là bội số, ví dụ 30 s và 60 s) đến hạn cùng lúc và dùng chung một lần đọc exporter/JDBC/Kafka/probe trong cache 3 giây; phase khác nhau giữa các VPS để không dồn tải vào cùng một giây. Chạy chậm quá slot kế tiếp thì nhảy sang slot sau, không chạy bù.
+
+Khi không có assignment đến hạn, scheduler hỏi DB thời điểm đến hạn sớm nhất (`findNextDue`, tính cả lease) rồi không truy vấn đến lúc đó, tối đa `max-idle-ms` (mặc định 5 giây, để vẫn thấy assignment do instance khác thêm). Đổi lịch, bật/tắt metric hoặc đăng ký target mới phát `CollectionScheduleChanged` sau commit để scheduler kiểm tra ngay.
+
+Port/Web check theo lịch dùng pool DNS riêng (4 luồng, hàng đợi 64), tách khỏi pool của nút Kiểm tra trên form (2 luồng, hàng đợi 16), nên nhiều người bấm Kiểm tra không làm check theo lịch báo bận.
+
 Khi lỗi, assignment giữ nguyên mẫu cũ và thử lại sau ít nhất 60 giây, tăng dần tối đa 15 phút (không rút ngắn chu kỳ đã cấu hình). Thu thập thành công reset số lần lỗi. Chỉ ghi cảnh báo khi nội dung lỗi thay đổi. Thông báo kết nối bao gồm IP/port và phân biệt lỗi kết nối, DNS, timeout và HTTP.
 
 Các metric dùng chung object (ví dụ network receive/transmit cùng `eth0`) khóa VPS và đọc object bằng khóa cập nhật trong transaction READ_COMMITTED, tránh tạo trùng object khi thu thập đồng thời. Có kiểm thử hai worker tạo cùng object; kiểm thử này dùng H2, không thay thế kiểm tra thực tế trên MySQL.
@@ -122,11 +131,15 @@ Các property tùy chọn dưới `monitoring.collection`:
 
 ```yaml
 enabled: true
-tick-ms: 1000
-retention-days: 0
+tick-ms: 500          # chỉ kiểm tra bộ nhớ; DB chỉ được hỏi khi đã đến hạn
+max-idle-ms: 5000     # thời gian ngủ tối đa khi không có việc
+retention-days: 30    # 0 = giữ toàn bộ perf
+cleanup-max-batches: 20
 ```
 
-`retention-days=0` giữ toàn bộ perf. Nếu cấu hình số ngày >0, cleanup mỗi giờ xóa tối đa 10000 mẫu cũ/lần. Với nhiều VPS cần chọn retention và theo dõi kích thước bảng/index. Không có thao tác xóa lịch sử mặc định.
+và `monitoring.events.retention-days: 180`, `monitoring.realtime.flush-ms: 1000`.
+
+Mặc định perf được giữ 30 ngày (màn hình xem tối đa 7 ngày) và event 180 ngày. Cleanup mỗi giờ xóa tối đa `cleanup-max-batches × 10000` dòng mỗi bảng, mỗi lô một transaction ngắn. **Lần đầu triển khai trên DB đã tích lũy lâu**, cleanup sẽ xóa dần dữ liệu cũ hơn mốc retention qua nhiều giờ; đặt `retention-days: 0` trước khi triển khai nếu cần giữ toàn bộ.
 
 ## Hiệu năng realtime và lịch thu thập
 
@@ -150,7 +163,7 @@ retention-days: 0
   `/topic/vps-events/{vpsId}` với
   quyền STAFF/ADMIN. Chặn wildcard và client SEND. Socket đóng khi access JWT
   hết hạn; client refresh cookie qua HTTP trước khi nối lại.
-- Chỉ gửi snapshot sau khi transaction thu thập hoặc thay đổi cấu hình commit.
+- Chỉ gửi snapshot sau khi transaction thu thập hoặc thay đổi cấu hình commit, và chỉ khi topic đang có người subscribe. Các thay đổi trong cùng một giây được gộp thành một frame (độ trễ thêm tối đa `monitoring.realtime.flush-ms`).
   Lỗi thu thập cũng đẩy trạng thái và giữ mẫu cũ. Lỗi gửi socket không làm hỏng
   transaction đã commit. Payload gồm `sequence` và `performance` (latest từng
   object, lỗi, trạng thái, chu kỳ hiệu lực). Nối lại sẽ tải snapshot và lịch sử.

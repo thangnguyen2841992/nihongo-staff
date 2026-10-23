@@ -4,6 +4,7 @@ import com.nihongo.staff.model.monitoring.*;
 import com.nihongo.staff.repository.*;
 import com.nihongo.staff.service.monitor.collection.PerfCollectionStore;
 import com.nihongo.staff.service.monitor.collection.PerformanceChanged;
+import com.nihongo.staff.service.monitor.collection.CollectionScheduleChanged;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -64,6 +65,7 @@ public class VpsMetricConfigService {
         if (update.enabled() != null) link.setEnabled(update.enabled());
         link.setNextCollectionAt(PerfCollectionStore.now());
         events.publishEvent(new PerformanceChanged(vpsId, code));
+        events.publishEvent(new CollectionScheduleChanged());
         return config(link);
     }
     @Transactional
@@ -79,5 +81,6 @@ public class VpsMetricConfigService {
             }
             events.publishEvent(new PerformanceChanged(link.getVps().getVpsId(), metric.getMetricCode()));
         }
+        events.publishEvent(new CollectionScheduleChanged());
     }
 }

@@ -19,7 +19,8 @@ class MetricCatalogMysqlTest {
     @Test void assignsOnlyMysqlMetricsToMysqlTarget() {
         var metrics = mock(MonitorMetricRepository.class);
         var links = mock(MonitorVpsMetricRepository.class);
-        var catalog = new MetricCatalog(metrics, links, mock(MonitorVpsRepository.class));
+        var catalog = new MetricCatalog(metrics, links, mock(MonitorVpsRepository.class),
+                mock(org.springframework.context.ApplicationEventPublisher.class));
         when(metrics.findAll()).thenReturn(List.of(metric(1, "CPU_USAGE", "NODE_EXPORTER"),
                 metric(2, "MYSQL_THREADS_CONNECTED", "MYSQL_JDBC")));
         var target = new MonitorVps();
@@ -36,7 +37,8 @@ class MetricCatalogMysqlTest {
     @Test void assignsOnlyKafkaMetricsToKafkaTarget() {
         var metrics = mock(MonitorMetricRepository.class);
         var links = mock(MonitorVpsMetricRepository.class);
-        var catalog = new MetricCatalog(metrics, links, mock(MonitorVpsRepository.class));
+        var catalog = new MetricCatalog(metrics, links, mock(MonitorVpsRepository.class),
+                mock(org.springframework.context.ApplicationEventPublisher.class));
         when(metrics.findAll()).thenReturn(List.of(metric(1, "CPU_USAGE", "NODE_EXPORTER"),
                 metric(2, "MYSQL_THREADS_CONNECTED", "MYSQL_JDBC"),
                 metric(3, "KAFKA_BROKER_COUNT", "KAFKA_ADMIN")));

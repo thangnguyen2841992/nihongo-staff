@@ -38,7 +38,7 @@ public class StaffServiceImpl implements IStaffService {
        ========================================================= */
 
     @Override
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public BookResponse createNewBook(CreateNewBookRequest request) {
 
@@ -54,7 +54,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public BookResponse updateBook(UpdateBookRequest request) {
 
@@ -70,6 +70,7 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "bookDetail", key = "#bookId")
     public BookResponse getBookDetail(
             Long bookId
     ) {
@@ -112,7 +113,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public List<ImageDTO>
     updateImagesOfBooks(
@@ -181,6 +182,8 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    // Includes drafts; the controller filters what learners may see.
+    @Cacheable(value = "booksByLevel", key = "#levelId")
     public List<BookResponse>
     getBooksByLevel(
             Long levelId
@@ -191,7 +194,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent"}, allEntries = true)
+    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public LessonResponse createNewLesson(
             CreateNewLessonRequest request
@@ -226,7 +229,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent"}, allEntries = true)
+    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public LessonResponse updateLesson(
             CreateNewLessonRequest request
@@ -267,6 +270,8 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @Transactional(readOnly = true)
+    @Cacheable(value = "lessonById", key = "#lessonId")
     public LessonResponse getLessonByIdAPI(
             Long lessonId
     ) {
@@ -278,7 +283,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent"}, allEntries = true)
+    @CacheEvict(value = {"lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public void deleteLesson(
             Long lessonId
@@ -306,7 +311,7 @@ public class StaffServiceImpl implements IStaffService {
        ========================================================= */
 
     @Override
-    @CacheEvict(value = {"grammarsByLesson", "lessonGrammarContent"}, allEntries = true)
+    @CacheEvict(value = {"grammarsByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public GrammarResponse createNewGrammar(
             GrammarRequest request
@@ -340,7 +345,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    @CacheEvict(value = {"grammarsByLesson", "lessonGrammarContent"}, allEntries = true)
+    @CacheEvict(value = {"grammarsByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public GrammarResponse updateGrammar(
             GrammarRequest request
@@ -373,7 +378,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    @CacheEvict(value = {"grammarsByLesson", "examplesByLesson", "lessonGrammarContent"}, allEntries = true)
+    @CacheEvict(value = {"grammarsByLesson", "examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public void deleteGrammar(
             Long grammarId
@@ -423,7 +428,7 @@ public class StaffServiceImpl implements IStaffService {
        ========================================================= */
 
     @Override
-    @CacheEvict(value = {"examplesByLesson", "lessonGrammarContent"}, allEntries = true)
+    @CacheEvict(value = {"examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public ExampleResponse createNewExample(
             ExampleRequest request
@@ -453,7 +458,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    @CacheEvict(value = {"examplesByLesson", "lessonGrammarContent"}, allEntries = true)
+    @CacheEvict(value = {"examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
     @Transactional
     public ExampleResponse updateExample(
             ExampleRequest request
@@ -503,6 +508,7 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "bookLocation", key = "#bookId")
     public ContentLocationResponse getBookLocation(Long bookId) {
         return bookRepository.findLocationById(bookId)
                 .orElseThrow(() -> new ResourceNotFoundException("Book not found with id: " + bookId));
@@ -510,6 +516,7 @@ public class StaffServiceImpl implements IStaffService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "lessonLocation", key = "#lessonId")
     public ContentLocationResponse getLessonLocation(Long lessonId) {
         return lessonsRepository.findLocationById(lessonId)
                 .orElseThrow(() -> new ResourceNotFoundException("Lesson not found with id: " + lessonId));
@@ -529,6 +536,7 @@ public class StaffServiceImpl implements IStaffService {
        ========================================================= */
 
     @Override
+    @CacheEvict(value = {"exercisesByLesson", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "answerKeys"}, allEntries = true)
     @Transactional
     public ExerciseKeywordDTO createNewExcercise(
             ExerciseKeywordDTO dto
@@ -558,6 +566,7 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
+    @CacheEvict(value = {"exercisesByLesson", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "answerKeys"}, allEntries = true)
     @Transactional
     public ExerciseKeywordDTO updateExcercise(
             ExerciseKeywordDTO dto
@@ -628,8 +637,10 @@ public class StaffServiceImpl implements IStaffService {
 
 
     @Override
-    // Read-only: the class-level default is a read-write transaction.
+    // Read-only: the class-level default is a read-write transaction. Cached rows are shared: callers that hide
+    // answers or attach explanations must work on copies (see StaffRestController).
     @Transactional(readOnly = true)
+    @Cacheable(value = "exercisesByLesson", key = "#lessonId")
     public List<ExerciseKeywordDTO>
     getAllExcercisesKeywordOfLesson(
             Long lessonId
@@ -657,7 +668,7 @@ public class StaffServiceImpl implements IStaffService {
             );
         }
 
-        return dtos;
+        return List.copyOf(dtos);
     }
 
 
