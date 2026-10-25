@@ -37,7 +37,23 @@ public class BookImportService {
     public record Save(Long version,boolean reviewed,BookImportContent content) {}
     public record Publish(Long version) {}
 
-    @Transactional(readOnly=true) public List<Summary> list() { return sessions.findTop50ByOrderByCreatedAtDesc().stream().map(this::summary).toList(); }
+    // Book name per (session, version): the name lives inside the draft JSON, which only changes with the version.
+    private final com.github.benmanes.caffeine.cache.Cache<String,String> bookNames=com.github.benmanes.caffeine.cache.Caffeine.newBuilder()
+            .maximumSize(500).expireAfterAccess(java.time.Duration.ofHours(6)).build();
+    /** 50 latest sessions from the status columns only; each draft is parsed once per version for its book name. */
+    @Transactional(readOnly=true) public List<Summary> list() { return sessions.recent(org.springframework.data.domain.PageRequest.of(0,50)).stream().map(this::summary).toList(); }
+    /** Lightweight progress for polling: no draft, page text or LOB columns unless the book name is not cached yet. */
+    @Transactional(readOnly=true) public Summary status(String id) { storage.directory(id); return sessions.row(id).map(this::summary).orElseThrow(()->missing("Không tìm thấy lần nhập sách.")); }
+    private Summary summary(BookImportSessionRepository.Row r) {
+        return new Summary(r.getId(),r.getFileName(),bookName(r.getId(),r.getVersion()),r.getState(),r.getPageCount(),r.getProcessedPages(),r.getMessage(),
+                r.getImportedBookId(),r.getVersion(),r.getAutoMode(),r.getAiProcessedPages(),r.getAiCompleted());
+    }
+    private String bookName(String id,Long version) {
+        return bookNames.get(id+":"+version,ignored->sessions.payload(id).map(payload->{
+            try { return mapper.readTree(payload).path("bookName").asText(""); }
+            catch(Exception e) { throw new IllegalStateException("Stored import draft is invalid",e); }
+        }).orElse(""));
+    }
     @Transactional(readOnly=true) public Detail get(String id) {
         var s=find(id);
         return new Detail(summary(s),content(s),pages.findBySessionIdOrderByPageNumberAsc(id).stream().map(p->new Page(p.getPageNumber(),p.getMethod(),p.getText())).toList(),warnings(s));

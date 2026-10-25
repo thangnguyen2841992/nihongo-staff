@@ -23,11 +23,19 @@ public class ExampleSpeechController {
 
     @GetMapping(value = "/{exampleId}/speech", produces = "audio/wav")
     @PreAuthorize("@contentAccess.grammar(#grammarId,authentication)")
-    public ResponseEntity<byte[]> speech(@PathVariable Long grammarId, @PathVariable Long exampleId) {
+    public ResponseEntity<byte[]> speech(@PathVariable Long grammarId, @PathVariable Long exampleId,
+            @org.springframework.web.bind.annotation.RequestHeader(value = "If-None-Match", required = false) String ifNoneMatch) {
         var example = examples.findById(exampleId)
                 .filter(row -> row.getGrammar().getGrammarId().equals(grammarId))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy câu ví dụ."));
+        // The browser keeps the WAV privately and revalidates every play: an unchanged sentence costs a bodiless
+        // 304 instead of the whole file, and an edited sentence gets a new ETag (and new audio) immediately.
+        String etag = speech.etag(example.getNihongo());
+        var cache = CacheControl.noCache().cachePrivate();
+        if (ifNoneMatch != null && java.util.Arrays.stream(ifNoneMatch.split(",")).map(String::trim)
+                .anyMatch(tag -> tag.equals(etag) || tag.equals("W/" + etag)))
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).eTag(etag).cacheControl(cache).build();
         return ResponseEntity.ok().contentType(MediaType.parseMediaType("audio/wav"))
-                .cacheControl(CacheControl.noStore()).body(speech.speech(example.getNihongo()));
+                .eTag(etag).cacheControl(cache).body(speech.speech(example.getNihongo()));
     }
 }

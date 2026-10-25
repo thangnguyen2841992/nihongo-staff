@@ -42,83 +42,157 @@ public class KafkaMetricSource {
     record Snapshot(Probe probe, double offlinePartitions, double underReplicatedPartitions,
                     Map<String, Double> consumerLag) {}
 
+    record Account(String bootstrapServers, String securityProtocol, String saslMechanism,
+                           String username, String password) {}
+    private record Session(Admin admin, Account account, int timeout, long openedAt) {}
+    // Recreated at least this often (broker list/DNS/certificate changes).
+    private static final long MAX_SESSION_AGE_MS = Duration.ofMinutes(10).toMillis();
+    // Decrypted connection settings per target; changed only through KafkaTargetService, which calls invalidate().
+    private final com.github.benmanes.caffeine.cache.Cache<Long, Account> accounts =
+            com.github.benmanes.caffeine.cache.Caffeine.newBuilder().maximumSize(1024)
+                    .expireAfterWrite(Duration.ofMinutes(10)).build();
+    // One Admin client per target instead of a new client (connections, SASL/TLS handshakes, metadata bootstrap and a
+    // network thread) every cycle. Closed after two idle minutes, on error and on invalidate(), on the calling thread.
+    private final com.github.benmanes.caffeine.cache.Cache<Long, Session> sessions =
+            com.github.benmanes.caffeine.cache.Caffeine.newBuilder().maximumSize(1024)
+                    .expireAfterAccess(Duration.ofMinutes(2)).executor(Runnable::run)
+                    .removalListener((Long id, Session session, com.github.benmanes.caffeine.cache.RemovalCause cause) -> {
+                        if (session != null) closeQuietly(session.admin());
+                    }).build();
+
     public Probe probe(String bootstrapServers, String securityProtocol, String saslMechanism,
                        String username, String password, int timeoutMs) {
-        return fetch(bootstrapServers, securityProtocol, saslMechanism, username, password, timeoutMs).probe();
+        int timeout = clamp(timeoutMs);
+        Admin admin = null;
+        try {
+            admin = open(new Account(bootstrapServers, securityProtocol, saslMechanism, username, password), timeout);
+            return read(admin, timeout).probe();
+        } catch (Exception error) {
+            throw failure(error);
+        } finally {
+            if (admin != null) closeQuietly(admin);
+        }
     }
 
-    public void invalidate(long vpsId) { cache.invalidate(vpsId); }
+    /** Forgets the cached snapshot, connection settings and open client, e.g. after the target was edited. */
+    public void invalidate(long vpsId) {
+        cache.invalidate(vpsId);
+        accounts.invalidate(vpsId);
+        sessions.invalidate(vpsId);
+    }
+
+    @jakarta.annotation.PreDestroy
+    public void close() {
+        sessions.invalidateAll();
+        sessions.cleanUp();
+    }
 
     public List<NodeMetricSource.Reading> readings(long vpsId, String code, int timeoutMs) {
-        var snapshot = cache.get(vpsId, ignored -> {
-            MonitorKafkaTarget target = targets.findById(vpsId)
-                    .orElseThrow(() -> new IllegalStateException("Thiếu cấu hình kết nối Kafka."));
-            String password = target.getPasswordEncrypted() == null ? null
-                    : cipher.decrypt(target.getPasswordEncrypted());
-            return fetch(target.getBootstrapServers(), target.getSecurityProtocol(),
-                    target.getSaslMechanism(), target.getUsername(), password, timeoutMs);
-        });
+        var snapshot = cache.get(vpsId, id -> snapshot(id, accounts.get(id, this::account), clamp(timeoutMs)));
         return map(code, snapshot);
     }
 
-    private Snapshot fetch(String bootstrapServers, String securityProtocol, String saslMechanism,
-                           String username, String password, int timeoutMs) {
-        int timeout = Math.max(1000, Math.min(30000, timeoutMs));
-        long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(timeout);
-        try {
-            Admin admin = Admin.create(properties(bootstrapServers, securityProtocol, saslMechanism,
-                    username, password, timeout));
-            try {
-                var cluster = admin.describeCluster();
-                var topicNamesFuture = admin.listTopics().names();
-                var groupsFuture = admin.listConsumerGroups().all();
-                String clusterId = await(cluster.clusterId(), deadline);
-                Collection<org.apache.kafka.common.Node> nodes = await(cluster.nodes(), deadline);
-                org.apache.kafka.common.Node controller = await(cluster.controller(), deadline);
-                var topicNames = await(topicNamesFuture, deadline);
-                Map<String, org.apache.kafka.clients.admin.TopicDescription> descriptions = topicNames.isEmpty()
-                        ? Map.of() : await(admin.describeTopics(topicNames).allTopicNames(), deadline);
-                int partitions = 0;
-                double offline = 0;
-                double underReplicated = 0;
-                for (var topic : descriptions.values()) {
-                    partitions += topic.partitions().size();
-                    for (var partition : topic.partitions()) {
-                        if (partition.leader() == null || partition.leader().id() < 0) offline++;
-                        if (partition.isr().size() < partition.replicas().size()) underReplicated++;
-                    }
-                }
-                Integer groupCount = null;
-                Map<String, Double> lag = Map.of();
-                try {
-                    var groups = await(groupsFuture, deadline);
-                    groupCount = groups.size();
-                    lag = consumerLag(admin, groups.stream().limit(MAX_GROUPS).map(g -> g.groupId()).toList(), deadline);
-                } catch (InterruptedException interrupted) {
-                    throw interrupted;
-                } catch (Exception ignored) {
-                    // Cluster-level metrics remain useful when the monitoring principal cannot inspect groups.
-                }
-                Probe probe = new Probe(clusterId, nodes.size(), controller == null ? null : controller.id(),
-                        descriptions.size(), partitions, groupCount);
-                return new Snapshot(probe, offline, underReplicated, lag);
-            } finally {
-                admin.close(Duration.ofMillis(500));
-            }
-        } catch (Exception error) {
-            if (error instanceof InterruptedException) Thread.currentThread().interrupt();
-            Throwable cause = root(error);
-            String detail = cause.getMessage();
-            if (cause instanceof org.apache.kafka.common.errors.SslAuthenticationException)
-                throw new IllegalStateException("Không xác thực được TLS Kafka. Kiểm tra chứng chỉ và hostname broker.", error);
-            if (cause instanceof org.apache.kafka.common.errors.AuthenticationException)
-                throw new IllegalStateException("Kafka từ chối thông tin xác thực.", error);
-            if (cause instanceof java.util.concurrent.TimeoutException ||
-                    cause instanceof org.apache.kafka.common.errors.TimeoutException)
-                throw new IllegalStateException("Kafka không phản hồi trong thời gian cho phép.", error);
-            throw new IllegalStateException(detail == null || detail.isBlank()
-                    ? "Không kết nối được Kafka." : "Không kết nối được Kafka: " + detail, error);
+    private Account account(long vpsId) {
+        MonitorKafkaTarget target = targets.findById(vpsId)
+                .orElseThrow(() -> new IllegalStateException("Thiếu cấu hình kết nối Kafka."));
+        String password = target.getPasswordEncrypted() == null ? null : cipher.decrypt(target.getPasswordEncrypted());
+        return new Account(target.getBootstrapServers(), target.getSecurityProtocol(), target.getSaslMechanism(),
+                target.getUsername(), password);
+    }
+
+    private Snapshot snapshot(long vpsId, Account account, int timeout) {
+        Session session = sessions.getIfPresent(vpsId);
+        if (session != null && (!session.account().equals(account) || session.timeout() != timeout
+                || System.currentTimeMillis() - session.openedAt() > MAX_SESSION_AGE_MS)) {
+            sessions.invalidate(vpsId);
+            session = null;
         }
+        if (session != null) {
+            try {
+                return read(session.admin(), timeout);
+            } catch (InterruptedException interrupted) {
+                Thread.currentThread().interrupt();
+                throw failure(interrupted);
+            } catch (Exception stale) {
+                // Brokers restarted, credentials rotated or the connection broke: retry once with a fresh client.
+                sessions.invalidate(vpsId);
+            }
+        }
+        Admin admin = null;
+        try {
+            admin = open(account, timeout);
+            var snapshot = read(admin, timeout);
+            sessions.put(vpsId, new Session(admin, account, timeout, System.currentTimeMillis()));
+            return snapshot;
+        } catch (Exception error) {
+            if (admin != null) closeQuietly(admin);
+            throw failure(error);
+        }
+    }
+
+    protected Admin open(Account account, int timeout) {
+        return Admin.create(properties(account.bootstrapServers(), account.securityProtocol(), account.saslMechanism(),
+                account.username(), account.password(), timeout));
+    }
+
+    protected Snapshot read(Admin admin, int timeout) throws Exception { return collect(admin, timeout); }
+
+    private static int clamp(int timeoutMs) { return Math.max(1000, Math.min(30000, timeoutMs)); }
+
+    private static void closeQuietly(Admin admin) {
+        try { admin.close(Duration.ofMillis(500)); } catch (RuntimeException ignored) { /* Already broken. */ }
+    }
+
+    static Snapshot collect(Admin admin, int timeout) throws Exception {
+        long deadline = System.nanoTime() + TimeUnit.MILLISECONDS.toNanos(timeout);
+        var cluster = admin.describeCluster();
+        var topicNamesFuture = admin.listTopics().names();
+        var groupsFuture = admin.listConsumerGroups().all();
+        String clusterId = await(cluster.clusterId(), deadline);
+        Collection<org.apache.kafka.common.Node> nodes = await(cluster.nodes(), deadline);
+        org.apache.kafka.common.Node controller = await(cluster.controller(), deadline);
+        var topicNames = await(topicNamesFuture, deadline);
+        Map<String, org.apache.kafka.clients.admin.TopicDescription> descriptions = topicNames.isEmpty()
+                ? Map.of() : await(admin.describeTopics(topicNames).allTopicNames(), deadline);
+        int partitions = 0;
+        double offline = 0;
+        double underReplicated = 0;
+        for (var topic : descriptions.values()) {
+            partitions += topic.partitions().size();
+            for (var partition : topic.partitions()) {
+                if (partition.leader() == null || partition.leader().id() < 0) offline++;
+                if (partition.isr().size() < partition.replicas().size()) underReplicated++;
+            }
+        }
+        Integer groupCount = null;
+        Map<String, Double> lag = Map.of();
+        try {
+            var groups = await(groupsFuture, deadline);
+            groupCount = groups.size();
+            lag = consumerLag(admin, groups.stream().limit(MAX_GROUPS).map(g -> g.groupId()).toList(), deadline);
+        } catch (InterruptedException interrupted) {
+            throw interrupted;
+        } catch (Exception ignored) {
+            // Cluster-level metrics remain useful when the monitoring principal cannot inspect groups.
+        }
+        Probe probe = new Probe(clusterId, nodes.size(), controller == null ? null : controller.id(),
+                descriptions.size(), partitions, groupCount);
+        return new Snapshot(probe, offline, underReplicated, lag);
+    }
+
+    private static IllegalStateException failure(Exception error) {
+        if (error instanceof InterruptedException) Thread.currentThread().interrupt();
+        Throwable cause = root(error);
+        String detail = cause.getMessage();
+        if (cause instanceof org.apache.kafka.common.errors.SslAuthenticationException)
+            return new IllegalStateException("Không xác thực được TLS Kafka. Kiểm tra chứng chỉ và hostname broker.", error);
+        if (cause instanceof org.apache.kafka.common.errors.AuthenticationException)
+            return new IllegalStateException("Kafka từ chối thông tin xác thực.", error);
+        if (cause instanceof java.util.concurrent.TimeoutException ||
+                cause instanceof org.apache.kafka.common.errors.TimeoutException)
+            return new IllegalStateException("Kafka không phản hồi trong thời gian cho phép.", error);
+        return new IllegalStateException(detail == null || detail.isBlank()
+                ? "Không kết nối được Kafka." : "Không kết nối được Kafka: " + detail, error);
     }
 
     static <T> T await(KafkaFuture<T> future, long deadline) throws InterruptedException, ExecutionException, TimeoutException {

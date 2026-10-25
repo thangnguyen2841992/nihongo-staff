@@ -12,4 +12,7 @@ public interface ILessonsRepository extends JpaRepository<Lessons, Long> {
     java.util.Optional<com.nihongo.staff.model.dto.ContentLocationResponse> findLocationById(Long lessonId);
     @org.springframework.data.jpa.repository.Query("select l from Lessons l where l.book.bookId = :bookId order by l.lessonId")
     List<Lessons> findByBook_BookId(@org.springframework.data.repository.query.Param("bookId") Long bookId);
+    /** [bookId, lesson count] for the public course syllabus. */
+    @org.springframework.data.jpa.repository.Query("select l.book.bookId, count(l) from Lessons l where l.book.bookId in :ids group by l.book.bookId")
+    List<Object[]> countByBooks(@org.springframework.data.repository.query.Param("ids") java.util.Collection<Long> ids);
 }

@@ -18,7 +18,7 @@ Các metric mặc định:
 | `KAFKA_CONSUMER_GROUP_COUNT` | Tổng số consumer group | group |
 | `KAFKA_CONSUMER_LAG` | Tổng lag theo từng consumer group | message |
 
-Collector giới hạn đọc lag ở 500 group mỗi target trong một chu kỳ để giữ thời gian thu thập có giới hạn. Metadata của cùng target được dùng lại tối đa 3 giây, nhờ đó các metric đến hạn gần nhau không mở một kết nối Admin riêng cho từng metric. Timeout mặc định là 10 giây và có thể đổi trong cấu hình lịch thu thập.
+Collector giới hạn đọc lag ở 500 group mỗi target trong một chu kỳ để giữ thời gian thu thập có giới hạn. Metadata của cùng target được dùng lại tối đa 3 giây, nhờ đó các metric đến hạn gần nhau không mở một kết nối Admin riêng cho từng metric. Mỗi target giữ một Admin client dùng lại giữa các chu kỳ (tối đa 10 phút, đóng sau 2 phút không dùng); khi đọc lỗi, client được thay mới và thử lại một lần. Timeout mặc định là 10 giây và có thể đổi trong cấu hình lịch thu thập.
 
 Target Kafka dùng chung màn hiệu năng, lịch sử, WebSocket, lịch thu thập và rule event. Consumer lag là metric theo object; mỗi consumer group là một object riêng. Khi group biến mất sau một lần đọc thành công, object được đánh dấu offline theo cơ chế monitoring hiện có.
 

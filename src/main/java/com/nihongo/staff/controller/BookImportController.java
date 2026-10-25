@@ -17,6 +17,7 @@ public class BookImportController {
     @GetMapping("/capabilities") public java.util.Map<String,Boolean> capabilities() {return java.util.Map.of("geminiConfigured",automation.configured());}
     @GetMapping public List<BookImportService.Summary> list() { return service.list(); }
     @GetMapping("/{id}") public BookImportService.Detail get(@PathVariable String id) { return service.get(id); }
+    @GetMapping("/{id}/summary") public BookImportService.Summary status(@PathVariable String id) { return service.status(id); }
     @PostMapping(consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<BookImportService.Detail> create(@RequestPart MultipartFile pdf,@RequestParam String bookName,@RequestParam Long levelId,@RequestParam Long typeId,@RequestParam(defaultValue="false") boolean automatic) throws Exception {
         var result=service.create(pdf,bookName,levelId,typeId,automatic);if("QUEUED".equals(result.summary().state())) processor.start(result.summary().id());return ResponseEntity.status(HttpStatus.CREATED).body(result);

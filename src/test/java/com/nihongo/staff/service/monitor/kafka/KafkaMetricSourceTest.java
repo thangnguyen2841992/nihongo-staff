@@ -63,4 +63,49 @@ class KafkaMetricSourceTest {
         assertEquals(first, KafkaMetricSource.objectKey(prefix + "a"));
         assertNotEquals(first, second);
     }
+
+    @Test void reusesOneAdminClientPerTargetAndReplacesItAfterAFailure() throws Exception {
+        var targets = mock(com.nihongo.staff.repository.MonitorKafkaTargetRepository.class);
+        var cipher = mock(com.nihongo.staff.service.monitor.mysql.MysqlCredentialCipher.class);
+        var target = new com.nihongo.staff.model.monitoring.MonitorKafkaTarget();
+        target.setVpsId(1L); target.setBootstrapServers("broker:9092"); target.setSecurityProtocol("PLAINTEXT");
+        when(targets.findById(1L)).thenReturn(java.util.Optional.of(target));
+        var first = mock(org.apache.kafka.clients.admin.Admin.class);
+        var second = mock(org.apache.kafka.clients.admin.Admin.class);
+        var opened = new java.util.ArrayDeque<>(java.util.List.of(first, second));
+        var broken = new java.util.concurrent.atomic.AtomicBoolean();
+        var source = new KafkaMetricSource(targets, cipher) {
+            @Override protected org.apache.kafka.clients.admin.Admin open(Account account, int timeout) { return opened.removeFirst(); }
+            @Override protected Snapshot read(org.apache.kafka.clients.admin.Admin admin, int timeout) {
+                if (admin == first && broken.get()) throw new IllegalStateException("broker restarted");
+                return snapshot();
+            }
+        };
+        try {
+            assertEquals(3D, source.readings(1, "KAFKA_BROKER_COUNT", 5000).get(0).value());
+            ReflectionHelper.forget(source, 1L);
+            source.readings(1, "KAFKA_TOPIC_COUNT", 5000);
+            assertEquals(1, 2 - opened.size(), "the second cycle reuses the open client");
+            verify(targets, times(1)).findById(1L);
+
+            broken.set(true);
+            ReflectionHelper.forget(source, 1L);
+            assertEquals(3D, source.readings(1, "KAFKA_BROKER_COUNT", 5000).get(0).value());
+            assertEquals(0, opened.size(), "a broken client is replaced within the same cycle");
+            verify(first).close(any(java.time.Duration.class));
+
+            source.invalidate(1);
+            verify(second).close(any(java.time.Duration.class));
+        } finally { source.close(); }
+    }
+
+    /** Drops only the 3-second snapshot so the next call reads again without waiting. */
+    static final class ReflectionHelper {
+        @SuppressWarnings("unchecked")
+        static void forget(KafkaMetricSource source, long id) {
+            var cache = (com.nihongo.staff.service.monitor.collection.MetricSnapshotCache<Long, ?>)
+                    org.springframework.test.util.ReflectionTestUtils.getField(source, "cache");
+            cache.invalidate(id);
+        }
+    }
 }

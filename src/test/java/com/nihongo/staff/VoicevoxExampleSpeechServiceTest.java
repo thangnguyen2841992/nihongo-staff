@@ -54,4 +54,42 @@ class VoicevoxExampleSpeechServiceTest {
         var service = new VoicevoxExampleSpeechService("http://127.0.0.1:50021", cache.toString());
         assertThrows(ResponseStatusException.class, () -> service.speech("<ruby><rt>ふりがな</rt></ruby>"));
     }
+
+    static byte[] wav(int marker) {
+        byte[] wav = new byte[44];
+        System.arraycopy("RIFF".getBytes(StandardCharsets.US_ASCII), 0, wav, 0, 4);
+        wav[43] = (byte) marker;
+        return wav;
+    }
+
+    @Test void aSlowSentenceDoesNotBlockOtherSentencesAndDuplicatesShareOneSynthesis() throws Exception {
+        var release = new java.util.concurrent.CountDownLatch(1);
+        var calls = new java.util.concurrent.ConcurrentHashMap<String, AtomicInteger>();
+        var service = new VoicevoxExampleSpeechService("http://127.0.0.1:1", cache.toString(), 2) {
+            @Override protected byte[] synthesize(String text) throws InterruptedException {
+                calls.computeIfAbsent(text, ignored -> new AtomicInteger()).incrementAndGet();
+                if (text.equals("遅い文。")) release.await(5, java.util.concurrent.TimeUnit.SECONDS);
+                return wav(text.length());
+            }
+        };
+        var pool = java.util.concurrent.Executors.newFixedThreadPool(2);
+        try {
+            var slow = pool.submit(() -> service.speech("遅い文。"));
+            var duplicate = pool.submit(() -> service.speech("遅い文。"));
+            long started = System.nanoTime();
+            assertNotNull(service.speech("速い文です。"));
+            assertTrue(System.nanoTime() - started < java.util.concurrent.TimeUnit.SECONDS.toNanos(2),
+                    "another sentence is synthesized while the slow one is still running");
+            release.countDown();
+            assertArrayEquals(slow.get(5, java.util.concurrent.TimeUnit.SECONDS), duplicate.get(5, java.util.concurrent.TimeUnit.SECONDS));
+            assertEquals(1, calls.get("遅い文。").get(), "concurrent requests for one sentence share a single synthesis");
+        } finally { release.countDown(); pool.shutdownNow(); }
+    }
+
+    @Test void etagFollowsTheSpokenTextNotTheMarkup() {
+        var service = new VoicevoxExampleSpeechService("http://127.0.0.1:1", cache.toString());
+        assertEquals(service.etag("<ruby>日本語<rt>にほんご</rt></ruby>を学ぶ。"), service.etag("日本語を学ぶ。"));
+        assertNotEquals(service.etag("日本語を学ぶ。"), service.etag("日本語を話す。"));
+        assertTrue(service.etag("日本語を学ぶ。").startsWith("\""));
+    }
 }

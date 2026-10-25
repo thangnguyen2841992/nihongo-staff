@@ -45,6 +45,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**")
                         .permitAll()
 
+                        // Public course syllabus: published book names and lesson counts only.
+                        .requestMatchers(HttpMethod.GET, "/api/staff/public/**").permitAll()
+
                         // staff/admin api
                         .requestMatchers("/api/staff/vps-performance/ws").hasAnyRole("STAFF", "ADMIN")
                         .requestMatchers("/api/staff/**")
