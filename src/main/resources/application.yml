@@ -57,6 +57,9 @@ eureka:
       defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
 
 monitoring:
+  collection:
+    # Name of this machine for targets registered as 127.0.0.1/localhost (default: Windows COMPUTERNAME).
+    local-hostname: ${MONITOR_LOCAL_HOSTNAME:}
   prometheus-targets-file: ${PROMETHEUS_TARGETS_FILE:${user.home}/Downloads/prometheus-3.15.0.windows-amd64/targets/node_targets.json}
   prometheus-windows-targets-file: ${PROMETHEUS_WINDOWS_TARGETS_FILE:${user.home}/Downloads/prometheus-3.15.0.windows-amd64/targets/windows_targets.json}
 

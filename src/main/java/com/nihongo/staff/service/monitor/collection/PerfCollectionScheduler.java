@@ -31,6 +31,9 @@ public class PerfCollectionScheduler {
     @Value("${monitoring.collection.cleanup-max-batches:20}") private int cleanupMaxBatches;
     // Upper bound for sleeping when nothing is due, so rows added by another instance are still picked up.
     @Value("${monitoring.collection.max-idle-ms:5000}") private long maxIdleMs = 5000;
+    // This machine's name; loopback targets are collected only by the machine they belong to (see the repository).
+    @Value("${monitoring.collection.local-hostname:}") private String localHostname = "";
+    private volatile String me;
     private final ExecutorService workers = Executors.newFixedThreadPool(4);
     private final Semaphore capacity = new Semaphore(4);
     private volatile boolean ready;
@@ -54,7 +57,7 @@ public class PerfCollectionScheduler {
         woken = false;
         LocalDateTime now = PerfCollectionStore.now();
         // A worker collects every due metric of one target, so dispatch at most one worker per target.
-        var due = assignments.findDue(now, PageRequest.of(0, Math.min(64, available * 8)));
+        var due = assignments.findDueHere(now, me(), PageRequest.of(0, Math.min(64, available * 8)));
         var targets = new java.util.HashSet<Long>();
         for (var row : due) {
             if (!targets.add(row.getVpsId())) continue;
@@ -72,7 +75,7 @@ public class PerfCollectionScheduler {
 
     private long idleMillis(LocalDateTime now) {
         long limit = Math.max(0, maxIdleMs);
-        LocalDateTime next = assignments.findNextDue();
+        LocalDateTime next = assignments.findNextDueHere(me());
         if (next == null) return limit;
         return Math.max(0, Math.min(limit, Duration.between(now, next).toMillis()));
     }
@@ -93,6 +96,15 @@ public class PerfCollectionScheduler {
             if (deleted == null || deleted < 10000) return;
         }
         log.info("{} retention cleanup reached {} batches; remaining data will be processed next hour", name, batches);
+    }
+    /** Lower-case name of this machine (COMPUTERNAME on Windows), or null when it cannot be determined. */
+    String me() {
+        String known = me;
+        if (known != null) return known.isEmpty() ? null : known;
+        String name = LocalHost.name(localHostname);
+        me = name == null ? "" : name;
+        if (name != null) log.info("Collecting monitoring targets registered with a loopback address only for host '{}'", name);
+        return name;
     }
     @PreDestroy public void shutdown() { workers.shutdownNow(); }
 }

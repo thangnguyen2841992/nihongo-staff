@@ -84,6 +84,27 @@ class CollectionRunnerTest {
         assertEquals(100D, readings.getValue().get(0).counter());
         verify(store, never()).fail(any(), any());
     }
+    @Test void exporterOfAnotherMachineIsNotStoredUnderThisMachine() {
+        var store = mock(PerfCollectionStore.class);
+        var source = mock(NodeMetricSource.class);
+        var pc = new PerfCollectionStore.Job(5, "token", 6, "127.0.0.1", 9182, "MEMORY_USAGE", "WINDOWS_EXPORTER", 5000, "Admin-PC");
+        when(store.claimGroup(5)).thenReturn(List.of(pc));
+        when(source.fetch("127.0.0.1", 9182, 5000)).thenReturn(NodeMetricSource.parse("""
+                windows_exporter_build_info{version="0.31.8"} 1
+                windows_os_hostname{hostname="LAPTOP"} 1
+                windows_memory_physical_total_bytes 100
+                windows_memory_available_bytes 40
+                """));
+        new MetricCollector(store, source, mock(MysqlMetricSource.class), mock(KafkaMetricSource.class), mock(CheckMetricSource.class)).collectAssignment(5);
+        verify(store, never()).complete(any(), any(), any());
+        verify(store).fail(eq(pc), argThat(message -> message.contains("LAPTOP") && message.contains("Admin-PC")));
+    }
+    @Test void hostnamesMatchIgnoringCaseAndDomain() {
+        assertTrue(LocalHost.same("ADMIN-PC", "admin-pc.lan"));
+        assertTrue(LocalHost.same(null, "LAPTOP"));
+        assertFalse(LocalHost.same("Admin-PC", "LAPTOP"));
+        assertEquals("admin-pc", LocalHost.name("Admin-PC.local"));
+    }
     @Test void mysqlAssignmentUsesMysqlSourceOnly() {
         var store = mock(PerfCollectionStore.class);
         var node = mock(NodeMetricSource.class);

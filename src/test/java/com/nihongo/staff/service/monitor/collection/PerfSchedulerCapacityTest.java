@@ -43,7 +43,7 @@ class PerfSchedulerCapacityTest {
         var collector = mock(MetricCollector.class);
         var started = new CountDownLatch(4);
         var release = new CountDownLatch(1);
-        when(assignments.findDue(any(), any(Pageable.class))).thenReturn(List.of(due(1, 1), due(2, 2), due(3, 3), due(4, 4)));
+        when(assignments.findDueHere(any(), any(), any(Pageable.class))).thenReturn(List.of(due(1, 1), due(2, 2), due(3, 3), due(4, 4)));
         doAnswer(call -> { started.countDown(); release.await(5, TimeUnit.SECONDS); return null; })
                 .when(collector).collectAssignment(anyLong());
         var scheduler = new PerfCollectionScheduler(assignments, mock(MonitorPerfValueRepository.class),
@@ -55,7 +55,7 @@ class PerfSchedulerCapacityTest {
             assertTrue(started.await(3, TimeUnit.SECONDS));
             scheduler.tick();
             scheduler.tick();
-            verify(assignments, times(1)).findDue(any(), any(Pageable.class));
+            verify(assignments, times(1)).findDueHere(any(), any(), any(Pageable.class));
         } finally {
             release.countDown();
             scheduler.shutdown();
@@ -74,30 +74,30 @@ class PerfSchedulerCapacityTest {
     @Test
     void idleSchedulerSleepsUntilTheNextDueCollectionInsteadOfPollingEveryTick() {
         var assignments = mock(MonitorVpsMetricRepository.class);
-        when(assignments.findDue(any(), any(Pageable.class))).thenReturn(List.of());
-        when(assignments.findNextDue()).thenReturn(PerfCollectionStore.now().plusSeconds(30));
+        when(assignments.findDueHere(any(), any(), any(Pageable.class))).thenReturn(List.of());
+        when(assignments.findNextDueHere(any())).thenReturn(PerfCollectionStore.now().plusSeconds(30));
         var scheduler = idleScheduler(assignments);
         try {
             for (int i = 0; i < 5; i++) scheduler.tick();
-            verify(assignments, times(1)).findDue(any(), any(Pageable.class));
-            verify(assignments, times(1)).findNextDue();
+            verify(assignments, times(1)).findDueHere(any(), any(), any(Pageable.class));
+            verify(assignments, times(1)).findNextDueHere(any());
             // A changed interval or a new target must not wait for the old wake-up time.
             scheduler.scheduleChanged(new CollectionScheduleChanged());
             scheduler.tick();
-            verify(assignments, times(2)).findDue(any(), any(Pageable.class));
+            verify(assignments, times(2)).findDueHere(any(), any(), any(Pageable.class));
         } finally { scheduler.shutdown(); }
     }
 
     @Test
     void overdueOrMissingNextCollectionFallsBackToPollingWithinTheIdleLimit() {
         var assignments = mock(MonitorVpsMetricRepository.class);
-        when(assignments.findDue(any(), any(Pageable.class))).thenReturn(List.of());
-        when(assignments.findNextDue()).thenReturn(PerfCollectionStore.now().minusSeconds(5));
+        when(assignments.findDueHere(any(), any(), any(Pageable.class))).thenReturn(List.of());
+        when(assignments.findNextDueHere(any())).thenReturn(PerfCollectionStore.now().minusSeconds(5));
         var scheduler = idleScheduler(assignments);
         try {
             scheduler.tick();
             scheduler.tick();
-            verify(assignments, times(2)).findDue(any(), any(Pageable.class));
+            verify(assignments, times(2)).findDueHere(any(), any(), any(Pageable.class));
         } finally { scheduler.shutdown(); }
     }
 
@@ -147,7 +147,7 @@ class PerfSchedulerCapacityTest {
         var assignments = mock(MonitorVpsMetricRepository.class);
         var collector = mock(MetricCollector.class);
         var done = new CountDownLatch(2);
-        when(assignments.findDue(any(), any(Pageable.class))).thenReturn(List.of(due(1, 7), due(2, 7), due(3, 8), due(4, 7)));
+        when(assignments.findDueHere(any(), any(), any(Pageable.class))).thenReturn(List.of(due(1, 7), due(2, 7), due(3, 8), due(4, 7)));
         doAnswer(call -> { done.countDown(); return null; }).when(collector).collectAssignment(anyLong());
         var scheduler = new PerfCollectionScheduler(assignments, mock(MonitorPerfValueRepository.class),
                 collector, mock(PlatformTransactionManager.class), mock(MonitorEventRepository.class));

@@ -12,7 +12,13 @@ import java.util.*;
 
 @Service @RequiredArgsConstructor
 public class PerfCollectionStore {
-    public record Job(long id, String token, long vpsId, String host, int port, String code, String collector, int timeout) {}
+    /** {@code hostname}: the registered machine name, used to check that the exporter answering is that machine. */
+    public record Job(long id, String token, long vpsId, String host, int port, String code, String collector, int timeout,
+                      String hostname) {
+        public Job(long id, String token, long vpsId, String host, int port, String code, String collector, int timeout) {
+            this(id, token, vpsId, host, port, code, collector, timeout, null);
+        }
+    }
     private final MonitorVpsMetricRepository assignments;
     private final MonitorVpsRepository servers;
     private final MonitorObjectRepository objects;
@@ -86,7 +92,8 @@ public class PerfCollectionStore {
         String collector = link.getMetric().getCollectorType();
         if ("NODE_EXPORTER".equals(collector) && ExporterType.forVps(link.getVps()) == ExporterType.WINDOWS_EXPORTER)
             collector = ExporterType.WINDOWS_EXPORTER.name();
-        return new Job(id, token, link.getVps().getVpsId(), link.getVps().getIpAddress(), link.getVps().getAgentPort(), link.getMetric().getMetricCode(), collector, timeout);
+        return new Job(id, token, link.getVps().getVpsId(), link.getVps().getIpAddress(), link.getVps().getAgentPort(), link.getMetric().getMetricCode(), collector, timeout,
+                link.getVps().getHostname());
     }
 
     @Transactional

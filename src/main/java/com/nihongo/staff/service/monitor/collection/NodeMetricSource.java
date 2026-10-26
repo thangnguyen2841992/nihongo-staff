@@ -79,6 +79,17 @@ public class NodeMetricSource {
         }
         return result.toString();
     }
+    /** Machine name the exporter reports about itself, or null when it does not say. */
+    public static String hostname(List<Sample> samples) {
+        for (String[] source : new String[][] {{"windows_os_hostname", "hostname"}, {"windows_cs_hostname", "hostname"},
+                {"node_uname_info", "nodename"}}) {
+            for (Sample sample : samples) if (sample.metric().equals(source[0])) {
+                String value = sample.labels().get(source[1]);
+                if (value != null && !value.isBlank()) return value.trim();
+            }
+        }
+        return null;
+    }
     public static ExporterType exporterType(List<Sample> samples) {
         boolean windows = samples.stream().anyMatch(s -> s.metric().equals("windows_exporter_build_info"));
         boolean node = samples.stream().anyMatch(s -> s.metric().equals("node_exporter_build_info"));

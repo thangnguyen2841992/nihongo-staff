@@ -8,6 +8,7 @@ import com.nihongo.staff.repository.MonitorVpsRepository;
 import com.nihongo.staff.service.monitor.collection.MetricCatalog;
 import com.nihongo.staff.service.monitor.collection.NodeMetricSource;
 import com.nihongo.staff.service.monitor.collection.PerfCollectionStore;
+import com.nihongo.staff.service.monitor.collection.LocalHost;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -78,6 +79,10 @@ public class MonitorVpsService implements IMonitorVpsService {
     private MonitorVps persist(String host, int port, Details details, List<NodeMetricSource.Sample> samples) {
         requireAvailableEndpoint(host, port);
         String hostname = details.hostname();
+        if (hostname == null && LocalHost.isLoopback(host)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Exporter không báo tên máy nên không thể đăng ký bằng 127.0.0.1. Hãy nhập hostname hoặc dùng IP thật của máy.");
+        }
         if (hostname != null && servers.existsByHostname(hostname)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "Máy chủ với hostname này đã được đăng ký. Vui lòng kiểm tra danh sách máy chủ.");
@@ -92,14 +97,20 @@ public class MonitorVpsService implements IMonitorVpsService {
         vps.setArchitecture(details.architecture());
         vps.setStatus(VpsStatus.UP);
         vps.setLastSeenAt(LocalDateTime.now(ZoneOffset.UTC));
+        // A loopback endpoint may already belong to another machine (each PC registers its own exporter as
+        // 127.0.0.1); the Prometheus target table is unique per address, so only the first one gets a row there.
+        boolean sharedLoopback = LocalHost.isLoopback(host) && servers.existsByIpAddressAndAgentPort(host, port);
         servers.save(vps);
         catalog.bindDefaults(vps);
         store.discover(vps, samples);
-        targets.registerTarget(vps.getVpsId());
+        if (!sharedLoopback) targets.registerTarget(vps.getVpsId());
         return vps;
     }
 
     private void requireAvailableEndpoint(String host, int port) {
+        // 127.0.0.1 means "this machine": several PCs may register their own exporter with it; the hostname read
+        // from the exporter (unique) tells them apart, and each machine only collects its own (see PerfCollectionScheduler).
+        if (LocalHost.isLoopback(host)) return;
         if (servers.existsByIpAddressAndAgentPort(host, port)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "Địa chỉ IP và cổng này đã được đăng ký. Vui lòng kiểm tra danh sách máy chủ.");

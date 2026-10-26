@@ -61,6 +61,10 @@ public class MetricCollector {
             var samples = snapshots.get(endpoint,
                     key -> java.util.List.copyOf(source.fetch(key.host(), key.port(), key.timeout())));
             ExporterType actual = NodeMetricSource.exporterType(samples);
+            String reported = NodeMetricSource.hostname(samples);
+            if (!LocalHost.same(job.hostname(), reported))
+                throw new IllegalStateException("Exporter tại " + job.host() + ":" + job.port() + " là máy " + reported
+                        + ", không phải " + job.hostname() + ". Dùng IP LAN/hostname của máy đó thay cho 127.0.0.1.");
             if (!actual.name().equals(job.collector()))
                 throw new IllegalStateException("Exporter tại " + job.host() + ":" + job.port() + " đã đổi loại; cần đăng ký lại máy chủ.");
             return PerfCollectionStore.Outcome.completed(job, NodeMetricSource.readings(job.code(), samples, actual), PerfCollectionStore.now());

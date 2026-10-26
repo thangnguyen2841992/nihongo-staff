@@ -19,6 +19,27 @@ public interface MonitorVpsMetricRepository extends JpaRepository<MonitorVpsMetr
     @Query("select a from MonitorVpsMetric a where a.vpsMetricId = :id")
     Optional<MonitorVpsMetric> lockById(Long id);
     interface Due { Long getId(); Long getVpsId(); }
+    /** Addresses that mean "the machine running the collector" besides 127.0.0.0/8. */
+    List<String> LOOPBACK = List.of("localhost", "::1", "[::1]", "0:0:0:0:0:0:0:1");
+    // A target registered with a loopback address (127.0.0.1, localhost) is that one machine's own exporter: only the
+    // staff-service running on the machine with the same hostname may collect it. Several PCs share one database, so
+    // otherwise any instance could claim it and store its own machine's numbers under another machine's name.
+    // `me` null = hostname unknown: collect everything (previous behaviour).
+    String COLLECTABLE_HERE = " and (:me is null or (a.vps.ipAddress not in :loopback and a.vps.ipAddress not like '127.%')"
+            + " or lower(a.vps.hostname) = :me or lower(a.vps.hostname) like :meDomain)";
+    @Query("select a.vpsMetricId as id, a.vps.vpsId as vpsId from MonitorVpsMetric a where a.enabled = true and a.metric.enabled = true and (a.nextCollectionAt is null or a.nextCollectionAt <= :now) and (a.leaseUntil is null or a.leaseUntil <= :now)"
+            + COLLECTABLE_HERE + " order by a.nextCollectionAt asc, a.vpsMetricId asc")
+    List<Due> findDueFor(LocalDateTime now, Collection<String> loopback, String me, String meDomain, Pageable page);
+    default List<Due> findDueHere(LocalDateTime now, String me, Pageable page) {
+        return findDueFor(now, LOOPBACK, me, me == null ? null : me + ".%", page);
+    }
+    @Query("select min(case when a.leaseUntil is null then a.nextCollectionAt when a.nextCollectionAt is null then a.leaseUntil "
+            + "when a.leaseUntil > a.nextCollectionAt then a.leaseUntil else a.nextCollectionAt end) "
+            + "from MonitorVpsMetric a where a.enabled = true and a.metric.enabled = true" + COLLECTABLE_HERE)
+    LocalDateTime findNextDueFor(Collection<String> loopback, String me, String meDomain);
+    default LocalDateTime findNextDueHere(String me) {
+        return findNextDueFor(LOOPBACK, me, me == null ? null : me + ".%");
+    }
     @Query("select a.vpsMetricId as id, a.vps.vpsId as vpsId from MonitorVpsMetric a where a.enabled = true and a.metric.enabled = true and (a.nextCollectionAt is null or a.nextCollectionAt <= :now) and (a.leaseUntil is null or a.leaseUntil <= :now) order by a.nextCollectionAt asc, a.vpsMetricId asc")
     List<Due> findDue(LocalDateTime now, Pageable page);
     @Query("select a.vps.vpsId from MonitorVpsMetric a where a.vpsMetricId = :id")
