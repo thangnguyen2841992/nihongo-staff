@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController @RequestMapping("/api/staff/imported-audio") @RequiredArgsConstructor
 public class ImportedAudioController {
-    private final ILessonsRepository lessons;private final IExerciseKeywordRepository exercises;private final BookImportService service;private final BookImportStorage storage;
+    private final ILessonsRepository lessons;private final IExerciseKeywordRepository exercises;private final LessonAudioTrackRepository tracks;private final BookImportService service;private final BookImportStorage storage;
     @GetMapping("/lessons/{id}") @PreAuthorize("@contentAccess.lesson(#id,authentication)")
     public ResponseEntity<Resource> lesson(@PathVariable Long id) {
         var l=lessons.findById(id).orElseThrow(()->new org.springframework.web.server.ResponseStatusException(HttpStatus.NOT_FOUND));return audio(l.getAudioImportId(),l.getAudioAssetId());
+    }
+    /** One labelled listening track of a lesson (e.g. 練習 B3). Same access rule as the lesson. */
+    @GetMapping("/lesson-tracks/{id}") @PreAuthorize("@importedAudioAccess.lessonTrack(#id,authentication)")
+    public ResponseEntity<Resource> lessonTrack(@PathVariable Long id) {
+        var t=tracks.findById(id).orElseThrow(()->new org.springframework.web.server.ResponseStatusException(HttpStatus.NOT_FOUND));return audio(t.getAudioImportId(),t.getAudioAssetId());
     }
     @GetMapping("/exercises/{id}") @PreAuthorize("@importedAudioAccess.exercise(#id,authentication)")
     public ResponseEntity<Resource> exercise(@PathVariable Long id) {

@@ -25,6 +25,7 @@ public class StaffServiceImpl implements IStaffService {
 
     private final IBookRepository bookRepository;
     private final ILessonsRepository lessonsRepository;
+    private final com.nihongo.staff.repository.LessonAudioTrackRepository lessonAudioTracks;
     private final ITypeRepository typeRepository;
     private final ILevelsRepository levelsRepository;
     private final IImageRepository imageRepository;
@@ -172,10 +173,14 @@ public class StaffServiceImpl implements IStaffService {
             Long bookId
     ) {
 
-        return lessonsRepository
-                .findByBook_BookId(bookId)
+        var bookLessons = lessonsRepository.findByBook_BookId(bookId);
+        // All listening tracks of the book in one query instead of one per lesson.
+        var tracksByLesson = bookLessons.isEmpty() ? java.util.Map.<Long, List<com.nihongo.staff.model.LessonAudioTrack>>of()
+                : lessonAudioTracks.findByLessonIdInOrderByLessonIdAscPositionAsc(bookLessons.stream().map(Lessons::getLessonId).toList())
+                .stream().collect(java.util.stream.Collectors.groupingBy(com.nihongo.staff.model.LessonAudioTrack::getLessonId));
+        return bookLessons
                 .stream()
-                .map(this::mapLessonToResponse)
+                .map(lesson -> withTracks(mapLessonToResponse(lesson), tracksByLesson.getOrDefault(lesson.getLessonId(), List.of())))
                 .toList();
     }
 
@@ -276,9 +281,15 @@ public class StaffServiceImpl implements IStaffService {
             Long lessonId
     ) {
 
-        return mapLessonToResponse(
-                getLessonById(lessonId)
-        );
+        var lesson = getLessonById(lessonId);
+        return withTracks(mapLessonToResponse(lesson), lessonAudioTracks.findByLessonIdOrderByPositionAsc(lesson.getLessonId()));
+    }
+
+    private LessonResponse withTracks(LessonResponse response, List<com.nihongo.staff.model.LessonAudioTrack> tracks) {
+        response.setTracks(tracks.stream()
+                .map(t -> new LessonResponse.Track(t.getTrackId(), t.getLabel(), "/api/staff/imported-audio/lesson-tracks/" + t.getTrackId()))
+                .toList());
+        return response;
     }
 
 

@@ -21,4 +21,8 @@ public class LessonResponse {
     private String reading;
     private String audioTrack;
     private String audioUrl;
+    /** Labelled listening tracks of the lesson (ことば, 文型, 例文, 練習 …); empty when the lesson has none. */
+    private java.util.List<Track> tracks = java.util.List.of();
+
+    public record Track(Long id, String label, String url) {}
 }

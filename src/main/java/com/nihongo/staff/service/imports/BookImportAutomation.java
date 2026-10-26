@@ -15,16 +15,17 @@ public class BookImportAutomation {
     private final BookImportService service;
     private final BookImportGemini gemini;
     private final TryN3BookData knownBook;
+    private final MinnaBookData minna;
     private final ObjectMapper mapper;
     private final TransactionTemplate tx;
     public record AudioHint(String lessonName,String questionText,String track) {}
-    public BookImportAutomation(BookImportSessionRepository sessions,BookImportService service,BookImportGemini gemini,TryN3BookData knownBook,ObjectMapper mapper,PlatformTransactionManager manager) {
-        this.sessions=sessions;this.service=service;this.gemini=gemini;this.knownBook=knownBook;this.mapper=mapper;tx=new TransactionTemplate(manager);
+    public BookImportAutomation(BookImportSessionRepository sessions,BookImportService service,BookImportGemini gemini,TryN3BookData knownBook,MinnaBookData minna,ObjectMapper mapper,PlatformTransactionManager manager) {
+        this.sessions=sessions;this.service=service;this.gemini=gemini;this.knownBook=knownBook;this.minna=minna;this.mapper=mapper;tx=new TransactionTemplate(manager);
     }
     public boolean configured() { return gemini.configured(); }
     public void run(String id) {
         try {
-            if(preparedBook(id)) return;
+            if(preparedBook(id) || minnaBook(id)) return;
             if(!gemini.configured()) throw new BookImportGemini.Failure("Chưa có key Gemini cho nhập sách. Cấu hình key đang dùng trong project rồi bấm Tiếp tục tự động.");
             state(id,"ANALYZING","Gemini đang tách bài, ngữ pháp, dịch ví dụ và đọc bài tập.",false);
             while(true) {
@@ -63,6 +64,17 @@ public class BookImportAutomation {
             service.validate(content,current.getPageCount(),false);current.setPayload(json(content));current.setAudioHints(json(hints));
             current.setAutoWarnings(json(List.of("Dùng nội dung TRY! N3 đã biên tập theo đúng mã PDF. Các bài Check/やってみよう trong từng mục chưa được chuyển thành câu hỏi tương tác; xem trang nguồn.")));
             current.setAiProcessedPages(current.getPageCount());current.setAiCompleted(true);current.setState("REVIEW");current.setMessage("Đã tự điền nội dung TRY! N3 đã chuẩn bị. Kiểm tra bản nháp và ghép audio trước khi nhập.");sessions.save(current);
+        });return true;
+    }
+    /** Minna no Nihongo II (lessons 26-50), same rule: only the exact PDF and only into an empty draft. */
+    private boolean minnaBook(String id) {
+        var s=service.find(id);var book=minna.book();
+        if(!Objects.equals(s.getSourceHash(),book.sourceSha256()) || s.getPageCount()!=book.pageCount() || !service.content(s).lessons().isEmpty()) return false;
+        tx.executeWithoutResult(t->{var current=sessions.lock(id).orElseThrow();var c=service.content(current);
+            var content=new BookImportContent(BookImportService.blank(c.bookName())?book.bookName():c.bookName(),c.levelId(),c.typeId(),c.description(),c.audio(),book.lessons());
+            service.validate(content,current.getPageCount(),false);current.setPayload(json(content));current.setAudioHints(json(List.of()));
+            current.setAutoWarnings(json(List.of("Dùng nội dung Minna no Nihongo II đã chuẩn bị theo đúng mã PDF: 文型, 会話 và ngữ pháp có giải thích, ví dụ dịch tiếng Việt. Phần 練習 và 問題 xem ở trang nguồn; file nghe được ghép theo tên 第N課 khi nhập sách.")));
+            current.setAiProcessedPages(current.getPageCount());current.setAiCompleted(true);current.setState("REVIEW");current.setMessage("Đã tự điền 25 bài Minna no Nihongo II. Tải các thư mục file nghe, kiểm tra bản nháp rồi nhập sách.");sessions.save(current);
         });return true;
     }
     public void checkpoint(String id,int first,int last,BookImportGemini.Batch batch) {

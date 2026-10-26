@@ -30,9 +30,14 @@ public class BookImportService {
     private final IExerciseTypeRepository exerciseTypes;
     private final ILevelsRepository levels;
     private final ITypeRepository types;
+    private final LessonAudioTrackRepository lessonTracks;
+    /** Whole-book audio limits (a CD set such as Minna no Nihongo II has ~440 tracks / ~330 MB). */
+    static final int MAX_AUDIO_FILES=800;
+    static final long MAX_AUDIO_BYTES=900L*1024*1024;
 
     public record Summary(String id,String fileName,String bookName,String state,int pageCount,int processedPages,String message,Long bookId,Long version,String autoMode,int aiProcessedPages,boolean aiCompleted) {}
-    public record Detail(Summary summary,BookImportContent content,List<Page> pages,List<String> warnings) {}
+    /** lessonTracks: per lesson (same order as content.lessons) the labels of the audio files matched to it by name. */
+    public record Detail(Summary summary,BookImportContent content,List<Page> pages,List<String> warnings,List<List<String>> lessonTracks) {}
     public record Page(int number,String method,String text) {}
     public record Save(Long version,boolean reviewed,BookImportContent content) {}
     public record Publish(Long version) {}
@@ -56,7 +61,10 @@ public class BookImportService {
     }
     @Transactional(readOnly=true) public Detail get(String id) {
         var s=find(id);
-        return new Detail(summary(s),content(s),pages.findBySessionIdOrderByPageNumberAsc(id).stream().map(p->new Page(p.getPageNumber(),p.getMethod(),p.getText())).toList(),warnings(s));
+        var content=content(s);var matched=LessonTrackMatcher.assign(content.lessons(),content.audio());
+        var lessonTracks=new ArrayList<List<String>>();
+        for(int n=0;n<content.lessons().size();n++) lessonTracks.add(matched.getOrDefault(n,List.of()).stream().map(LessonTrackMatcher.Track::label).toList());
+        return new Detail(summary(s),content,pages.findBySessionIdOrderByPageNumberAsc(id).stream().map(p->new Page(p.getPageNumber(),p.getMethod(),p.getText())).toList(),warnings(s),lessonTracks);
     }
     public BookImportSession find(String id) { storage.directory(id); return sessions.findById(id).orElseThrow(()->missing("Không tìm thấy lần nhập sách.")); }
     public BookImportContent content(BookImportSession s) {
@@ -110,7 +118,8 @@ public class BookImportService {
 
     @Transactional public Detail addAudio(String id,List<MultipartFile> files) throws Exception {
         var s=lock(id);editable(s,true);var c=content(s);
-        if(files==null || files.isEmpty() || files.size()+c.audio().size()>128) throw invalid("Có thể thêm tối đa 128 file nghe.");
+        if(files==null || files.isEmpty() || files.size()>128) throw invalid("Mỗi lần tải tối đa 128 file nghe; hãy tải theo từng thư mục.");
+        if(files.size()+c.audio().size()>MAX_AUDIO_FILES) throw invalid("Một sách có tối đa "+MAX_AUDIO_FILES+" file nghe.");
         var audio=new ArrayList<>(c.audio());long total=audio.stream().mapToLong(BookImportContent.Asset::bytes).sum();
         var written=new ArrayList<Path>();
         try {
@@ -118,7 +127,7 @@ public class BookImportService {
                 String name=fileName(file.getOriginalFilename());int dot=name.lastIndexOf('.');String ext=dot<0?"":name.substring(dot+1).toLowerCase(Locale.ROOT);
                 String mime=Map.of("mp3","audio/mpeg","m4a","audio/mp4","wav","audio/wav","ogg","audio/ogg").get(ext);
                 if(mime==null || file.isEmpty() || file.getSize()>40L*1024*1024) throw invalid("File nghe cần là MP3, M4A, WAV hoặc OGG, tối đa 40 MB/file.");
-                total+=file.getSize();if(total>300L*1024*1024) throw invalid("Tổng file nghe của một sách tối đa 300 MB.");
+                total+=file.getSize();if(total>MAX_AUDIO_BYTES) throw invalid("Tổng file nghe của một sách tối đa "+(MAX_AUDIO_BYTES/1024/1024)+" MB.");
                 byte[] header;try(var in=file.getInputStream()) { header=in.readNBytes(16); }
                 if(!audioHeader(ext,header)) throw invalid("Nội dung file nghe không khớp định dạng: "+name);
                 var asset=new BookImportContent.Asset(UUID.randomUUID().toString(),name,mime,ext,file.getSize());
@@ -159,11 +168,19 @@ public class BookImportService {
         var c=content(s);validate(c,s.getPageCount(),true);catalogue(c.levelId(),c.typeId());
         var book=new Books();book.setBookName(c.bookName().trim());book.setDescription(c.description());book.setPublicationStatus(PublicationStatus.DRAFT);
         book.setLevel(levels.findById(c.levelId()).orElseThrow());book.setTypes(types.findById(c.typeId()).orElseThrow());books.save(book);
-        for(var part:c.lessons()) {
+        // Files named "第N課 …" become labelled listening tracks of lesson N (ことば, 文型, 例文, 練習 A1 …).
+        var matchedTracks=LessonTrackMatcher.assign(c.lessons(),c.audio());
+        for(int index=0;index<c.lessons().size();index++) {
+            var part=c.lessons().get(index);
             var lesson=new Lessons();lesson.setBook(book);lesson.setName(part.name().trim());lesson.setDescription(part.description());
             lesson.setReading(html(part.reading()));
             if(!blank(part.audioId())) { lesson.setAudioImportId(id);lesson.setAudioAssetId(part.audioId()); }
             lessons.save(lesson);
+            int position=0;
+            for(var track:matchedTracks.getOrDefault(index,List.of())) {
+                var row=new LessonAudioTrack();row.setLessonId(lesson.getLessonId());row.setPosition(position++);row.setLabel(track.label());
+                row.setAudioImportId(id);row.setAudioAssetId(track.assetId());lessonTracks.save(row);
+            }
             for(var input:part.grammars()) {
                 var grammar=new Grammar();grammar.setLessons(lesson);grammar.setTitle(input.title());grammar.setDescription(html(input.description()));grammars.save(grammar);
                 for(var inputExample:input.examples()) {

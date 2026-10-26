@@ -1,0 +1,1779 @@
+{
+ "schemaVersion": 1,
+ "sourceKey": "minna-no-nihongo-shokyu-2-2nd:5d0ce9b3:lessons-26-50:v1",
+ "bookName": "Minna no Nihongo Sơ cấp II (bản 2) – Bài 26–50",
+ "levelName": "N4",
+ "sourceSha256": "5d0ce9b33bab69e0f6b81d019f12594d95be4ee6a629085410e33fd3687e0008",
+ "pageCount": 330,
+ "lessons": [
+  {
+   "name": "第26課 ごみは どこに 出したら いいですか",
+   "description": "Giải thích lý do, hoàn cảnh bằng 〜んです; nhờ vả lịch sự bằng 〜んですが、〜ていただけませんか; xin lời khuyên bằng 〜たら いいですか.",
+   "firstPage": 22,
+   "lastPage": 29,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>あしたから 旅行なんです。</li><li>生け花を 習いたいんですが、いい 先生を 紹介して いただけませんか。</li></ol><h4>会話 · Hội thoại：ごみは どこに 出したら いいですか</h4><p><strong>管理人</strong>：ミラーさん、引っ越しの 荷物は 片づきましたか。</p><p><strong>ミラー</strong>：はい、だいたい 片づきました。あのう、ごみを 捨てたいんですが、どこに 出したら いいですか。</p><p><strong>管理人</strong>：燃える ごみは 月曜日と 木曜日の 朝 出して ください。ごみ置き場は 駐車場の 横です。</p><p><strong>ミラー</strong>：瓶や 缶は いつですか。</p><p><strong>管理人</strong>：土曜日です。</p><p><strong>ミラー</strong>：わかりました。それから お湯が 出ないんですが……。</p><p><strong>管理人</strong>：ガス会社に 連絡したら、すぐ 来て くれますよ。</p><p><strong>ミラー</strong>：すみませんが、電話番号を 教えて いただけませんか。</p><p><strong>管理人</strong>：ええ、いいですよ。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "〜んです（giải thích, hỏi lý do, nhấn mạnh）",
+     "description": "<p>Cấu trúc: V/いA thể thông thường ＋ んです ／ なA・N ＋ な ＋ んです</p><p>Dùng khi người nói giải thích lý do, hoàn cảnh, hoặc muốn hỏi rõ điều mình thấy/nghe được. Trong hội thoại thường nói 〜んです; câu hỏi 〜んですか thể hiện sự quan tâm, tò mò của người hỏi. Không dùng 〜んです cho những câu chỉ thông báo sự việc đơn thuần.</p>",
+     "examples": [
+      {
+       "nihongo": "あしたから 旅行なんです。",
+       "vietnamese": "Từ ngày mai tôi đi du lịch (nên…)."
+      },
+      {
+       "nihongo": "渡辺さんは 時々 大阪弁を 使いますね。大阪に 住んで いたんですか。……ええ、15歳まで 大阪に 住んで いました。",
+       "vietnamese": "Chị Watanabe thỉnh thoảng dùng giọng Osaka nhỉ. Chị đã từng sống ở Osaka à? …… Vâng, tôi đã sống ở Osaka đến năm 15 tuổi."
+      },
+      {
+       "nihongo": "おもしろい デザインの 靴ですね。どこで 買ったんですか。……エドヤストアで 買いました。スペインの 靴です。",
+       "vietnamese": "Đôi giày thiết kế thú vị nhỉ. Anh mua ở đâu vậy? …… Tôi mua ở cửa hàng Edoya. Giày của Tây Ban Nha đấy."
+      },
+      {
+       "nihongo": "どうして 遅れたんですか。……バスが 来なかったんです。",
+       "vietnamese": "Sao anh đến muộn vậy? …… Vì xe buýt không đến."
+      },
+      {
+       "nihongo": "よく カラオケに 行きますか。……いいえ、あまり 行きません。カラオケは 好きじゃ ないんです。",
+       "vietnamese": "Anh có hay đi karaoke không? …… Không, tôi không hay đi lắm. Tôi không thích karaoke."
+      }
+     ]
+    },
+    {
+     "title": "〜んですが、〜て いただけませんか（nhờ vả lịch sự）",
+     "description": "<p>Cấu trúc: 〜んですが、V て ＋ いただけませんか</p><p>〜んですが dùng để mở đầu, nêu hoàn cảnh trước khi nhờ vả hay xin phép; vế sau có thể lược bỏ khi người nghe đã hiểu. 〜て いただけませんか là cách nhờ lịch sự hơn 〜て ください.</p>",
+     "examples": [
+      {
+       "nihongo": "生け花を 習いたいんですが、いい 先生を 紹介して いただけませんか。",
+       "vietnamese": "Tôi muốn học cắm hoa, anh có thể giới thiệu cho tôi một giáo viên giỏi được không?"
+      },
+      {
+       "nihongo": "日本語で レポートを 書いたんですが、ちょっと 見て いただけませんか。……いいですよ。",
+       "vietnamese": "Tôi đã viết báo cáo bằng tiếng Nhật, anh xem giúp tôi một chút được không? …… Được thôi."
+      },
+      {
+       "nihongo": "すみませんが、電話番号を 教えて いただけませんか。",
+       "vietnamese": "Xin lỗi, anh có thể cho tôi biết số điện thoại được không?"
+      }
+     ]
+    },
+    {
+     "title": "疑問詞 ＋ V たら いいですか（xin lời khuyên, chỉ dẫn）",
+     "description": "<p>Cấu trúc: 疑問詞（どこ・どう・何…）＋ V たら いいですか</p><p>Dùng khi xin lời khuyên hoặc hỏi cách làm. Trả lời bằng 〜たら いいですよ.</p>",
+     "examples": [
+      {
+       "nihongo": "国会議事堂を 見学したいんですが、どう したら いいですか。……直接 行ったら いいですよ。平日は いつでも 見る ことが できます。",
+       "vietnamese": "Tôi muốn tham quan tòa nhà Quốc hội, tôi nên làm thế nào? …… Anh cứ đến thẳng là được. Ngày thường lúc nào cũng có thể vào xem."
+      },
+      {
+       "nihongo": "ごみを 捨てたいんですが、どこに 出したら いいですか。",
+       "vietnamese": "Tôi muốn vứt rác, tôi nên để rác ở đâu?"
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第27課 何でも 作れるんですね",
+   "description": "Thể khả năng (可能形); 見える・聞こえる; できる (được xây, hoàn thành); trợ từ は so sánh, しか〜ない.",
+   "firstPage": 30,
+   "lastPage": 37,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>わたしは 日本語が 少し 話せます。</li><li>山が はっきり 見えます。</li><li>駅の 前に 大きい スーパーが できました。</li></ol><h4>会話 · Hội thoại：何でも 作れるんですね</h4><p><strong>ミラー</strong>：明るくて、いい 部屋ですね。</p><p><strong>鈴木</strong>：ええ。天気が いい 日には 海が 見えるんです。</p><p><strong>ミラー</strong>：この テーブルは おもしろい デザインですね。どこで 買ったんですか。</p><p><strong>鈴木</strong>：これは わたしが 作ったんですよ。</p><p><strong>ミラー</strong>：えっ、ほんとうですか。</p><p><strong>鈴木</strong>：ええ。趣味は 自分で 家具を 作る ことなんです。</p><p><strong>ミラー</strong>：へえ。じゃ、あの 本棚も 作ったんですか。</p><p><strong>鈴木</strong>：ええ。</p><p><strong>ミラー</strong>：すごいですね。鈴木さん、何でも 作れるんですね。</p><p><strong>鈴木</strong>：わたしの 夢は いつか 自分で 家を 建てる ことなんです。</p><p><strong>ミラー</strong>：すばらしい 夢ですね。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "可能動詞（thể khả năng）：〜が V（e）ます",
+     "description": "<p>Cấu trúc: Nhóm I: 話す → 話せる（đuôi う → え＋る）／ Nhóm II: 食べる → 食べられる ／ Nhóm III: 来る → 来られる、する → できる</p><p>Thể khả năng diễn tả năng lực hoặc khả năng làm việc gì đó trong một hoàn cảnh. Tân ngữ thường đổi trợ từ を thành が. Động từ khả năng chia như động từ nhóm II.</p>",
+     "examples": [
+      {
+       "nihongo": "わたしは 日本語が 少し 話せます。",
+       "vietnamese": "Tôi nói được một chút tiếng Nhật."
+      },
+      {
+       "nihongo": "日本語の 新聞が 読めますか。……いいえ、読めません。",
+       "vietnamese": "Anh đọc được báo tiếng Nhật không? …… Không, tôi không đọc được."
+      },
+      {
+       "nihongo": "この マンションで ペットが 飼えますか。……小さい 鳥や 魚は 飼えますが、犬や 猫は 飼えません。",
+       "vietnamese": "Ở chung cư này có nuôi thú cưng được không? …… Chim nhỏ hay cá thì nuôi được, nhưng chó hay mèo thì không."
+      },
+      {
+       "nihongo": "鈴木さん、何でも 作れるんですね。",
+       "vietnamese": "Anh Suzuki, cái gì anh cũng làm được nhỉ."
+      }
+     ]
+    },
+    {
+     "title": "見えます・聞こえます",
+     "description": "<p>Cấu trúc: N が 見えます ／ N が 聞こえます</p><p>Diễn tả việc hình ảnh hay âm thanh tự nhiên lọt vào mắt, vào tai, không phụ thuộc ý chí người nói. Khác với 見られます・聞けます (có thể xem/nghe nhờ có điều kiện, cơ hội).</p>",
+     "examples": [
+      {
+       "nihongo": "山が はっきり 見えます。",
+       "vietnamese": "Có thể nhìn thấy núi rõ ràng."
+      },
+      {
+       "nihongo": "鳥の 声が 聞こえますね。……ええ。もう 春ですね。",
+       "vietnamese": "Nghe thấy tiếng chim hót nhỉ. …… Vâng. Đã sang xuân rồi nhỉ."
+      },
+      {
+       "nihongo": "天気が いい 日には 海が 見えるんです。",
+       "vietnamese": "Những ngày trời đẹp có thể nhìn thấy biển."
+      }
+     ]
+    },
+    {
+     "title": "できます（được xây dựng, hoàn thành, mở ra）",
+     "description": "<p>Cấu trúc: N が できます</p><p>Ngoài nghĩa \"có thể\", できます còn có nghĩa một công trình được xây xong, một cửa hàng được mở, một việc được hoàn thành.</p>",
+     "examples": [
+      {
+       "nihongo": "駅の 前に 大きい スーパーが できました。",
+       "vietnamese": "Trước nhà ga đã mở một siêu thị lớn."
+      },
+      {
+       "nihongo": "法隆寺は いつ できましたか。……607年に できました。",
+       "vietnamese": "Chùa Horyu được xây khi nào? …… Được xây năm 607."
+      }
+     ]
+    },
+    {
+     "title": "しか 〜ない（chỉ…）",
+     "description": "<p>Cấu trúc: N（＋助詞）＋ しか ＋ V ない</p><p>しか đi với thể phủ định, nhấn mạnh số lượng hay phạm vi ít, mang sắc thái \"không đủ, chỉ có\". Phân biệt với だけ (chỉ… mang nghĩa trung tính, dùng với thể khẳng định).</p>",
+     "examples": [
+      {
+       "nihongo": "パワー電気は 何日ぐらい 夏休みが ありますか。……そうですね。3週間ぐらいです。いいですね。わたしの 会社は 1週間しか 休めません。",
+       "vietnamese": "Công ty điện Power được nghỉ hè khoảng mấy ngày? …… Ừm, khoảng 3 tuần. …… Thích nhỉ. Công ty tôi chỉ được nghỉ có 1 tuần thôi."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第28課 出張も 多いし、試験も あるし……",
+   "description": "Làm hai việc cùng lúc (Vながら); thói quen lặp lại (Vています); liệt kê lý do bằng 〜し、〜し.",
+   "firstPage": 38,
+   "lastPage": 45,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>音楽を 聞きながら 食事します。</li><li>毎朝 ジョギングを して います。</li><li>地下鉄は 速いし、安いし、地下鉄で 行きましょう。</li></ol><h4>会話 · Hội thoại：出張も 多いし、試験も あるし……</h4><p><strong>小川幸子</strong>：ミラーさん、ちょっと お願いが あるんですが。</p><p><strong>ミラー</strong>：何ですか。</p><p><strong>小川幸子</strong>：実は 8月に オーストラリアへ ホームステイに 行くんです。</p><p><strong>ミラー</strong>：ホームステイですか。いいですね。</p><p><strong>小川幸子</strong>：ええ。それで 今 友達と 英語を 勉強して いるんですが……。</p><p><strong>ミラー</strong>：ええ。</p><p><strong>小川幸子</strong>：なかなか 上手に ならないんです。先生も いないし、英語で 話す チャンスも ないし……。ミラーさん、会話の 先生に なって いただけませんか。</p><p><strong>ミラー</strong>：え？ 先生に？ うーん、ちょっと 仕事が……。</p><p><strong>小川幸子</strong>：お暇な とき、お茶でも 飲みながら……。</p><p><strong>ミラー</strong>：うーん、出張も 多いし、もうすぐ 日本語の 試験も あるし……。</p><p><strong>小川幸子</strong>：そうですか。</p><p><strong>ミラー</strong>：すみません。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "V1ますながら V2（vừa… vừa…）",
+     "description": "<p>Cấu trúc: V1（thể ます bỏ ます）＋ ながら ＋ V2</p><p>Một chủ thể làm hai hành động cùng lúc; V2 là hành động chính. Cũng dùng cho hai việc diễn ra song song trong một thời gian dài (vừa đi làm vừa đi học).</p>",
+     "examples": [
+      {
+       "nihongo": "音楽を 聞きながら 食事します。",
+       "vietnamese": "Tôi vừa nghe nhạc vừa ăn cơm."
+      },
+      {
+       "nihongo": "眠い とき、ガムを かみながら 運転します。……そうですか。わたしは 車を 止めて、しばらく 寝ます。",
+       "vietnamese": "Khi buồn ngủ tôi vừa nhai kẹo cao su vừa lái xe. …… Thế à. Tôi thì dừng xe lại ngủ một lúc."
+      },
+      {
+       "nihongo": "音楽を 聞きながら 勉強しますか。……いいえ。勉強する ときは、音楽を 聞きません。",
+       "vietnamese": "Bạn có vừa nghe nhạc vừa học không? …… Không. Khi học tôi không nghe nhạc."
+      },
+      {
+       "nihongo": "彼は 働きながら 大学で 勉強して います。……そうですか。偉いですね。",
+       "vietnamese": "Anh ấy vừa đi làm vừa học đại học. …… Thế à. Giỏi thật nhỉ."
+      }
+     ]
+    },
+    {
+     "title": "Vて います（thói quen）",
+     "description": "<p>Cấu trúc: V て います</p><p>Diễn tả hành động lặp đi lặp lại như một thói quen. Nói về thói quen trong quá khứ thì dùng Vて いました.</p>",
+     "examples": [
+      {
+       "nihongo": "毎朝 ジョギングを して います。",
+       "vietnamese": "Sáng nào tôi cũng chạy bộ."
+      },
+      {
+       "nihongo": "休みの 日は いつも 何を して いますか。……そうですね。たいてい 絵を かいて います。",
+       "vietnamese": "Ngày nghỉ bạn thường làm gì? …… Ừm, thường thì tôi vẽ tranh."
+      }
+     ]
+    },
+    {
+     "title": "普通形し、普通形し（vừa… lại vừa…, liệt kê lý do）",
+     "description": "<p>Cấu trúc: 普通形 ＋ し、普通形 ＋ し、〜（Aな／N: 〜だし）</p><p>Liệt kê nhiều đặc điểm cùng chiều, hoặc nêu nhiều lý do (ngụ ý còn lý do khác). Thường đi với も. Câu sau là kết luận hay hành động dựa trên những lý do đó.</p>",
+     "examples": [
+      {
+       "nihongo": "地下鉄は 速いし、安いし、地下鉄で 行きましょう。",
+       "vietnamese": "Tàu điện ngầm vừa nhanh vừa rẻ, nên chúng ta đi bằng tàu điện ngầm đi."
+      },
+      {
+       "nihongo": "ワット先生は 熱心だし、おもしろいし、それに 経験も あります。……いい 先生ですね。",
+       "vietnamese": "Thầy Watt vừa nhiệt tình, vừa thú vị, lại còn có kinh nghiệm nữa. …… Thầy giáo tốt nhỉ."
+      },
+      {
+       "nihongo": "よく この すし屋へ 来るんですか。……ええ。ここは 値段も 安いし、魚も 新しいし、よく 食べに 来ます。",
+       "vietnamese": "Anh hay đến quán sushi này à? …… Vâng. Ở đây giá rẻ, cá lại tươi nên tôi hay đến ăn."
+      },
+      {
+       "nihongo": "どうして 富士大学を 選んだんですか。……富士大学は 有名だし、いい 先生も 多いし、寮も ありますから。",
+       "vietnamese": "Sao bạn chọn Đại học Fuji? …… Vì Đại học Fuji nổi tiếng, có nhiều giáo viên giỏi, lại có ký túc xá nữa."
+      },
+      {
+       "nihongo": "出張も 多いし、もうすぐ 日本語の 試験も あるし……。",
+       "vietnamese": "Tôi hay phải đi công tác, lại sắp thi tiếng Nhật nữa……"
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第29課 忘れ物を して しまったんです",
+   "description": "Trạng thái kết quả của tự động từ (Vて います); Vて しまいます (làm xong hết / lỡ làm, tiếc nuối).",
+   "firstPage": 46,
+   "lastPage": 53,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>窓が 閉まって います。</li><li>電車に 傘を 忘れて しまいました。</li></ol><h4>会話 · Hội thoại：忘れ物を して しまったんです</h4><p><strong>イー</strong>：すみません。今の 電車に 忘れ物を して しまったんですが……。</p><p><strong>駅員</strong>：何を 忘れたんですか。</p><p><strong>イー</strong>：青い かばんです。このくらいの……。外側に 大きい ポケットが 付いて います。</p><p><strong>駅員</strong>：どの 辺に 置きましたか。</p><p><strong>イー</strong>：よく 覚えて いません。でも、網棚の 上に 置きました。</p><p><strong>駅員</strong>：中に 何が 入って いますか。</p><p><strong>イー</strong>：えーと、確か、本と 傘が 入って います。</p><p><strong>駅員</strong>：じゃ、調べますから、ちょっと 待って いて ください。</p><p><strong>駅員</strong>：ありましたよ。</p><p><strong>イー</strong>：ああ、よかった。</p><p><strong>駅員</strong>：今 新宿駅に ありますが、どう しますか。</p><p><strong>イー</strong>：すぐ 取りに 行きます。</p><p><strong>駅員</strong>：じゃ、新宿駅の 事務所に 行って ください。</p><p><strong>イー</strong>：はい。どうも ありがとう ございました。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "N が Vて います（trạng thái）",
+     "description": "<p>Cấu trúc: N が 自動詞て います</p><p>Dùng với tự động từ để diễn tả trạng thái còn lại sau khi hành động xảy ra (cửa đang đóng, khóa đang cài, máy đang hỏng). Khi chủ ngữ đã là chủ đề thì が đổi thành は.</p>",
+     "examples": [
+      {
+       "nihongo": "窓が 閉まって います。",
+       "vietnamese": "Cửa sổ đang đóng."
+      },
+      {
+       "nihongo": "会議室の かぎが 掛かって いますね。……じゃ、渡辺さんに 言って、開けて もらいましょう。",
+       "vietnamese": "Phòng họp đang khóa nhỉ. …… Vậy nói với chị Watanabe nhờ mở giúp đi."
+      },
+      {
+       "nihongo": "この パソコン、使っても いいですか。……それは 故障して いますから、あちらのを 使って ください。",
+       "vietnamese": "Tôi dùng cái máy tính này được không? …… Cái đó đang hỏng, anh dùng cái đằng kia đi."
+      },
+      {
+       "nihongo": "外側に 大きい ポケットが 付いて います。",
+       "vietnamese": "Bên ngoài có gắn một cái túi lớn."
+      }
+     ]
+    },
+    {
+     "title": "Vて しまいました／しまいます（xong hết）",
+     "description": "<p>Cấu trúc: V て しまいました ／ V て しまいます</p><p>Nhấn mạnh hành động đã hoàn tất trọn vẹn. Vて しまいます dùng cho việc sẽ làm cho xong trong tương lai.</p>",
+     "examples": [
+      {
+       "nihongo": "シュミットさんが 持って 来た ワインは どこですか。……みんなで 飲んで しまいました。",
+       "vietnamese": "Chai rượu anh Schmidt mang đến đâu rồi? …… Mọi người uống hết rồi."
+      },
+      {
+       "nihongo": "いっしょに 帰りませんか。……すみません。この メールを 書いて しまいますから、お先に どうぞ。",
+       "vietnamese": "Cùng về không? …… Xin lỗi, tôi phải viết xong cái email này, anh về trước đi."
+      }
+     ]
+    },
+    {
+     "title": "Vて しまいました（lỡ… mất, tiếc nuối）",
+     "description": "<p>Cấu trúc: V て しまいました（hội thoại: 〜ちゃった／〜じゃった）</p><p>Diễn tả sự tiếc nuối, bối rối của người nói trước một việc lỡ xảy ra ngoài ý muốn.</p>",
+     "examples": [
+      {
+       "nihongo": "電車に 傘を 忘れて しまいました。",
+       "vietnamese": "Tôi để quên ô trên tàu mất rồi."
+      },
+      {
+       "nihongo": "約束の 時間に 間に 合いましたか。……いいえ、遅れて しまいました。道を まちがえたんです。",
+       "vietnamese": "Bạn có kịp giờ hẹn không? …… Không, tôi bị muộn mất. Tôi đi nhầm đường."
+      },
+      {
+       "nihongo": "どう したんですか。……タクシーに 荷物を 忘れて しまったんです。",
+       "vietnamese": "Có chuyện gì vậy? …… Tôi lỡ để quên hành lý trên taxi."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第30課 非常袋を 準備して おかないと",
+   "description": "Trạng thái do ai đó cố ý tạo ra (Vて あります); chuẩn bị trước, giữ nguyên trạng thái (Vて おきます).",
+   "firstPage": 54,
+   "lastPage": 63,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>交番に 町の 地図が はって あります。</li><li>旅行の まえに、インターネットで いろいろ 調べて おきます。</li></ol><h4>会話 · Hội thoại：非常袋を 準備して おかないと</h4><p><strong>ミラー</strong>：こんにちは。</p><p><strong>鈴木</strong>：いらっしゃい。さあ、どうぞ。</p><p><strong>ミラー</strong>：大きい リュックが 置いて ありますね。山へ 行くんですか。</p><p><strong>鈴木</strong>：いいえ。非常袋ですよ。</p><p><strong>ミラー</strong>：非常袋？ 何ですか。</p><p><strong>鈴木</strong>：非常時に 使う 物を 入れて おく 袋です。電気や ガスが 止まっても、3日ぐらい 生活できる 物が 入れて あるんです。</p><p><strong>ミラー</strong>：水や 食べ物ですか。</p><p><strong>鈴木</strong>：ええ、ほかにも いろいろ ありますよ。懐中電灯とか、ラジオとか……。</p><p><strong>ミラー</strong>：わたしも 準備して おかないと。</p><p><strong>鈴木</strong>：非常袋は スーパーでも 売って いますよ。</p><p><strong>ミラー</strong>：そうですか。じゃ、買って おきます。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "N が Vて あります（trạng thái có chủ ý）",
+     "description": "<p>Cấu trúc: N が 他動詞て あります</p><p>Dùng với tha động từ, diễn tả trạng thái là kết quả của hành động mà ai đó đã cố ý làm (với mục đích nào đó). So sánh: 窓が 閉まって います (chỉ tả trạng thái) và 窓が 閉めて あります (có người đã đóng lại).</p>",
+     "examples": [
+      {
+       "nihongo": "交番に 町の 地図が はって あります。",
+       "vietnamese": "Ở đồn cảnh sát có dán bản đồ khu phố."
+      },
+      {
+       "nihongo": "駅の 新しい トイレ、おもしろいですね。……え？ そうですか。壁に 花や 動物の 絵が かいて あるんです。",
+       "vietnamese": "Nhà vệ sinh mới ở ga thú vị nhỉ. …… Ồ, vậy à? Trên tường có vẽ tranh hoa và động vật."
+      },
+      {
+       "nihongo": "セロテープは どこですか。……あの 引き出しに しまって ありますよ。",
+       "vietnamese": "Băng dính ở đâu? …… Đã cất trong ngăn kéo kia rồi."
+      },
+      {
+       "nihongo": "大きい リュックが 置いて ありますね。",
+       "vietnamese": "Có cái ba lô to đặt ở đây nhỉ."
+      }
+     ]
+    },
+    {
+     "title": "Vて おきます（làm sẵn, để nguyên）",
+     "description": "<p>Cấu trúc: V て おきます（hội thoại: 〜とく）</p><p>① Làm trước để chuẩn bị cho việc sau. ② Làm xong một việc cần thiết (dọn dẹp, cất). ③ Giữ nguyên trạng thái hiện tại.</p>",
+     "examples": [
+      {
+       "nihongo": "旅行の まえに、インターネットで いろいろ 調べて おきます。",
+       "vietnamese": "Trước chuyến du lịch, tôi tìm hiểu trước nhiều thứ trên mạng."
+      },
+      {
+       "nihongo": "来月の 出張ですが、ホテルを 予約して おきましょうか。……ええ、お願いします。",
+       "vietnamese": "Về chuyến công tác tháng sau, tôi đặt khách sạn trước nhé? …… Vâng, nhờ anh."
+      },
+      {
+       "nihongo": "はさみを 使ったら、元の 所に 戻して おいて ください。……はい、わかりました。",
+       "vietnamese": "Dùng kéo xong thì để lại chỗ cũ nhé. …… Vâng, tôi hiểu rồi."
+      },
+      {
+       "nihongo": "資料を 片づけても いいですか。……いいえ、そのままに して おいて ください。まだ 使って いますから。",
+       "vietnamese": "Tôi dọn tài liệu được không? …… Không, cứ để nguyên đó. Tôi vẫn đang dùng."
+      }
+     ]
+    },
+    {
+     "title": "まだ ＋ khẳng định（vẫn còn）",
+     "description": "<p>Cấu trúc: まだ ＋ V て います／ある</p><p>まだ đi với câu khẳng định mang nghĩa \"vẫn còn, vẫn đang\".</p>",
+     "examples": [
+      {
+       "nihongo": "まだ 使って いますから。",
+       "vietnamese": "Vì tôi vẫn đang dùng."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第31課 料理を 習おうと 思って います",
+   "description": "Thể ý chí (意向形); 〜と思っています (dự định); 〜つもりです; 〜予定です; まだ Vていません.",
+   "firstPage": 64,
+   "lastPage": 71,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>いっしょに 行こう。</li><li>将来 自分の 会社を 作ろうと 思って います。</li><li>来月 車を 買う つもりです。</li></ol><h4>会話 · Hội thoại：料理を 習おうと 思って います</h4><p><strong>小川</strong>：来月から 独身です。</p><p><strong>ミラー</strong>：えっ？</p><p><strong>小川</strong>：実は 大阪の 本社に 転勤なんです。</p><p><strong>ミラー</strong>：本社ですか。それは おめでとう ございます。でも、どうして 独身に なるんですか。</p><p><strong>小川</strong>：妻と 子どもは 東京に 残るんです。</p><p><strong>ミラー</strong>：えっ、いっしょに 行かないんですか。</p><p><strong>小川</strong>：ええ。息子は 来年 大学の 入学試験が あるから、東京に 残ると 言うし、妻も 今の 会社を やめたくないと 言うんです。</p><p><strong>ミラー</strong>：それで、別々に 住むんですね。</p><p><strong>小川</strong>：ええ。でも、月に 2、3回 週末に 帰る つもりです。</p><p><strong>ミラー</strong>：大変ですね。</p><p><strong>小川</strong>：でも、いい チャンスですから、料理を 習おうと 思って います。</p><p><strong>ミラー</strong>：それは いいですね。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "意向形（thể ý chí）",
+     "description": "<p>Cấu trúc: Nhóm I: 行く → 行こう（う → お＋う）／ Nhóm II: 食べる → 食べよう ／ Nhóm III: 来る → 来よう、する → しよう</p><p>Thể ý chí là dạng thông thường của 〜ましょう, dùng trong hội thoại thân mật để rủ rê hoặc bày tỏ ý định.</p>",
+     "examples": [
+      {
+       "nihongo": "いっしょに 行こう。",
+       "vietnamese": "Cùng đi nào."
+      },
+      {
+       "nihongo": "疲れたね。ちょっと 休まない？……うん、そう しよう。",
+       "vietnamese": "Mệt nhỉ. Nghỉ chút không? …… Ừ, nghỉ thôi."
+      }
+     ]
+    },
+    {
+     "title": "V意向形と 思って います（định làm）",
+     "description": "<p>Cấu trúc: V（thể ý chí）＋ と 思って います</p><p>Bày tỏ ý định của người nói. 〜と思っています cho thấy ý định đã có từ trước và vẫn tiếp tục; có thể dùng cho người thứ ba. 〜と思います chỉ dùng cho ý định của người nói lúc nói.</p>",
+     "examples": [
+      {
+       "nihongo": "将来 自分の 会社を 作ろうと 思って います。",
+       "vietnamese": "Tương lai tôi định thành lập công ty riêng."
+      },
+      {
+       "nihongo": "お正月は 何を しますか。……家族と 温泉に 行こうと 思って います。",
+       "vietnamese": "Tết bạn làm gì? …… Tôi định đi suối nước nóng với gia đình."
+      },
+      {
+       "nihongo": "レポートは もう できましたか。……いいえ、まだ 書いて いません。金曜日までに まとめようと 思って います。",
+       "vietnamese": "Báo cáo xong chưa? …… Chưa, tôi vẫn chưa viết. Tôi định tổng hợp xong trước thứ Sáu."
+      },
+      {
+       "nihongo": "いい チャンスですから、料理を 習おうと 思って います。",
+       "vietnamese": "Đây là cơ hội tốt nên tôi định học nấu ăn."
+      }
+     ]
+    },
+    {
+     "title": "Vる／Vない つもりです（có ý định）",
+     "description": "<p>Cấu trúc: V（thể từ điển）／ V ない ＋ つもりです</p><p>Diễn tả ý định, quyết tâm khá chắc chắn. Mức độ quyết định mạnh hơn 〜ようと思っています.</p>",
+     "examples": [
+      {
+       "nihongo": "来月 車を 買う つもりです。",
+       "vietnamese": "Tháng sau tôi định mua xe."
+      },
+      {
+       "nihongo": "国へ 帰っても、日本語の 勉強を 続けますか。……はい、続ける つもりです。",
+       "vietnamese": "Về nước rồi bạn vẫn tiếp tục học tiếng Nhật chứ? …… Vâng, tôi định tiếp tục."
+      },
+      {
+       "nihongo": "夏休みは 国へ 帰らないんですか。……ええ。大学院の 試験を 受けますから、ことしは 帰らない つもりです。",
+       "vietnamese": "Nghỉ hè bạn không về nước à? …… Vâng. Tôi thi cao học nên năm nay định không về."
+      }
+     ]
+    },
+    {
+     "title": "Vる／Nの 予定です（dự kiến）",
+     "description": "<p>Cấu trúc: V（thể từ điển）／ N の ＋ 予定です</p><p>Nói về kế hoạch, lịch trình đã được định sẵn (không hoàn toàn do ý muốn của người nói).</p>",
+     "examples": [
+      {
+       "nihongo": "あしたから ニューヨークへ 出張します。……そうですか。いつ 帰りますか。来週の 金曜日に 帰る 予定です。",
+       "vietnamese": "Từ mai tôi đi công tác New York. …… Thế à. Khi nào anh về? …… Dự kiến thứ Sáu tuần sau."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第32課 無理を しない ほうが いいですよ",
+   "description": "Lời khuyên (Vた／Vない ほうが いいです); dự đoán (〜でしょう); khả năng (〜かも しれません).",
+   "firstPage": 72,
+   "lastPage": 79,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>毎日 運動した ほうが いいです。</li><li>あしたは 雪が 降るでしょう。</li><li>約束の 時間に 間に 合わないかも しれません。</li></ol><h4>会話 · Hội thoại：無理を しない ほうが いいですよ</h4><p><strong>小川</strong>：シュミットさん、元気が ありませんね。どう したんですか。</p><p><strong>シュミット</strong>：最近 体の 調子が よくないんです。時々 頭や 胃が 痛く なるんですよ。</p><p><strong>小川</strong>：それは いけませんね。仕事が 忙しいんですか。</p><p><strong>シュミット</strong>：ええ。残業が 多いんです。</p><p><strong>小川</strong>：ストレスかも しれませんね。一度 病院で 診て もらった ほうが いいですよ。</p><p><strong>シュミット</strong>：ええ、そうですね。</p><p><strong>小川</strong>：無理を しない ほうが いいですよ。</p><p><strong>シュミット</strong>：ええ、今の 仕事が 終わったら、休みを 取ろうと 思って います。</p><p><strong>小川</strong>：それは いいですね。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "Vた ほうが いいです／Vない ほうが いいです（nên / không nên）",
+     "description": "<p>Cấu trúc: V た ＋ ほうが いいです ／ V ない ＋ ほうが いいです</p><p>Dùng để khuyên người nghe nên hay không nên làm gì. Lời khuyên khá mạnh, nên cẩn thận khi nói với người trên.</p>",
+     "examples": [
+      {
+       "nihongo": "毎日 運動した ほうが いいです。",
+       "vietnamese": "Nên vận động mỗi ngày."
+      },
+      {
+       "nihongo": "学生の アルバイトに ついて どう 思いますか。……いいと 思いますよ。若い ときは、いろいろな 経験を した ほうが いいですから。",
+       "vietnamese": "Bạn nghĩ sao về việc sinh viên làm thêm? …… Tôi nghĩ là tốt. Vì khi còn trẻ nên trải nghiệm nhiều thứ."
+      },
+      {
+       "nihongo": "1か月ぐらい ヨーロッパへ 遊びに 行きたいんですが、40万円で 足りますか。……十分だと 思います。でも、現金で 持って 行かない ほうが いいですよ。",
+       "vietnamese": "Tôi muốn đi chơi châu Âu khoảng một tháng, 400.000 yên có đủ không? …… Tôi nghĩ là đủ. Nhưng không nên mang theo tiền mặt."
+      },
+      {
+       "nihongo": "一度 病院で 診て もらった ほうが いいですよ。",
+       "vietnamese": "Anh nên đến bệnh viện khám một lần."
+      }
+     ]
+    },
+    {
+     "title": "普通形 でしょう（có lẽ, chắc là）",
+     "description": "<p>Cấu trúc: 普通形（Aな／N bỏ だ）＋ でしょう</p><p>Diễn tả suy đoán của người nói, không khẳng định chắc chắn. Hay dùng trong dự báo thời tiết. 〜でしょうか dùng để hỏi ý kiến, phán đoán của người nghe một cách lịch sự.</p>",
+     "examples": [
+      {
+       "nihongo": "あしたは 雪が 降るでしょう。",
+       "vietnamese": "Ngày mai có lẽ tuyết sẽ rơi."
+      },
+      {
+       "nihongo": "先生、日本の 経済は どう なるでしょうか。……そうですね。まだ しばらく よく ならないでしょう。",
+       "vietnamese": "Thưa thầy, kinh tế Nhật Bản sẽ ra sao ạ? …… Ừm, chắc còn một thời gian nữa vẫn chưa khá lên."
+      }
+     ]
+    },
+    {
+     "title": "普通形 かも しれません（có thể, không chừng）",
+     "description": "<p>Cấu trúc: 普通形（Aな／N bỏ だ）＋ かも しれません</p><p>Diễn tả khả năng có thể xảy ra, mức độ chắc chắn thấp hơn でしょう.</p>",
+     "examples": [
+      {
+       "nihongo": "約束の 時間に 間に 合わないかも しれません。",
+       "vietnamese": "Có thể tôi sẽ không kịp giờ hẹn."
+      },
+      {
+       "nihongo": "先生、ハンスは インフルエンザですか。……はい、インフルエンザです。2、3日 高い 熱が 続くかも しれませんが、心配しなくても いいですよ。",
+       "vietnamese": "Bác sĩ ơi, Hans bị cúm à? …… Vâng, bị cúm. Có thể sốt cao kéo dài 2–3 ngày, nhưng không cần lo lắng."
+      },
+      {
+       "nihongo": "エンジンの 音が おかしいですね。……そうですね。故障かも しれません。ちょっと 調べましょう。",
+       "vietnamese": "Tiếng động cơ lạ nhỉ. …… Ừ. Có thể bị hỏng. Kiểm tra một chút đi."
+      },
+      {
+       "nihongo": "ストレスかも しれませんね。",
+       "vietnamese": "Có lẽ là do căng thẳng nhỉ."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第33課 これは どういう 意味ですか",
+   "description": "Thể mệnh lệnh và cấm đoán; 〜と 読みます／書いて あります; XはYという意味です; truyền đạt lời nói (〜と言っていました／伝えていただけませんか).",
+   "firstPage": 80,
+   "lastPage": 87,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>急げ。</li><li>触るな。</li><li>立入禁止は 入るなと いう 意味です。</li><li>ミラーさんは 来週 大阪へ 出張すると 言って いました。</li></ol><h4>会話 · Hội thoại：これは どういう 意味ですか</h4><p><strong>ワット</strong>：すみません。わたしの 車に こんな 紙が はって あったんですが、この 漢字は 何と 読むんですか。</p><p><strong>大学職員</strong>：「ちゅうしゃいはん」です。</p><p><strong>ワット</strong>：ちゅうしゃいはん……、どういう 意味ですか。</p><p><strong>大学職員</strong>：止めては いけない 場所に 車を 止めたと いう 意味です。どこに 止めたんですか。</p><p><strong>ワット</strong>：駅の 前です。雑誌を 買いに 行って、10分だけ……。</p><p><strong>大学職員</strong>：駅の 前だったら、10分でも だめですよ。</p><p><strong>ワット</strong>：そうですか。罰金を 払わなければ なりませんか。</p><p><strong>大学職員</strong>：ええ、15,000円 払わないと いけません。</p><p><strong>ワット</strong>：えっ。15,000円ですか。雑誌は 300円だったんですけど……。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "命令形・禁止形（mệnh lệnh / cấm đoán）",
+     "description": "<p>Cấu trúc: Mệnh lệnh: 急ぐ → 急げ（う → え）／ 食べる → 食べろ ／ 来る → 来い、する → しろ。Cấm: V（thể từ điển）＋ な</p><p>Dùng khi ra lệnh hay cấm mạnh: người trên với người dưới (nam giới), cổ vũ thể thao, biển báo, khẩn cấp. Phụ nữ hầu như không dùng trong hội thoại.</p>",
+     "examples": [
+      {
+       "nihongo": "急げ。",
+       "vietnamese": "Nhanh lên!"
+      },
+      {
+       "nihongo": "触るな。",
+       "vietnamese": "Không được sờ vào!"
+      },
+      {
+       "nihongo": "だめだ。もう 走れない。……頑張れ。あと 500メートルだ。",
+       "vietnamese": "Không được rồi, tôi không chạy nổi nữa. …… Cố lên! Còn 500 mét nữa thôi."
+      },
+      {
+       "nihongo": "もう 時間が ない。……まだ 1分 ある。あきらめるな。",
+       "vietnamese": "Hết thời gian rồi. …… Vẫn còn 1 phút. Đừng bỏ cuộc!"
+      },
+      {
+       "nihongo": "この 池で 遊んでは いけません。あそこに 「入るな」と 書いて ありますよ。……あ、ほんとうだ。",
+       "vietnamese": "Không được chơi ở cái ao này. Đằng kia có ghi \"Cấm vào\" đấy. …… À, đúng thật."
+      }
+     ]
+    },
+    {
+     "title": "X は Y と いう 意味です（X nghĩa là Y）",
+     "description": "<p>Cấu trúc: X は Y と いう 意味です ／ X は どういう 意味ですか ／ X は 何と 読むんですか</p><p>Dùng để hỏi và giải thích ý nghĩa, cách đọc của chữ, biển báo, ký hiệu.</p>",
+     "examples": [
+      {
+       "nihongo": "立入禁止は 入るなと いう 意味です。",
+       "vietnamese": "\"立入禁止\" nghĩa là cấm vào."
+      },
+      {
+       "nihongo": "あの 漢字は 何と 読むんですか。……「きんえん」です。たばこを 吸っては いけないと いう 意味です。",
+       "vietnamese": "Chữ Hán kia đọc là gì? …… Là \"kin'en\". Nghĩa là không được hút thuốc."
+      },
+      {
+       "nihongo": "この マークは どういう 意味ですか。……洗濯機で 洗えると いう 意味です。",
+       "vietnamese": "Ký hiệu này có nghĩa là gì? …… Nghĩa là có thể giặt bằng máy giặt."
+      },
+      {
+       "nihongo": "止めては いけない 場所に 車を 止めたと いう 意味です。",
+       "vietnamese": "Nghĩa là đã đỗ xe ở nơi không được đỗ."
+      }
+     ]
+    },
+    {
+     "title": "普通形 と 言って いました／伝えて いただけませんか（truyền đạt lời nói）",
+     "description": "<p>Cấu trúc: 普通形 ＋ と 言って いました ／ 普通形 ＋ と 伝えて いただけませんか</p><p>〜と言っていました dùng để truyền đạt lại lời người thứ ba. 〜と伝えていただけませんか dùng để nhờ ai nhắn lại lời cho người khác một cách lịch sự.</p>",
+     "examples": [
+      {
+       "nihongo": "ミラーさんは 来週 大阪へ 出張すると 言って いました。",
+       "vietnamese": "Anh Miller nói tuần sau sẽ đi công tác Osaka."
+      },
+      {
+       "nihongo": "グプタさんは いますか。……今 出かけて います。30分ぐらいで 戻ると 言って いました。",
+       "vietnamese": "Anh Gupta có đó không? …… Anh ấy đang ra ngoài. Anh ấy nói khoảng 30 phút nữa sẽ quay lại."
+      },
+      {
+       "nihongo": "すみませんが、渡辺さんに あしたの パーティーは 6時からだと 伝えて いただけませんか。……わかりました。6時からですね。",
+       "vietnamese": "Xin lỗi, anh nhắn giúp chị Watanabe là bữa tiệc ngày mai bắt đầu từ 6 giờ được không? …… Được. Từ 6 giờ nhé."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第34課 わたしが した とおりに、して ください",
+   "description": "Làm theo đúng như (〜とおりに); sau khi (〜あとで); cách thức đi kèm (Vて／Vないで V2).",
+   "firstPage": 88,
+   "lastPage": 95,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>先生が 言った とおりに、書きます。</li><li>ごはんを 食べた あとで、歯を 磨きます。</li><li>コーヒーは 砂糖を 入れないで 飲みます。</li></ol><h4>会話 · Hội thoại：わたしが した とおりに、して ください</h4><p><strong>クララ</strong>：一度 茶道が 見たいんですが……。</p><p><strong>渡辺</strong>：じゃ、来週の 土曜日 いっしょに 行きませんか。</p><p><strong>お茶の先生</strong>：渡辺さん、お茶を たてて ください。クララさん、お菓子を どうぞ。</p><p><strong>クララ</strong>：えっ、先に お菓子を 食べるんですか。</p><p><strong>お茶の先生</strong>：ええ。甘い お菓子を 食べた あとで、お茶を 飲むと、おいしいんですよ。</p><p><strong>クララ</strong>：そうですか。</p><p><strong>お茶の先生</strong>：では、お茶を 飲みましょう。まず 右手で おちゃわんを 取って、左手に 載せます。次に おちゃわんを 2回 回して、それから 飲みます。</p><p><strong>クララ</strong>：はい。</p><p><strong>お茶の先生</strong>：じゃ、わたしが した とおりに、して ください。</p><p><strong>クララ</strong>：これで いいですか。</p><p><strong>お茶の先生</strong>：はい。いかがですか。</p><p><strong>クララ</strong>：少し 苦いですが、おいしいです。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "V1る／V1た／Nの とおりに、V2（làm đúng như）",
+     "description": "<p>Cấu trúc: V（thể từ điển／thể た）＋ とおりに ／ N の ＋ とおりに</p><p>Làm V2 giống hệt như điều đã nghe, thấy, đọc, hay làm theo hướng dẫn. Vた とおりに: theo đúng điều đã làm/nói; Vる とおりに: theo điều sắp nói/làm.</p>",
+     "examples": [
+      {
+       "nihongo": "先生が 言った とおりに、書きます。",
+       "vietnamese": "Tôi viết đúng như thầy đã nói."
+      },
+      {
+       "nihongo": "これは 新しい ロボットです。……どんな ロボットですか。人が した とおりに、何でも するんです。",
+       "vietnamese": "Đây là robot mới. …… Robot thế nào vậy? …… Người làm gì nó cũng làm y như vậy."
+      },
+      {
+       "nihongo": "この テーブルは 自分で 組み立てるんですか。……ええ、説明書の とおりに、組み立てて ください。",
+       "vietnamese": "Cái bàn này mình tự lắp à? …… Vâng, hãy lắp theo đúng sách hướng dẫn."
+      },
+      {
+       "nihongo": "わたしが した とおりに、して ください。",
+       "vietnamese": "Hãy làm đúng như tôi đã làm."
+      }
+     ]
+    },
+    {
+     "title": "V1た／Nの あとで、V2（sau khi）",
+     "description": "<p>Cấu trúc: V た ＋ あとで ／ N の ＋ あとで</p><p>V2 xảy ra sau V1 hoặc sau sự việc N. Nhấn mạnh thứ tự thời gian hơn so với 〜てから.</p>",
+     "examples": [
+      {
+       "nihongo": "ごはんを 食べた あとで、歯を 磨きます。",
+       "vietnamese": "Ăn cơm xong tôi đánh răng."
+      },
+      {
+       "nihongo": "ちょっと 待って ください。しょうゆは 砂糖を 入れた あとで、入れるんですよ。……はい、わかりました。",
+       "vietnamese": "Đợi chút. Xì dầu phải cho vào sau khi cho đường cơ. …… Vâng, tôi hiểu rồi."
+      },
+      {
+       "nihongo": "仕事の あとで、飲みに 行きませんか。……すみません。きょうは スポーツクラブへ 行く 日なんです。",
+       "vietnamese": "Sau giờ làm đi nhậu không? …… Xin lỗi, hôm nay là ngày tôi đi câu lạc bộ thể thao."
+      }
+     ]
+    },
+    {
+     "title": "V1て／V1ないで V2（cách thức đi kèm）",
+     "description": "<p>Cấu trúc: V1 て ＋ V2 ／ V1 ない で ＋ V2</p><p>V1 chỉ cách thức, trạng thái đi kèm khi làm V2 (mặc gì, có cho gì vào không). V1ないで V2 còn dùng khi chọn V2 thay cho V1 (không… mà…).</p>",
+     "examples": [
+      {
+       "nihongo": "コーヒーは 砂糖を 入れないで 飲みます。",
+       "vietnamese": "Tôi uống cà phê không cho đường."
+      },
+      {
+       "nihongo": "友達の 結婚式に 何を 着て 行ったら いいですか。……そうですね。日本では 男の 人は 黒か 紺の スーツを 着て、白い ネクタイを して 行きます。",
+       "vietnamese": "Đi đám cưới bạn thì nên mặc gì? …… Ừm, ở Nhật đàn ông thường mặc vest đen hoặc xanh đậm, đeo cà vạt trắng."
+      },
+      {
+       "nihongo": "これは ソースを つけるんですか。……いいえ、何も つけないで 食べて ください。",
+       "vietnamese": "Món này chấm nước sốt à? …… Không, cứ ăn không chấm gì cả."
+      },
+      {
+       "nihongo": "最近 エレベーターに 乗らないで、階段を 使って いるんです。……いい 運動に なりますね。",
+       "vietnamese": "Dạo này tôi không đi thang máy mà đi cầu thang bộ. …… Vận động tốt nhỉ."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第35課 どこか いい 所、ありませんか",
+   "description": "Thể điều kiện (条件形 〜ば); 〜なら; 疑問詞＋Vば いいですか.",
+   "firstPage": 96,
+   "lastPage": 107,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>春に なれば、桜が 咲きます。</li><li>天気が よければ、向こうに 島が 見えます。</li><li>北海道旅行なら、6月が いいです。</li></ol><h4>会話 · Hội thoại：どこか いい 所、ありませんか</h4><p><strong>タワポン</strong>：鈴木さん、冬休みに 友達と スキーに 行きたいんですが、どこか いい 所、ありませんか。</p><p><strong>鈴木</strong>：何日ぐらいの 予定ですか。</p><p><strong>タワポン</strong>：3日ぐらいです。</p><p><strong>鈴木</strong>：それなら、草津か 志賀高原が いいと 思いますよ。温泉も あるし……。</p><p><strong>タワポン</strong>：どうやって 行くんですか。</p><p><strong>鈴木</strong>：JRでも 行けますが、夜行バスなら、朝 着きますから、便利ですよ。</p><p><strong>タワポン</strong>：そうですか。どちらが 安いんですか。</p><p><strong>鈴木</strong>：さあ……。旅行社へ 行けば もっと 詳しい ことが わかりますよ。</p><p><strong>タワポン</strong>：それから スキーの 道具や 服は 何も 持って いないんですが……。</p><p><strong>鈴木</strong>：全部 スキー場で 借りられますよ。心配なら、旅行社で 予約も できるし……。</p><p><strong>タワポン</strong>：そうですか。どうも ありがとう ございました。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "条件形 〜ば（nếu）",
+     "description": "<p>Cấu trúc: V: 行く → 行けば（う → え＋ば）、食べる → 食べれば、来る → 来れば、する → すれば ／ Aい: よい → よければ ／ Aな・N: 〜なら ／ phủ định: 〜なければ</p><p>Nêu điều kiện cần để sự việc ở vế sau xảy ra. Vế sau thường không phải ý chí của người nói khi chủ ngữ hai vế giống nhau và V là động từ hành động.</p>",
+     "examples": [
+      {
+       "nihongo": "春に なれば、桜が 咲きます。",
+       "vietnamese": "Hễ sang xuân thì hoa anh đào nở."
+      },
+      {
+       "nihongo": "天気が よければ、向こうに 島が 見えます。",
+       "vietnamese": "Nếu trời đẹp thì có thể nhìn thấy đảo ở phía bên kia."
+      },
+      {
+       "nihongo": "車の 窓が 開かないんですが……。……その ボタンを 押せば、開きますよ。",
+       "vietnamese": "Cửa sổ xe không mở được…… …… Ấn cái nút đó là mở được đấy."
+      },
+      {
+       "nihongo": "ほかに 意見が ありますか。……いいえ、特に ありません。なければ、これで 終わりましょう。",
+       "vietnamese": "Còn ý kiến nào khác không? …… Không, không có gì đặc biệt. …… Nếu không có thì chúng ta kết thúc ở đây."
+      },
+      {
+       "nihongo": "日本の 生活は どうですか。……とても 便利です。でも、もう 少し 物価が 安ければ、もっと いいと 思います。",
+       "vietnamese": "Cuộc sống ở Nhật thế nào? …… Rất tiện lợi. Nhưng nếu vật giá rẻ hơn chút nữa thì tôi nghĩ sẽ tốt hơn."
+      },
+      {
+       "nihongo": "旅行社へ 行けば もっと 詳しい ことが わかりますよ。",
+       "vietnamese": "Nếu đến công ty du lịch thì sẽ biết chi tiết hơn."
+      }
+     ]
+    },
+    {
+     "title": "N なら、〜（nếu là…, về… thì）",
+     "description": "<p>Cấu trúc: N ／ 普通形 ＋ なら、〜</p><p>Tiếp nhận chủ đề người nghe vừa nêu rồi đưa ra lời khuyên, thông tin liên quan đến chủ đề đó.</p>",
+     "examples": [
+      {
+       "nihongo": "北海道旅行なら、6月が いいです。",
+       "vietnamese": "Nếu đi du lịch Hokkaido thì tháng 6 là tốt nhất."
+      },
+      {
+       "nihongo": "あしたまでに レポートを 出さなければ なりませんか。……無理なら、金曜日までに 出して ください。",
+       "vietnamese": "Tôi phải nộp báo cáo trước ngày mai à? …… Nếu không kịp thì nộp trước thứ Sáu."
+      },
+      {
+       "nihongo": "2、3日 旅行を しようと 思って いるんですが、どこか いい 所は ありませんか。……そうですね。2、3日なら、箱根か 日光が いいと 思います。",
+       "vietnamese": "Tôi định đi du lịch 2–3 ngày, có chỗ nào hay không? …… Ừm, nếu 2–3 ngày thì Hakone hoặc Nikko là được đấy."
+      },
+      {
+       "nihongo": "夜行バスなら、朝 着きますから、便利ですよ。",
+       "vietnamese": "Nếu đi xe buýt đêm thì sáng đến nơi, tiện lắm."
+      }
+     ]
+    },
+    {
+     "title": "疑問詞＋Vば いいですか（nên làm thế nào）",
+     "description": "<p>Cấu trúc: 疑問詞 ＋ V ば ＋ いいですか</p><p>Hỏi xin lời khuyên, hướng dẫn về cách làm. Nghĩa tương tự 疑問詞＋Vたら いいですか (bài 26).</p>",
+     "examples": [
+      {
+       "nihongo": "本を 借りたいんですが、どう すれば いいですか。……受付で カードを 作って もらって ください。",
+       "vietnamese": "Tôi muốn mượn sách, phải làm thế nào? …… Hãy nhờ quầy lễ tân làm thẻ cho."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第36課 毎日 運動するように して います",
+   "description": "Mục đích (〜ように); sự thay đổi năng lực, thói quen (〜ように なりました); cố gắng duy trì (〜ように して います).",
+   "firstPage": 108,
+   "lastPage": 115,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>速く 泳げるように、毎日 練習して います。</li><li>やっと 自転車に 乗れるように なりました。</li><li>毎日 日記を 書くように して います。</li></ol><h4>会話 · Hội thoại：毎日 運動するように して います</h4><p><strong>アナウンサー</strong>：皆さん、こんにちは。きょうの お客様は ことし 80歳の 小川よねさんです。</p><p><strong>小川よね</strong>：こんにちは。</p><p><strong>アナウンサー</strong>：お元気ですね。何か 特別な ことを して いらっしゃいますか。</p><p><strong>小川よね</strong>：毎日 運動するように して います。</p><p><strong>アナウンサー</strong>：どんな 運動ですか。</p><p><strong>小川よね</strong>：ダンスとか、水泳とか……。最近 500メートル 泳げるように なりました。</p><p><strong>アナウンサー</strong>：すごいですね。食べ物は？</p><p><strong>小川よね</strong>：何でも 食べますが、特に 魚が 好きです。毎日 違う 料理を 作るように して います。</p><p><strong>アナウンサー</strong>：頭と 体を よく 使って いらっしゃるんですね。</p><p><strong>小川よね</strong>：ええ。来年 フランスへ 行きたいと 思って います。それで フランス語の 勉強も 始めました。</p><p><strong>アナウンサー</strong>：何でも チャレンジする 気持ちが 大切なんですね。楽しい お話、どうも ありがとう ございました。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "V1る／V1ない ように、V2（để, để không）",
+     "description": "<p>Cấu trúc: V（thể từ điển, thể khả năng）／ V ない ＋ ように、V2</p><p>V1 là mục tiêu, trạng thái mong muốn; V2 là hành động có chủ ý để đạt được nó. V1 thường là động từ không mang ý chí (thể khả năng, わかる, 見える…) hoặc thể phủ định.</p>",
+     "examples": [
+      {
+       "nihongo": "速く 泳げるように、毎日 練習して います。",
+       "vietnamese": "Tôi luyện tập mỗi ngày để có thể bơi nhanh."
+      },
+      {
+       "nihongo": "それは 電子辞書ですか。……ええ。知らない ことばが あったら、すぐ 調べられるように、持って いるんです。",
+       "vietnamese": "Đó là từ điển điện tử à? …… Vâng. Tôi mang theo để khi gặp từ không biết có thể tra ngay."
+      },
+      {
+       "nihongo": "カレンダーの 赤い 丸は どういう 意味ですか。……ごみの 日です。忘れないように、付けて あるんです。",
+       "vietnamese": "Vòng tròn đỏ trên lịch có nghĩa là gì? …… Là ngày đổ rác. Tôi đánh dấu để khỏi quên."
+      }
+     ]
+    },
+    {
+     "title": "Vる ように なります（đã có thể, đã bắt đầu）",
+     "description": "<p>Cấu trúc: V（thể từ điển, thể khả năng）＋ ように なりました ／ V なく なりました</p><p>Diễn tả sự thay đổi từ trạng thái không làm được sang làm được, hoặc hình thành một thói quen mới.</p>",
+     "examples": [
+      {
+       "nihongo": "やっと 自転車に 乗れるように なりました。",
+       "vietnamese": "Cuối cùng tôi cũng đã đi được xe đạp."
+      },
+      {
+       "nihongo": "もう 日本の 食べ物に 慣れましたか。……はい。初めは 食べられませんでしたが、今は 何でも 食べられるように なりました。",
+       "vietnamese": "Bạn đã quen đồ ăn Nhật chưa? …… Rồi. Lúc đầu tôi không ăn được, nhưng giờ thì ăn được mọi thứ."
+      },
+      {
+       "nihongo": "ショパンの 曲が 弾けるように なりましたか。……いいえ、まだ 弾けません。早く 弾けるように なりたいです。",
+       "vietnamese": "Bạn đã chơi được nhạc Chopin chưa? …… Chưa, vẫn chưa chơi được. Tôi muốn sớm chơi được."
+      },
+      {
+       "nihongo": "新しい 道が できましたね。……ええ。夫の 田舎まで 4時間で 帰れるように なりました。",
+       "vietnamese": "Đường mới đã làm xong rồi nhỉ. …… Vâng. Giờ về quê chồng tôi chỉ mất 4 tiếng."
+      }
+     ]
+    },
+    {
+     "title": "Vる／Vない ように します（cố gắng, chú ý để）",
+     "description": "<p>Cấu trúc: V（thể từ điển）／ V ない ＋ ように して います／して ください</p><p>〜ようにしています: cố gắng duy trì một thói quen. 〜ようにしてください: yêu cầu người nghe chú ý làm (hoặc không làm) gì đó, lịch sự hơn 〜てください.</p>",
+     "examples": [
+      {
+       "nihongo": "毎日 日記を 書くように して います。",
+       "vietnamese": "Tôi cố gắng viết nhật ký mỗi ngày."
+      },
+      {
+       "nihongo": "甘い 物は 食べないんですか。……ええ。できるだけ 食べないように して いるんです。",
+       "vietnamese": "Bạn không ăn đồ ngọt à? …… Vâng. Tôi cố gắng hết sức không ăn."
+      },
+      {
+       "nihongo": "試験は 9時からです。絶対に 遅れないように して ください。遅れたら、入れませんから。……はい、わかりました。",
+       "vietnamese": "Kỳ thi bắt đầu từ 9 giờ. Tuyệt đối đừng đến muộn. Muộn là không được vào đâu. …… Vâng, tôi hiểu rồi."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第37課 金閣寺は 14世紀に 建てられました",
+   "description": "Thể bị động (受身形): bị/được người khác tác động, bị ảnh hưởng đến đồ vật của mình, bị động khách quan; N から／N で 造られます.",
+   "firstPage": 116,
+   "lastPage": 123,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>子どもの とき、よく 母に しかられました。</li><li>ラッシュの 電車で 足を 踏まれました。</li><li>法隆寺は 607年に 建てられました。</li></ol><h4>会話 · Hội thoại：金閣寺は 14世紀に 建てられました</h4><p><strong>ガイド</strong>：皆様、あちらが 有名な 金閣寺です。金閣寺は 14世紀に 建てられました。1950年に 一度 焼けて しまいましたが、その後 新しい 建物が 建てられて、1994年に 世界遺産に なりました。京都で 人気が ある お寺の 一つです。</p><p><strong>カリナ</strong>：きれいですね。壁が 金色ですが、本物の 金ですか。</p><p><strong>ガイド</strong>：はい。金が 20キロぐらい 使われました。</p><p><strong>カリナ</strong>：そうですか。あの 中に 入れますか。</p><p><strong>ガイド</strong>：中には 入れないんです。池の 周りを 歩きながら 見て ください。</p><p><strong>カリナ</strong>：紅葉が きれいですね。</p><p><strong>ガイド</strong>：ええ。金閣寺は 紅葉と 雪の 季節が 特に 美しいと 言われて います。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "受身形・受身文（câu bị động: N1 は N2 に V られます）",
+     "description": "<p>Cấu trúc: Nhóm I: 踏む → 踏まれる（う → あ＋れる）／ Nhóm II: 見る → 見られる ／ 来る → 来られる、する → される。 N1（người chịu）は N2（người làm）に V受身</p><p>Diễn tả hành động từ góc độ người chịu tác động. Người thực hiện hành động đi với に.</p>",
+     "examples": [
+      {
+       "nihongo": "子どもの とき、よく 母に しかられました。",
+       "vietnamese": "Hồi nhỏ tôi hay bị mẹ mắng."
+      },
+      {
+       "nihongo": "けさ 部長に 呼ばれました。……何か あったんですか。出張の レポートの 書き方に ついて 注意されました。",
+       "vietnamese": "Sáng nay tôi bị trưởng phòng gọi lên. …… Có chuyện gì vậy? …… Tôi bị nhắc nhở về cách viết báo cáo công tác."
+      }
+     ]
+    },
+    {
+     "title": "N1 は N2 に N3 を V受身（bị ảnh hưởng đến đồ vật, bộ phận của mình）",
+     "description": "<p>Cấu trúc: N1 は N2 に N3（vật sở hữu, bộ phận cơ thể）を V受身</p><p>Người N1 bị làm phiền, chịu thiệt vì hành động của N2 lên đồ vật hay cơ thể của N1.</p>",
+     "examples": [
+      {
+       "nihongo": "ラッシュの 電車で 足を 踏まれました。",
+       "vietnamese": "Tôi bị giẫm vào chân trên chuyến tàu giờ cao điểm."
+      },
+      {
+       "nihongo": "どう したんですか。……だれかに 傘を まちがえられたんです。",
+       "vietnamese": "Có chuyện gì vậy? …… Ai đó cầm nhầm ô của tôi."
+      }
+     ]
+    },
+    {
+     "title": "N が／は V受身（bị động khách quan）",
+     "description": "<p>Cấu trúc: N が／は V受身（người làm thường không cần nêu）</p><p>Dùng khi không cần nêu người thực hiện, khi nói về sự kiện, công trình, sản phẩm, sự thật chung (được xây, được tổ chức, được sử dụng…).</p>",
+     "examples": [
+      {
+       "nihongo": "法隆寺は 607年に 建てられました。",
+       "vietnamese": "Chùa Horyu được xây dựng năm 607."
+      },
+      {
+       "nihongo": "また 新しい 星が 発見されましたよ。……そうですか。",
+       "vietnamese": "Lại có một ngôi sao mới được phát hiện đấy. …… Vậy à."
+      },
+      {
+       "nihongo": "ことしの 世界子ども会議は どこで 開かれますか。……広島で 開かれます。",
+       "vietnamese": "Hội nghị trẻ em thế giới năm nay được tổ chức ở đâu? …… Được tổ chức ở Hiroshima."
+      },
+      {
+       "nihongo": "ブラジルでは 何語が 使われて いますか。……ポルトガル語が 使われて います。",
+       "vietnamese": "Ở Brazil người ta dùng tiếng gì? …… Tiếng Bồ Đào Nha."
+      },
+      {
+       "nihongo": "金閣寺は 紅葉と 雪の 季節が 特に 美しいと 言われて います。",
+       "vietnamese": "Người ta nói chùa Kinkaku đặc biệt đẹp vào mùa lá đỏ và mùa tuyết."
+      }
+     ]
+    },
+    {
+     "title": "N から／N で 造られます（làm từ…）",
+     "description": "<p>Cấu trúc: N（nguyên liệu, biến đổi chất）から 造られます ／ N（vật liệu nhìn thấy được）で 造られます</p><p>から dùng khi nguyên liệu đã biến đổi, không còn nhận ra; で dùng khi vẫn nhìn thấy vật liệu.</p>",
+     "examples": [
+      {
+       "nihongo": "ビールは 麦から 造られます。これが 原料の 麦です。……これが ビールに なるんですね。",
+       "vietnamese": "Bia được làm từ lúa mạch. Đây là lúa mạch nguyên liệu. …… Cái này mà thành bia nhỉ."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第38課 片づけるのが 好きなんです",
+   "description": "Danh từ hóa động từ bằng の: 〜のは＋tính từ, 〜のが＋好き／上手, 〜のを 忘れました／知っていますか, 〜のは N です (nhấn mạnh).",
+   "firstPage": 124,
+   "lastPage": 131,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>絵を かくのは 楽しいです。</li><li>わたしは 星を 見るのが 好きです。</li><li>財布を 持って 来るのを 忘れました。</li><li>わたしが 日本へ 来たのは 去年の 3月です。</li></ol><h4>会話 · Hội thoại：片づけるのが 好きなんです</h4><p><strong>大学職員</strong>：ワット先生、回覧です。</p><p><strong>ワット</strong>：あ、すみません。そこに 置いといて ください。</p><p><strong>大学職員</strong>：先生の 研究室は いつも きれいですね。</p><p><strong>ワット</strong>：わたしは 片づけるのが 好きなんです。</p><p><strong>大学職員</strong>：本も きちんと 並べて あるし……。整理するのが 上手なんですね。</p><p><strong>ワット</strong>：昔 『上手な 整理の 方法』と いう 本を 書いた ことが あるんです。</p><p><strong>大学職員</strong>：へえ、すごいですね。</p><p><strong>ワット</strong>：あまり 売れませんでしたけどね。よかったら、1冊 持って 来ましょうか。</p><p><strong>大学職員</strong>：おはよう ございます。</p><p><strong>ワット</strong>：あ、本を 持って 来るのを 忘れました。すみません。</p><p><strong>大学職員</strong>：いいですよ。でも、回覧に はんこを 押すのを 忘れないで ください。先月も 押して ありませんでしたよ。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "V普通形のは Aです（việc… thì…）",
+     "description": "<p>Cấu trúc: V（thể thông thường）＋ のは ＋ Aい／Aな です（楽しい、難しい、簡単…）</p><p>の biến cụm động từ thành danh từ, làm chủ đề để đánh giá bằng tính từ.</p>",
+     "examples": [
+      {
+       "nihongo": "絵を かくのは 楽しいです。",
+       "vietnamese": "Vẽ tranh thì vui."
+      },
+      {
+       "nihongo": "日記を 続けて いますか。……いいえ、3日で やめて しまいました。始めるのは 簡単ですが、続けるのは 難しいですね。",
+       "vietnamese": "Bạn vẫn viết nhật ký chứ? …… Không, 3 ngày là bỏ rồi. Bắt đầu thì dễ, nhưng duy trì mới khó."
+      }
+     ]
+    },
+    {
+     "title": "V普通形のが Aです（thích / giỏi / nhanh… việc）",
+     "description": "<p>Cấu trúc: V（thể thông thường）＋ のが ＋ 好き／嫌い／上手／下手／速い／遅い です</p><p>Diễn tả sở thích, khả năng, đặc điểm liên quan đến một hành động.</p>",
+     "examples": [
+      {
+       "nihongo": "わたしは 星を 見るのが 好きです。",
+       "vietnamese": "Tôi thích ngắm sao."
+      },
+      {
+       "nihongo": "きれいな 庭ですね。……ありがとう ございます。夫は 花を 育てるのが 上手なんです。",
+       "vietnamese": "Khu vườn đẹp quá. …… Cảm ơn anh. Chồng tôi trồng hoa giỏi lắm."
+      },
+      {
+       "nihongo": "東京は どうですか。……人が 多いですね。それに みんな 歩くのが 速いですね。",
+       "vietnamese": "Tokyo thế nào? …… Đông người nhỉ. Hơn nữa ai cũng đi nhanh."
+      },
+      {
+       "nihongo": "わたしは 片づけるのが 好きなんです。",
+       "vietnamese": "Tôi thích dọn dẹp."
+      }
+     ]
+    },
+    {
+     "title": "V普通形のを 忘れました／知っていますか",
+     "description": "<p>Cấu trúc: V（thể thông thường）＋ のを ＋ 忘れました ／ 知って いますか</p><p>Danh từ hóa làm tân ngữ: quên làm việc gì; có biết việc gì không. 知りませんでした dùng khi trả lời \"trước đó không biết\".</p>",
+     "examples": [
+      {
+       "nihongo": "財布を 持って 来るのを 忘れました。",
+       "vietnamese": "Tôi quên mang ví."
+      },
+      {
+       "nihongo": "あ、いけない。……どう したんですか。車の 窓を 閉めるのを 忘れました。",
+       "vietnamese": "Ôi chết. …… Sao vậy? …… Tôi quên đóng cửa sổ ô tô."
+      },
+      {
+       "nihongo": "宮崎さんに 赤ちゃんが 生まれたのを 知って いますか。……いいえ、知りませんでした。いつですか。1か月ぐらいまえです。",
+       "vietnamese": "Anh có biết chị Miyazaki vừa sinh em bé không? …… Không, tôi không biết. Khi nào vậy? …… Khoảng một tháng trước."
+      }
+     ]
+    },
+    {
+     "title": "V普通形のは N です（nhấn mạnh）",
+     "description": "<p>Cấu trúc: V（thể thông thường）＋ のは ＋ N（thời gian, nơi chốn, người…）です</p><p>Đưa thông tin muốn nhấn mạnh xuống cuối câu, làm vị ngữ.</p>",
+     "examples": [
+      {
+       "nihongo": "わたしが 日本へ 来たのは 去年の 3月です。",
+       "vietnamese": "Tôi đến Nhật là vào tháng 3 năm ngoái."
+      },
+      {
+       "nihongo": "初めて 好きに なった 人の ことを 覚えて いますか。……ええ。彼女に 初めて 会ったのは 小学校の 教室です。彼女は 音楽の 先生でした。",
+       "vietnamese": "Bạn còn nhớ người đầu tiên mình thích không? …… Có. Nơi tôi gặp cô ấy lần đầu là lớp học tiểu học. Cô ấy là giáo viên âm nhạc."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第39課 遅れて、すみません",
+   "description": "Nguyên nhân – kết quả: 〜て／〜なくて (cảm xúc, khả năng), N で (sự cố, thiên tai), 〜ので (lý do lịch sự).",
+   "firstPage": 132,
+   "lastPage": 139,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>ニュースを 聞いて、びっくりしました。</li><li>地震で ビルが 倒れました。</li><li>体の 調子が 悪いので、病院へ 行きます。</li></ol><h4>会話 · Hội thoại：遅れて、すみません</h4><p><strong>ミラー</strong>：課長、遅れて、すみません。</p><p><strong>中村課長</strong>：ミラーさん、どう したんですか。</p><p><strong>ミラー</strong>：実は 来る 途中で 事故が あって、バスが 遅れて しまったんです。</p><p><strong>中村課長</strong>：バスの 事故ですか。</p><p><strong>ミラー</strong>：いいえ。交差点で トラックと 車が ぶつかって、バスが 動かなかったんです。</p><p><strong>中村課長</strong>：それは 大変でしたね。連絡が ないので、みんな 心配して いたんですよ。</p><p><strong>ミラー</strong>：電話したかったんですが、ケータイを うちに 忘れて しまって……。どうも すみませんでした。</p><p><strong>中村課長</strong>：わかりました。じゃ、会議を 始めましょう。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "〜て／〜なくて／Aくて／Aなで、〜（vì…, nên…）",
+     "description": "<p>Cấu trúc: V て／V なくて ／ Aい → くて ／ Aな・N → で ＋ 〜（cảm xúc, khả năng, trạng thái）</p><p>Vế trước là nguyên nhân, vế sau là kết quả không mang ý chí: cảm xúc (びっくりする、安心する、困る、がっかりする), khả năng (〜られない), trạng thái. Vế sau không dùng mệnh lệnh, nhờ vả, rủ rê, ý chí.</p>",
+     "examples": [
+      {
+       "nihongo": "ニュースを 聞いて、びっくりしました。",
+       "vietnamese": "Nghe tin tức tôi giật mình."
+      },
+      {
+       "nihongo": "お見合いは どうでしたか。……写真を 見た ときは、すてきな 人だと 思いましたが、会って、がっかりしました。",
+       "vietnamese": "Buổi xem mắt thế nào? …… Lúc xem ảnh tôi nghĩ là người tuyệt vời, nhưng gặp rồi thì thất vọng."
+      },
+      {
+       "nihongo": "今度の 土曜日に みんなで ハイキングに 行くんですが、いっしょに 行きませんか。……すみません。土曜日は ちょっと 都合が 悪くて、行けないんです。",
+       "vietnamese": "Thứ Bảy tới mọi người đi dã ngoại, bạn đi cùng không? …… Xin lỗi, thứ Bảy tôi bận nên không đi được."
+      },
+      {
+       "nihongo": "きのうの 映画は どうでしたか。……話が 複雑で、よく わかりませんでした。",
+       "vietnamese": "Bộ phim hôm qua thế nào? …… Nội dung phức tạp nên tôi không hiểu lắm."
+      },
+      {
+       "nihongo": "遅れて、すみません。",
+       "vietnamese": "Xin lỗi vì đã đến muộn."
+      }
+     ]
+    },
+    {
+     "title": "N で（vì N: sự cố, hiện tượng）",
+     "description": "<p>Cấu trúc: N（事故、地震、火事、病気…）＋ で</p><p>Danh từ chỉ sự kiện, hiện tượng tự nhiên, tai nạn là nguyên nhân. Vế sau cũng không mang ý chí.</p>",
+     "examples": [
+      {
+       "nihongo": "地震で ビルが 倒れました。",
+       "vietnamese": "Tòa nhà bị đổ vì động đất."
+      },
+      {
+       "nihongo": "遅く なって、すみません。……どう したんですか。事故で バスが 遅れたんです。",
+       "vietnamese": "Xin lỗi vì đến muộn. …… Có chuyện gì vậy? …… Xe buýt bị chậm vì tai nạn."
+      }
+     ]
+    },
+    {
+     "title": "普通形 ので、〜（vì…, nên…）",
+     "description": "<p>Cấu trúc: 普通形（Aな／N: 〜な）＋ ので</p><p>Nêu lý do một cách khách quan, nhẹ nhàng; hay dùng khi xin phép, giải thích lý do một cách lịch sự. Có thể dùng thể lịch sự trước ので.</p>",
+     "examples": [
+      {
+       "nihongo": "体の 調子が 悪いので、病院へ 行きます。",
+       "vietnamese": "Vì thấy trong người không khỏe nên tôi đi bệnh viện."
+      },
+      {
+       "nihongo": "ちょっと 飲みに 行きませんか。……すみません。用事が あるので、お先に 失礼します。そうですか。お疲れさまでした。",
+       "vietnamese": "Đi uống chút không? …… Xin lỗi, tôi có việc bận nên xin phép về trước. …… Vậy à. Anh vất vả rồi."
+      },
+      {
+       "nihongo": "最近、布団で 寝て いるんですが、便利ですね。……ベッドは どう したんですか。部屋が 狭くて、邪魔なので、友達に あげました。",
+       "vietnamese": "Dạo này tôi ngủ đệm futon, tiện lắm. …… Còn cái giường thì sao? …… Phòng hẹp, vướng víu nên tôi cho bạn rồi."
+      },
+      {
+       "nihongo": "連絡が ないので、みんな 心配して いたんですよ。",
+       "vietnamese": "Vì không có liên lạc nên mọi người đã rất lo đấy."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第40課 友達が できたか どうか、心配です",
+   "description": "Câu hỏi lồng (疑問詞〜か／〜か どうか); thử làm (Vて みます).",
+   "firstPage": 140,
+   "lastPage": 149,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>JL107便は 何時に 到着するか、調べて ください。</li><li>台風9号は 東京へ 来るか どうか、まだ わかりません。</li><li>この 服を 着て みても いいですか。</li></ol><h4>会話 · Hội thoại：友達が できたか どうか、心配です</h4><p><strong>クララ</strong>：先生、ハンスは 学校で どうでしょうか。友達が できたか どうか、心配なんですが……。</p><p><strong>伊藤先生</strong>：大丈夫ですよ。ハンス君は クラスで とても 人気が あります。</p><p><strong>クララ</strong>：そうですか。安心しました。勉強は どうですか。漢字が 大変だと 言って いますが……。</p><p><strong>伊藤先生</strong>：毎日 漢字の テストを して いますが、ハンス君は いい 成績ですよ。</p><p><strong>クララ</strong>：そうですか。ありがとう ございます。</p><p><strong>伊藤先生</strong>：ところで、もうすぐ 運動会ですが、お父さんも いらっしゃいますか。</p><p><strong>クララ</strong>：ええ。</p><p><strong>伊藤先生</strong>：ハンス君が 学校で どんな 様子か、ぜひ 見て ください。</p><p><strong>クララ</strong>：わかりました。これからも よろしく お願いします。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "疑問詞＋普通形か、〜（câu hỏi có từ để hỏi lồng trong câu）",
+     "description": "<p>Cấu trúc: 疑問詞 ＋ 普通形（Aな／N bỏ だ）＋ か、〜（わかりません、調べて ください、覚えて いますか…）</p><p>Đưa một câu hỏi có từ để hỏi (何、いつ、どこ、どうやって…) vào làm một thành phần của câu lớn.</p>",
+     "examples": [
+      {
+       "nihongo": "JL107便は 何時に 到着するか、調べて ください。",
+       "vietnamese": "Hãy kiểm tra xem chuyến bay JL107 đến lúc mấy giờ."
+      },
+      {
+       "nihongo": "二次会は どこへ 行きましたか。……酔って いたので、どこへ 行ったか、全然 覚えて いないんです。",
+       "vietnamese": "Tăng hai các anh đi đâu? …… Tôi say quá nên hoàn toàn không nhớ đã đi đâu."
+      },
+      {
+       "nihongo": "山の 高さは どうやって 測るか、知って いますか。……さあ……。インターネットで 調べましょう。",
+       "vietnamese": "Bạn có biết người ta đo độ cao của núi bằng cách nào không? …… Chịu…… Tra trên mạng đi."
+      },
+      {
+       "nihongo": "わたしたちが 初めて 会ったのは いつか、覚えて いますか。……昔の ことなので、もう 忘れて しまいました。",
+       "vietnamese": "Anh có nhớ lần đầu chúng ta gặp nhau là khi nào không? …… Chuyện lâu rồi nên tôi quên mất rồi."
+      }
+     ]
+    },
+    {
+     "title": "普通形か どうか、〜（có… hay không）",
+     "description": "<p>Cấu trúc: 普通形（Aな／N bỏ だ）＋ か どうか、〜</p><p>Lồng một câu hỏi có/không (không có từ để hỏi) vào câu.</p>",
+     "examples": [
+      {
+       "nihongo": "台風9号は 東京へ 来るか どうか、まだ わかりません。",
+       "vietnamese": "Vẫn chưa biết cơn bão số 9 có đến Tokyo hay không."
+      },
+      {
+       "nihongo": "忘年会に 出席できるか どうか、メールで 返事を ください。……はい、わかりました。",
+       "vietnamese": "Hãy trả lời qua email xem có tham dự tiệc tất niên được hay không. …… Vâng, tôi hiểu rồi."
+      },
+      {
+       "nihongo": "大学に 出す 書類なんですが、まちがいが ないか どうか、見て いただけませんか。……いいですよ。",
+       "vietnamese": "Đây là hồ sơ nộp cho trường đại học, anh xem giúp có chỗ nào sai không được không? …… Được thôi."
+      },
+      {
+       "nihongo": "友達が できたか どうか、心配なんですが……。",
+       "vietnamese": "Tôi lo không biết cháu đã có bạn chưa……"
+      }
+     ]
+    },
+    {
+     "title": "Vて みます（thử làm）",
+     "description": "<p>Cấu trúc: V て ＋ みます</p><p>Làm thử một việc để xem kết quả thế nào. Vてみたいです: muốn thử làm.</p>",
+     "examples": [
+      {
+       "nihongo": "この 服を 着て みても いいですか。",
+       "vietnamese": "Tôi mặc thử bộ quần áo này được không?"
+      },
+      {
+       "nihongo": "長崎へ 行った ことが ありますか。……まだ ありません。ぜひ 一度 行って みたいです。",
+       "vietnamese": "Bạn đã đến Nagasaki chưa? …… Chưa. Nhất định tôi muốn đi thử một lần."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第41課 ご結婚 おめでとう ございます",
+   "description": "Cho nhận kính ngữ, khiêm nhường: いただきます／くださいます／やります; Vて いただきます／くださいます／やります; Vて くださいませんか.",
+   "firstPage": 150,
+   "lastPage": 157,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>わたしは ワット先生に 本を いただきました。</li><li>わたしは 先生に 漢字の まちがいを 直して いただきました。</li><li>部長の 奥さんが お茶を 教えて くださいました。</li><li>わたしは 息子に 紙飛行機を 作って やりました。</li></ol><h4>会話 · Hội thoại：ご結婚 おめでとう ございます</h4><p><strong>学長</strong>：ワットさん、いずみさん、ご結婚 おめでとう ございます。乾杯。</p><p><strong>皆</strong>：乾杯。</p><p><strong>司会者</strong>：次に こちらの 皆さんに ひとことずつ お願いします。</p><p><strong>松本良子</strong>：わたしは 去年の 夏の クラスで ワット先生に 英語を 教えて いただきました。先生の 授業は ユーモアが あって、楽しかったです。実は その クラスに いずみさんも いらっしゃったんです。</p><p><strong>大学職員</strong>：わたしは 先生に 『上手な 整理の 方法』と いう 本を いただきました。先生は 整理するのが お上手で、研究室は いつも きれいです。きっと お二人の お宅も すてきだと 思います。</p><p><strong>ミラー</strong>：ワットさん、今度は 『すてきな 人と 結婚する 方法』と いう 本を 書いて くださいませんか。ぜひ 読んで、勉強したいです。どうぞ お幸せに。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "いただきます／くださいます／やります（cho – nhận đồ vật）",
+     "description": "<p>Cấu trúc: わたしは（目上の人）に N を いただきます ／（目上の人）が わたしに N を くださいます ／ わたしは（目下・動植物）に N を やります</p><p>いただきます là khiêm nhường của もらいます (nhận từ người trên); くださいます là tôn kính của くれます (người trên cho mình); やります dùng khi cho người dưới, động vật, cây cối (thay cho あげます).</p>",
+     "examples": [
+      {
+       "nihongo": "わたしは ワット先生に 本を いただきました。",
+       "vietnamese": "Tôi đã nhận sách từ thầy Watt."
+      },
+      {
+       "nihongo": "きれいな お皿ですね。……ええ。結婚の お祝いに 田中さんが くださいました。",
+       "vietnamese": "Đĩa đẹp quá nhỉ. …… Vâng. Anh Tanaka đã tặng làm quà cưới."
+      },
+      {
+       "nihongo": "お母さん、猿に お菓子を やっても いい？……だめよ。あそこに えさを やっては いけないと 書いて あるでしょう？",
+       "vietnamese": "Mẹ ơi, con cho khỉ ăn bánh được không? …… Không được. Đằng kia có ghi là không được cho ăn đấy thôi?"
+      }
+     ]
+    },
+    {
+     "title": "Vて いただきます／くださいます／やります（nhận / được làm cho）",
+     "description": "<p>Cấu trúc: V て ＋ いただきます ／ くださいます ／ やります</p><p>Hành động mang lại lợi ích. Vていただきます: được người trên làm cho (chủ ngữ là người nhận). Vてくださいます: người trên làm cho mình (chủ ngữ là người làm). Vてやります: làm cho người dưới, con vật.</p>",
+     "examples": [
+      {
+       "nihongo": "わたしは 先生に 漢字の まちがいを 直して いただきました。",
+       "vietnamese": "Tôi được thầy sửa lỗi chữ Hán cho."
+      },
+      {
+       "nihongo": "部長の 奥さんが お茶を 教えて くださいました。",
+       "vietnamese": "Vợ của trưởng phòng đã dạy trà đạo cho tôi."
+      },
+      {
+       "nihongo": "わたしは 息子に 紙飛行機を 作って やりました。",
+       "vietnamese": "Tôi gấp máy bay giấy cho con trai."
+      },
+      {
+       "nihongo": "相撲を 見に 行った ことが ありますか。……ええ。この間 部長に 連れて 行って いただきました。とても おもしろかったです。",
+       "vietnamese": "Bạn đã đi xem sumo bao giờ chưa? …… Rồi. Hôm trước tôi được trưởng phòng dẫn đi. Thú vị lắm."
+      },
+      {
+       "nihongo": "夏休みの ホームステイは どうでしたか。……楽しかったです。家族の 皆さんが とても 親切に して くださいました。",
+       "vietnamese": "Đợt homestay kỳ nghỉ hè thế nào? …… Vui lắm. Mọi người trong gia đình đều đối xử với tôi rất tử tế."
+      },
+      {
+       "nihongo": "連休は 何を しますか。……子どもを ディズニーランドへ 連れて 行って やります。",
+       "vietnamese": "Kỳ nghỉ dài bạn làm gì? …… Tôi đưa con đi Disneyland."
+      }
+     ]
+    },
+    {
+     "title": "Vて くださいませんか（nhờ vả lịch sự）",
+     "description": "<p>Cấu trúc: V て ＋ くださいませんか</p><p>Cách nhờ vả lịch sự hơn Vてください và Vてくれませんか, dùng với người trên hoặc người không thân.</p>",
+     "examples": [
+      {
+       "nihongo": "新しい コピー機の 使い方が よく わからないんですが、ちょっと 教えて くださいませんか。……いいですよ。",
+       "vietnamese": "Tôi không rõ cách dùng máy photo mới, anh chỉ giúp tôi một chút được không ạ? …… Được thôi."
+      },
+      {
+       "nihongo": "今度は 『すてきな 人と 結婚する 方法』と いう 本を 書いて くださいませんか。",
+       "vietnamese": "Lần tới thầy viết cuốn sách \"Cách kết hôn với người tuyệt vời\" được không ạ?"
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第42課 ボーナスは 何に 使いますか",
+   "description": "Mục đích, lợi ích (〜ために); công dụng, tiện cho (〜のに 使います／いいです／かかります).",
+   "firstPage": 158,
+   "lastPage": 165,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>将来 自分の 店を 持つ ために、貯金して います。</li><li>この 靴は 山を 歩くのに いいです。</li></ol><h4>会話 · Hội thoại：ボーナスは 何に 使いますか</h4><p><strong>鈴木</strong>：林さん、ボーナスは いつ 出るんですか。</p><p><strong>林</strong>：来週です。鈴木さんの 会社は？</p><p><strong>鈴木</strong>：あしたです。楽しみですね。</p><p><strong>林</strong>：ええ。鈴木さんは 何に 使いますか。</p><p><strong>鈴木</strong>：まず 新しい 自転車を 買って、それから 旅行に 行って……。</p><p><strong>小川</strong>：貯金は しないんですか。</p><p><strong>鈴木</strong>：僕は あまり 考えた こと、ありませんね。</p><p><strong>林</strong>：わたしは 半分は 貯金する つもりです。</p><p><strong>鈴木</strong>：えっ、半分も 貯金するんですか。</p><p><strong>林</strong>：ええ、いつか イギリスへ 留学しようと 思って いるんです。</p><p><strong>小川</strong>：へえ、独身の 人は いいですね。全部 自分の ために、使えて。わたしは 家の ローンを 払って、子どもの 教育の ために、貯金したら、ほとんど 残りませんよ。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "Vる／Nの ために、〜（để, vì）",
+     "description": "<p>Cấu trúc: V（thể từ điển, động từ ý chí）＋ ために ／ N の ＋ ために</p><p>Diễn tả mục đích có chủ ý. Vế trước dùng động từ ý chí (khác với 〜ように dùng động từ không ý chí). Nのために còn có nghĩa \"vì lợi ích của N\".</p>",
+     "examples": [
+      {
+       "nihongo": "将来 自分の 店を 持つ ために、貯金して います。",
+       "vietnamese": "Tôi đang tiết kiệm để sau này mở cửa hàng riêng."
+      },
+      {
+       "nihongo": "盆踊りに 参加する ために、毎日 練習して います。……そうですか。楽しみですね。",
+       "vietnamese": "Tôi luyện tập mỗi ngày để tham gia múa Bon. …… Thế à. Mong chờ nhỉ."
+      },
+      {
+       "nihongo": "なぜ 一人で 山に 登るんですか。……一人に なって 考える ために、山に 行くんです。",
+       "vietnamese": "Sao bạn leo núi một mình? …… Tôi lên núi để được một mình suy nghĩ."
+      },
+      {
+       "nihongo": "健康の ために、何か して いますか。……いいえ。でも、来週から 毎朝 走ろうと 思って います。",
+       "vietnamese": "Bạn có làm gì vì sức khỏe không? …… Không. Nhưng từ tuần sau tôi định sáng nào cũng chạy."
+      },
+      {
+       "nihongo": "きれいな 曲ですね。……「エリーゼの ために」ですよ。ベートーベンが ある 女の 人の ために、作った 曲です。",
+       "vietnamese": "Bản nhạc hay quá nhỉ. …… Là \"Für Elise\" đấy. Bản nhạc Beethoven sáng tác cho một người phụ nữ."
+      }
+     ]
+    },
+    {
+     "title": "Vる の／N に 使います・いいです・便利です（dùng để, tốt cho）",
+     "description": "<p>Cấu trúc: V（thể từ điển）＋ のに ／ N ＋ に ＋ 使います／いいです／便利です／役に 立ちます</p><p>Nói về công dụng, sự thích hợp, tiện lợi của đồ vật cho một mục đích.</p>",
+     "examples": [
+      {
+       "nihongo": "この 靴は 山を 歩くのに いいです。",
+       "vietnamese": "Đôi giày này tốt cho việc đi bộ leo núi."
+      },
+      {
+       "nihongo": "これは 何に 使うんですか。……ワインを 開けるのに 使います。",
+       "vietnamese": "Cái này dùng để làm gì? …… Dùng để mở chai rượu vang."
+      },
+      {
+       "nihongo": "2、3日の 出張に いい かばんが ありますか。……こちらは いかがですか。パソコンも 入って、便利ですよ。",
+       "vietnamese": "Có cái cặp nào hợp cho chuyến công tác 2–3 ngày không? …… Cái này thì sao ạ? Đựng được cả máy tính, tiện lắm."
+      }
+     ]
+    },
+    {
+     "title": "Vる の に ＋ thời gian／tiền が かかります",
+     "description": "<p>Cấu trúc: V（thể từ điển）＋ のに ＋（時間・お金）が かかります／要ります</p><p>Nói về thời gian, chi phí cần để làm việc gì.</p>",
+     "examples": [
+      {
+       "nihongo": "この 橋を 造るのに 何年 かかりましたか。……12年 かかりました。",
+       "vietnamese": "Xây cây cầu này mất mấy năm? …… Mất 12 năm."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第43課 毎日 楽しそうです",
+   "description": "Phán đoán qua vẻ bề ngoài (〜そうです: trông có vẻ, sắp…); đi làm gì rồi quay lại (Vて 来ます).",
+   "firstPage": 166,
+   "lastPage": 173,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>今にも 雨が 降りそうです。</li><li>ちょっと 切符を 買って 来ます。</li></ol><h4>会話 · Hội thoại：毎日 楽しそうです</h4><p><strong>林</strong>：これ、どなたの 写真ですか。</p><p><strong>シュミット</strong>：息子の ハンスです。運動会の とき、撮った 写真です。</p><p><strong>林</strong>：元気そうですね。</p><p><strong>シュミット</strong>：ええ。ハンスは 走るのが 速いんですよ。日本の 小学校にも 慣れて、友達も できて、毎日 楽しそうです。</p><p><strong>林</strong>：よかったですね。こちらの 方は 奥さんですか。きれいな 方ですね。</p><p><strong>シュミット</strong>：ありがとう ございます。妻は いろいろな ことに 興味が あって、いっしょに いると、おもしろいんですよ。</p><p><strong>林</strong>：そうですか。</p><p><strong>シュミット</strong>：特に 歴史が 好きで、時間が あれば、古い 町を 歩いて います。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "Vます そうです（sắp, có vẻ sắp）",
+     "description": "<p>Cấu trúc: V（thể ます bỏ ます）＋ そうです（今にも、もうすぐ、これから…）</p><p>Dựa vào những gì nhìn thấy để dự đoán một sự việc sắp xảy ra hoặc một thay đổi sắp đến.</p>",
+     "examples": [
+      {
+       "nihongo": "今にも 雨が 降りそうです。",
+       "vietnamese": "Trời sắp mưa đến nơi rồi."
+      },
+      {
+       "nihongo": "上着の ボタンが とれそうですよ。……あっ、ほんとうですね。どうも ありがとう ございます。",
+       "vietnamese": "Cúc áo khoác sắp rơi kìa. …… Ồ, đúng thật. Cảm ơn anh."
+      },
+      {
+       "nihongo": "暖かく なりましたね。……ええ、もうすぐ 桜が 咲きそうですね。",
+       "vietnamese": "Trời ấm lên rồi nhỉ. …… Vâng, hoa anh đào sắp nở rồi nhỉ."
+      }
+     ]
+    },
+    {
+     "title": "Aい／Aな そうです（trông có vẻ）",
+     "description": "<p>Cấu trúc: Aい（bỏ い）＋ そうです ／ Aな（bỏ な）＋ そうです（いい → よさそう、ない → なさそう）</p><p>Diễn tả phán đoán dựa trên vẻ bề ngoài, chưa xác nhận trực tiếp. Không dùng cho tính từ nhìn là biết ngay (きれい、赤い…). Bổ nghĩa danh từ: 〜そうな N.</p>",
+     "examples": [
+      {
+       "nihongo": "ドイツの りんごの ケーキです。どうぞ。……わあ、おいしそうですね。いただきます。",
+       "vietnamese": "Bánh táo kiểu Đức đây, mời anh. …… Ồ, trông ngon quá. Tôi xin phép ăn."
+      },
+      {
+       "nihongo": "この アルバイト、よさそうですね。給料も いいし、仕事も 楽そうだし。……でも、夜の 12時から 朝の 6時まででですよ。",
+       "vietnamese": "Việc làm thêm này có vẻ tốt nhỉ. Lương cao, việc lại có vẻ nhàn. …… Nhưng làm từ 12 giờ đêm đến 6 giờ sáng đấy."
+      },
+      {
+       "nihongo": "元気そうですね。",
+       "vietnamese": "Trông cháu khỏe mạnh nhỉ."
+      },
+      {
+       "nihongo": "友達も できて、毎日 楽しそうです。",
+       "vietnamese": "Cháu có bạn rồi, ngày nào trông cũng vui vẻ."
+      }
+     ]
+    },
+    {
+     "title": "Vて 来ます（đi làm gì rồi quay lại）",
+     "description": "<p>Cấu trúc: V て ＋ 来ます（ちょっと 〜て 来ます）</p><p>Đi đến một nơi, làm một việc rồi quay trở lại chỗ cũ.</p>",
+     "examples": [
+      {
+       "nihongo": "ちょっと 切符を 買って 来ます。",
+       "vietnamese": "Tôi đi mua vé một chút rồi quay lại."
+      },
+      {
+       "nihongo": "資料が 足りませんね。……何枚ですか。すぐ コピーして 来ます。",
+       "vietnamese": "Tài liệu không đủ nhỉ. …… Mấy tờ ạ? Tôi đi photo ngay rồi về."
+      },
+      {
+       "nihongo": "ちょっと 出かけて 来ます。……何時ごろ 帰りますか。4時までに 帰る つもりです。",
+       "vietnamese": "Tôi ra ngoài một chút. …… Khoảng mấy giờ anh về? …… Tôi định về trước 4 giờ."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第44課 この 写真みたいに して ください",
+   "description": "〜すぎます (quá…); 〜やすい／〜にくい (dễ/khó làm); 〜く／〜に します (làm cho trở nên…); N に します (chọn, quyết định).",
+   "firstPage": 174,
+   "lastPage": 181,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>ゆうべ お酒を 飲みすぎました。</li><li>この パソコンは 使いやすいです。</li><li>ズボンを 短く して ください。</li></ol><h4>会話 · Hội thoại：この 写真みたいに して ください</h4><p><strong>美容師</strong>：いらっしゃいませ。きょうは どう なさいますか。</p><p><strong>イー</strong>：カット、お願いします。</p><p><strong>美容師</strong>：じゃ、シャンプーを しますから、こちらへ どうぞ。</p><p><strong>美容師</strong>：カットは どういうふうに なさいますか。</p><p><strong>イー</strong>：ショートに したいんですけど……。この 写真みたいに して ください。</p><p><strong>美容師</strong>：あ、すてきですね。</p><p><strong>美容師</strong>：前の 長さは これで よろしいでしょうか。</p><p><strong>イー</strong>：そうですね。もう 少し 短く して ください。</p><p><strong>美容師</strong>：どうも お疲れさまでした。</p><p><strong>イー</strong>：ありがとう。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "〜すぎます（quá…）",
+     "description": "<p>Cấu trúc: V（thể ます bỏ ます）／ Aい（bỏ い）／ Aな（bỏ な）＋ すぎます</p><p>Diễn tả mức độ vượt quá giới hạn thông thường, thường mang ý không tốt. Chia như động từ nhóm II.</p>",
+     "examples": [
+      {
+       "nihongo": "ゆうべ お酒を 飲みすぎました。",
+       "vietnamese": "Tối qua tôi uống rượu quá nhiều."
+      },
+      {
+       "nihongo": "泣いて いるんですか。……いいえ、笑いすぎて、涙が 出たんです。",
+       "vietnamese": "Bạn đang khóc à? …… Không, tôi cười nhiều quá đến chảy nước mắt."
+      },
+      {
+       "nihongo": "最近の 車は 操作が 簡単ですね。……ええ。でも、簡単すぎて、運転が おもしろくないです。",
+       "vietnamese": "Xe ô tô dạo này thao tác đơn giản nhỉ. …… Vâng. Nhưng đơn giản quá nên lái chẳng thú vị."
+      }
+     ]
+    },
+    {
+     "title": "Vます やすいです／にくいです（dễ / khó làm）",
+     "description": "<p>Cấu trúc: V（thể ます bỏ ます）＋ やすいです ／ にくいです</p><p>Diễn tả việc làm gì đó dễ hay khó; hoặc một sự việc dễ hay khó xảy ra. Chia như tính từ đuôi い.</p>",
+     "examples": [
+      {
+       "nihongo": "この パソコンは 使いやすいです。",
+       "vietnamese": "Máy tính này dễ dùng."
+      },
+      {
+       "nihongo": "田舎と 町と どちらが 住みやすいですか。……田舎の ほうが 住みやすいと 思います。物価も 安いし、空気も きれいですから。",
+       "vietnamese": "Nông thôn và thành phố, nơi nào dễ sống hơn? …… Tôi nghĩ nông thôn dễ sống hơn. Vì vật giá rẻ, không khí lại trong lành."
+      },
+      {
+       "nihongo": "この コップは 丈夫で 割れにくいですよ。……子どもが 使うのに 安全で、いいですね。",
+       "vietnamese": "Cái cốc này chắc chắn, khó vỡ lắm. …… Trẻ con dùng cũng an toàn, tốt nhỉ."
+      }
+     ]
+    },
+    {
+     "title": "Aく／Aなに／Nに します（làm cho…）",
+     "description": "<p>Cấu trúc: Aい（bỏ い）＋ く します ／ Aな（bỏ な）＋ に します ／ N ＋ に します</p><p>Chủ thể tác động để làm cho đối tượng thay đổi. So sánh với 〜く／〜に なります (tự trở nên).</p>",
+     "examples": [
+      {
+       "nihongo": "ズボンを 短く して ください。",
+       "vietnamese": "Hãy làm quần ngắn lại."
+      },
+      {
+       "nihongo": "もう 夜 遅いですから、静かに して いただけませんか。……はい。すみません。",
+       "vietnamese": "Đã khuya rồi, anh giữ yên lặng giúp được không ạ? …… Vâng, xin lỗi."
+      },
+      {
+       "nihongo": "ショートに したいんですけど……。この 写真みたいに して ください。",
+       "vietnamese": "Tôi muốn cắt ngắn…… Làm giống như ảnh này giúp tôi."
+      }
+     ]
+    },
+    {
+     "title": "N に します（chọn, quyết định）",
+     "description": "<p>Cấu trúc: N ＋ に します</p><p>Dùng khi chọn, quyết định một thứ trong nhiều lựa chọn (gọi món, chọn đồ uống…).</p>",
+     "examples": [
+      {
+       "nihongo": "飲み物は 何に しますか。……ビールに します。",
+       "vietnamese": "Đồ uống anh chọn gì? …… Tôi lấy bia."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第45課 コースを まちがえた 場合は、どう したら いいですか",
+   "description": "Giả định tình huống (〜場合は); trái với mong đợi (〜のに).",
+   "firstPage": 182,
+   "lastPage": 191,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>カードを なくした 場合は、すぐ カード会社に 連絡して ください。</li><li>約束を したのに、彼女は 来ませんでした。</li></ol><h4>会話 · Hội thoại：コースを まちがえた 場合は、どう したら いいですか</h4><p><strong>係員</strong>：皆さん、この マラソンは 健康マラソンですから、無理を しないで ください。もし 気分が 悪く なったら、係員に 言って ください。</p><p><strong>参加者全員</strong>：はい。</p><p><strong>参加者1</strong>：すみません。コースを まちがえた 場合は、どう したら いいですか。</p><p><strong>係員</strong>：元の 所に 戻って、続けて ください。</p><p><strong>参加者2</strong>：あのう、途中で やめたい 場合は？</p><p><strong>係員</strong>：その 場合は、近くの 係員に 名前を 言って、帰って ください。では、スタートの 時間です。</p><p><strong>鈴木</strong>：ミラーさん、マラソンは どうでしたか。</p><p><strong>ミラー</strong>：2位でした。</p><p><strong>鈴木</strong>：2位だったんですか。すごいですね。</p><p><strong>ミラー</strong>：いいえ、一生懸命 練習したのに、優勝できなくて、残念です。</p><p><strong>鈴木</strong>：また 来年が ありますよ。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "〜場合は、〜（trường hợp…, khi…）",
+     "description": "<p>Cấu trúc: V（thể từ điển／ない／た）／ Aい ／ Aな な ／ N の ＋ 場合は、〜</p><p>Giả định một tình huống có thể xảy ra và nêu cách xử lý. Hay dùng trong hướng dẫn, quy định. Vế sau thường là chỉ thị, yêu cầu.</p>",
+     "examples": [
+      {
+       "nihongo": "カードを なくした 場合は、すぐ カード会社に 連絡して ください。",
+       "vietnamese": "Trường hợp làm mất thẻ, hãy liên lạc ngay với công ty thẻ."
+      },
+      {
+       "nihongo": "地震で 電車が 止まった 場合は、無理に 帰らないで、会社に 泊まって ください。……はい、わかりました。",
+       "vietnamese": "Trường hợp tàu dừng vì động đất, đừng cố về mà hãy ngủ lại công ty. …… Vâng, tôi hiểu rồi."
+      },
+      {
+       "nihongo": "これが この コンピューターの 保証書です。調子が 悪い 場合は、この 番号に 連絡して ください。……はい、わかりました。",
+       "vietnamese": "Đây là phiếu bảo hành của máy tính này. Trường hợp máy có trục trặc, hãy liên lạc số này. …… Vâng, tôi hiểu rồi."
+      },
+      {
+       "nihongo": "あのう、この 図書館では コピーの 領収書が もらえますか。……ええ。必要な 場合は、言って ください。",
+       "vietnamese": "Ở thư viện này có lấy được hóa đơn photo không ạ? …… Có. Trường hợp cần thì cứ nói."
+      },
+      {
+       "nihongo": "火事や 地震の 場合は、絶対に エレベーターを 使わないで ください。……はい、わかりました。",
+       "vietnamese": "Trường hợp hỏa hoạn hay động đất, tuyệt đối không dùng thang máy. …… Vâng, tôi hiểu rồi."
+      }
+     ]
+    },
+    {
+     "title": "普通形のに、〜（vậy mà, thế mà）",
+     "description": "<p>Cấu trúc: 普通形（Aな／N: 〜な）＋ のに、〜</p><p>Vế sau là kết quả trái với điều đương nhiên mong đợi từ vế trước; thể hiện sự bất mãn, tiếc nuối, ngạc nhiên. Vế sau không dùng câu ý chí, mệnh lệnh, nhờ vả.</p>",
+     "examples": [
+      {
+       "nihongo": "約束を したのに、彼女は 来ませんでした。",
+       "vietnamese": "Đã hẹn rồi vậy mà cô ấy không đến."
+      },
+      {
+       "nihongo": "スピーチは うまく いきましたか。……いいえ。一生懸命 練習して 覚えたのに、途中で 忘れて しまいました。",
+       "vietnamese": "Bài phát biểu ổn chứ? …… Không. Tôi đã luyện tập chăm chỉ và thuộc lòng vậy mà giữa chừng lại quên mất."
+      },
+      {
+       "nihongo": "冬なのに、桜が 咲いて いますね。……えっ、あれは 桜じゃ ありません。梅ですよ。",
+       "vietnamese": "Đang mùa đông mà hoa anh đào đã nở nhỉ. …… Hả, đó không phải hoa anh đào. Là hoa mơ đấy."
+      },
+      {
+       "nihongo": "一生懸命 練習したのに、優勝できなくて、残念です。",
+       "vietnamese": "Đã luyện tập hết sức vậy mà không vô địch được, tiếc quá."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第46課 先週 直して もらった ばかりなのに、また……",
+   "description": "Thời điểm của hành động (〜ところです: sắp, đang, vừa mới); 〜たばかりです (vừa mới); 〜はずです (chắc chắn là).",
+   "firstPage": 192,
+   "lastPage": 199,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>会議は 今から 始まる ところです。</li><li>彼は 3月に 大学を 卒業した ばかりです。</li><li>ミラーさんは 会議室に いる はずです。</li></ol><h4>会話 · Hội thoại：先週 直して もらった ばかりなのに、また……</h4><p><strong>係員</strong>：はい、ガスサービスセンターで ございます。</p><p><strong>タワポン</strong>：あのう、ガスレンジの 調子が おかしいんですが……。</p><p><strong>係員</strong>：どんな 具合ですか。</p><p><strong>タワポン</strong>：先週 直して もらった ばかりなのに、また 火が 消えて しまうんです。危ないので、すぐ 見に 来て くれませんか。</p><p><strong>係員</strong>：わかりました。5時ごろには 行けると 思います。ご住所と お名前を お願いします。</p><p><strong>タワポン</strong>：もしもし、5時ごろに ガスレンジを 見に 来て くれる はずなんですが、まだですか。</p><p><strong>係員</strong>：申し訳 ありません。どちら様でしょうか。</p><p><strong>タワポン</strong>：タワポンです。</p><p><strong>係員</strong>：少々 お待ち ください。係員に 連絡しますから。</p><p><strong>係員</strong>：お待たせしました。今 そちらに 向かって いる ところです。あと 10分ほど お待ち ください。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "Vる／Vて いる／Vた ところです（sắp / đang / vừa xong）",
+     "description": "<p>Cấu trúc: V（thể từ điển）＋ ところです ／ V て いる ＋ ところです ／ V た ＋ ところです</p><p>Chỉ rõ thời điểm của hành động: Vるところ: ngay trước khi bắt đầu (sắp làm); Vているところ: đang giữa chừng; Vたところ: vừa mới xong (ngay sau đó).</p>",
+     "examples": [
+      {
+       "nihongo": "会議は 今から 始まる ところです。",
+       "vietnamese": "Cuộc họp bây giờ sắp bắt đầu."
+      },
+      {
+       "nihongo": "もしもし、田中ですが、今 いいですか。……すみません。電車に 乗る ところなんです。あとで こちらから 電話します。",
+       "vietnamese": "A lô, tôi là Tanaka, bây giờ anh nói chuyện được không? …… Xin lỗi, tôi đang chuẩn bị lên tàu. Lát nữa tôi gọi lại."
+      },
+      {
+       "nihongo": "故障の 原因は わかりましたか。……いいえ、今 調べて いる ところです。",
+       "vietnamese": "Đã biết nguyên nhân hỏng chưa? …… Chưa, bây giờ đang kiểm tra."
+      },
+      {
+       "nihongo": "渡辺さんは いますか。……あ、たった今 帰った ところです。まだ エレベーターの 所に いるかも しれません。",
+       "vietnamese": "Chị Watanabe có đó không? …… À, chị ấy vừa mới về. Có khi vẫn còn ở chỗ thang máy."
+      },
+      {
+       "nihongo": "今 そちらに 向かって いる ところです。",
+       "vietnamese": "Bây giờ (nhân viên) đang trên đường đến chỗ anh."
+      }
+     ]
+    },
+    {
+     "title": "Vた ばかりです（vừa mới）",
+     "description": "<p>Cấu trúc: V た ＋ ばかりです</p><p>Diễn tả cảm nhận của người nói rằng một việc vừa xảy ra chưa lâu, dù khoảng thời gian thực tế có thể dài (khác với Vたところ chỉ thời điểm ngay sau đó).</p>",
+     "examples": [
+      {
+       "nihongo": "彼は 3月に 大学を 卒業した ばかりです。",
+       "vietnamese": "Anh ấy vừa mới tốt nghiệp đại học hồi tháng 3."
+      },
+      {
+       "nihongo": "仕事は どうですか。……先月 会社に 入った ばかりなので、まだ よく わかりません。",
+       "vietnamese": "Công việc thế nào? …… Tôi mới vào công ty tháng trước nên vẫn chưa rõ lắm."
+      },
+      {
+       "nihongo": "この ビデオカメラ、先週 買った ばかりなのに、動かないんです。……じゃ、ちょっと 見せて ください。",
+       "vietnamese": "Cái máy quay này mới mua tuần trước vậy mà không chạy. …… Vậy cho tôi xem một chút."
+      }
+     ]
+    },
+    {
+     "title": "普通形 はずです（chắc chắn là, lẽ ra）",
+     "description": "<p>Cấu trúc: V／Aい 普通形 ／ Aな な ／ N の ＋ はずです</p><p>Người nói phán đoán chắc chắn dựa trên căn cứ, lý lẽ khách quan.</p>",
+     "examples": [
+      {
+       "nihongo": "ミラーさんは 会議室に いる はずです。",
+       "vietnamese": "Chắc chắn anh Miller đang ở phòng họp."
+      },
+      {
+       "nihongo": "ミラーさんは まだですか。……さっき 駅から 電話が ありましたから、もうすぐ 来る はずです。",
+       "vietnamese": "Anh Miller vẫn chưa đến à? …… Lúc nãy anh ấy gọi từ ga, nên chắc chắn sắp đến rồi."
+      },
+      {
+       "nihongo": "5時ごろに ガスレンジを 見に 来て くれる はずなんですが、まだですか。",
+       "vietnamese": "Lẽ ra khoảng 5 giờ sẽ có người đến xem bếp ga, vậy mà vẫn chưa thấy ạ?"
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第47課 婚約したそうです",
+   "description": "Truyền đạt thông tin nghe được (普通形そうです, 〜によると); phán đoán dựa trên tình hình (〜ようです); 声／音／においが します.",
+   "firstPage": 200,
+   "lastPage": 207,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>天気予報に よると、あしたは 寒く なるそうです。</li><li>隣の 部屋に だれか いるようです。</li></ol><h4>会話 · Hội thoại：婚約したそうです</h4><p><strong>渡辺</strong>：お先に 失礼します。</p><p><strong>高橋</strong>：あっ、渡辺さん、ちょっと 待って。僕も 帰ります。</p><p><strong>渡辺</strong>：すみません、ちょっと 急ぎますから。</p><p><strong>高橋</strong>：渡辺さん、このごろ 早く 帰りますね。どうも 恋人が できたようですね。</p><p><strong>林</strong>：あ、知らないんですか。この間 婚約したそうですよ。</p><p><strong>高橋</strong>：えっ、だれですか、相手は。</p><p><strong>林</strong>：IMCの 鈴木さんですよ。</p><p><strong>高橋</strong>：えっ、鈴木さん？</p><p><strong>林</strong>：ワットさんの 結婚式で 知り合ったそうですよ。</p><p><strong>高橋</strong>：そうですか。</p><p><strong>林</strong>：ところで、高橋さんは？</p><p><strong>高橋</strong>：僕ですか。僕は 仕事が 恋人です。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "普通形 そうです（nghe nói）",
+     "description": "<p>Cấu trúc: 普通形 ＋ そうです（N に よると、〜そうです）</p><p>Truyền đạt lại thông tin nghe hoặc đọc được, không thêm ý kiến của người nói. Nguồn tin nêu bằng 〜によると. Khác với そうです bài 43 (trông có vẻ) về cách nối.</p>",
+     "examples": [
+      {
+       "nihongo": "天気予報に よると、あしたは 寒く なるそうです。",
+       "vietnamese": "Theo dự báo thời tiết, nghe nói ngày mai trời sẽ lạnh."
+      },
+      {
+       "nihongo": "新聞で 読んだんですが、1月に 日本語の スピーチ大会が あるそうですよ。ミラーさんも 出て みませんか。……そうですね。考えて みます。",
+       "vietnamese": "Tôi đọc trên báo, nghe nói tháng 1 có cuộc thi hùng biện tiếng Nhật. Anh Miller thử tham gia không? …… Ừm, để tôi suy nghĩ."
+      },
+      {
+       "nihongo": "クララさんは 子どもの とき、フランスに 住んで いたそうです。……それで、フランス語も わかるんですね。",
+       "vietnamese": "Nghe nói hồi nhỏ chị Klara từng sống ở Pháp. …… Thảo nào chị ấy biết cả tiếng Pháp."
+      },
+      {
+       "nihongo": "パワー電気の 新しい 電子辞書は とても 使いやすくて、いいそうですよ。……ええ。わたしは もう 買いました。",
+       "vietnamese": "Nghe nói từ điển điện tử mới của Power Electric rất dễ dùng, tốt lắm. …… Vâng, tôi mua rồi."
+      },
+      {
+       "nihongo": "ワット先生は 厳しい 先生だそうですね。……ええ。でも、授業は とても おもしろいですよ。",
+       "vietnamese": "Nghe nói thầy Watt là thầy giáo nghiêm khắc nhỉ. …… Vâng. Nhưng giờ học rất thú vị."
+      },
+      {
+       "nihongo": "この間 婚約したそうですよ。",
+       "vietnamese": "Nghe nói gần đây chị ấy đã đính hôn rồi đấy."
+      }
+     ]
+    },
+    {
+     "title": "普通形 ようです（hình như, có vẻ như）",
+     "description": "<p>Cấu trúc: V／Aい 普通形 ／ Aな な ／ N の ＋ ようです（どうも 〜ようです）</p><p>Người nói phán đoán dựa trên tình hình, dấu hiệu quan sát được bằng giác quan (nghe, nhìn, ngửi).</p>",
+     "examples": [
+      {
+       "nihongo": "隣の 部屋に だれか いるようです。",
+       "vietnamese": "Hình như có ai đó ở phòng bên cạnh."
+      },
+      {
+       "nihongo": "人が 大勢 集まって いますね。……事故のようですね。パトカーと 救急車が 来て いますよ。",
+       "vietnamese": "Nhiều người tụ tập quá nhỉ. …… Hình như có tai nạn. Xe cảnh sát và xe cấp cứu đến kìa."
+      },
+      {
+       "nihongo": "どうも 恋人が できたようですね。",
+       "vietnamese": "Hình như chị ấy có người yêu rồi nhỉ."
+      }
+     ]
+    },
+    {
+     "title": "声／音／におい／味が します",
+     "description": "<p>Cấu trúc: N（声、音、におい、味…）が します</p><p>Diễn tả việc cảm nhận được âm thanh, mùi, vị bằng giác quan.</p>",
+     "examples": [
+      {
+       "nihongo": "にぎやかな 声が しますね。……ええ。パーティーでも して いるようですね。",
+       "vietnamese": "Nghe thấy tiếng ồn ào nhỉ. …… Vâng. Hình như đang có tiệc thì phải."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第48課 休ませて いただけませんか",
+   "description": "Thể sai khiến (使役形): bắt / cho phép ai làm gì; xin phép lịch sự (Vさせて いただけませんか).",
+   "firstPage": 208,
+   "lastPage": 215,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>息子を イギリスへ 留学させます。</li><li>娘に ピアノを 習わせます。</li></ol><h4>会話 · Hội thoại：休ませて いただけませんか</h4><p><strong>ミラー</strong>：課長、今 お忙しいですか。</p><p><strong>中村課長</strong>：いいえ、どうぞ。</p><p><strong>ミラー</strong>：ちょっと お願いが あるんですが……。</p><p><strong>中村課長</strong>：何ですか。</p><p><strong>ミラー</strong>：あのう、来月 7日から 10日ほど 休みを 取らせて いただけませんか。</p><p><strong>中村課長</strong>：10日間ですか。</p><p><strong>ミラー</strong>：実は アメリカの 友達が 結婚するんです。</p><p><strong>中村課長</strong>：そうですか。えーと、来月は 20日に 営業会議が ありますが、それまでに 帰れますね。</p><p><strong>ミラー</strong>：はい。</p><p><strong>中村課長</strong>：じゃ、かまいませんよ。楽しんで 来て ください。</p><p><strong>ミラー</strong>：ありがとう ございます。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "使役形（thể sai khiến）",
+     "description": "<p>Cấu trúc: Nhóm I: 行く → 行かせる（う → あ＋せる）／ Nhóm II: 食べる → 食べさせる ／ 来る → 来させる、する → させる</p><p>Thể sai khiến diễn tả việc người trên bắt buộc hoặc cho phép người dưới làm gì. Không dùng với người trên (khi đó dùng 〜ていただきます).</p>",
+     "examples": [
+      {
+       "nihongo": "息子を イギリスへ 留学させます。",
+       "vietnamese": "Tôi cho con trai đi du học Anh."
+      }
+     ]
+    },
+    {
+     "title": "N を V（tự động từ）させます／N に N を V（tha động từ）させます",
+     "description": "<p>Cấu trúc: 自動詞: 人 を V使役 ／ 他動詞: 人 に N を V使役</p><p>Với tự động từ, người bị sai khiến đi với を (đôi khi に khi tôn trọng ý muốn của người đó); với tha động từ, người bị sai khiến đi với に vì đã có tân ngữ を.</p>",
+     "examples": [
+      {
+       "nihongo": "娘に ピアノを 習わせます。",
+       "vietnamese": "Tôi cho con gái học piano."
+      },
+      {
+       "nihongo": "この サッカー教室は 練習が 厳しいそうですね。……ええ、毎日 子どもたちを 1キロ 走らせて います。",
+       "vietnamese": "Nghe nói lớp bóng đá này tập luyện nghiêm lắm nhỉ. …… Vâng, ngày nào cũng bắt bọn trẻ chạy 1 km."
+      },
+      {
+       "nihongo": "そろそろ 失礼します。……あ、ちょっと 待って ください。息子に 駅まで 送らせますから。",
+       "vietnamese": "Tôi xin phép về. …… À, đợi chút. Tôi bảo con trai đưa anh ra ga."
+      },
+      {
+       "nihongo": "ハンス君は 学校の 勉強の ほかに、何か 習って いますか。……ええ、柔道を したいと 言ったので、柔道教室に 行かせて います。",
+       "vietnamese": "Ngoài việc học ở trường, Hans có học gì không? …… Có, cháu nói muốn tập judo nên tôi cho cháu đi lớp judo."
+      },
+      {
+       "nihongo": "伊藤先生は どんな 先生ですか。……いい 先生ですよ。生徒に 好きな 本を 読ませて、自由に 意見を 言わせるんです。",
+       "vietnamese": "Cô Ito là giáo viên thế nào? …… Cô tốt lắm. Cô cho học sinh đọc sách mình thích và để các em tự do phát biểu ý kiến."
+      }
+     ]
+    },
+    {
+     "title": "Vさせて いただけませんか（xin phép lịch sự）",
+     "description": "<p>Cấu trúc: V（使役形）て ＋ いただけませんか</p><p>Cách xin phép người trên một cách rất lịch sự để mình được làm gì.</p>",
+     "examples": [
+      {
+       "nihongo": "すみません。しばらく ここに 車を 止めさせて いただけませんか。……いいですよ。",
+       "vietnamese": "Xin lỗi, cho tôi đỗ xe ở đây một lúc được không ạ? …… Được thôi."
+      },
+      {
+       "nihongo": "来月 7日から 10日ほど 休みを 取らせて いただけませんか。",
+       "vietnamese": "Cho phép tôi nghỉ khoảng 10 ngày từ mùng 7 tháng sau được không ạ?"
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第49課 よろしく お伝え ください",
+   "description": "Tôn kính ngữ (尊敬語): V（ら）れます, お Vます に なります, động từ tôn kính đặc biệt, お Vます ください.",
+   "firstPage": 216,
+   "lastPage": 223,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>課長は 帰られました。</li><li>社長は お帰りに なりました。</li><li>部長は アメリカへ 出張なさいます。</li><li>しばらく お待ち ください。</li></ol><h4>会話 · Hội thoại：よろしく お伝え ください</h4><p><strong>先生</strong>：はい、ひまわり小学校です。</p><p><strong>クララ</strong>：おはよう ございます。5年2組の ハンス・シュミットの 母ですが、伊藤先生は いらっしゃいますか。</p><p><strong>先生</strong>：まだなんですが……。</p><p><strong>クララ</strong>：では、伊藤先生に 伝えて いただきたいんですが……。</p><p><strong>先生</strong>：はい、何でしょうか。</p><p><strong>クララ</strong>：実は ハンスが ゆうべ 熱を 出しまして、けさも まだ 下がらないんです。</p><p><strong>先生</strong>：それは いけませんね。</p><p><strong>クララ</strong>：それで きょうは 学校を 休ませますので、先生に よろしく お伝え ください。</p><p><strong>先生</strong>：わかりました。どうぞ お大事に。</p><p><strong>クララ</strong>：ありがとう ございます。失礼いたします。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "尊敬語 V（ら）れます（tôn kính dạng bị động）",
+     "description": "<p>Cấu trúc: Nhóm I: 帰る → 帰られる、読む → 読まれる ／ Nhóm II: 出る → 出られる ／ 来る → 来られる、する → される</p><p>Tôn kính ngữ dùng để nâng cao hành động của người trên, người không thân. Dạng giống thể bị động. Mức độ kính trọng nhẹ nhất.</p>",
+     "examples": [
+      {
+       "nihongo": "課長は 帰られました。",
+       "vietnamese": "Trưởng nhóm đã về rồi."
+      },
+      {
+       "nihongo": "この 本は 読まれましたか。……ええ、もう 読みました。",
+       "vietnamese": "Anh đã đọc cuốn sách này chưa ạ? …… Rồi, tôi đọc rồi."
+      }
+     ]
+    },
+    {
+     "title": "お Vます に なります（tôn kính）",
+     "description": "<p>Cấu trúc: お ＋ V（thể ます bỏ ます）＋ に なります</p><p>Mức độ tôn kính cao hơn V（ら）れます. Không dùng với động từ có thể ます một âm tiết (見ます、寝ます) và động từ nhóm III dạng Nします.</p>",
+     "examples": [
+      {
+       "nihongo": "社長は お帰りに なりました。",
+       "vietnamese": "Giám đốc đã về rồi ạ."
+      },
+      {
+       "nihongo": "部長は どちらですか。……さっき お出かけに なりました。",
+       "vietnamese": "Trưởng phòng đâu rồi ạ? …… Lúc nãy ông ấy đã ra ngoài rồi."
+      }
+     ]
+    },
+    {
+     "title": "特別な 尊敬語（động từ tôn kính đặc biệt）",
+     "description": "<p>Cấu trúc: いる・行く・来る → いらっしゃる ／ する → なさる ／ 言う → おっしゃる ／ 見る → ご覧に なる ／ 知って いる → ご存じだ ／ 食べる・飲む → 召し上がる</p><p>Một số động từ có dạng tôn kính riêng. いらっしゃる、なさる、おっしゃる khi chia ます thành いらっしゃいます、なさいます、おっしゃいます. Danh từ hành động: 出張なさいます.</p>",
+     "examples": [
+      {
+       "nihongo": "部長は アメリカへ 出張なさいます。",
+       "vietnamese": "Trưởng phòng sẽ đi công tác Mỹ."
+      },
+      {
+       "nihongo": "よく 映画を ご覧に なりますか。……そうですね。たまに 妻と 見に 行きます。",
+       "vietnamese": "Anh có hay xem phim không ạ? …… Ừm, thỉnh thoảng tôi đi xem với vợ."
+      },
+      {
+       "nihongo": "小川さんの 息子さんが さくら大学に 合格したのを ご存じですか。……いいえ、知りませんでした。",
+       "vietnamese": "Anh có biết con trai anh Ogawa đã đỗ Đại học Sakura không ạ? …… Không, tôi không biết."
+      },
+      {
+       "nihongo": "お名前は 何と おっしゃいますか。……ワットと いいます。",
+       "vietnamese": "Quý danh của ông là gì ạ? …… Tôi tên là Watt."
+      },
+      {
+       "nihongo": "お仕事は 何を なさって いますか。……銀行員です。アップル銀行に 勤めて います。",
+       "vietnamese": "Anh làm nghề gì ạ? …… Tôi là nhân viên ngân hàng. Tôi làm ở ngân hàng Apple."
+      }
+     ]
+    },
+    {
+     "title": "お Vます ください（mời, xin hãy – tôn kính）",
+     "description": "<p>Cấu trúc: お ＋ V（thể ます bỏ ます）＋ ください ／ ご ＋ N（漢語）＋ ください</p><p>Dạng tôn kính của Vてください, dùng để mời, yêu cầu lịch sự với khách hàng, người trên.</p>",
+     "examples": [
+      {
+       "nihongo": "しばらく お待ち ください。",
+       "vietnamese": "Xin vui lòng đợi một lát."
+      },
+      {
+       "nihongo": "松本部長は いらっしゃいますか。……ええ、こちらの お部屋です。どうぞ お入り ください。",
+       "vietnamese": "Trưởng phòng Matsumoto có ở đây không ạ? …… Có, ở phòng này. Xin mời vào."
+      },
+      {
+       "nihongo": "先生に よろしく お伝え ください。",
+       "vietnamese": "Xin chị chuyển lời giúp tới thầy/cô."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  },
+  {
+   "name": "第50課 心から 感謝いたします",
+   "description": "Khiêm nhường ngữ (謙譲語): お Vます します／ご N します, động từ khiêm nhường đặc biệt; 丁重語 (おります、ございます…).",
+   "firstPage": 224,
+   "lastPage": 231,
+   "reading": "<h4>文型 · Mẫu câu</h4><ol><li>今月の スケジュールを お送りします。</li><li>あした 3時に 伺います。</li><li>私は アメリカから 参りました。</li></ol><h4>会話 · Hội thoại：心から 感謝いたします</h4><p><strong>司会者</strong>：優勝 おめでとう ございます。すばらしい スピーチでした。</p><p><strong>ミラー</strong>：ありがとう ございます。</p><p><strong>司会者</strong>：緊張なさいましたか。</p><p><strong>ミラー</strong>：はい、とても 緊張いたしました。</p><p><strong>司会者</strong>：練習は 大変でしたか。</p><p><strong>ミラー</strong>：ええ。忙しくて、なかなか 練習の 時間が ありませんでした。</p><p><strong>司会者</strong>：賞金は 何に お使いに なりますか。</p><p><strong>ミラー</strong>：そうですね。わたしは 動物が 好きで、子どもの ときから アフリカへ 行くのが 夢でした。</p><p><strong>司会者</strong>：じゃ、アフリカへ 行かれますか。</p><p><strong>ミラー</strong>：はい。アフリカの 自然の 中で きりんや 象を 見たいと 思います。</p><p><strong>司会者</strong>：子どもの ころの 夢が かなうんですね。</p><p><strong>ミラー</strong>：はい。うれしいです。応援して くださった 皆様に 心から 感謝いたします。どうも ありがとう ございました。</p>",
+   "audioId": "",
+   "grammars": [
+    {
+     "title": "お Vます します／ご N します（khiêm nhường）",
+     "description": "<p>Cấu trúc: お ＋ V（thể ます bỏ ます）＋ します ／ ご ＋ N（漢語）＋ します</p><p>Khiêm nhường ngữ hạ thấp hành động của mình (hoặc người phía mình) để tỏ lòng kính trọng với người nghe, người nhận hành động. Không dùng với động từ có thể ます một âm tiết.</p>",
+     "examples": [
+      {
+       "nihongo": "今月の スケジュールを お送りします。",
+       "vietnamese": "Tôi xin gửi lịch trình tháng này."
+      },
+      {
+       "nihongo": "重そうですね。お持ちしましょうか。……すみません。お願いします。",
+       "vietnamese": "Trông nặng quá. Để tôi xách giúp nhé? …… Cảm ơn, nhờ anh ạ."
+      },
+      {
+       "nihongo": "ガイドさん、ここを 見た あとで、どこへ 行くんですか。……江戸東京博物館へ ご案内します。",
+       "vietnamese": "Chị hướng dẫn viên ơi, xem xong ở đây thì đi đâu ạ? …… Tôi xin dẫn mọi người đến Bảo tàng Edo-Tokyo."
+      }
+     ]
+    },
+    {
+     "title": "特別な 謙譲語（động từ khiêm nhường đặc biệt）",
+     "description": "<p>Cấu trúc: 行く・来る → 参る ／ いる → おる ／ する → いたす ／ 言う → 申す ／ 見る → 拝見する ／ 訪ねる・聞く → 伺う ／ 食べる・飲む・もらう → いただく ／ 会う → お目に かかる ／ 知って いる → 存じて おる</p><p>Một số động từ có dạng khiêm nhường riêng. 参ります、おります、いたします、申します còn là 丁重語, dùng để nói lịch sự về mình với người nghe.</p>",
+     "examples": [
+      {
+       "nihongo": "あした 3時に 伺います。",
+       "vietnamese": "Ngày mai 3 giờ tôi xin đến thăm."
+      },
+      {
+       "nihongo": "私は アメリカから 参りました。",
+       "vietnamese": "Tôi đến từ Mỹ."
+      },
+      {
+       "nihongo": "グプタさんの 到着は 2時ですね。だれか 迎えに 行くんですか。……はい、私が 参ります。",
+       "vietnamese": "Anh Gupta đến lúc 2 giờ nhỉ. Có ai đi đón không? …… Vâng, tôi sẽ đi."
+      },
+      {
+       "nihongo": "ちょっと 切符を 拝見します。……はい。どうも ありがとう ございました。",
+       "vietnamese": "Xin phép kiểm tra vé một chút. …… Vâng. …… Xin cảm ơn quý khách."
+      },
+      {
+       "nihongo": "こちらは ミラーさんです。……初めまして。ミラーと 申します。どうぞ よろしく お願いします。",
+       "vietnamese": "Đây là anh Miller. …… Rất hân hạnh. Tôi tên là Miller. Rất mong được giúp đỡ."
+      },
+      {
+       "nihongo": "ご家族は どちらに いらっしゃいますか。……ニューヨークに おります。",
+       "vietnamese": "Gia đình anh sống ở đâu ạ? …… Gia đình tôi ở New York."
+      },
+      {
+       "nihongo": "応援して くださった 皆様に 心から 感謝いたします。",
+       "vietnamese": "Tôi xin chân thành cảm ơn tất cả mọi người đã cổ vũ."
+      }
+     ]
+    }
+   ],
+   "exercises": []
+  }
+ ]
+}
