@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BookImportGeminiLiveTest {
  @Test void extractsARealPageIntoATranslatedDraft() throws Exception {
   var properties=new Properties();try(var in=Files.newBufferedReader(Path.of("../.local/gemini.properties"))) {properties.load(in);}
-  var mapper=new ObjectMapper();var storage=new BookImportStorage("target/generic-live-test");String id=UUID.randomUUID().toString();
+  var mapper=new ObjectMapper();var storage=new BookImportStorage("target/generic-live-test","");String id=UUID.randomUUID().toString();
   Files.createDirectories(storage.image(id,1).getParent());
   try(var in=getClass().getResourceAsStream("/imports/try-n3/pages/15.png")) {assertNotNull(in);Files.copy(in,storage.image(id,1));}
   var gemini=new BookImportGemini(mapper,storage,properties.getProperty("gemini.local-api-key",""),"gemini-3.1-flash-lite","https://generativelanguage.googleapis.com/v1beta");

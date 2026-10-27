@@ -27,7 +27,12 @@ public class BookImportController {
     @PostMapping(value="/{id}/audio",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public BookImportService.Detail audio(@PathVariable String id,@RequestPart List<MultipartFile> files) throws Exception { return service.addAudio(id,files); }
     @PutMapping("/{id}") public BookImportService.Detail save(@PathVariable String id,@RequestBody BookImportService.Save request) throws Exception { return service.save(id,request); }
-    @PostMapping("/{id}/publish") public BookImportService.Detail publish(@PathVariable String id,@RequestBody BookImportService.Publish request) { return service.publish(id,request); }
+    @PostMapping("/{id}/publish") public BookImportService.Detail publish(@PathVariable String id,@RequestBody BookImportService.Publish request) throws Exception {
+        var result=service.publish(id,request);
+        // Copy the book's listening files to book-assets/ so they can be committed and played on every machine.
+        if(result.summary().bookId()!=null) storage.share(id,result.content().audio());
+        return result;
+    }
     @PostMapping("/{id}/retry") public BookImportService.Detail retry(@PathVariable String id) { service.get(id);processor.retry(id);return service.get(id); }
     @GetMapping("/{id}/pages/{page}") public ResponseEntity<Resource> page(@PathVariable String id,@PathVariable int page) {
         var s=service.find(id);if(page<1 || page>s.getPageCount()) throw new org.springframework.web.server.ResponseStatusException(HttpStatus.NOT_FOUND);

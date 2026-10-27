@@ -131,7 +131,7 @@ public class BookImportService {
                 byte[] header;try(var in=file.getInputStream()) { header=in.readNBytes(16); }
                 if(!audioHeader(ext,header)) throw invalid("Nội dung file nghe không khớp định dạng: "+name);
                 var asset=new BookImportContent.Asset(UUID.randomUUID().toString(),name,mime,ext,file.getSize());
-                var path=storage.audio(id,asset);Files.createDirectories(path.getParent());written.add(path);file.transferTo(path);audio.add(asset);
+                var path=storage.localAudio(id,asset);Files.createDirectories(path.getParent());written.add(path);file.transferTo(path);audio.add(asset);
             }
             s.setPayload(mapper.writeValueAsString(link(new BookImportContent(c.bookName(),c.levelId(),c.typeId(),c.description(),audio,c.lessons()),s)));
             if("READY".equals(s.getState())) s.setState("REVIEW");sessions.saveAndFlush(s);return get(id);
