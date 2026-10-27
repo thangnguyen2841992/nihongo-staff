@@ -118,24 +118,66 @@ public class BookImportService {
 
     @Transactional public Detail addAudio(String id,List<MultipartFile> files) throws Exception {
         var s=lock(id);editable(s,true);var c=content(s);
-        if(files==null || files.isEmpty() || files.size()>128) throw invalid("Mỗi lần tải tối đa 128 file nghe; hãy tải theo từng thư mục.");
-        if(files.size()+c.audio().size()>MAX_AUDIO_FILES) throw invalid("Một sách có tối đa "+MAX_AUDIO_FILES+" file nghe.");
-        var audio=new ArrayList<>(c.audio());long total=audio.stream().mapToLong(BookImportContent.Asset::bytes).sum();
         var written=new ArrayList<Path>();
         try {
-            for(var file:files) {
-                String name=fileName(file.getOriginalFilename());int dot=name.lastIndexOf('.');String ext=dot<0?"":name.substring(dot+1).toLowerCase(Locale.ROOT);
-                String mime=Map.of("mp3","audio/mpeg","m4a","audio/mp4","wav","audio/wav","ogg","audio/ogg").get(ext);
-                if(mime==null || file.isEmpty() || file.getSize()>40L*1024*1024) throw invalid("File nghe cần là MP3, M4A, WAV hoặc OGG, tối đa 40 MB/file.");
-                total+=file.getSize();if(total>MAX_AUDIO_BYTES) throw invalid("Tổng file nghe của một sách tối đa "+(MAX_AUDIO_BYTES/1024/1024)+" MB.");
-                byte[] header;try(var in=file.getInputStream()) { header=in.readNBytes(16); }
-                if(!audioHeader(ext,header)) throw invalid("Nội dung file nghe không khớp định dạng: "+name);
-                var asset=new BookImportContent.Asset(UUID.randomUUID().toString(),name,mime,ext,file.getSize());
-                var path=storage.localAudio(id,asset);Files.createDirectories(path.getParent());written.add(path);file.transferTo(path);audio.add(asset);
-            }
+            var audio=store(id,c,files,written);
             s.setPayload(mapper.writeValueAsString(link(new BookImportContent(c.bookName(),c.levelId(),c.typeId(),c.description(),audio,c.lessons()),s)));
             if("READY".equals(s.getState())) s.setState("REVIEW");sessions.saveAndFlush(s);return get(id);
         } catch(Exception e) { for(var path:written) Files.deleteIfExists(path);throw e; }
+    }
+    public record AddedAudio(Detail detail,List<BookImportContent.Asset> assets,int tracks) {}
+    /**
+     * Listening files that arrive after the book was imported (e.g. the textbook CD with 会話 and 問題 of every lesson):
+     * they are added to the imported lessons as labelled tracks, by "第N課" in the file name or by the CD track number.
+     * A lesson without its own reading audio gets its 会話 track there too.
+     */
+    @Transactional @CacheEvict(value = {"books", "exerciseTypes", "lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true) public AddedAudio addPublishedAudio(String id,List<MultipartFile> files) throws Exception {
+        var s=lock(id);if(s.getImportedBookId()==null) throw conflict("Sách chưa được nhập; hãy tải file nghe ở bản nháp.");
+        var c=content(s);var written=new ArrayList<Path>();
+        try {
+            var audio=store(id,c,files,written);var added=audio.subList(c.audio().size(),audio.size());
+            var matched=LessonTrackMatcher.assign(c.lessons(),added);
+            if(matched.isEmpty()) matched=LessonTrackMatcher.assignDisc(c.lessons(),added);
+            if(matched.isEmpty()) throw invalid("Không ghép được file nghe vào bài nào. Tên file cần có 第N課, hoặc là bộ CD đánh số track (3 track mỗi bài: 会話, 問題 1, 問題 2).");
+            var byNumber=new HashMap<Integer,Lessons>();
+            for(var lesson:lessons.findByBook_BookId(s.getImportedBookId())) {var n=LessonTrackMatcher.lessonNumber(lesson.getName());if(n!=null) byNumber.putIfAbsent(n,lesson);}
+            int count=0;
+            for(var entry:matched.entrySet()) {
+                var lesson=byNumber.get(LessonTrackMatcher.lessonNumber(c.lessons().get(entry.getKey()).name()));if(lesson==null) continue;
+                var rows=new ArrayList<>(lessonTracks.findByLessonIdOrderByPositionAsc(lesson.getLessonId()));
+                var known=new HashSet<String>();rows.forEach(t->known.add(t.getAudioAssetId()));
+                for(var track:entry.getValue()) {
+                    if(!known.add(track.assetId())) continue;
+                    var row=new LessonAudioTrack();row.setLessonId(lesson.getLessonId());row.setLabel(track.label());
+                    row.setAudioImportId(id);row.setAudioAssetId(track.assetId());rows.add(row);count++;
+                    if(track.label().startsWith("会話") && blank(lesson.getAudioAssetId())) {lesson.setAudioImportId(id);lesson.setAudioAssetId(track.assetId());lessons.save(lesson);}
+                }
+                // ことば, 文型, 例文, 会話, 練習 …, 問題 — new parts take their place among the existing ones.
+                rows.sort(Comparator.comparingInt((LessonAudioTrack t)->LessonTrackMatcher.rank(t.getLabel())));
+                for(int position=0;position<rows.size();position++) rows.get(position).setPosition(position);
+                lessonTracks.saveAll(rows);
+            }
+            s.setPayload(mapper.writeValueAsString(new BookImportContent(c.bookName(),c.levelId(),c.typeId(),c.description(),audio,c.lessons())));
+            s.setMessage("Đã nhập sách và thêm "+added.size()+" file nghe.");sessions.saveAndFlush(s);
+            return new AddedAudio(get(id),List.copyOf(added),count);
+        } catch(Exception e) { for(var path:written) Files.deleteIfExists(path);throw e; }
+    }
+    /** Validates and saves uploaded listening files; returns the book's audio list with the new files appended. */
+    private List<BookImportContent.Asset> store(String id,BookImportContent c,List<MultipartFile> files,List<Path> written) throws Exception {
+        if(files==null || files.isEmpty() || files.size()>128) throw invalid("Mỗi lần tải tối đa 128 file nghe; hãy tải theo từng thư mục.");
+        if(files.size()+c.audio().size()>MAX_AUDIO_FILES) throw invalid("Một sách có tối đa "+MAX_AUDIO_FILES+" file nghe.");
+        var audio=new ArrayList<>(c.audio());long total=audio.stream().mapToLong(BookImportContent.Asset::bytes).sum();
+        for(var file:files) {
+            String name=fileName(file.getOriginalFilename());int dot=name.lastIndexOf('.');String ext=dot<0?"":name.substring(dot+1).toLowerCase(Locale.ROOT);
+            String mime=Map.of("mp3","audio/mpeg","m4a","audio/mp4","wav","audio/wav","ogg","audio/ogg").get(ext);
+            if(mime==null || file.isEmpty() || file.getSize()>40L*1024*1024) throw invalid("File nghe cần là MP3, M4A, WAV hoặc OGG, tối đa 40 MB/file.");
+            total+=file.getSize();if(total>MAX_AUDIO_BYTES) throw invalid("Tổng file nghe của một sách tối đa "+(MAX_AUDIO_BYTES/1024/1024)+" MB.");
+            byte[] header;try(var in=file.getInputStream()) { header=in.readNBytes(16); }
+            if(!audioHeader(ext,header)) throw invalid("Nội dung file nghe không khớp định dạng: "+name);
+            var asset=new BookImportContent.Asset(UUID.randomUUID().toString(),name,mime,ext,file.getSize());
+            var path=storage.localAudio(id,asset);Files.createDirectories(path.getParent());written.add(path);file.transferTo(path);audio.add(asset);
+        }
+        return audio;
     }
     static boolean audioHeader(String ext,byte[] b) {
         var text=new String(b,java.nio.charset.StandardCharsets.ISO_8859_1);

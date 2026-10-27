@@ -26,6 +26,12 @@ public class BookImportController {
     @PostMapping("/{id}/manual") public BookImportService.Detail manual(@PathVariable String id,@RequestBody BookImportService.Publish request) {return service.manual(id,request);}
     @PostMapping(value="/{id}/audio",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
     public BookImportService.Detail audio(@PathVariable String id,@RequestPart List<MultipartFile> files) throws Exception { return service.addAudio(id,files); }
+    /** Listening files for a book that was already imported (e.g. the textbook CD); also copied to book-assets/. */
+    @PostMapping(value="/{id}/published-audio",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    public java.util.Map<String,Object> publishedAudio(@PathVariable String id,@RequestPart List<MultipartFile> files) throws Exception {
+        var result=service.addPublishedAudio(id,files);storage.share(id,result.assets());
+        return java.util.Map.of("files",result.assets().size(),"tracks",result.tracks(),"bookId",result.detail().summary().bookId());
+    }
     @PutMapping("/{id}") public BookImportService.Detail save(@PathVariable String id,@RequestBody BookImportService.Save request) throws Exception { return service.save(id,request); }
     @PostMapping("/{id}/publish") public BookImportService.Detail publish(@PathVariable String id,@RequestBody BookImportService.Publish request) throws Exception {
         var result=service.publish(id,request);
