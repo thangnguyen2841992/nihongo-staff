@@ -38,6 +38,8 @@ class LessonTrackMatcherTest {
         assertNull(LessonTrackMatcher.lessonNumber("Phụ lục"));
         assertEquals("例文 · Câu ví dụ", LessonTrackMatcher.label("例文 Reibun"));
         assertEquals("練習 C3 · Luyện tập C3", LessonTrackMatcher.label("練習 Renshu C3"));
+        assertEquals("聴解タスク 4 · Nghe hiểu 4", LessonTrackMatcher.label("聴解タスク 4"));
+        assertEquals("聴解タスク 4", BookImportService.trackName(LessonTrackMatcher.label("聴解タスク 4")));
         assertEquals("問題 2 · Bài tập nghe 2", LessonTrackMatcher.label("問題 2"));
     }
 

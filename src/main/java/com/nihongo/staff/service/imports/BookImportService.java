@@ -162,6 +162,54 @@ public class BookImportService {
             return new AddedAudio(get(id),List.copyOf(added),count);
         } catch(Exception e) { for(var path:written) Files.deleteIfExists(path);throw e; }
     }
+    /** One question for an imported lesson (lesson = number in its name, 第N課); audio = start of a track label, e.g. "問題 2". */
+    /** {@code replaces}: earlier text of the same question, so a reworded question updates the published one. */
+    public record NewExercise(int lesson,String group,String content,String answerA,String answerB,String answerC,String answerD,String correctAnswer,String audio,String replaces) {}
+    public record AddedExercises(int created,int updated,int skipped) {}
+    private static final Set<String> KEYS=Set.of("A","B","C","D");
+    /**
+     * Adds exercises to the lessons of an imported book (e.g. 練習 A/B/C and 問題 of Minna no Nihongo). Running it again
+     * updates the same questions (same lesson, group and text) instead of duplicating them.
+     */
+    @Transactional @CacheEvict(value = {"books", "exerciseTypes", "lessonsByBook", "grammarsByLesson", "examplesByLesson", "lessonGrammarContent", "bookAccess", "lessonBook", "grammarLesson", "bookDetail", "booksByLevel", "lessonById", "bookLocation", "lessonLocation", "exercisesByLesson", "answerKeys"}, allEntries = true)
+    public AddedExercises addPublishedExercises(String id,List<NewExercise> input) {
+        var s=lock(id);if(s.getImportedBookId()==null) throw conflict("Sách chưa được nhập.");
+        if(input==null || input.isEmpty() || input.size()>1000) throw invalid("Mỗi lần gửi từ 1 đến 1.000 câu hỏi.");
+        for(var q:input) {
+            if(q==null || blank(q.group()) || q.group().length()>180 || blank(q.content()) || q.content().length()>20_000 || q.replaces()!=null && q.replaces().length()>20_000 || q.correctAnswer()==null || !KEYS.contains(q.correctAnswer())) throw invalid("Câu hỏi cần nhóm, nội dung và đáp án A–D.");
+            var choices=Arrays.asList(q.answerA(),q.answerB(),q.answerC(),q.answerD());
+            if(choices.stream().filter(v->!blank(v)).count()<2 || blank(choices.get("ABCD".indexOf(q.correctAnswer()))) || choices.stream().anyMatch(v->v!=null && v.length()>255)) throw invalid("Đáp án đúng cần trỏ tới lựa chọn có nội dung (tối đa 255 ký tự/lựa chọn): "+q.content());
+        }
+        var byNumber=new HashMap<Integer,Lessons>();
+        for(var lesson:lessons.findByBook_BookId(s.getImportedBookId())) {var n=LessonTrackMatcher.lessonNumber(lesson.getName());if(n!=null) byNumber.putIfAbsent(n,lesson);}
+        var existing=new HashMap<Long,List<ExersiceKeyword>>();var tracks=new HashMap<Long,List<LessonAudioTrack>>();var groups=new HashMap<String,ExerciseType>();
+        int created=0,updated=0,skipped=0;
+        for(var q:input) {
+            var lesson=byNumber.get(q.lesson());if(lesson==null) {skipped++;continue;}
+            var type=groups.computeIfAbsent(q.group().trim(),name->exerciseTypes.findByName(name).orElseGet(()->{var t=new ExerciseType();t.setName(name);return exerciseTypes.save(t);}));
+            String content=html(q.content());
+            var rows=existing.computeIfAbsent(lesson.getLessonId(),lessonId->new ArrayList<>(exercises.findByLessons_LessonId(lessonId)));
+            var row=rows.stream().filter(e->e.getExerciseType()!=null && type.getName().equals(e.getExerciseType().getName()) && Objects.equals(e.getContentNihongo(),content)).findFirst().orElse(null);
+            if(row==null && !blank(q.replaces())) {
+                String before=html(q.replaces());
+                row=rows.stream().filter(e->e.getExerciseType()!=null && type.getName().equals(e.getExerciseType().getName()) && Objects.equals(e.getContentNihongo(),before)).findFirst().orElse(null);
+            }
+            if(row==null) {row=new ExersiceKeyword();row.setLessons(lesson);row.setExerciseType(type);rows.add(row);created++;} else updated++;
+            row.setContentNihongo(content);
+            row.setAnswerA(trim(q.answerA()));row.setAnswerB(trim(q.answerB()));row.setAnswerC(trim(q.answerC()));row.setAnswerD(trim(q.answerD()));row.setCorrectAnswer(q.correctAnswer());
+            row.setAudioImportId(null);row.setAudioAssetId(null);
+            if(!blank(q.audio())) {
+                String wanted=trackName(q.audio());
+                var track=tracks.computeIfAbsent(lesson.getLessonId(),lessonTracks::findByLessonIdOrderByPositionAsc).stream().filter(t->trackName(t.getLabel()).equals(wanted)).findFirst().orElse(null);
+                if(track!=null) {row.setAudioImportId(track.getAudioImportId());row.setAudioAssetId(track.getAudioAssetId());}
+            }
+            exercises.save(row);
+        }
+        return new AddedExercises(created,updated,skipped);
+    }
+    /** Japanese part of a track label: "練習 B1 · Luyện tập B1" → "練習 B1" (so B1 never matches B10). */
+    static String trackName(String label) { String text=LessonTrackMatcher.normalize(label);int dot=text.indexOf('·');return (dot<0?text:text.substring(0,dot)).trim(); }
+    private static String trim(String value) { return value==null || value.isBlank() ? null : value.trim(); }
     /** Validates and saves uploaded listening files; returns the book's audio list with the new files appended. */
     private List<BookImportContent.Asset> store(String id,BookImportContent c,List<MultipartFile> files,List<Path> written) throws Exception {
         if(files==null || files.isEmpty() || files.size()>128) throw invalid("Mỗi lần tải tối đa 128 file nghe; hãy tải theo từng thư mục.");

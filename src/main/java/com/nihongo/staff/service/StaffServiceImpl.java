@@ -667,16 +667,25 @@ public class StaffServiceImpl implements IStaffService {
         List<ExerciseKeywordDTO> dtos =
                 new ArrayList<>();
 
+        // Questions that use the same listening file as a labelled lesson track (e.g. 練習 B3) point at that track,
+        // so the page can show one player for all of them and the file is downloaded once.
+        var tracks = new java.util.HashMap<String, com.nihongo.staff.model.LessonAudioTrack>();
+        for (var track : lessonAudioTracks.findByLessonIdOrderByPositionAsc(lessonId))
+            if (track.getAudioAssetId() != null) tracks.putIfAbsent(track.getAudioImportId() + "/" + track.getAudioAssetId(), track);
+
         for (
                 ExersiceKeyword exersiceKeyword
                 : exersiceKeywords
         ) {
 
-            dtos.add(
-                    mapExerciseToDTO(
-                            exersiceKeyword
-                    )
-            );
+            var dto = mapExerciseToDTO(exersiceKeyword);
+            var track = exersiceKeyword.getAudioAssetId() == null ? null
+                    : tracks.get(exersiceKeyword.getAudioImportId() + "/" + exersiceKeyword.getAudioAssetId());
+            if (track != null) {
+                dto.setAudioUrl("/api/staff/imported-audio/lesson-tracks/" + track.getTrackId());
+                dto.setAudioLabel(track.getLabel());
+            }
+            dtos.add(dto);
         }
 
         return List.copyOf(dtos);

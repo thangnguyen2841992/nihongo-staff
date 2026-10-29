@@ -20,6 +20,7 @@ public final class LessonTrackMatcher {
     private static final Pattern TRACK_NUMBER = Pattern.compile("(\\d{1,3})\\s*$");
     private static final Pattern EXTENSION = Pattern.compile("\\.[A-Za-z0-9]{2,4}$");
     private static final Pattern LISTENING = Pattern.compile("(?:問題|(?i:mondai))\\s*(\\d{1,2})");
+    private static final Pattern TASK = Pattern.compile("聴解\\D{0,6}(\\d{1,2})");
     private static final Pattern PRACTICE = Pattern.compile("(?i)練習\\s*(?:renshu)?\\s*([ABC])\\s*-?\\s*(\\d{0,2})");
 
     static String normalize(String text) {
@@ -49,6 +50,11 @@ public final class LessonTrackMatcher {
         if (text.contains("問題") || text.toLowerCase(Locale.ROOT).contains("mondai")) {
             Matcher number = LISTENING.matcher(text);
             return number.find() ? "問題 " + number.group(1) + " · Bài tập nghe " + number.group(1) : "問題 · Bài tập nghe";
+        }
+        // 聴解タスク25 (the listening workbook): "第26課 聴解タスク 1.mp3" → "聴解タスク 1 · Nghe hiểu 1".
+        if (text.contains("聴解")) {
+            Matcher number = TASK.matcher(text);
+            return number.find() ? "聴解タスク " + number.group(1) + " · Nghe hiểu " + number.group(1) : "聴解タスク · Nghe hiểu";
         }
         if (text.contains("読み物") || text.toLowerCase(Locale.ROOT).contains("yomimono")) return "読み物 · Bài đọc";
         return text.isBlank() ? "File nghe" : text.substring(0, Math.min(text.length(), 110));

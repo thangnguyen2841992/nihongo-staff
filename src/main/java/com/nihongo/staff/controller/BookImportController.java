@@ -32,6 +32,8 @@ public class BookImportController {
         var result=service.addPublishedAudio(id,files);storage.share(id,result.assets());
         return java.util.Map.of("files",result.assets().size(),"tracks",result.tracks(),"bookId",result.detail().summary().bookId());
     }
+    /** Exercises for the lessons of an imported book (re-sending the same questions updates them). */
+    @PostMapping("/{id}/published-exercises") public BookImportService.AddedExercises publishedExercises(@PathVariable String id,@RequestBody List<BookImportService.NewExercise> exercises) { return service.addPublishedExercises(id,exercises); }
     @PutMapping("/{id}") public BookImportService.Detail save(@PathVariable String id,@RequestBody BookImportService.Save request) throws Exception { return service.save(id,request); }
     @PostMapping("/{id}/publish") public BookImportService.Detail publish(@PathVariable String id,@RequestBody BookImportService.Publish request) throws Exception {
         var result=service.publish(id,request);

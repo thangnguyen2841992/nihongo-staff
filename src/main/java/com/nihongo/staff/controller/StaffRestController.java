@@ -218,6 +218,6 @@ public class StaffRestController {
         return ExerciseKeywordDTO.builder().exerciseKeywordId(row.getExerciseKeywordId()).contentNihongo(row.getContentNihongo())
                 .answerA(row.getAnswerA()).answerB(row.getAnswerB()).answerC(row.getAnswerC()).answerD(row.getAnswerD())
                 .correctAnswer(row.getCorrectAnswer()).lessonId(row.getLessonId()).exerciseTypeId(row.getExerciseTypeId())
-                .exerciseTypeName(row.getExerciseTypeName()).audioUrl(row.getAudioUrl()).aiSolution(row.getAiSolution()).build();
+                .exerciseTypeName(row.getExerciseTypeName()).audioUrl(row.getAudioUrl()).audioLabel(row.getAudioLabel()).aiSolution(row.getAiSolution()).build();
     }
 }

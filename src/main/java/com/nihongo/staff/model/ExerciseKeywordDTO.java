@@ -27,6 +27,8 @@ public class ExerciseKeywordDTO {
     private Long exerciseTypeId;
     private String exerciseTypeName;
     private String audioUrl;
+    /** Label of the shared lesson track the audio comes from (e.g. "練習 B3 · Luyện tập B3"), if any. */
+    private String audioLabel;
     private com.nihongo.staff.service.BookAiSolutionService.Solution aiSolution;
 }
 
